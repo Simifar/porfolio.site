@@ -1,0 +1,414 @@
+- generic [ref=e2]:
+  - navigation [ref=e3]:
+    - generic [ref=e4]:
+      - link "EM" [ref=e5] [cursor=pointer]:
+        - /url: "#"
+      - generic [ref=e6]:
+        - link "Work" [ref=e7] [cursor=pointer]:
+          - /url: "#work"
+        - link "About" [ref=e8] [cursor=pointer]:
+          - /url: "#about"
+        - link "Lab" [ref=e9] [cursor=pointer]:
+          - /url: "#lab"
+        - link "Contact" [ref=e10] [cursor=pointer]:
+          - /url: "#contact"
+      - generic [ref=e11]:
+        - button "Toggle theme" [ref=e12]
+        - button "Switch language" [ref=e15]: EN
+        - button "Open command palette" [ref=e19]:
+          - generic [ref=e23]: ⌘K
+        - link "CV ↗" [ref=e24] [cursor=pointer]:
+          - /url: /cv.pdf
+  - main [ref=e25]:
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - generic [ref=e29]: Egor Matafonov
+        - heading "Product Manager" [level=1] [ref=e31]
+        - heading "who builds." [level=1] [ref=e33]
+        - paragraph [ref=e34]: Product, project coordination and growth. From research and product logic to implementation, launch, analytics and iteration.
+        - generic [ref=e35]:
+          - link "View selected work" [ref=e36] [cursor=pointer]:
+            - /url: "#work"
+          - link "Download CV" [ref=e39] [cursor=pointer]:
+            - /url: /cv.pdf
+          - link "Contact" [ref=e43] [cursor=pointer]:
+            - /url: "#contact"
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e51]: Idea
+          - generic [ref=e52]: —
+        - generic [ref=e53]:
+          - generic [ref=e55]: Research
+          - generic [ref=e56]: —
+        - generic [ref=e57]:
+          - generic [ref=e59]: Build
+          - generic [ref=e60]: —
+        - generic [ref=e61]:
+          - generic [ref=e63]: Ship
+          - generic [ref=e64]: —
+        - generic [ref=e65]:
+          - generic [ref=e67]: Measure
+          - generic [ref=e68]: —
+        - generic [ref=e69]: Iterate
+    - generic [ref=e78]:
+      - generic [ref=e80]:
+        - paragraph [ref=e81]: Things I've built.
+        - heading "Selected work" [level=2] [ref=e82]
+      - generic [ref=e83]:
+        - link "Productivity / Product Live TaskFocus Task management & focus system Product UX Development AI View case" [ref=e86] [cursor=pointer]:
+          - /url: "#/work/taskfocus"
+          - generic [ref=e98]:
+            - generic [ref=e99]:
+              - generic [ref=e100]:
+                - generic [ref=e101]: Productivity / Product
+                - generic [ref=e102]: Live
+              - heading "TaskFocus" [level=3] [ref=e105]
+              - paragraph [ref=e106]: Task management & focus system
+            - generic [ref=e107]:
+              - generic [ref=e108]:
+                - generic [ref=e109]: Product
+                - generic [ref=e110]: UX
+                - generic [ref=e111]: Development
+                - generic [ref=e112]: AI
+              - generic [ref=e113]: View case
+        - link "Knowledge / Visualization In development CortexMap Knowledge visualization tool Product Data UX View case" [ref=e119] [cursor=pointer]:
+          - /url: "#/work/cortexmap"
+          - generic [ref=e127]:
+            - generic [ref=e128]:
+              - generic [ref=e129]:
+                - generic [ref=e130]: Knowledge / Visualization
+                - generic [ref=e131]: In development
+              - heading "CortexMap" [level=3] [ref=e134]
+              - paragraph [ref=e135]: Knowledge visualization tool
+            - generic [ref=e136]:
+              - generic [ref=e137]:
+                - generic [ref=e138]: Product
+                - generic [ref=e139]: Data
+                - generic [ref=e140]: UX
+              - generic [ref=e141]: View case
+        - link "Web Product In development Mindtrack Web product for self-tracking Product UX AI View case" [ref=e147] [cursor=pointer]:
+          - /url: "#/work/mindtrack"
+          - generic [ref=e155]:
+            - generic [ref=e156]:
+              - generic [ref=e157]:
+                - generic [ref=e158]: Web Product
+                - generic [ref=e159]: In development
+              - heading "Mindtrack" [level=3] [ref=e162]
+              - paragraph [ref=e163]: Web product for self-tracking
+            - generic [ref=e164]:
+              - generic [ref=e165]:
+                - generic [ref=e166]: Product
+                - generic [ref=e167]: UX
+                - generic [ref=e168]: AI
+              - generic [ref=e169]: View case
+        - link "EdTech Live EnglishPath Structured English learning system Product Education AI View case" [ref=e175] [cursor=pointer]:
+          - /url: "#/work/englishpath"
+          - generic [ref=e183]:
+            - generic [ref=e184]:
+              - generic [ref=e185]:
+                - generic [ref=e186]: EdTech
+                - generic [ref=e187]: Live
+              - heading "EnglishPath" [level=3] [ref=e190]
+              - paragraph [ref=e191]: Structured English learning system
+            - generic [ref=e192]:
+              - generic [ref=e193]:
+                - generic [ref=e194]: Product
+                - generic [ref=e195]: Education
+                - generic [ref=e196]: AI
+              - generic [ref=e197]: View case
+        - link "Growth / Analytics Live Telegram Growth Analytics Advertising placement evaluation system Growth Analytics Data View case" [ref=e203] [cursor=pointer]:
+          - /url: "#/work/telegram-growth-analytics"
+          - generic [ref=e211]:
+            - generic [ref=e212]:
+              - generic [ref=e213]:
+                - generic [ref=e214]: Growth / Analytics
+                - generic [ref=e215]: Live
+              - heading "Telegram Growth Analytics" [level=3] [ref=e218]
+              - paragraph [ref=e219]: Advertising placement evaluation system
+            - generic [ref=e220]:
+              - generic [ref=e221]:
+                - generic [ref=e222]: Growth
+                - generic [ref=e223]: Analytics
+                - generic [ref=e224]: Data
+              - generic [ref=e225]: View case
+    - generic [ref=e230]:
+      - paragraph [ref=e233]: Good products aren't born from perfect briefs.
+      - paragraph [ref=e236]: They emerge from understanding the problem, making decisions and shipping.
+    - generic [ref=e240]:
+      - heading "From ambiguity to product." [level=2] [ref=e243]
+      - generic [ref=e244]:
+        - generic [ref=e247]:
+          - generic [ref=e248]: "01"
+          - heading "Discover" [level=3] [ref=e251]
+          - list [ref=e252]:
+            - listitem [ref=e253]: Customer research
+            - listitem [ref=e255]: Competitor research
+            - listitem [ref=e257]: Market analysis
+            - listitem [ref=e259]: Problem discovery
+            - listitem [ref=e261]: Data exploration
+        - generic [ref=e265]:
+          - generic [ref=e266]: "02"
+          - heading "Define" [level=3] [ref=e269]
+          - list [ref=e270]:
+            - listitem [ref=e271]: Product requirements
+            - listitem [ref=e273]: User flows
+            - listitem [ref=e275]: CJM
+            - listitem [ref=e277]: Prioritization
+            - listitem [ref=e279]: Metrics
+        - generic [ref=e283]:
+          - generic [ref=e284]: "03"
+          - heading "Build" [level=3] [ref=e287]
+          - list [ref=e288]:
+            - listitem [ref=e289]: UX
+            - listitem [ref=e291]: Prototyping
+            - listitem [ref=e293]: Documentation
+            - listitem [ref=e295]: AI-assisted implementation
+            - listitem [ref=e297]: Team coordination
+        - generic [ref=e301]:
+          - generic [ref=e302]: "04"
+          - heading "Ship" [level=3] [ref=e305]
+          - list [ref=e306]:
+            - listitem [ref=e307]: QA
+            - listitem [ref=e309]: Release planning
+            - listitem [ref=e311]: Documentation
+            - listitem [ref=e313]: Launch
+        - generic [ref=e317]:
+          - generic [ref=e318]: "05"
+          - heading "Measure" [level=3] [ref=e321]
+          - list [ref=e322]:
+            - listitem [ref=e323]: Product metrics
+            - listitem [ref=e325]: Funnels
+            - listitem [ref=e327]: User feedback
+            - listitem [ref=e329]: Performance
+        - generic [ref=e333]:
+          - generic [ref=e334]: "06"
+          - heading "Iterate" [level=3] [ref=e337]
+          - list [ref=e338]:
+            - listitem [ref=e339]: Hypotheses
+            - listitem [ref=e341]: Experiments
+            - listitem [ref=e343]: Improvements
+      - generic [ref=e347]:
+        - generic [ref=e348]:
+          - generic [ref=e349]: Discover
+          - generic [ref=e350]: →
+        - generic [ref=e351]:
+          - generic [ref=e352]: Define
+          - generic [ref=e353]: →
+        - generic [ref=e354]:
+          - generic [ref=e355]: Build
+          - generic [ref=e356]: →
+        - generic [ref=e357]:
+          - generic [ref=e358]: Ship
+          - generic [ref=e359]: →
+        - generic [ref=e360]:
+          - generic [ref=e361]: Measure
+          - generic [ref=e362]: →
+        - generic [ref=e363]: Iterate
+    - generic [ref=e368]:
+      - heading "Capabilities" [level=2] [ref=e371]
+      - generic [ref=e372]:
+        - generic [ref=e375]:
+          - heading "Product" [level=3] [ref=e382]
+          - generic [ref=e383]:
+            - generic [ref=e384]: Product discovery
+            - generic [ref=e385]: CustDev
+            - generic [ref=e386]: CJM
+            - generic [ref=e387]: User flows
+            - generic [ref=e388]: Prioritization
+            - generic [ref=e389]: Product metrics
+            - generic [ref=e390]: Competitive research
+            - generic [ref=e391]: Requirements
+        - generic [ref=e394]:
+          - heading "Delivery" [level=3] [ref=e398]
+          - generic [ref=e399]:
+            - generic [ref=e400]: Roadmaps
+            - generic [ref=e401]: Project coordination
+            - generic [ref=e402]: Documentation
+            - generic [ref=e403]: QA
+            - generic [ref=e404]: Releases
+            - generic [ref=e405]: Stakeholder communication
+        - generic [ref=e408]:
+          - heading "Growth" [level=3] [ref=e412]
+          - generic [ref=e413]:
+            - generic [ref=e414]: Funnels
+            - generic [ref=e415]: Acquisition
+            - generic [ref=e416]: Experiments
+            - generic [ref=e417]: Unit economics
+            - generic [ref=e418]: B2B
+            - generic [ref=e419]: Partnerships
+            - generic [ref=e420]: Advertising analytics
+        - generic [ref=e423]:
+          - heading "Technology" [level=3] [ref=e428]
+          - generic [ref=e429]:
+            - generic [ref=e430]: APIs
+            - generic [ref=e431]: JSON
+            - generic [ref=e432]: SQL
+            - generic [ref=e433]: Git
+            - generic [ref=e434]: GitHub
+            - generic [ref=e435]: AI agents
+            - generic [ref=e436]: Automation
+            - generic [ref=e437]: Web development
+      - generic [ref=e440]:
+        - paragraph [ref=e441]: Tools
+        - generic [ref=e442]:
+          - generic [ref=e443]: Figma
+          - generic [ref=e444]: GitHub
+          - generic [ref=e445]: VS Code
+          - generic [ref=e446]: ChatGPT
+          - generic [ref=e447]: Codex
+          - generic [ref=e448]: Notion
+          - generic [ref=e449]: Todoist
+          - generic [ref=e450]: Linear
+          - generic [ref=e451]: Amplitude
+          - generic [ref=e452]: Postman
+    - generic [ref=e456]:
+      - generic [ref=e458]:
+        - heading "AI is part of my workflow." [level=2] [ref=e459]
+        - paragraph [ref=e460]: I use AI to accelerate research, prototyping, development and analysis — not to replace product thinking.
+      - generic [ref=e465]:
+        - generic [ref=e471]:
+          - generic [ref=e472]: "01"
+          - generic [ref=e473]: Research
+        - generic [ref=e479]:
+          - generic [ref=e480]: "02"
+          - generic [ref=e481]: Analysis
+        - generic [ref=e487]:
+          - generic [ref=e488]: "03"
+          - generic [ref=e489]: Product specification
+        - generic [ref=e495]:
+          - generic [ref=e496]: "04"
+          - generic [ref=e497]: Prototype
+        - generic [ref=e503]:
+          - generic [ref=e504]: "05"
+          - generic [ref=e505]: AI coding agents
+        - generic [ref=e511]:
+          - generic [ref=e512]: "06"
+          - generic [ref=e513]: GitHub
+        - generic [ref=e519]:
+          - generic [ref=e520]: "07"
+          - generic [ref=e521]: Testing
+        - generic [ref=e527]:
+          - generic [ref=e528]: "08"
+          - generic [ref=e529]: Deploy
+        - generic [ref=e535]:
+          - generic [ref=e536]: "09"
+          - generic [ref=e537]: Measure
+    - generic [ref=e541]:
+      - heading "Experience" [level=2] [ref=e544]
+      - generic [ref=e545]:
+        - generic [ref=e548]:
+          - button "Web Do Product / Project 2024 — Present +" [ref=e549]:
+            - generic [ref=e550]:
+              - heading "Web Do" [level=3] [ref=e551]
+              - paragraph [ref=e552]: Product / Project
+            - generic [ref=e553]:
+              - generic [ref=e554]: 2024 — Present
+              - generic [ref=e555]: +
+          - list [ref=e556]:
+            - listitem [ref=e557]: Product coordination
+            - listitem [ref=e559]: Feature prioritization
+            - listitem [ref=e561]: Cross-functional team alignment
+            - listitem [ref=e563]: Process optimization
+        - generic [ref=e567]:
+          - button "O!task Product / Project 2023 — 2024 +" [ref=e568]:
+            - generic [ref=e569]:
+              - heading "O!task" [level=3] [ref=e570]
+              - paragraph [ref=e571]: Product / Project
+            - generic [ref=e572]:
+              - generic [ref=e573]: 2023 — 2024
+              - generic [ref=e574]: +
+          - list [ref=e575]:
+            - listitem [ref=e576]: Task management product development
+            - listitem [ref=e578]: User research
+            - listitem [ref=e580]: Release coordination
+            - listitem [ref=e582]: Analytics implementation
+    - generic [ref=e587]:
+      - generic [ref=e589]:
+        - heading "Lab" [level=2] [ref=e590]
+        - paragraph [ref=e591]: Experiments and side projects.
+      - generic [ref=e592]:
+        - generic [ref=e595]:
+          - generic [ref=e596]:
+            - generic [ref=e597]: Active
+            - generic [ref=e598]: "#001"
+          - heading "AI Research Agent" [level=3] [ref=e599]
+          - paragraph [ref=e600]: Automated competitor analysis pipeline using LLMs
+          - generic [ref=e601]:
+            - generic [ref=e602]: AI
+            - generic [ref=e603]: Automation
+        - generic [ref=e606]:
+          - generic [ref=e607]:
+            - generic [ref=e608]: Active
+            - generic [ref=e609]: "#002"
+          - heading "Home Server" [level=3] [ref=e610]
+          - paragraph [ref=e611]: Self-hosted infrastructure for development and experiments
+          - generic [ref=e612]:
+            - generic [ref=e613]: Infrastructure
+            - generic [ref=e614]: DevOps
+        - generic [ref=e617]:
+          - generic [ref=e618]:
+            - generic [ref=e619]: In progress
+            - generic [ref=e620]: "#003"
+          - heading "Data Pipeline Tool" [level=3] [ref=e621]
+          - paragraph [ref=e622]: ETL pipeline for product metrics aggregation
+          - generic [ref=e623]:
+            - generic [ref=e624]: Data
+            - generic [ref=e625]: Python
+        - generic [ref=e628]:
+          - generic [ref=e629]:
+            - generic [ref=e630]: Active
+            - generic [ref=e631]: "#004"
+          - heading "UI Component Kit" [level=3] [ref=e632]
+          - paragraph [ref=e633]: Reusable component library for rapid prototyping
+          - generic [ref=e634]:
+            - generic [ref=e635]: React
+            - generic [ref=e636]: Design System
+        - generic [ref=e639]:
+          - generic [ref=e640]:
+            - generic [ref=e641]: Active
+            - generic [ref=e642]: "#005"
+          - heading "Automation Scripts" [level=3] [ref=e643]
+          - paragraph [ref=e644]: Workflow automations for repetitive tasks
+          - generic [ref=e645]:
+            - generic [ref=e646]: Automation
+            - generic [ref=e647]: Tools
+        - generic [ref=e650]:
+          - generic [ref=e651]:
+            - generic [ref=e652]: Ongoing
+            - generic [ref=e653]: "#006"
+          - heading "Open Source Contributions" [level=3] [ref=e654]
+          - paragraph [ref=e655]: Various contributions to open source projects
+          - generic [ref=e656]:
+            - generic [ref=e657]: Open Source
+            - generic [ref=e658]: Community
+    - generic [ref=e663]:
+      - heading "About" [level=2] [ref=e666]
+      - generic [ref=e669]:
+        - paragraph [ref=e670]: I'm a product-oriented builder interested in turning messy problems into simple, useful products.
+        - paragraph [ref=e671]: I work across product, project management, growth and technology and prefer staying close to both users and implementation.
+    - generic [ref=e675]:
+      - generic [ref=e677]:
+        - heading "Let's build something useful." [level=2] [ref=e678]
+        - paragraph [ref=e679]: Have a problem worth solving?
+      - generic [ref=e682]:
+        - button "Email me" [ref=e683]
+        - link "Telegram" [ref=e684] [cursor=pointer]:
+          - /url: https://t.me/legionanstek
+      - generic [ref=e691]:
+        - link "Matafonovegor2@gmail.com" [ref=e692] [cursor=pointer]:
+          - /url: mailto:Matafonovegor2@gmail.com
+        - generic [ref=e693]: ·
+        - link "@legionanstek" [ref=e694] [cursor=pointer]:
+          - /url: https://t.me/legionanstek
+  - contentinfo [ref=e695]:
+    - generic [ref=e696]:
+      - generic [ref=e697]:
+        - generic [ref=e698]: © 2025 Egor Matafonov
+        - generic [ref=e699]: Designed & built by Egor Matafonov
+      - generic [ref=e700]:
+        - link "GitHub" [ref=e701] [cursor=pointer]:
+          - /url: https://github.com
+        - link "LinkedIn" [ref=e702] [cursor=pointer]:
+          - /url: https://linkedin.com
+        - link "Telegram" [ref=e703] [cursor=pointer]:
+          - /url: https://t.me/legionanstek
