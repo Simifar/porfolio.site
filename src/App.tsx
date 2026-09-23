@@ -1,8 +1,10 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { MotionConfig } from 'framer-motion';
+import { useEffect } from 'react';
 import { AppProvider } from './lib/context';
 import { Navbar, ScrollProgress } from './components/Navigation';
 import Hero from './components/Hero';
-import { SelectedWork, Statement, HowIWork, Capabilities, AIWorkflow, Experience, Lab, About, Contact, Footer } from './components/Sections';
+import { SelectedWork, Statement, About, Contact, Footer } from './components/Sections';
 import CaseStudy from './components/CaseStudy';
 import NotFound from './components/NotFound';
 
@@ -14,26 +16,37 @@ function Divider() {
   );
 }
 
+function ScrollReset() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [pathname]);
+
+  return null;
+}
+
 function HomePage() {
   return (
     <>
       <ScrollProgress />
       <Navbar />
-      <main>
+      <a
+        href="#main-content"
+        className="skip-link"
+        onClick={event => {
+          event.preventDefault();
+          const main = document.getElementById('main-content');
+          main?.focus({ preventScroll: true });
+          main?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      >
+        Skip to content
+      </a>
+      <main id="main-content" tabIndex={-1}>
         <Hero />
-        <Divider />
         <SelectedWork />
         <Statement />
-        <Divider />
-        <HowIWork />
-        <Divider />
-        <Capabilities />
-        <Divider />
-        <AIWorkflow />
-        <Divider />
-        <Experience />
-        <Divider />
-        <Lab />
         <Divider />
         <About />
         <Divider />
@@ -56,7 +69,6 @@ function CaseStudyPage() {
 function NotFoundPage() {
   return (
     <>
-      <Navbar />
       <NotFound />
     </>
   );
@@ -66,12 +78,16 @@ export default function App() {
   return (
     <AppProvider>
       <HashRouter>
-        <div className="noise-overlay" />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/work/:slug" element={<CaseStudyPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
+        <MotionConfig reducedMotion="user">
+          <ScrollReset />
+          <div className="noise-overlay" aria-hidden="true" />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/work/:slug" element={<CaseStudyPage />} />
+            <Route path="/not-found" element={<NotFoundPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </MotionConfig>
       </HashRouter>
     </AppProvider>
   );

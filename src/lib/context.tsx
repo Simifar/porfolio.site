@@ -12,6 +12,22 @@ interface AppContextType {
   t: Content;
 }
 
+function readPreference(key: string): string | null {
+  try {
+    return window.localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function savePreference(key: string, value: string) {
+  try {
+    window.localStorage.setItem(key, value);
+  } catch {
+    // The site still works for this session when storage is unavailable.
+  }
+}
+
 const AppContext = createContext<AppContextType>({
   lang: 'en',
   setLang: () => {},
@@ -23,28 +39,32 @@ const AppContext = createContext<AppContextType>({
 export function AppProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLang] = useState<Lang>(() => {
     if (typeof window !== 'undefined') {
-      return (localStorage.getItem('lang') as Lang) || 'en';
+      const saved = readPreference('lang');
+      if (saved === 'en' || saved === 'ru') return saved;
     }
     return 'en';
   });
 
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('theme') as Theme;
-      if (stored) return stored;
+      const stored = readPreference('theme');
+      if (stored === 'dark' || stored === 'light') return stored;
       return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
     }
     return 'dark';
   });
 
   useEffect(() => {
-    localStorage.setItem('lang', lang);
+    savePreference('lang', lang);
+    document.documentElement.lang = lang;
   }, [lang]);
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
+    savePreference('theme', theme);
     document.documentElement.classList.toggle('light', theme === 'light');
     document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.style.colorScheme = theme;
+    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#08090B' : '#F5F5F2');
     if (theme === 'light') {
       document.documentElement.style.backgroundColor = '#F5F5F2';
       document.documentElement.style.color = '#08090B';

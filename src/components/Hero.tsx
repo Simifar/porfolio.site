@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApp } from '../lib/context';
-import { ArrowDown, Download, Mail } from 'lucide-react';
+import { ArrowDown, Mail } from 'lucide-react';
 
 interface GraphNode {
   id: string;
@@ -121,7 +121,7 @@ function ProductGraph() {
                 x={node.x}
                 y={node.y + (node.y > 60 ? 5 : -4)}
                 textAnchor="middle"
-                fill={highlighted ? '#F5F5F2' : '#686E77'}
+                  fill={highlighted ? 'var(--color-text-primary)' : 'var(--color-text-muted)'}
                 fontSize="2.2"
                 fontFamily="Inter, sans-serif"
                 fontWeight={isHovered ? 500 : 400}
@@ -153,7 +153,7 @@ function ProductGraph() {
                       x={sub.x}
                       y={sub.y + 2.5}
                       textAnchor="middle"
-                      fill="#A0A5AD"
+                      fill="var(--color-text-secondary)"
                       fontSize="1.5"
                       fontFamily="JetBrains Mono, monospace"
                     >
@@ -172,12 +172,6 @@ function ProductGraph() {
 
 export default function Hero() {
   const { t } = useApp();
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
 
   return (
     <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 lg:px-20 overflow-hidden" id="hero">
@@ -193,13 +187,13 @@ export default function Hero() {
         }}
       />
 
-      <div className="max-w-[1600px] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center py-24 lg:py-0">
+      <div className="max-w-[1600px] mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center py-24 pb-40 lg:py-0">
         {/* Left: Text */}
         <div className="relative z-10">
           {/* System label */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={loaded ? { opacity: 1, y: 0 } : {}}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="font-mono text-xs text-[var(--color-text-muted)] tracking-wider uppercase mb-8"
           >
@@ -209,8 +203,8 @@ export default function Hero() {
           {/* Headline */}
           <div className="overflow-hidden">
             <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={loaded ? { opacity: 1, y: 0 } : {}}
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
               className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] xl:text-[110px] font-bold leading-[0.9] tracking-[-0.03em]"
             >
@@ -218,20 +212,20 @@ export default function Hero() {
             </motion.h1>
           </div>
           <div className="overflow-hidden mt-2">
-            <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={loaded ? { opacity: 1, y: 0 } : {}}
+            <motion.p
+              initial={false}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="text-[48px] sm:text-[64px] md:text-[80px] lg:text-[96px] xl:text-[110px] font-bold leading-[0.9] tracking-[-0.03em] text-[var(--color-accent)]"
             >
               {t.hero.headlineAccent}
-            </motion.h1>
+            </motion.p>
           </div>
 
           {/* Supporting text */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={loaded ? { opacity: 1, y: 0 } : {}}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
             className="mt-8 text-base md:text-lg text-[var(--color-text-secondary)] max-w-lg leading-relaxed whitespace-pre-line"
           >
@@ -240,39 +234,34 @@ export default function Hero() {
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={loaded ? { opacity: 1, y: 0 } : {}}
+            initial={false}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.65 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <a
-              href="#work"
-              className="magnetic-btn inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-accent)] text-white rounded-full text-sm font-medium hover:bg-[var(--color-accent)]/90 transition-colors"
+            <button
+              type="button"
+              onClick={() => document.getElementById('work')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}
+              className="magnetic-btn inline-flex items-center gap-2 min-h-11 px-6 py-3 bg-[var(--color-accent)] text-[var(--color-on-accent)] rounded-full text-sm font-medium hover:opacity-90 transition-colors"
             >
               {t.hero.cta}
-              <ArrowDown className="w-4 h-4" />
-            </a>
-            <a
-              href="/cv.pdf"
-              className="magnetic-btn inline-flex items-center gap-2 px-6 py-3 border border-[var(--color-border)] rounded-full text-sm font-medium text-[var(--color-text-secondary)] hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-primary)] transition-all"
-            >
-              <Download className="w-4 h-4" />
-              {t.hero.secondaryCta}
-            </a>
-            <a
-              href="#contact"
+              <ArrowDown className="h-4 w-4" aria-hidden="true" />
+            </button>
+            <button
+              type="button"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}
               className="link-underline inline-flex items-center gap-2 text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] transition-colors"
             >
-              <Mail className="w-3.5 h-3.5" />
+              <Mail className="h-3.5 w-3.5" aria-hidden="true" />
               {t.hero.contactLink}
-            </a>
+            </button>
           </motion.div>
         </div>
 
         {/* Right: Product Graph */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={loaded ? { opacity: 1 } : {}}
+          initial={false}
+          animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4 }}
           className="lg:block hidden"
         >
@@ -281,17 +270,17 @@ export default function Hero() {
 
         {/* Mobile: Simplified graph */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={loaded ? { opacity: 1 } : {}}
+          initial={false}
+          animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="block lg:hidden mt-8"
+          className="mt-8 hidden min-[430px]:block lg:hidden"
         >
           <div className="flex items-center justify-center gap-3 flex-wrap">
             {['Idea', 'Research', 'Build', 'Ship', 'Measure', 'Iterate'].map((node, i) => (
               <motion.div
                 key={node}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={loaded ? { opacity: 1, scale: 1 } : {}}
+                initial={false}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 + i * 0.1 }}
                 className="flex items-center gap-2"
               >
@@ -306,8 +295,8 @@ export default function Hero() {
 
       {/* Scroll indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={loaded ? { opacity: 1 } : {}}
+        initial={false}
+        animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >

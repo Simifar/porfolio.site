@@ -1,0 +1,16 @@
+# Egor Matafonov — Portfolio
+
+> A bilingual portfolio of product and software projects, with links to published sites and source repositories.
+
+## Portfolio
+- [Portfolio home](https://simifar.github.io/porfolio.site/)
+
+## Projects
+- [TaskFocus](https://github.com/Simifar/taskfocus): task manager for daily planning and focused work.
+- [CortexMap](https://simifar.github.io/CortexMap/): Russian-language catalog for learning English. [Source](https://github.com/Simifar/CortexMap)
+- [MindTrack](https://simifar.github.io/mindtrack/): browser-based self-observation questionnaires. [Source](https://github.com/Simifar/mindtrack)
+- [Telegram Growth Analytics](https://github.com/Simifar/StatsTelegramChannels): local analytics tool for public Telegram channel placements.
+
+## Contact
+- Email: Matafonovegor2@gmail.com
+- Telegram: https://t.me/legionanstek

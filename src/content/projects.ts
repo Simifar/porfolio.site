@@ -1,136 +1,122 @@
+export type Language = 'en' | 'ru';
+
+export interface LocalizedText {
+  en: string;
+  ru: string;
+}
+
 export interface Project {
   slug: string;
   name: string;
-  subtitle: string;
-  category: string;
-  year?: string;
-  role?: string;
-  description: string;
+  subtitle: LocalizedText;
+  category: LocalizedText;
+  description: LocalizedText;
+  features: LocalizedText[];
   tags: string[];
-  github?: string;
+  github: string;
   live?: string;
-  featured: boolean;
-  status?: 'Live' | 'In development' | 'Archived';
-  size: 'large' | 'medium' | 'small';
-  problem?: string;
-  decisions?: { problem: string; decision: string; why: string }[];
-  reflection?: { limitation: string; hypothesis: string; experiment: string }[];
+  status?: LocalizedText;
+  screenshot?: { src: string; alt: LocalizedText; width: number; height: number };
 }
 
 export const projects: Project[] = [
   {
     slug: 'taskfocus',
     name: 'TaskFocus',
-    subtitle: 'Task management & focus system',
-    category: 'Productivity / Product',
-    year: '2024',
-    role: 'Product, UX, Development',
-    description: 'A system for managing tasks and maintaining deep focus. Built around the idea that active focus should be the primary UI object, not the entire task list.',
-    tags: ['Product', 'UX', 'Development', 'AI'],
-    github: 'https://github.com',
-    featured: true,
-    status: 'Live',
-    size: 'large',
-    problem: 'Too many tasks compete for attention. Users feel overwhelmed by long lists and lose track of what matters right now.',
-    decisions: [
-      { problem: 'Too many tasks compete for attention', decision: 'Make active focus the primary UI object instead of the entire task list', why: 'Reduce cognitive load and help users commit to one thing' },
-      { problem: 'Users forget what they planned', decision: 'Daily focus review prompt at session start', why: 'Create intentional engagement with priorities' },
-      { problem: 'No sense of progress', decision: 'Visual focus streak and completion patterns', why: 'Motivate through visible consistency' }
+    subtitle: {
+      en: 'A task manager for daily priorities and focused work',
+      ru: 'Менеджер задач для дневных приоритетов и сосредоточенной работы',
+    },
+    category: { en: 'Productivity', ru: 'Продуктивность' },
+    description: {
+      en: 'A task manager with quick inbox capture, a daily plan limited to five tasks, flexible scheduling, subtasks, priority and energy planning, and a focus timer.',
+      ru: 'Менеджер задач с быстрым сбором во входящие, планом дня максимум из пяти задач, гибкими датами, подзадачами, приоритетами, оценкой энергии и таймером фокуса.',
+    },
+    features: [
+      { en: 'Capture tasks in an inbox and organize them later.', ru: 'Собирать задачи во входящие и разбирать их позже.' },
+      { en: 'Keep the daily focus list to a maximum of five tasks.', ru: 'Ограничивать список задач на день пятью пунктами.' },
+      { en: 'Use flexible dates, views, and subtasks to organize work.', ru: 'Организовывать работу с помощью гибких дат, представлений и подзадач.' },
+      { en: 'Plan around importance, urgency, and available energy.', ru: 'Планировать с учётом важности, срочности и уровня энергии.' },
+      { en: 'Start a built-in focus timer from a task.', ru: 'Запускать встроенный таймер фокуса из задачи.' },
     ],
-    reflection: [
-      { limitation: 'No cross-device sync yet', hypothesis: 'Users need their focus state everywhere', experiment: 'Implement cloud sync with conflict resolution' }
-    ]
+    tags: ['Product', 'UX', 'Web app'],
+    github: 'https://github.com/Simifar/taskfocus',
   },
   {
     slug: 'cortexmap',
     name: 'CortexMap',
-    subtitle: 'Knowledge visualization tool',
-    category: 'Knowledge / Visualization',
-    year: '2024',
-    role: 'Product, Data, UX, Development',
-    description: 'A tool for visualizing knowledge structures and relationships between concepts. Helps users see connections they wouldn\'t notice in linear notes.',
-    tags: ['Product', 'Data', 'UX', 'Development'],
-    featured: true,
-    status: 'In development',
-    size: 'medium',
-    problem: 'Linear notes hide relationships between ideas. Users accumulate knowledge but can\'t see the bigger picture.',
-    decisions: [
-      { problem: 'Knowledge feels disconnected', decision: 'Spatial graph as primary interface', why: 'Leverage human spatial cognition for understanding relationships' },
-      { problem: 'Graphs become unreadable at scale', decision: 'Progressive disclosure with zoom levels', why: 'Maintain clarity regardless of data size' }
+    subtitle: {
+      en: 'A Russian-language reference catalog for learning English',
+      ru: 'Русскоязычный справочник-каталог для изучения английского',
+    },
+    category: { en: 'Education', ru: 'Образование' },
+    description: {
+      en: 'A static English-learning catalog published on GitHub Pages. It works as a reference site without accounts, a backend, or analytics.',
+      ru: 'Статический каталог материалов для изучения английского, опубликованный на GitHub Pages. Это справочный сайт без аккаунтов, бэкенда и аналитики.',
+    },
+    features: [
+      { en: 'Browse English-learning reference material in Russian.', ru: 'Изучать справочные материалы по английскому на русском языке.' },
+      { en: 'Open the published static site directly in a browser.', ru: 'Открывать опубликованный статический сайт в браузере.' },
+      { en: 'Use the catalog without creating an account.', ru: 'Пользоваться каталогом без регистрации.' },
     ],
-    reflection: [
-      { limitation: 'Performance with large graphs', hypothesis: 'Virtual rendering and clustering needed', experiment: 'Implement LOD rendering for 1000+ node graphs' }
-    ]
+    tags: ['Education', 'Static site', 'Next.js'],
+    github: 'https://github.com/Simifar/CortexMap',
+    live: 'https://simifar.github.io/CortexMap/',
+    status: { en: 'Published', ru: 'Опубликован' },
+    screenshot: {
+      src: '/projects/cortexmap-home.png',
+      alt: { en: 'CortexMap learning catalog home page', ru: 'Главная страница каталога CortexMap' },
+      width: 1200,
+      height: 630,
+    },
   },
   {
     slug: 'mindtrack',
-    name: 'Mindtrack',
-    subtitle: 'Web product for self-tracking',
-    category: 'Web Product',
-    year: '2024',
-    role: 'Product, UX, AI, Development',
-    description: 'A web product combining self-tracking with AI-powered insights. Helps users understand their patterns without manual analysis.',
-    tags: ['Product', 'UX', 'AI', 'Development'],
-    featured: true,
-    status: 'In development',
-    size: 'small',
-    problem: 'Self-tracking tools generate data but not understanding. Users log habits but don\'t learn from patterns.',
-    decisions: [
-      { problem: 'Data without insight', decision: 'AI-generated weekly pattern summaries', why: 'Transform raw data into actionable understanding' }
+    name: 'MindTrack',
+    subtitle: {
+      en: 'Private self-screening and reflection in the browser',
+      ru: 'Конфиденциальная самооценка и наблюдение за состоянием в браузере',
+    },
+    category: { en: 'Wellbeing', ru: 'Самонаблюдение' },
+    description: {
+      en: 'A browser-based self-observation app with screening questionnaires. Answers stay in browser storage; the app has no accounts, backend, analytics, or AI features.',
+      ru: 'Браузерное приложение для самооценки с опросниками. Ответы остаются в хранилище браузера; в приложении нет аккаунтов, бэкенда, аналитики или функций ИИ.',
+    },
+    features: [
+      { en: 'Complete ASRS, MDQ, and PSS-10 questionnaire flows.', ru: 'Проходить опросники ASRS, MDQ и PSS-10.' },
+      { en: 'Calculate questionnaire results in the browser.', ru: 'Получать результаты опросников прямо в браузере.' },
+      { en: 'Keep saved answers and progress in local browser storage.', ru: 'Хранить ответы и прогресс в локальном хранилище браузера.' },
+      { en: 'Read guidance for urgent situations alongside the results.', ru: 'Находить рекомендации для экстренных ситуаций рядом с результатами.' },
     ],
-    reflection: [
-      { limitation: 'AI insights can feel generic', hypothesis: 'Context-aware prompts improve relevance', experiment: 'Personalize AI analysis based on user history' }
-    ]
-  },
-  {
-    slug: 'englishpath',
-    name: 'EnglishPath',
-    subtitle: 'Structured English learning system',
-    category: 'EdTech',
-    year: '2023',
-    role: 'Product, Education, AI, Web',
-    description: 'A personal learning system for structured English study. Combines spaced repetition, AI-generated content and progress tracking.',
-    tags: ['Product', 'Education', 'AI', 'Web'],
-    featured: true,
-    status: 'Live',
-    size: 'medium',
-    problem: 'Language learning apps lack personal structure. Users jump between resources without a coherent path.',
-    decisions: [
-      { problem: 'No clear learning path', decision: 'Adaptive curriculum based on level assessment', why: 'Give users a clear starting point and progression' },
-      { problem: 'Content feels impersonal', decision: 'AI generates examples from user\'s interests', why: 'Increase engagement through personal relevance' }
-    ],
-    reflection: [
-      { limitation: 'Speaking practice is limited', hypothesis: 'Voice AI can fill the gap', experiment: 'Integrate conversational AI tutor' }
-    ]
+    tags: ['Privacy', 'Questionnaires', 'Static site'],
+    github: 'https://github.com/Simifar/mindtrack',
+    live: 'https://simifar.github.io/mindtrack/',
+    status: { en: 'Published', ru: 'Опубликован' },
+    screenshot: {
+      src: '/projects/mindtrack-home.png',
+      alt: { en: 'MindTrack self-observation app home page', ru: 'Главная страница приложения MindTrack' },
+      width: 1280,
+      height: 1306,
+    },
   },
   {
     slug: 'telegram-growth-analytics',
     name: 'Telegram Growth Analytics',
-    subtitle: 'Advertising placement evaluation system',
-    category: 'Growth / Analytics',
-    year: '2024',
-    role: 'Growth, Analytics, Development',
-    description: 'A system for evaluating Telegram advertising placements based on real performance metrics. Helps make data-driven decisions about channel investments.',
-    tags: ['Growth', 'Analytics', 'Data', 'Development'],
-    featured: true,
-    status: 'Live',
-    size: 'small',
-    problem: 'Telegram ad buying is opaque. Marketers lack reliable metrics for comparing placements.',
-    decisions: [
-      { problem: 'No standardized evaluation', decision: 'Build scoring system across ERR, CPM, CPS, CR', why: 'Enable apples-to-apples comparison of placements' },
-      { problem: 'Reach metrics are misleading', decision: 'Track subscriber quality, not just quantity', why: 'Focus on actual business outcomes' }
+    subtitle: {
+      en: 'A local tool for analyzing public Telegram ad placements',
+      ru: 'Локальный инструмент для анализа рекламных размещений в публичных Telegram-каналах',
+    },
+    category: { en: 'Analytics', ru: 'Аналитика' },
+    description: {
+      en: 'A desktop analysis tool for public Telegram channels. It collects channel data through Telegram MTProto and stores analysis locally in SQLite; it is not a hosted website.',
+      ru: 'Настольный инструмент для анализа публичных Telegram-каналов. Он получает данные через MTProto и хранит результаты локально в SQLite; это не размещённый в интернете сайт.',
+    },
+    features: [
+      { en: 'Analyze public Telegram channel advertising placements.', ru: 'Анализировать рекламные размещения в публичных Telegram-каналах.' },
+      { en: 'Connect through Telegram MTProto from the local application.', ru: 'Подключаться через Telegram MTProto из локального приложения.' },
+      { en: 'Store collected analysis in a local SQLite database.', ru: 'Сохранять собранные данные в локальной базе SQLite.' },
     ],
-    reflection: [
-      { limitation: 'Manual data collection', hypothesis: 'API integration can automate', experiment: 'Connect to Telegram Bot API for automated tracking' }
-    ]
-  }
-];
-
-export const labProjects = [
-  { name: 'AI Research Agent', description: 'Automated competitor analysis pipeline using LLMs', status: 'Active', tags: ['AI', 'Automation'] },
-  { name: 'Home Server', description: 'Self-hosted infrastructure for development and experiments', status: 'Active', tags: ['Infrastructure', 'DevOps'] },
-  { name: 'Data Pipeline Tool', description: 'ETL pipeline for product metrics aggregation', status: 'In progress', tags: ['Data', 'Python'] },
-  { name: 'UI Component Kit', description: 'Reusable component library for rapid prototyping', status: 'Active', tags: ['React', 'Design System'] },
-  { name: 'Automation Scripts', description: 'Workflow automations for repetitive tasks', status: 'Active', tags: ['Automation', 'Tools'] },
-  { name: 'Open Source Contributions', description: 'Various contributions to open source projects', status: 'Ongoing', tags: ['Open Source', 'Community'] }
+    tags: ['Telegram', 'Analytics', 'SQLite'],
+    github: 'https://github.com/Simifar/StatsTelegramChannels',
+  },
 ];

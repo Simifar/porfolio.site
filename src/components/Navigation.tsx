@@ -1,272 +1,248 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowRight, Globe, Moon, Search, Sun, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useApp, useScrollProgress } from '../lib/context';
-import { Search, X, ArrowRight, Globe, Sun, Moon } from 'lucide-react';
+
+type SectionName = 'work' | 'about' | 'contact';
+
+function scrollToSection(id: SectionName) {
+  const target = document.getElementById(id);
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  target?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+}
 
 export function ScrollProgress() {
   const progress = useScrollProgress();
-  return <div className="scroll-progress" style={{ width: `${progress}%` }} />;
+  return <div className="scroll-progress" style={{ width: `${progress}%` }} aria-hidden="true" />;
 }
 
 export function Navbar() {
   const { t, lang, setLang, theme, setTheme } = useApp();
   const [scrolled, setScrolled] = useState(false);
   const [cmdOpen, setCmdOpen] = useState(false);
+  const navLinks: { label: string; target: SectionName }[] = [
+    { label: t.nav.work, target: 'work' },
+    { label: t.nav.about, target: 'about' },
+    { label: t.nav.contact, target: 'contact' },
+  ];
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 100);
+    const handleScroll = () => setScrolled(window.scrollY > 80);
+    handleScroll();
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        setCmdOpen(prev => !prev);
+    const handleKey = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        setCmdOpen(open => !open);
       }
-      if (e.key === 'Escape') setCmdOpen(false);
+      if (event.key === 'Escape') setCmdOpen(false);
     };
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, []);
 
-  const navLinks = [
-    { label: t.nav.work, href: '#work' },
-    { label: t.nav.about, href: '#about' },
-    { label: t.nav.lab, href: '#lab' },
-    { label: t.nav.contact, href: '#contact' },
-  ];
+  const navigation = (mobile = false) => (
+    <nav aria-label={mobile ? 'Mobile navigation' : 'Main navigation'} className={mobile ? 'flex items-center justify-around' : 'hidden items-center gap-7 md:flex'}>
+      {navLinks.map(link => (
+        <button
+          key={link.target}
+          type="button"
+          onClick={() => scrollToSection(link.target)}
+          className={`${mobile ? 'min-h-11 px-3 text-xs' : 'px-1 py-2 text-sm'} whitespace-nowrap text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]`}
+        >
+          {link.label}
+        </button>
+      ))}
+    </nav>
+  );
 
   return (
     <>
-      <motion.nav
-        initial={{ opacity: 0, y: -10 }}
+      <motion.header
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
-        className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-500 ${
-          scrolled ? 'py-3' : 'py-5'
-        }`}
+        className={`fixed left-0 right-0 top-0 z-[1000] px-3 pt-3 transition-all duration-300 md:px-8 md:pt-5 ${scrolled ? 'md:pt-3' : ''}`}
       >
-        <div className={`max-w-[1600px] mx-auto px-6 md:px-12 flex items-center justify-between ${
-          scrolled
-            ? 'bg-[var(--color-bg)]/80 backdrop-blur-xl border border-[var(--color-border)] rounded-full mx-4 md:mx-8 px-5 py-2.5'
-            : ''
-        }`}>
-          {/* Logo */}
-          <a href="#" className="font-mono text-xs tracking-wider text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
-            EM
-          </a>
-
-          {/* Nav links */}
-          <div className="hidden md:flex items-center gap-8">
-            {navLinks.map(link => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-sm text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] transition-colors link-underline"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Right side */}
-          <div className="flex items-center gap-3">
-            {/* Theme toggle */}
+        <div className={`mx-auto flex max-w-[1400px] items-center justify-between gap-4 px-4 py-2.5 md:px-5 ${scrolled ? 'rounded-full border border-[var(--color-border)] bg-[var(--color-bg)]/85 shadow-lg shadow-black/5 backdrop-blur-xl' : ''}`}>
+          <Link to="/" aria-label="Egor Matafonov — home" className="shrink-0 rounded px-2 py-2 font-mono text-xs tracking-wider text-[var(--color-text-muted)] transition-colors hover:text-[var(--color-text-primary)]">EM</Link>
+          {navigation()}
+          <div className="ml-auto flex shrink-0 items-center gap-1 sm:gap-2">
             <button
+              type="button"
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="flex items-center gap-1 text-xs font-mono text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] transition-colors px-2 py-1 rounded-md border border-transparent hover:border-[var(--color-border)]"
-              aria-label="Toggle theme"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]"
+              aria-label={t.nav.theme}
+              aria-pressed={theme === 'light'}
+              title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
             >
-              {theme === 'dark' ? <Sun className="w-3 h-3" /> : <Moon className="w-3 h-3" />}
+              {theme === 'dark' ? <Sun className="h-4 w-4" aria-hidden="true" /> : <Moon className="h-4 w-4" aria-hidden="true" />}
             </button>
-
-            {/* Language toggle */}
             <button
+              type="button"
               onClick={() => setLang(lang === 'en' ? 'ru' : 'en')}
-              className="flex items-center gap-1 text-xs font-mono text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] transition-colors px-2 py-1 rounded-md border border-transparent hover:border-[var(--color-border)]"
-              aria-label="Switch language"
+              className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full px-2 text-xs font-mono text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)] sm:px-3"
+              aria-label={`${t.nav.language} (${lang.toUpperCase()})`}
             >
-              <Globe className="w-3 h-3" />
+              <Globe className="h-3.5 w-3.5" aria-hidden="true" />
               {lang.toUpperCase()}
             </button>
-
-            {/* Command palette trigger */}
             <button
+              type="button"
               onClick={() => setCmdOpen(true)}
-              className="flex items-center gap-2 text-xs font-mono text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)] transition-colors px-2.5 py-1.5 rounded-md border border-[var(--color-border)] hover:border-[var(--color-border-hover)]"
-              aria-label="Open command palette"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[var(--color-border)] px-3 text-xs font-mono text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-primary)]"
+              aria-label={t.nav.palette}
             >
-              <Search className="w-3 h-3" />
-              <span className="hidden sm:inline">⌘K</span>
+              <Search className="h-3.5 w-3.5" aria-hidden="true" />
+              <span className="hidden sm:inline">Ctrl K</span>
             </button>
-
-            {/* CV link */}
-            <a
-              href="/cv.pdf"
-              className="hidden md:inline-flex text-xs font-mono text-[var(--color-text-muted)] hover:text-[var(--color-accent)] transition-colors"
-            >
-              {t.nav.cv}
-            </a>
           </div>
         </div>
-      </motion.nav>
+      </motion.header>
 
       <CommandPalette open={cmdOpen} onClose={() => setCmdOpen(false)} />
 
-      {/* Mobile bottom nav */}
-      <nav className="fixed bottom-4 left-4 right-4 z-[999] md:hidden" aria-label="Mobile navigation">
-        <div className="flex items-center justify-around bg-[var(--color-bg)]/90 backdrop-blur-xl border border-[var(--color-border)] rounded-full px-4 py-2.5">
-          {navLinks.map(link => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors py-2 px-3"
-            >
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </nav>
+      <div className="mobile-navigation-bar fixed left-3 right-3 z-[999] rounded-full border border-[var(--color-border)] bg-[var(--color-bg)]/95 px-2 py-1 shadow-xl shadow-black/10 backdrop-blur-xl md:hidden">
+        {navigation(true)}
+      </div>
     </>
   );
 }
 
 function CommandPalette({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { t, lang, setLang } = useApp();
+  const { t, lang, setLang, theme, setTheme } = useApp();
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef<HTMLInputElement>(null);
-
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previousFocus = useRef<HTMLElement | null>(null);
   const actions = [
     ...t.commandPalette.actions,
-    { label: lang === 'en' ? 'Switch to Russian' : 'Switch to English', action: 'lang' },
+    { label: lang === 'en' ? 'Switch to Russian' : 'Switch to English', action: 'language' },
   ];
-
-  const filtered = actions.filter(a =>
-    a.label.toLowerCase().includes(query.toLowerCase())
-  );
+  const filtered = actions.filter(action => action.label.toLocaleLowerCase().includes(query.toLocaleLowerCase()));
 
   useEffect(() => {
-    if (open) {
-      setQuery('');
-      setSelectedIndex(0);
-      setTimeout(() => inputRef.current?.focus(), 50);
-    }
+    if (!open) return;
+    previousFocus.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    const oldOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const focusTimer = window.setTimeout(() => inputRef.current?.focus(), 0);
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.body.style.overflow = oldOverflow;
+      previousFocus.current?.focus();
+    };
   }, [open]);
+
+  useEffect(() => {
+    setSelectedIndex(index => Math.min(index, Math.max(filtered.length - 1, 0)));
+  }, [filtered.length]);
 
   const executeAction = useCallback((action: string) => {
     onClose();
     switch (action) {
-      case 'work': document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' }); break;
-      case 'about': document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); break;
-      case 'lab': document.getElementById('lab')?.scrollIntoView({ behavior: 'smooth' }); break;
-      case 'contact': document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); break;
-      case 'cv': window.open('/cv.pdf', '_blank'); break;
-      case 'github': window.open('https://github.com', '_blank'); break;
-      case 'lang': setLang(lang === 'en' ? 'ru' : 'en'); break;
-      default:
-        if (action === 'build') {
-          // Easter egg
-          alert('Turning ambiguity into something useful...');
-        }
+      case 'work': scrollToSection('work'); break;
+      case 'about': scrollToSection('about'); break;
+      case 'contact': scrollToSection('contact'); break;
+      case 'github': window.open('https://github.com/Simifar', '_blank', 'noopener,noreferrer'); break;
+      case 'theme': setTheme(theme === 'dark' ? 'light' : 'dark'); break;
+      case 'language': setLang(lang === 'en' ? 'ru' : 'en'); break;
     }
-  }, [onClose, lang, setLang]);
+  }, [lang, onClose, setLang, setTheme, theme]);
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      setSelectedIndex(i => Math.min(i + 1, filtered.length - 1));
-    } else if (e.key === 'ArrowUp') {
-      e.preventDefault();
-      setSelectedIndex(i => Math.max(i - 1, 0));
-    } else if (e.key === 'Enter') {
-      if (filtered[selectedIndex]) executeAction(filtered[selectedIndex].action);
+  const handleDialogKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'Tab' && dialogRef.current) {
+      const focusable = Array.from(dialogRef.current.querySelectorAll<HTMLElement>('input:not([disabled]), button:not([disabled])'));
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+      return;
+    }
+    if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      setSelectedIndex(index => Math.min(index + 1, filtered.length - 1));
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      setSelectedIndex(index => Math.max(index - 1, 0));
+    } else if (event.key === 'Enter' && filtered[selectedIndex]) {
+      event.preventDefault();
+      executeAction(filtered[selectedIndex].action);
     }
   };
-
-  // Easter egg: typing "build"
-  useEffect(() => {
-    if (query.toLowerCase() === 'build') {
-      // Show easter egg after a delay
-    }
-  }, [query]);
 
   return (
     <AnimatePresence>
       {open && (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
-          className="fixed inset-0 z-[10000] flex items-start justify-center pt-[20vh]"
-          onClick={onClose}
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          transition={{ duration: 0.14 }}
+          className="fixed inset-0 z-[10000] flex items-start justify-center overflow-y-auto px-4 pt-[12vh] sm:pt-[18vh]"
+          onMouseDown={event => { if (event.target === event.currentTarget) onClose(); }}
         >
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-
-          {/* Palette */}
+          <div className="absolute inset-0 bg-black/65 backdrop-blur-sm" aria-hidden="true" />
           <motion.div
-            initial={{ opacity: 0, scale: 0.96, y: -10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.96, y: -10 }}
-            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full max-w-lg bg-[var(--color-bg-elevated)] border border-[var(--color-border)] rounded-2xl overflow-hidden shadow-2xl"
-            onClick={e => e.stopPropagation()}
+            ref={dialogRef}
+            initial={{ opacity: 0, scale: 0.97, y: -8 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.97, y: -8 }}
+            transition={{ duration: 0.16 }}
+            className="relative w-full max-w-lg overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] shadow-2xl"
+            onKeyDown={handleDialogKeyDown}
             role="dialog"
-            aria-label="Command palette"
+            aria-modal="true"
+            aria-labelledby="command-palette-title"
           >
-            {/* Input */}
-            <div className="flex items-center gap-3 px-5 py-4 border-b border-[var(--color-border)]">
-              <Search className="w-4 h-4 text-[var(--color-text-muted)]" />
+            <h2 id="command-palette-title" className="sr-only">{t.commandPalette.title}</h2>
+            <div className="flex min-h-14 items-center gap-3 border-b border-[var(--color-border)] px-4 sm:px-5">
+              <Search className="h-4 w-4 shrink-0 text-[var(--color-text-muted)]" aria-hidden="true" />
               <input
                 ref={inputRef}
                 type="text"
                 value={query}
-                onChange={e => { setQuery(e.target.value); setSelectedIndex(0); }}
-                onKeyDown={handleKeyDown}
+                onChange={event => { setQuery(event.target.value); setSelectedIndex(0); }}
                 placeholder={t.commandPalette.placeholder}
-                className="flex-1 bg-transparent text-sm text-[var(--color-text-primary)] placeholder:text-[var(--color-text-muted)] outline-none"
+                className="min-w-0 flex-1 bg-transparent py-3 text-sm text-[var(--color-text-primary)] outline-none placeholder:text-[var(--color-text-muted)]"
+                role="combobox"
+                aria-expanded="true"
+                aria-controls="command-palette-options"
+                aria-activedescendant={filtered[selectedIndex] ? `command-option-${filtered[selectedIndex].action}` : undefined}
+                autoComplete="off"
               />
-              <button onClick={onClose} className="text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)]">
-                <X className="w-4 h-4" />
+              <button type="button" onClick={onClose} aria-label={t.commandPalette.closeHint} className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-[var(--color-text-muted)] hover:bg-[var(--color-bg-secondary)] hover:text-[var(--color-text-primary)]">
+                <X className="h-4 w-4" aria-hidden="true" />
               </button>
             </div>
-
-            {/* Results */}
-            <div className="max-h-[300px] overflow-y-auto py-2">
-              {filtered.map((action, i) => (
+            <div id="command-palette-options" role="listbox" className="max-h-[min(50vh,320px)] overflow-y-auto py-2">
+              {filtered.map((action, index) => (
                 <button
+                  id={`command-option-${action.action}`}
                   key={action.action}
+                  type="button"
+                  role="option"
+                  aria-selected={index === selectedIndex}
+                  onMouseEnter={() => setSelectedIndex(index)}
                   onClick={() => executeAction(action.action)}
-                  className={`w-full flex items-center justify-between px-5 py-3 text-sm transition-colors ${
-                    i === selectedIndex
-                      ? 'bg-[var(--color-accent)]/10 text-[var(--color-text-primary)]'
-                      : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]'
-                  }`}
+                  className={`flex min-h-11 w-full items-center justify-between px-5 py-3 text-left text-sm transition-colors ${index === selectedIndex ? 'bg-[var(--color-accent)]/10 text-[var(--color-text-primary)]' : 'text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-secondary)]'}`}
                 >
                   <span>{action.label}</span>
-                  {i === selectedIndex && <ArrowRight className="w-3.5 h-3.5 text-[var(--color-accent)]" />}
+                  {index === selectedIndex && <ArrowRight className="h-3.5 w-3.5 text-[var(--color-accent)]" aria-hidden="true" />}
                 </button>
               ))}
-              {filtered.length === 0 && (
-                <div className="px-5 py-8 text-center text-sm text-[var(--color-text-muted)]">
-                  {query.toLowerCase() === 'build' ? (
-                    <span className="text-[var(--color-accent)]">Turning ambiguity into something useful...</span>
-                  ) : (
-                    'No results'
-                  )}
-                </div>
-              )}
+              {filtered.length === 0 && <p className="px-5 py-8 text-center text-sm text-[var(--color-text-muted)]">{t.commandPalette.empty}</p>}
             </div>
-
-            {/* Footer hint */}
-            <div className="px-5 py-3 border-t border-[var(--color-border)] flex items-center gap-4 text-xs text-[var(--color-text-muted)] font-mono">
-              <span>↑↓ Navigate</span>
-              <span>↵ Select</span>
-              <span>Esc Close</span>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 border-t border-[var(--color-border)] px-5 py-3 font-mono text-[10px] text-[var(--color-text-muted)]">
+              <span>↑↓ {t.commandPalette.navigationHint}</span>
+              <span>↵ {t.commandPalette.selectHint}</span>
+              <span>Esc {t.commandPalette.closeHint}</span>
             </div>
           </motion.div>
         </motion.div>

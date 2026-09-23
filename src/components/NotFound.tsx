@@ -52,7 +52,7 @@ export default function NotFound() {
         >
           <Link
             to="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[var(--color-accent)] text-white rounded-full text-sm font-medium hover:bg-[var(--color-accent)]/90 transition-colors"
+            className="inline-flex min-h-11 items-center gap-2 px-6 py-3 bg-[var(--color-accent)] text-[var(--color-on-accent)] rounded-full text-sm font-medium hover:opacity-90 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             {t.notFound.btn}
