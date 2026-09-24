@@ -22,6 +22,41 @@ function FadeIn({ children, delay = 0, className = '' }: { children: React.React
 
 export function SelectedWork() {
   const { t, lang } = useApp();
+  const featured = projects.filter(project => project.presentation === 'featured');
+  const additional = projects.filter(project => project.presentation === 'additional');
+
+  const renderActions = (project: (typeof projects)[number]) => (
+    <div className="mt-auto flex flex-wrap items-center gap-x-3 gap-y-2 pt-6">
+      <Link
+        to={`/work/${project.slug}`}
+        aria-label={`${t.work.viewCase}: ${project.name}`}
+        className="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-[var(--color-accent)] transition-colors hover:text-[var(--color-text-primary)]"
+      >
+        {t.work.viewCase}
+        <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+      </Link>
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex min-h-11 items-center gap-1.5 text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]"
+      >
+        {t.work.repository}
+        <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+      </a>
+      {project.live && (
+        <a
+          href={project.live}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 items-center gap-1.5 text-sm text-[var(--color-text-secondary)] transition-colors hover:text-[var(--color-text-primary)]"
+        >
+          {t.work.openProduct}
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+        </a>
+      )}
+    </div>
+  );
 
   return (
     <section id="work" className="relative scroll-mt-24 px-6 py-24 md:px-12 md:py-32 lg:px-20">
@@ -32,16 +67,33 @@ export function SelectedWork() {
         </FadeIn>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6">
-          {projects.map((project, index) => (
-            <FadeIn key={project.slug} delay={index * 0.06} className={index === 0 ? 'md:col-span-2' : ''}>
-              <Link
-                to={`/work/${project.slug}`}
-                className="card-spotlight border-light group relative flex min-h-[290px] h-full flex-col justify-between overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 transition-colors hover:border-[var(--color-border-hover)] md:min-h-[320px] md:p-8"
-                aria-label={`${t.work.viewCase}: ${project.name}`}
-              >
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(124,140,255,0.10),transparent_38%)] opacity-70 transition-opacity group-hover:opacity-100" />
-                <div className="relative">
-                  <div className="mb-5 flex flex-wrap items-center gap-x-3 gap-y-2">
+          {featured.map((project, index) => (
+            <FadeIn key={project.slug} delay={index * 0.06}>
+              <article aria-labelledby={`project-${project.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] transition-colors hover:border-[var(--color-border-hover)]">
+                {project.screenshot && (
+                  <figure className="grid aspect-[1.55] grid-cols-2 overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] md:aspect-[1.7]">
+                    <div className="min-h-0 overflow-hidden">
+                      <img
+                        src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
+                        alt={project.screenshot.alt[lang]}
+                        width={project.screenshot.width}
+                        height={project.screenshot.height}
+                        loading="lazy"
+                        decoding="async"
+                        className={`h-full w-full object-cover ${project.screenshot.objectPosition === 'left' ? 'object-left' : 'object-center'} max-sm:scale-[1.4] transition-transform duration-500 group-hover:scale-[1.015]`}
+                      />
+                    </div>
+                    <figcaption className="flex flex-col justify-between gap-3 border-l border-[var(--color-border)] p-3 sm:p-4 md:p-6">
+                      <div>
+                        <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--color-text-muted)] md:text-[10px]">{t.work.focusLabel}</p>
+                        <p className="mt-2 text-xs leading-relaxed text-[var(--color-text-primary)] md:text-sm">{project.cardFocus[lang]}</p>
+                      </div>
+                      <p className="text-[10px] leading-relaxed text-[var(--color-text-muted)] md:text-xs">{project.screenshot.caption[lang]}</p>
+                    </figcaption>
+                  </figure>
+                )}
+                <div className="flex flex-1 flex-col p-5 md:p-6">
+                  <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2">
                     <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">{project.category[lang]}</span>
                     {project.status && (
                       <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-[var(--color-accent)]">
@@ -50,28 +102,53 @@ export function SelectedWork() {
                       </span>
                     )}
                   </div>
-                  <div className="flex items-start justify-between gap-5">
-                    <div>
-                      <h3 className="text-2xl font-bold tracking-[-0.02em] md:text-3xl">{project.name}</h3>
-                      <p className="mt-3 max-w-xl text-sm leading-relaxed text-[var(--color-text-secondary)] md:text-base">{project.subtitle[lang]}</p>
-                    </div>
-                    <ArrowUpRight className="mt-1 h-5 w-5 shrink-0 text-[var(--color-text-muted)] transition-transform group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-[var(--color-accent)]" aria-hidden="true" />
-                  </div>
+                  <h3 id={`project-${project.slug}`} className="text-2xl font-semibold tracking-[-0.025em] md:text-3xl">{project.name}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{project.subtitle[lang]}</p>
+                  <p className="mt-4 border-t border-[var(--color-border)] pt-3 text-xs leading-relaxed text-[var(--color-text-muted)]">{project.cardRole[lang]}</p>
+                  {renderActions(project)}
                 </div>
-                <div className="relative mt-10 flex flex-wrap gap-2">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="rounded-full border border-[var(--color-border)] px-3 py-1 text-[10px] font-mono text-[var(--color-text-muted)]">{tag}</span>
-                  ))}
-                  {project.live && (
-                    <span className="ml-auto inline-flex items-center gap-1.5 self-center text-xs text-[var(--color-accent)]">
-                      {lang === 'en' ? 'Open site' : 'Открыть сайт'}
-                      <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
-                    </span>
-                  )}
-                </div>
-              </Link>
+              </article>
             </FadeIn>
           ))}
+        </div>
+
+        <div data-project-group="additional" className="mt-16 md:mt-20">
+          <h3 className="mb-6 text-xl font-semibold tracking-[-0.02em] md:text-2xl">{t.work.additionalTitle}</h3>
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+            {additional.map((project, index) => (
+              <FadeIn key={project.slug} delay={index * 0.05}>
+                <article aria-labelledby={`project-${project.slug}`} className="flex h-full min-h-[250px] flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] transition-colors hover:border-[var(--color-border-hover)] sm:flex-row">
+                  {project.screenshot ? (
+                    <figure className="relative aspect-[2.1] w-full shrink-0 overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] sm:aspect-auto sm:w-36 sm:border-b-0 sm:border-r md:w-44">
+                      <img
+                        src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
+                        alt={project.screenshot.alt[lang]}
+                        width={project.screenshot.width}
+                        height={project.screenshot.height}
+                        loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover object-center"
+                      />
+                      <figcaption className="sr-only">{project.screenshot.caption[lang]}</figcaption>
+                    </figure>
+                  ) : (
+                    <div className="flex min-h-24 shrink-0 items-center border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-text-muted)] sm:w-36 sm:border-b-0 sm:border-r md:w-44">
+                      {project.cardRole[lang]}
+                    </div>
+                  )}
+                  <div className="flex flex-1 flex-col p-5 md:p-6">
+                    <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">{project.category[lang]}</span>
+                      {project.status && <span className="font-mono text-[10px] text-[var(--color-accent)]">{project.status[lang]}</span>}
+                    </div>
+                    <h4 id={`project-${project.slug}`} className="text-xl font-semibold tracking-[-0.02em]">{project.name}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{project.cardFocus[lang]}</p>
+                    {renderActions(project)}
+                  </div>
+                </article>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </div>
     </section>

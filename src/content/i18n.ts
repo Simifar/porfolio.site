@@ -1,7 +1,15 @@
 export interface Content {
   nav: { work: string; about: string; contact: string; theme: string; language: string; palette: string };
   hero: { headline: string; headlineAccent: string; supporting: string; cta: string; contactLink: string; visualAlt: string; visualTitle: string; visualSubtitle: string };
-  work: { title: string; subtitle: string; viewCase: string };
+  work: {
+    title: string;
+    subtitle: string;
+    viewCase: string;
+    repository: string;
+    openProduct: string;
+    additionalTitle: string;
+    focusLabel: string;
+  };
   statement: { line1: string; line2: string };
   about: { title: string; text: string[] };
   contact: { title: string; subtitle: string; emailBtn: string; telegramBtn: string; copied: string };
@@ -38,7 +46,15 @@ export const en: Content = {
     visualTitle: 'MindTrack',
     visualSubtitle: 'Published product · answers stay in your browser',
   },
-  work: { title: 'Selected work', subtitle: 'Projects with a public trail.', viewCase: 'View project' },
+  work: {
+    title: 'Selected work',
+    subtitle: 'Two end-to-end product cases, plus other projects.',
+    viewCase: 'Project case',
+    repository: 'Source code',
+    openProduct: 'Open product',
+    additionalTitle: 'More projects',
+    focusLabel: 'Product focus',
+  },
   statement: {
     line1: 'Clear products start with a clear next step.',
     line2: 'TaskFocus caps the daily plan at five tasks. MindTrack keeps questionnaire answers in the browser.',
@@ -96,7 +112,15 @@ export const ru: Content = {
     visualTitle: 'MindTrack',
     visualSubtitle: 'Опубликованный продукт · ответы остаются в браузере',
   },
-  work: { title: 'Избранные проекты', subtitle: 'Проекты, которые можно проверить.', viewCase: 'О проекте' },
+  work: {
+    title: 'Избранные проекты',
+    subtitle: 'Два проекта полного цикла и дополнительные работы.',
+    viewCase: 'Кейс проекта',
+    repository: 'Исходный код',
+    openProduct: 'Открыть продукт',
+    additionalTitle: 'Другие проекты',
+    focusLabel: 'Продуктовый фокус',
+  },
   statement: {
     line1: 'Продуктовое решение — сделать следующий шаг яснее.',
     line2: 'TaskFocus ограничивает план дня пятью задачами. MindTrack хранит ответы в браузере.',
