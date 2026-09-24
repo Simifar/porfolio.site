@@ -5,6 +5,27 @@ export interface LocalizedText {
   ru: string;
 }
 
+export interface ProductDecision {
+  title: LocalizedText;
+  rationale: LocalizedText;
+}
+
+export interface CaseMaterial {
+  label: LocalizedText;
+  href: string;
+}
+
+export interface ProjectCaseStudy {
+  context: LocalizedText;
+  role: LocalizedText;
+  constraints: LocalizedText[];
+  decisions: ProductDecision[];
+  delivered: LocalizedText[];
+  status: LocalizedText;
+  nextValidation: LocalizedText;
+  materials: CaseMaterial[];
+}
+
 export interface Project {
   slug: string;
   name: string;
@@ -19,6 +40,7 @@ export interface Project {
   github: string;
   live?: string;
   status?: LocalizedText;
+  caseStudy?: ProjectCaseStudy;
   screenshot?: {
     src: string;
     alt: LocalizedText;
@@ -60,6 +82,78 @@ export const projects: Project[] = [
     ],
     tags: ['Product', 'UX', 'Web app'],
     github: 'https://github.com/Simifar/taskfocus',
+    caseStudy: {
+      context: {
+        en: 'TaskFocus is a diploma MVP for personal task planning. Its product hypothesis was that a smaller daily focus and flexible date ranges would make planning feel less overwhelming. The effect has not been measured.',
+        ru: 'TaskFocus — дипломный MVP персонального планировщика. Продуктовая гипотеза: небольшой список на сегодня и мягкие диапазоны дат сделают планирование менее перегружающим. Этот эффект не измерялся.',
+      },
+      role: {
+        en: 'I owned the full cycle as the sole contributor — from problem framing and product rules to UX and implementation. I used AI tools during development; I made and integrated the product decisions myself.',
+        ru: 'Я самостоятельно вёл полный цикл — от формулировки задачи и продуктовых правил до UX и реализации. При разработке использовал ИИ, а решения и сборку продукта выполнял сам.',
+      },
+      constraints: [
+        {
+          en: 'The authenticated dashboard requires a configured PostgreSQL/Neon database.',
+          ru: 'Для работы авторизованного планировщика нужна настроенная база PostgreSQL/Neon.',
+        },
+        {
+          en: 'There is no safe hosted dashboard demo; public screenshots show the sign-in and registration screens.',
+          ru: 'Безопасной публичной демоверсии планировщика нет; опубликованы скриншоты входа и регистрации.',
+        },
+        {
+          en: 'The cognitive-load benefit is still a hypothesis; no user or productivity outcomes are claimed.',
+          ru: 'Польза для когнитивной нагрузки остаётся гипотезой; пользовательские результаты и рост продуктивности не заявляются.',
+        },
+      ],
+      decisions: [
+        {
+          title: { en: 'Cap the daily focus at five tasks', ru: 'Ограничить план дня пятью задачами' },
+          rationale: {
+            en: 'Today has a clear upper boundary instead of becoming another place to move an unlimited backlog. Whether that feels more manageable still needs testing.',
+            ru: 'У плана на сегодня появляется верхняя граница: он не превращается в ещё один список без конца. Помогает ли это планировать спокойнее, ещё нужно проверить.',
+          },
+        },
+        {
+          title: { en: 'Capture first, schedule later', ru: 'Сначала записать, потом планировать' },
+          rationale: {
+            en: 'Inbox capture lets a person save a task without deciding its date and priority in the same moment.',
+            ru: 'Входящие позволяют записать задачу, не выбирая в тот же момент срок и приоритет.',
+          },
+        },
+        {
+          title: { en: 'Use a date window for flexible work', ru: 'Задавать гибкий диапазон дат' },
+          rationale: {
+            en: 'A soft start and end date distinguish a planning window from a hard deadline.',
+            ru: 'Мягкое начало и конец периода отделяют удобное окно для работы от жёсткого дедлайна.',
+          },
+        },
+        {
+          title: { en: 'Give the next task more context', ru: 'Добавить контекст для выбора следующего шага' },
+          rationale: {
+            en: 'Importance, urgency and an energy estimate sit alongside a Today recommendation, rather than relying on one flat priority list.',
+            ru: 'Важность, срочность и оценка энергозатратности дополняют рекомендацию на сегодня вместо одного плоского списка приоритетов.',
+          },
+        },
+      ],
+      delivered: [
+        { en: 'An inbox and a Today plan with the five-task limit.', ru: 'Входящие и план на сегодня с ограничением в пять задач.' },
+        { en: 'Week, calendar, day, Eisenhower matrix and archive views.', ru: 'Представления недели, календаря, дня, матрицы Эйзенхауэра и архива.' },
+        { en: 'Subtasks, importance, urgency, energy estimates, flexible date ranges and a focus timer.', ru: 'Подзадачи, важность, срочность, оценка энергии, гибкие диапазоны дат и таймер фокуса.' },
+        { en: 'A full-stack MVP with sign-in and a public source repository.', ru: 'Full-stack MVP с авторизацией и открытым исходным кодом.' },
+      ],
+      status: {
+        en: 'The MVP and source are available to inspect. A public dashboard demo and evidence of adoption or productivity impact are not available.',
+        ru: 'MVP и исходный код можно изучить. Публичной демоверсии планировщика и подтверждённых данных о его использовании или влиянии на продуктивность нет.',
+      },
+      nextValidation: {
+        en: 'Observe people moving tasks from Inbox into a realistic day plan. Check whether the five-task limit and flexible dates are understood before measuring any productivity effect.',
+        ru: 'Понаблюдать, как люди переносят задачи из входящих в посильный план дня. Сначала проверить, понятны ли ограничение в пять задач и гибкие даты, и только потом измерять влияние на продуктивность.',
+      },
+      materials: [
+        { label: { en: 'Architecture notes', ru: 'Описание архитектуры' }, href: 'https://github.com/Simifar/taskfocus/blob/main/docs/ARCHITECTURE.md' },
+        { label: { en: 'Project framing', ru: 'Контекст проекта' }, href: 'https://github.com/Simifar/taskfocus/blob/main/docs/THESIS.md' },
+      ],
+    },
     screenshot: {
       src: '/projects/taskfocus-sign-in.png',
       alt: {
@@ -106,6 +200,81 @@ export const projects: Project[] = [
     github: 'https://github.com/Simifar/mindtrack',
     live: 'https://simifar.github.io/mindtrack/',
     status: { en: 'Published', ru: 'Опубликован' },
+    caseStudy: {
+      context: {
+        en: 'Screening responses are sensitive, and a score can be mistaken for a diagnosis. MindTrack aims to offer a private way to reflect on wellbeing and prepare for a conversation with a specialist.',
+        ru: 'Ответы на скрининговые опросники чувствительны, а балл можно принять за диагноз. MindTrack даёт приватный способ понаблюдать за состоянием и подготовиться к разговору со специалистом.',
+      },
+      role: {
+        en: 'I owned the product decisions, UX and implementation from end to end, working independently with AI tools as development support.',
+        ru: 'Я самостоятельно отвечал за продуктовые решения, UX и реализацию всего продукта, используя ИИ как поддержку при разработке.',
+      },
+      constraints: [
+        {
+          en: 'MindTrack is not medical software, does not diagnose and does not replace a specialist.',
+          ru: 'MindTrack не является медицинским ПО, не ставит диагноз и не заменяет специалиста.',
+        },
+        {
+          en: 'Answers and history stay in browser storage. Clearing browser data removes that history; JSON export is available for backup.',
+          ru: 'Ответы и история хранятся в браузере. При очистке его данных история удалится; для резервной копии доступен экспорт в JSON.',
+        },
+        {
+          en: 'Method sources and translation limits matter: Russian text is not described as an official translation without confirmation from the rights holder.',
+          ru: 'Важны источники методик и ограничения перевода: русская версия не называется официальной без подтверждения правообладателя.',
+        },
+        {
+          en: 'The product has no backend or analytics, so usage and clinical outcomes are not available as evidence.',
+          ru: 'В продукте нет бэкенда и аналитики, поэтому данные об использовании и клинических результатах недоступны.',
+        },
+      ],
+      decisions: [
+        {
+          title: { en: 'Keep answers on the device', ru: 'Оставлять ответы на устройстве пользователя' },
+          rationale: {
+            en: 'Questionnaire responses can be sensitive. Processing and storing them in the browser avoids sending them to a product server.',
+            ru: 'Ответы могут быть чувствительными. Подсчёт и хранение в браузере избавляют от отправки их на сервер продукта.',
+          },
+        },
+        {
+          title: { en: 'Show score, interpretation and limits together', ru: 'Показывать балл, интерпретацию и ограничения рядом' },
+          rationale: {
+            en: 'The result is easier to read in context when its range, meaning and method source are visible together, without presenting it as a diagnosis.',
+            ru: 'Результат проще понять в контексте, когда рядом видны диапазон, пояснение и источник методики — без подачи его как диагноза.',
+          },
+        },
+        {
+          title: { en: 'Give people control over local history', ru: 'Дать контроль над локальной историей' },
+          rationale: {
+            en: 'Delete, export and import controls make browser-only storage understandable and let people keep a backup they control.',
+            ru: 'Удаление, экспорт и импорт делают локальное хранение понятным и позволяют сохранить резервную копию под контролем пользователя.',
+          },
+        },
+        {
+          title: { en: 'Make urgent routes explicit', ru: 'Ясно обозначить помощь в срочной ситуации' },
+          rationale: {
+            en: 'Crisis contacts are shown with region and age context so a self-screening flow does not stand in for urgent help.',
+            ru: 'Кризисные контакты сопровождаются регионом и возрастными условиями, чтобы самоопрос не подменял срочную помощь.',
+          },
+        },
+      ],
+      delivered: [
+        { en: 'A published static catalog with seven screening methods and direct links to each flow.', ru: 'Опубликованный статический каталог с семью скрининговыми методиками и отдельной ссылкой на каждую.' },
+        { en: 'Questionnaire flows that can resume, with scoring and history handled in the browser.', ru: 'Опросники с возможностью продолжить прохождение; подсчёт и история работают в браузере.' },
+        { en: 'Local journal, delete and backup controls, plus text, print and JSON export options.', ru: 'Локальный дневник, удаление и резервирование истории, а также экспорт в текст, печать и JSON.' },
+        { en: 'Method sources, result limitations and urgent-help guidance alongside the relevant flows.', ru: 'Источники методик, ограничения результатов и рекомендации по срочной помощи рядом с соответствующими сценариями.' },
+      ],
+      status: {
+        en: 'The static product and source are published. MindTrack supports self-observation; no adoption, diagnostic accuracy or clinical outcome is claimed.',
+        ru: 'Статический продукт и исходный код опубликованы. MindTrack предназначен для самонаблюдения; использование, точность диагностики и клинический эффект не заявляются.',
+      },
+      nextValidation: {
+        en: 'Check whether people understand score ranges, limitations, local data retention and backup options. Continue auditing method sources, translation rights and crisis routes.',
+        ru: 'Проверить, как люди понимают диапазоны баллов, ограничения методик, локальное хранение и резервные копии. Продолжить проверку источников, прав на переводы и кризисных контактов.',
+      },
+      materials: [
+        { label: { en: 'Product notes and method list', ru: 'Описание продукта и список методик' }, href: 'https://github.com/Simifar/mindtrack/blob/main/README.md' },
+      ],
+    },
     screenshot: {
       src: '/projects/mindtrack-home.png',
       alt: { en: 'MindTrack self-observation app home page', ru: 'Главная страница приложения MindTrack' },

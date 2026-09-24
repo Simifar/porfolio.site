@@ -24,7 +24,16 @@ export interface Content {
     closeHint: string;
   };
   caseStudy: {
+    caseLabel: string;
     back: string;
+    contextTitle: string;
+    roleTitle: string;
+    constraintsTitle: string;
+    decisionsTitle: string;
+    deliveredTitle: string;
+    statusTitle: string;
+    nextValidationTitle: string;
+    materialsTitle: string;
     projectDetails: string;
     whatItDoes: string;
     repository: string;
@@ -90,7 +99,16 @@ export const en: Content = {
     closeHint: 'Close',
   },
   caseStudy: {
+    caseLabel: 'Product case',
     back: 'Back to portfolio',
+    contextTitle: 'Context and task',
+    roleTitle: 'My role',
+    constraintsTitle: 'Constraints',
+    decisionsTitle: 'Product decisions',
+    deliveredTitle: 'What I built',
+    statusTitle: 'Status and evidence',
+    nextValidationTitle: 'What I would validate next',
+    materialsTitle: 'Materials to inspect',
     projectDetails: 'Project details',
     whatItDoes: 'What it does',
     repository: 'Source code',
@@ -156,7 +174,16 @@ export const ru: Content = {
     closeHint: 'Закрыть',
   },
   caseStudy: {
+    caseLabel: 'Продуктовый кейс',
     back: 'Назад к портфолио',
+    contextTitle: 'Контекст и задача',
+    roleTitle: 'Мой вклад',
+    constraintsTitle: 'Ограничения',
+    decisionsTitle: 'Продуктовые решения',
+    deliveredTitle: 'Что реализовал',
+    statusTitle: 'Статус и подтверждения',
+    nextValidationTitle: 'Что проверил бы следующим',
+    materialsTitle: 'Материалы для проверки',
     projectDetails: 'О проекте',
     whatItDoes: 'Что он делает',
     repository: 'Исходный код',
