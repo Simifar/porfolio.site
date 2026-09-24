@@ -1,15 +1,15 @@
-# Egor Matafonov — Portfolio
+# Egor Matafonov — Product Manager
 
-> A bilingual portfolio of product and software projects, with links to published sites and source repositories.
+> A bilingual portfolio featuring TaskFocus, MindTrack, CortexMap and Telegram Growth Analytics.
 
 ## Portfolio
 - [Portfolio home](https://simifar.github.io/porfolio.site/)
 
 ## Projects
-- [TaskFocus](https://github.com/Simifar/taskfocus): task manager for daily planning and focused work.
-- [CortexMap](https://simifar.github.io/CortexMap/): Russian-language catalog for learning English. [Source](https://github.com/Simifar/CortexMap)
-- [MindTrack](https://simifar.github.io/mindtrack/): browser-based self-observation questionnaires. [Source](https://github.com/Simifar/mindtrack)
-- [Telegram Growth Analytics](https://github.com/Simifar/StatsTelegramChannels): local analytics tool for public Telegram channel placements.
+- [TaskFocus](https://github.com/Simifar/taskfocus): task planner with a daily list limited to five tasks.
+- [MindTrack](https://simifar.github.io/mindtrack/): browser app for self-observation with questionnaires; answers stay in browser storage. [Source](https://github.com/Simifar/mindtrack)
+- [CortexMap](https://simifar.github.io/CortexMap/): Russian-language catalog for learning English, with CEFR levels, search and filters. [Source](https://github.com/Simifar/CortexMap)
+- [Telegram Growth Analytics](https://github.com/Simifar/StatsTelegramChannels): desktop tool for reviewing ads in public Telegram channels; results are stored locally.
 
 ## Contact
 - Email: Matafonovegor2@gmail.com

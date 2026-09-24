@@ -71,40 +71,38 @@ export function SelectedWork() {
             <FadeIn key={project.slug} delay={index * 0.06}>
               <article aria-labelledby={`project-${project.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] transition-colors hover:border-[var(--color-border-hover)]">
                 {project.screenshot && (
-                  <figure className="grid aspect-[1.55] grid-cols-2 overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] md:aspect-[1.7]">
-                    <div className="min-h-0 overflow-hidden">
-                      <img
-                        src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
-                        alt={project.screenshot.alt[lang]}
-                        width={project.screenshot.width}
-                        height={project.screenshot.height}
-                        loading="lazy"
-                        decoding="async"
-                        className={`h-full w-full object-cover ${project.screenshot.objectPosition === 'left' ? 'object-left' : 'object-center'} max-sm:scale-[1.4] transition-transform duration-500 group-hover:scale-[1.015]`}
-                      />
-                    </div>
-                    <figcaption className="flex flex-col justify-between gap-3 border-l border-[var(--color-border)] p-3 sm:p-4 md:p-6">
-                      <div>
-                        <p className="font-mono text-[9px] uppercase tracking-[0.12em] text-[var(--color-text-muted)] md:text-[10px]">{t.work.focusLabel}</p>
-                        <p className="mt-2 text-xs leading-relaxed text-[var(--color-text-primary)] md:text-sm">{project.cardFocus[lang]}</p>
-                      </div>
-                      <p className="text-[10px] leading-relaxed text-[var(--color-text-muted)] md:text-xs">{project.screenshot.caption[lang]}</p>
+                  <figure className="relative aspect-[1.25] overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] md:aspect-[1.4]">
+                    <img
+                      src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
+                      alt={project.screenshot.alt[lang]}
+                      width={project.screenshot.width}
+                      height={project.screenshot.height}
+                      loading="lazy"
+                      decoding="async"
+                      className={`h-full w-full object-cover ${project.screenshot.objectPosition === 'left' ? 'object-left' : 'object-top'} transition-transform duration-500 group-hover:scale-[1.025]`}
+                    />
+                    <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent px-4 pb-3 pt-10 text-xs leading-relaxed text-white sm:px-5 sm:pb-4 sm:text-sm">
+                      {project.screenshot.caption[lang]}
                     </figcaption>
                   </figure>
                 )}
                 <div className="flex flex-1 flex-col p-5 md:p-6">
-                  <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2">
-                    <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">{project.category[lang]}</span>
+                  <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2">
+                    <span className="text-xs font-medium text-[var(--color-text-muted)]">{project.category[lang]}</span>
                     {project.status && (
-                      <span className="inline-flex items-center gap-1.5 font-mono text-[10px] text-[var(--color-accent)]">
+                      <span className="inline-flex items-center gap-1.5 text-xs text-[var(--color-accent)]">
                         <Circle className="h-2 w-2 fill-current" aria-hidden="true" />
                         {project.status[lang]}
                       </span>
                     )}
                   </div>
                   <h3 id={`project-${project.slug}`} className="text-2xl font-semibold tracking-[-0.025em] md:text-3xl">{project.name}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{project.subtitle[lang]}</p>
-                  <p className="mt-4 border-t border-[var(--color-border)] pt-3 text-xs leading-relaxed text-[var(--color-text-muted)]">{project.cardRole[lang]}</p>
+                  <p className="mt-2 text-base leading-relaxed text-[var(--color-text-secondary)]">{project.subtitle[lang]}</p>
+                  <div className="mt-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-secondary)] p-4">
+                    <p className="font-mono text-xs uppercase tracking-[0.12em] text-[var(--color-text-muted)]">{t.work.focusLabel}</p>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-primary)]">{project.cardFocus[lang]}</p>
+                  </div>
+                  <p className="mt-4 text-xs leading-relaxed text-[var(--color-text-muted)]">{project.cardRole[lang]}</p>
                   {renderActions(project)}
                 </div>
               </article>
@@ -117,9 +115,9 @@ export function SelectedWork() {
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
             {additional.map((project, index) => (
               <FadeIn key={project.slug} delay={index * 0.05}>
-                <article aria-labelledby={`project-${project.slug}`} className="flex h-full min-h-[250px] flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] transition-colors hover:border-[var(--color-border-hover)] sm:flex-row">
+                <article aria-labelledby={`project-${project.slug}`} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] transition-colors hover:border-[var(--color-border-hover)]">
                   {project.screenshot ? (
-                    <figure className="relative aspect-[2.1] w-full shrink-0 overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] sm:aspect-auto sm:w-36 sm:border-b-0 sm:border-r md:w-44">
+                    <figure className="relative aspect-[1.9] overflow-hidden border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)]">
                       <img
                         src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
                         alt={project.screenshot.alt[lang]}
@@ -127,22 +125,27 @@ export function SelectedWork() {
                         height={project.screenshot.height}
                         loading="lazy"
                         decoding="async"
-                        className="h-full w-full object-cover object-center"
+                        className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.025]"
                       />
-                      <figcaption className="sr-only">{project.screenshot.caption[lang]}</figcaption>
+                      <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent px-4 pb-3 pt-10 text-xs leading-relaxed text-white sm:px-5 sm:pb-4 sm:text-sm">
+                        {project.screenshot.caption[lang]}
+                      </figcaption>
                     </figure>
                   ) : (
-                    <div className="flex min-h-24 shrink-0 items-center border-b border-[var(--color-border)] bg-[var(--color-bg-secondary)] px-5 py-4 font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--color-text-muted)] sm:w-36 sm:border-b-0 sm:border-r md:w-44">
-                      {project.cardRole[lang]}
+                    <div className="flex aspect-[1.9] items-end border-b border-[var(--color-border)] bg-gradient-to-br from-[var(--color-bg-elevated)] to-[var(--color-bg-secondary)] p-5 sm:p-6">
+                      <span className="font-mono text-xs uppercase tracking-[0.14em] text-[var(--color-text-muted)]">
+                        {project.cardRole[lang]}
+                      </span>
                     </div>
                   )}
                   <div className="flex flex-1 flex-col p-5 md:p-6">
                     <div className="mb-3 flex flex-wrap items-center gap-x-3 gap-y-2">
-                      <span className="font-mono text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">{project.category[lang]}</span>
-                      {project.status && <span className="font-mono text-[10px] text-[var(--color-accent)]">{project.status[lang]}</span>}
+                      <span className="text-xs font-medium text-[var(--color-text-muted)]">{project.category[lang]}</span>
+                      {project.status && <span className="text-xs text-[var(--color-accent)]">{project.status[lang]}</span>}
                     </div>
-                    <h4 id={`project-${project.slug}`} className="text-xl font-semibold tracking-[-0.02em]">{project.name}</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{project.cardFocus[lang]}</p>
+                    <h3 id={`project-${project.slug}`} className="text-xl font-semibold tracking-[-0.02em] md:text-2xl">{project.name}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">{project.subtitle[lang]}</p>
+                    <p className="mt-4 border-l-2 border-[var(--color-accent)] pl-3 text-sm leading-relaxed text-[var(--color-text-primary)]">{project.cardFocus[lang]}</p>
                     {renderActions(project)}
                   </div>
                 </article>
@@ -151,19 +154,6 @@ export function SelectedWork() {
           </div>
         </div>
       </div>
-    </section>
-  );
-}
-
-export function Statement() {
-  const { t } = useApp();
-
-  return (
-    <section className="px-6 py-20 md:px-12 md:py-28 lg:px-20">
-      <FadeIn className="mx-auto max-w-[1100px] border-y border-[var(--color-border)] py-10 md:py-14">
-        <p className="max-w-4xl text-2xl font-semibold leading-snug tracking-[-0.025em] md:text-4xl">{t.statement.line1}</p>
-        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--color-text-secondary)] md:text-base">{t.statement.line2}</p>
-      </FadeIn>
     </section>
   );
 }

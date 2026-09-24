@@ -5,7 +5,7 @@ import { AppProvider, useApp } from './lib/context';
 import { projects } from './content/projects';
 import { Navbar, ScrollProgress } from './components/Navigation';
 import Hero from './components/Hero';
-import { SelectedWork, Statement, About, Contact, Footer } from './components/Sections';
+import { SelectedWork, About, Contact, Footer } from './components/Sections';
 import CaseStudy from './components/CaseStudy';
 import NotFound from './components/NotFound';
 
@@ -77,7 +77,6 @@ function HomePage() {
       <main id="main-content" tabIndex={-1}>
         <Hero />
         <SelectedWork />
-        <Statement />
         <Divider />
         <About />
         <Divider />
