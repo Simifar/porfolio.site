@@ -6,6 +6,9 @@ import { useApp, useInView } from '../lib/context';
 import { Footer } from './Sections';
 import { LanguageToggle } from './Navigation';
 
+// Preserve the native fetchpriority hint without React 18's camel-case warning.
+const highFetchPriority = { fetchpriority: 'high' } as const;
+
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   const { ref, inView } = useInView(0.1);
   return (
@@ -94,11 +97,11 @@ export default function CaseStudy() {
               <motion.figure initial={false} animate={{ opacity: 1, y: 0 }} className="mt-10 grid aspect-[1.55] grid-cols-2 overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-secondary)] md:mt-12 md:aspect-[2.1]">
                 <div className="min-h-0 overflow-hidden">
                   <img
+                    {...highFetchPriority}
                     src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
                     alt={project.screenshot.alt[lang]}
                     width={project.screenshot.width}
                     height={project.screenshot.height}
-                    fetchPriority="high"
                     className={`h-full w-full object-cover ${project.screenshot.objectPosition === 'left' ? 'object-left' : 'object-center'} max-sm:scale-[1.3]`}
                   />
                 </div>

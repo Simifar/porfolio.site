@@ -108,7 +108,7 @@ function NotFoundPage() {
 export default function App() {
   return (
     <AppProvider>
-      <HashRouter>
+      <HashRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <MotionConfig reducedMotion="user">
           <ScrollReset />
           <PageMetadata />
