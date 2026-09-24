@@ -202,6 +202,10 @@ export function Contact() {
               {t.contact.emailBtn}
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
             </a>
+            <a href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer" className="magnetic-btn inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[var(--color-border)] px-6 py-3 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-primary)]">
+              {t.contact.linkedinBtn}
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+            </a>
             <a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer" className="magnetic-btn inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[var(--color-border)] px-6 py-3 text-sm font-medium text-[var(--color-text-secondary)] transition-colors hover:border-[var(--color-border-hover)] hover:text-[var(--color-text-primary)]">
               {t.contact.telegramBtn}
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
@@ -211,6 +215,8 @@ export function Contact() {
         <FadeIn delay={0.12}>
           <p className="mt-8 break-all text-sm text-[var(--color-text-muted)]">
             <a href="mailto:Matafonovegor2@gmail.com" className="link-underline hover:text-[var(--color-text-secondary)]">Matafonovegor2@gmail.com</a>
+            <span className="px-3" aria-hidden="true">·</span>
+            <a href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer" className="link-underline hover:text-[var(--color-text-secondary)]">LinkedIn</a>
             <span className="px-3" aria-hidden="true">·</span>
             <a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer" className="link-underline hover:text-[var(--color-text-secondary)]">@legionanstek</a>
           </p>
@@ -230,10 +236,11 @@ export function Footer() {
           <p className="text-sm text-[var(--color-text-muted)]">{t.footer.copyright.replace('{year}', String(new Date().getFullYear()))}</p>
           <p className="mt-1 hidden text-xs text-[var(--color-text-muted)] md:block">{t.footer.built}</p>
         </div>
-        <nav aria-label="Social links" className="flex flex-wrap items-center justify-center gap-5">
-          <a href="https://github.com/Simifar" target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]">GitHub</a>
-          <a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]">Telegram</a>
-          <a href="mailto:Matafonovegor2@gmail.com" className="link-underline text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]">Email</a>
+        <nav aria-label={t.nav.socialLinks} className="flex flex-wrap items-center justify-center gap-5">
+          <a href="https://github.com/Simifar" target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]">{t.footer.github}</a>
+          <a href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]">{t.footer.linkedin}</a>
+          <a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer" className="link-underline text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]">{t.footer.telegram}</a>
+          <a href="mailto:Matafonovegor2@gmail.com" className="link-underline text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-secondary)]">{t.footer.email}</a>
         </nav>
       </div>
     </footer>

@@ -1,7 +1,8 @@
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { MotionConfig } from 'framer-motion';
 import { useEffect } from 'react';
-import { AppProvider } from './lib/context';
+import { AppProvider, useApp } from './lib/context';
+import { projects } from './content/projects';
 import { Navbar, ScrollProgress } from './components/Navigation';
 import Hero from './components/Hero';
 import { SelectedWork, Statement, About, Contact, Footer } from './components/Sections';
@@ -16,6 +17,34 @@ function Divider() {
   );
 }
 
+function PageMetadata() {
+  const { pathname } = useLocation();
+  const { lang, t } = useApp();
+
+  useEffect(() => {
+    const slug = pathname.startsWith('/work/') ? pathname.slice('/work/'.length) : '';
+    const project = projects.find(item => item.slug === slug);
+    const isHome = pathname === '/';
+    const title = project
+      ? `${project.name} — ${t.metadata.projectTitleSuffix}`
+      : isHome ? t.metadata.title : `${t.notFound.title} — ${t.metadata.title}`;
+    const description = project
+      ? project.description[lang]
+      : isHome ? t.metadata.description : t.notFound.text;
+
+    document.title = title;
+    document.querySelector<HTMLMetaElement>('meta[name="description"]')?.setAttribute('content', description);
+    document.querySelector<HTMLMetaElement>('meta[property="og:title"]')?.setAttribute('content', title);
+    document.querySelector<HTMLMetaElement>('meta[property="og:description"]')?.setAttribute('content', description);
+    document.querySelector<HTMLMetaElement>('meta[property="og:image:alt"]')?.setAttribute('content', t.metadata.socialImageAlt);
+    document.querySelector<HTMLMetaElement>('meta[name="twitter:title"]')?.setAttribute('content', title);
+    document.querySelector<HTMLMetaElement>('meta[name="twitter:description"]')?.setAttribute('content', description);
+    document.querySelector<HTMLMetaElement>('meta[name="twitter:image:alt"]')?.setAttribute('content', t.metadata.socialImageAlt);
+  }, [lang, pathname, t]);
+
+  return null;
+}
+
 function ScrollReset() {
   const { pathname } = useLocation();
 
@@ -27,6 +56,8 @@ function ScrollReset() {
 }
 
 function HomePage() {
+  const { t } = useApp();
+
   return (
     <>
       <ScrollProgress />
@@ -41,7 +72,7 @@ function HomePage() {
           main?.scrollIntoView({ behavior: 'smooth' });
         }}
       >
-        Skip to content
+        {t.nav.skipToContent}
       </a>
       <main id="main-content" tabIndex={-1}>
         <Hero />
@@ -80,6 +111,7 @@ export default function App() {
       <HashRouter>
         <MotionConfig reducedMotion="user">
           <ScrollReset />
+          <PageMetadata />
           <div className="noise-overlay" aria-hidden="true" />
           <Routes>
             <Route path="/" element={<HomePage />} />

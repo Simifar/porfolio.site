@@ -1,10 +1,10 @@
-import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ArrowUpRight, ExternalLink, Globe, Moon, Sun } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ExternalLink, Moon, Sun } from 'lucide-react';
 import { projects } from '../content/projects';
 import { useApp, useInView } from '../lib/context';
 import { Footer } from './Sections';
+import { LanguageToggle } from './Navigation';
 
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   const { ref, inView } = useInView(0.1);
@@ -31,23 +31,10 @@ function CaseSection({ number, title, children }: { number: number; title: strin
 
 export default function CaseStudy() {
   const { slug } = useParams<{ slug: string }>();
-  const { lang, setLang, theme, setTheme, t } = useApp();
+  const { lang, theme, setTheme, t } = useApp();
   const project = projects.find(item => item.slug === slug);
   const currentIndex = projects.findIndex(item => item.slug === slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
-
-  useEffect(() => {
-    if (!project) return;
-    const previousTitle = document.title;
-    document.title = `${project.name} — Egor Matafonov`;
-    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    const previousDescription = description?.content;
-    if (description) description.content = project.description[lang];
-    return () => {
-      document.title = previousTitle;
-      if (description && previousDescription) description.content = previousDescription;
-    };
-  }, [lang, project]);
 
   if (!project) {
     return (
@@ -70,12 +57,10 @@ export default function CaseStudy() {
           <ArrowLeft className="h-4 w-4" aria-hidden="true" /><span className="hidden sm:inline">{t.caseStudy.back}</span><span className="sm:hidden">{lang === 'en' ? 'Back' : 'Назад'}</span>
         </Link>
         <div className="flex items-center gap-1 rounded-full border border-[var(--color-border)] bg-[var(--color-bg)]/85 p-1 backdrop-blur-xl">
-          <button type="button" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label={t.nav.theme} aria-pressed={theme === 'light'} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]">
+          <button type="button" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label={theme === 'dark' ? t.nav.themeToLight : t.nav.themeToDark} className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]">
             {theme === 'dark' ? <Sun className="h-4 w-4" aria-hidden="true" /> : <Moon className="h-4 w-4" aria-hidden="true" />}
           </button>
-          <button type="button" onClick={() => setLang(lang === 'en' ? 'ru' : 'en')} aria-label={`${t.nav.language} (${lang.toUpperCase()})`} className="inline-flex min-h-11 items-center gap-1.5 rounded-full px-3 text-xs font-mono text-[var(--color-text-muted)] hover:bg-[var(--color-bg-elevated)] hover:text-[var(--color-text-primary)]">
-            <Globe className="h-3.5 w-3.5" aria-hidden="true" />{lang.toUpperCase()}
-          </button>
+          <LanguageToggle />
         </div>
       </div>
 

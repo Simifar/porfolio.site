@@ -1,5 +1,20 @@
 export interface Content {
-  nav: { work: string; about: string; contact: string; theme: string; language: string; palette: string };
+  metadata: { title: string; description: string; projectTitleSuffix: string; socialImageAlt: string };
+  nav: {
+    work: string;
+    about: string;
+    contact: string;
+    themeToLight: string;
+    themeToDark: string;
+    language: string;
+    english: string;
+    russian: string;
+    mainNavigation: string;
+    mobileNavigation: string;
+    siteHome: string;
+    socialLinks: string;
+    skipToContent: string;
+  };
   hero: { headline: string; headlineAccent: string; supporting: string; cta: string; contactLink: string; visualAlt: string; visualTitle: string; visualSubtitle: string };
   work: {
     title: string;
@@ -12,17 +27,8 @@ export interface Content {
   };
   statement: { line1: string; line2: string };
   about: { title: string; text: string[] };
-  contact: { title: string; subtitle: string; emailBtn: string; telegramBtn: string; copied: string };
-  footer: { built: string; copyright: string };
-  commandPalette: {
-    title: string;
-    placeholder: string;
-    empty: string;
-    actions: { label: string; action: string }[];
-    navigationHint: string;
-    selectHint: string;
-    closeHint: string;
-  };
+  contact: { title: string; subtitle: string; emailBtn: string; linkedinBtn: string; telegramBtn: string; copied: string };
+  footer: { built: string; copyright: string; github: string; linkedin: string; telegram: string; email: string };
   caseStudy: {
     caseLabel: string;
     back: string;
@@ -44,7 +50,17 @@ export interface Content {
 }
 
 export const en: Content = {
-  nav: { work: 'Work', about: 'About', contact: 'Contact', theme: 'Toggle theme', language: 'Switch language', palette: 'Open command palette' },
+  metadata: {
+    title: 'Egor Matafonov — Product Manager portfolio',
+    description: 'Product cases by Egor Matafonov: problem framing, product decisions, UX and working software.',
+    projectTitleSuffix: 'Product case by Egor Matafonov',
+    socialImageAlt: 'Egor Matafonov, Product Manager — product cases in TaskFocus and MindTrack.',
+  },
+  nav: {
+    work: 'Work', about: 'About', contact: 'Contact', themeToLight: 'Switch to light theme', themeToDark: 'Switch to dark theme',
+    language: 'Language', english: 'English', russian: 'Russian', mainNavigation: 'Main navigation', mobileNavigation: 'Mobile navigation',
+    siteHome: 'Egor Matafonov — home', socialLinks: 'Social links', skipToContent: 'Skip to content',
+  },
   hero: {
     headline: 'Product Manager',
     headlineAccent: 'from idea to working product.',
@@ -76,28 +92,14 @@ export const en: Content = {
     ],
   },
   contact: {
-    title: 'Let’s build something useful.',
-    subtitle: 'For project or product conversations, get in touch.',
+    title: 'Let’s talk about a Product Manager role.',
+    subtitle: 'I’m exploring Product Manager opportunities. Email is the best way to reach me; LinkedIn has more about my background.',
     emailBtn: 'Email me',
+    linkedinBtn: 'Connect on LinkedIn',
     telegramBtn: 'Telegram',
     copied: 'Copied!',
   },
-  footer: { built: 'Designed & built by Egor Matafonov', copyright: '© {year} Egor Matafonov' },
-  commandPalette: {
-    title: 'Command palette',
-    placeholder: 'Type a command…',
-    empty: 'No matching commands',
-    actions: [
-      { label: 'Go to work', action: 'work' },
-      { label: 'Go to about', action: 'about' },
-      { label: 'Contact', action: 'contact' },
-      { label: 'Open GitHub profile', action: 'github' },
-      { label: 'Toggle theme', action: 'theme' },
-    ],
-    navigationHint: 'Navigate',
-    selectHint: 'Select',
-    closeHint: 'Close',
-  },
+  footer: { built: 'Designed & built by Egor Matafonov', copyright: '© {year} Egor Matafonov', github: 'GitHub', linkedin: 'LinkedIn', telegram: 'Telegram', email: 'Email' },
   caseStudy: {
     caseLabel: 'Product case',
     back: 'Back to portfolio',
@@ -119,7 +121,17 @@ export const en: Content = {
 };
 
 export const ru: Content = {
-  nav: { work: 'Проекты', about: 'Обо мне', contact: 'Контакт', theme: 'Сменить тему', language: 'Сменить язык', palette: 'Открыть палитру команд' },
+  metadata: {
+    title: 'Егор Матафонов — портфолио Product Manager',
+    description: 'Продуктовые кейсы Егора Матафонова: формулировка задач, продуктовые решения, UX и работающие приложения.',
+    projectTitleSuffix: 'Продуктовый кейс Егора Матафонова',
+    socialImageAlt: 'Егор Матафонов, Product Manager — продуктовые кейсы TaskFocus и MindTrack.',
+  },
+  nav: {
+    work: 'Проекты', about: 'Обо мне', contact: 'Контакт', themeToLight: 'Включить светлую тему', themeToDark: 'Включить тёмную тему',
+    language: 'Язык', english: 'Английский', russian: 'Русский', mainNavigation: 'Основная навигация', mobileNavigation: 'Мобильная навигация',
+    siteHome: 'Егор Матафонов — главная', socialLinks: 'Ссылки на профили', skipToContent: 'Перейти к содержимому',
+  },
   hero: {
     headline: 'Product Manager',
     headlineAccent: 'от идеи до работающего продукта.',
@@ -151,28 +163,14 @@ export const ru: Content = {
     ],
   },
   contact: {
-    title: 'Давайте создадим что-то полезное.',
-    subtitle: 'Напишите, если хотите обсудить продукт или проект.',
+    title: 'Обсудим позицию Product Manager?',
+    subtitle: 'Я рассматриваю предложения на эту роль. Удобнее всего написать на почту; в LinkedIn можно подробнее узнать о моём опыте.',
     emailBtn: 'Написать на почту',
+    linkedinBtn: 'Связаться в LinkedIn',
     telegramBtn: 'Telegram',
     copied: 'Скопировано!',
   },
-  footer: { built: 'Дизайн и разработка — Егор Матафонов', copyright: '© {year} Егор Матафонов' },
-  commandPalette: {
-    title: 'Палитра команд',
-    placeholder: 'Введите команду…',
-    empty: 'Команды не найдены',
-    actions: [
-      { label: 'К проектам', action: 'work' },
-      { label: 'Обо мне', action: 'about' },
-      { label: 'Контакт', action: 'contact' },
-      { label: 'Открыть профиль GitHub', action: 'github' },
-      { label: 'Сменить тему', action: 'theme' },
-    ],
-    navigationHint: 'Перемещение',
-    selectHint: 'Выбрать',
-    closeHint: 'Закрыть',
-  },
+  footer: { built: 'Дизайн и разработка — Егор Матафонов', copyright: '© {year} Егор Матафонов', github: 'GitHub', linkedin: 'LinkedIn', telegram: 'Telegram', email: 'Почта' },
   caseStudy: {
     caseLabel: 'Продуктовый кейс',
     back: 'Назад к портфолио',
