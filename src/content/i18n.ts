@@ -1,20 +1,23 @@
 export interface Content {
-  nav: { work: string; about: string; contact: string; theme: string; language: string; palette: string };
+  nav: {
+    brand: string;
+    home: string;
+    work: string;
+    about: string;
+    contact: string;
+    theme: string;
+    switchToLight: string;
+    switchToDark: string;
+    language: string;
+    mainNavigation: string;
+    mobileNavigation: string;
+  };
   hero: { headline: string; headlineAccent: string; supporting: string; cta: string; contactLink: string };
   work: { title: string; subtitle: string; viewCase: string };
   statement: { line1: string; line2: string };
   about: { title: string; text: string[] };
   contact: { title: string; subtitle: string; emailBtn: string; telegramBtn: string; copied: string };
   footer: { built: string; copyright: string };
-  commandPalette: {
-    title: string;
-    placeholder: string;
-    empty: string;
-    actions: { label: string; action: string }[];
-    navigationHint: string;
-    selectHint: string;
-    closeHint: string;
-  };
   caseStudy: {
     back: string;
     projectDetails: string;
@@ -27,7 +30,19 @@ export interface Content {
 }
 
 export const en: Content = {
-  nav: { work: 'Work', about: 'About', contact: 'Contact', theme: 'Toggle theme', language: 'Switch language', palette: 'Open command palette' },
+  nav: {
+    brand: 'Egor Matafonov',
+    home: 'Egor Matafonov — home',
+    work: 'Work',
+    about: 'About',
+    contact: 'Contact',
+    theme: 'Toggle theme',
+    switchToLight: 'Switch to light theme',
+    switchToDark: 'Switch to dark theme',
+    language: 'Switch language',
+    mainNavigation: 'Main navigation',
+    mobileNavigation: 'Mobile navigation',
+  },
   hero: {
     headline: 'Product Manager',
     headlineAccent: 'who builds.',
@@ -55,21 +70,6 @@ export const en: Content = {
     copied: 'Copied!',
   },
   footer: { built: 'Designed & built by Egor Matafonov', copyright: '© {year} Egor Matafonov' },
-  commandPalette: {
-    title: 'Command palette',
-    placeholder: 'Type a command…',
-    empty: 'No matching commands',
-    actions: [
-      { label: 'Go to work', action: 'work' },
-      { label: 'Go to about', action: 'about' },
-      { label: 'Contact', action: 'contact' },
-      { label: 'Open GitHub profile', action: 'github' },
-      { label: 'Toggle theme', action: 'theme' },
-    ],
-    navigationHint: 'Navigate',
-    selectHint: 'Select',
-    closeHint: 'Close',
-  },
   caseStudy: {
     back: 'Back to portfolio',
     projectDetails: 'Project details',
@@ -82,7 +82,19 @@ export const en: Content = {
 };
 
 export const ru: Content = {
-  nav: { work: 'Проекты', about: 'Обо мне', contact: 'Контакт', theme: 'Сменить тему', language: 'Сменить язык', palette: 'Открыть палитру команд' },
+  nav: {
+    brand: 'Егор Матафонов',
+    home: 'На главную — Егор Матафонов',
+    work: 'Проекты',
+    about: 'Обо мне',
+    contact: 'Контакт',
+    theme: 'Сменить тему',
+    switchToLight: 'Включить светлую тему',
+    switchToDark: 'Включить тёмную тему',
+    language: 'Сменить язык',
+    mainNavigation: 'Основная навигация',
+    mobileNavigation: 'Мобильная навигация',
+  },
   hero: {
     headline: 'Product Manager',
     headlineAccent: 'который создаёт.',
@@ -110,21 +122,6 @@ export const ru: Content = {
     copied: 'Скопировано!',
   },
   footer: { built: 'Дизайн и разработка — Егор Матафонов', copyright: '© {year} Егор Матафонов' },
-  commandPalette: {
-    title: 'Палитра команд',
-    placeholder: 'Введите команду…',
-    empty: 'Команды не найдены',
-    actions: [
-      { label: 'К проектам', action: 'work' },
-      { label: 'Обо мне', action: 'about' },
-      { label: 'Контакт', action: 'contact' },
-      { label: 'Открыть профиль GitHub', action: 'github' },
-      { label: 'Сменить тему', action: 'theme' },
-    ],
-    navigationHint: 'Перемещение',
-    selectHint: 'Выбрать',
-    closeHint: 'Закрыть',
-  },
   caseStudy: {
     back: 'Назад к портфолио',
     projectDetails: 'О проекте',
