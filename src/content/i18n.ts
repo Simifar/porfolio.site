@@ -1,6 +1,6 @@
 export interface Content {
   nav: { work: string; about: string; contact: string; theme: string; language: string; palette: string };
-  hero: { headline: string; headlineAccent: string; supporting: string; cta: string; contactLink: string };
+  hero: { headline: string; headlineAccent: string; supporting: string; cta: string; contactLink: string; visualAlt: string; visualTitle: string; visualSubtitle: string };
   work: { title: string; subtitle: string; viewCase: string };
   statement: { line1: string; line2: string };
   about: { title: string; text: string[] };
@@ -30,21 +30,24 @@ export const en: Content = {
   nav: { work: 'Work', about: 'About', contact: 'Contact', theme: 'Toggle theme', language: 'Switch language', palette: 'Open command palette' },
   hero: {
     headline: 'Product Manager',
-    headlineAccent: 'who builds.',
-    supporting: 'Product thinking, coordination and hands-on implementation. A selection of real projects, with links to the products and source code.',
-    cta: 'View selected work',
-    contactLink: 'Contact',
+    headlineAccent: 'from idea to working product.',
+    supporting: 'I shape product direction, design clear workflows and carry projects through to working software, with AI tools as part of delivery.',
+    cta: 'Explore product work',
+    contactLink: 'Get in touch',
+    visualAlt: 'MindTrack screening questionnaire catalog, a published product.',
+    visualTitle: 'MindTrack',
+    visualSubtitle: 'Published product · answers stay in your browser',
   },
   work: { title: 'Selected work', subtitle: 'Projects with a public trail.', viewCase: 'View project' },
   statement: {
-    line1: 'A portfolio should make the work easy to inspect.',
-    line2: 'Each project links to its published site or repository, where available.',
+    line1: 'Clear products start with a clear next step.',
+    line2: 'TaskFocus caps the daily plan at five tasks. MindTrack keeps questionnaire answers in the browser.',
   },
   about: {
-    title: 'About',
+    title: 'How I work',
     text: [
-      'I work across product management, project coordination and implementation.',
-      'This portfolio focuses on projects that can be explored directly. It avoids presenting unverified research, business outcomes or performance metrics as facts.',
+      'I take independent digital products from problem framing to working software. I own the product decisions and UX, and build with AI tools as part of the process.',
+      'My work focuses on making complex tasks easier to navigate, from planning a manageable day to keeping screening answers on the user’s device.',
     ],
   },
   contact: {
@@ -85,21 +88,24 @@ export const ru: Content = {
   nav: { work: 'Проекты', about: 'Обо мне', contact: 'Контакт', theme: 'Сменить тему', language: 'Сменить язык', palette: 'Открыть палитру команд' },
   hero: {
     headline: 'Product Manager',
-    headlineAccent: 'который создаёт.',
-    supporting: 'Продуктовое мышление, координация и практическая разработка. Здесь собраны реальные проекты со ссылками на сайты и исходный код.',
-    cta: 'Смотреть проекты',
+    headlineAccent: 'от идеи до работающего продукта.',
+    supporting: 'Определяю направление продукта, проектирую понятные сценарии и довожу проекты до работающего решения. ИИ использую как инструмент разработки.',
+    cta: 'Смотреть продуктовые кейсы',
     contactLink: 'Связаться',
+    visualAlt: 'Каталог скрининговых опросников MindTrack, опубликованный продукт.',
+    visualTitle: 'MindTrack',
+    visualSubtitle: 'Опубликованный продукт · ответы остаются в браузере',
   },
   work: { title: 'Избранные проекты', subtitle: 'Проекты, которые можно проверить.', viewCase: 'О проекте' },
   statement: {
-    line1: 'Портфолио должно помогать рассмотреть работу.',
-    line2: 'У каждого проекта есть ссылка на опубликованный сайт или репозиторий, если они доступны.',
+    line1: 'Продуктовое решение — сделать следующий шаг яснее.',
+    line2: 'TaskFocus ограничивает план дня пятью задачами. MindTrack хранит ответы в браузере.',
   },
   about: {
-    title: 'Обо мне',
+    title: 'Как я работаю',
     text: [
-      'Я работаю на стыке продуктового управления, координации проектов и разработки.',
-      'В портфолио собраны проекты, которые можно изучить напрямую. Неподтверждённые исследования, бизнес-результаты и метрики не выдаются за факты.',
+      'Я самостоятельно веду цифровые продукты от формулировки задачи до работающего приложения. Продуктовые решения и UX делаю сам, а ИИ использую как инструмент разработки.',
+      'В этих проектах я упрощаю сложные сценарии — от посильного плана на день до локального хранения ответов скрининговых опросников.',
     ],
   },
   contact: {

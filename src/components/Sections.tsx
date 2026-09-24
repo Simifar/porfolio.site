@@ -84,8 +84,8 @@ export function Statement() {
   return (
     <section className="px-6 py-20 md:px-12 md:py-28 lg:px-20">
       <FadeIn className="mx-auto max-w-[1100px] border-y border-[var(--color-border)] py-10 md:py-14">
-        <p className="text-2xl font-medium leading-snug tracking-[-0.02em] md:text-4xl">{t.statement.line1}</p>
-        <p className="mt-4 max-w-3xl text-base leading-relaxed text-[var(--color-text-secondary)] md:text-xl">{t.statement.line2}</p>
+        <p className="max-w-4xl text-2xl font-semibold leading-snug tracking-[-0.025em] md:text-4xl">{t.statement.line1}</p>
+        <p className="mt-4 max-w-3xl text-sm leading-relaxed text-[var(--color-text-secondary)] md:text-base">{t.statement.line2}</p>
       </FadeIn>
     </section>
   );
@@ -96,11 +96,11 @@ export function About() {
 
   return (
     <section id="about" className="relative scroll-mt-24 px-6 py-24 md:px-12 md:py-32 lg:px-20">
-      <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-start gap-8 md:grid-cols-[1fr_2fr] md:gap-16">
-        <FadeIn><h2 className="text-4xl font-bold tracking-[-0.02em] md:text-5xl">{t.about.title}</h2></FadeIn>
+      <div className="mx-auto grid max-w-[1100px] grid-cols-1 items-start gap-6 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+        <FadeIn><h2 className="text-3xl font-semibold tracking-[-0.02em] md:text-4xl">{t.about.title}</h2></FadeIn>
         <FadeIn delay={0.08}>
           <div className="space-y-5">
-            {t.about.text.map(paragraph => <p key={paragraph} className="text-lg leading-relaxed text-[var(--color-text-secondary)]">{paragraph}</p>)}
+            {t.about.text.map(paragraph => <p key={paragraph} className="text-base leading-relaxed text-[var(--color-text-secondary)] md:text-lg">{paragraph}</p>)}
           </div>
         </FadeIn>
       </div>
