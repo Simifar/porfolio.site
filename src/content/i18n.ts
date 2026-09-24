@@ -1,22 +1,45 @@
 export interface Content {
-  nav: { work: string; about: string; contact: string; theme: string; language: string; palette: string };
-  hero: { headline: string; headlineAccent: string; supporting: string; cta: string; contactLink: string };
-  work: { title: string; subtitle: string; viewCase: string };
+  metadata: { title: string; description: string; projectTitleSuffix: string; socialImageAlt: string };
+  nav: {
+    work: string;
+    about: string;
+    contact: string;
+    themeToLight: string;
+    themeToDark: string;
+    language: string;
+    english: string;
+    russian: string;
+    mainNavigation: string;
+    mobileNavigation: string;
+    siteHome: string;
+    socialLinks: string;
+    skipToContent: string;
+  };
+  hero: { headline: string; headlineAccent: string; supporting: string; cta: string; contactLink: string; visualAlt: string; visualTitle: string; visualSubtitle: string };
+  work: {
+    title: string;
+    subtitle: string;
+    viewCase: string;
+    repository: string;
+    openProduct: string;
+    additionalTitle: string;
+    focusLabel: string;
+  };
   statement: { line1: string; line2: string };
   about: { title: string; text: string[] };
-  contact: { title: string; subtitle: string; emailBtn: string; telegramBtn: string; copied: string };
-  footer: { built: string; copyright: string };
-  commandPalette: {
-    title: string;
-    placeholder: string;
-    empty: string;
-    actions: { label: string; action: string }[];
-    navigationHint: string;
-    selectHint: string;
-    closeHint: string;
-  };
+  contact: { title: string; subtitle: string; emailBtn: string; linkedinBtn: string; telegramBtn: string; copied: string };
+  footer: { built: string; copyright: string; github: string; linkedin: string; telegram: string; email: string };
   caseStudy: {
+    caseLabel: string;
     back: string;
+    contextTitle: string;
+    roleTitle: string;
+    constraintsTitle: string;
+    decisionsTitle: string;
+    deliveredTitle: string;
+    statusTitle: string;
+    nextValidationTitle: string;
+    materialsTitle: string;
     projectDetails: string;
     whatItDoes: string;
     repository: string;
@@ -27,51 +50,67 @@ export interface Content {
 }
 
 export const en: Content = {
-  nav: { work: 'Work', about: 'About', contact: 'Contact', theme: 'Toggle theme', language: 'Switch language', palette: 'Open command palette' },
+  metadata: {
+    title: 'Egor Matafonov — Product Manager portfolio',
+    description: 'Product cases by Egor Matafonov: problem framing, product decisions, UX and working software.',
+    projectTitleSuffix: 'Product case by Egor Matafonov',
+    socialImageAlt: 'Egor Matafonov, Product Manager — product cases in TaskFocus and MindTrack.',
+  },
+  nav: {
+    work: 'Work', about: 'About', contact: 'Contact', themeToLight: 'Switch to light theme', themeToDark: 'Switch to dark theme',
+    language: 'Language', english: 'English', russian: 'Russian', mainNavigation: 'Main navigation', mobileNavigation: 'Mobile navigation',
+    siteHome: 'Egor Matafonov — home', socialLinks: 'Social links', skipToContent: 'Skip to content',
+  },
   hero: {
     headline: 'Product Manager',
-    headlineAccent: 'who builds.',
-    supporting: 'Product thinking, coordination and hands-on implementation. A selection of real projects, with links to the products and source code.',
-    cta: 'View selected work',
-    contactLink: 'Contact',
+    headlineAccent: 'from idea to working product.',
+    supporting: 'I shape product direction, design clear workflows and carry projects through to working software, with AI tools as part of delivery.',
+    cta: 'Explore product work',
+    contactLink: 'Get in touch',
+    visualAlt: 'MindTrack screening questionnaire catalog, a published product.',
+    visualTitle: 'MindTrack',
+    visualSubtitle: 'Published product · answers stay in your browser',
   },
-  work: { title: 'Selected work', subtitle: 'Projects with a public trail.', viewCase: 'View project' },
+  work: {
+    title: 'Selected work',
+    subtitle: 'Two end-to-end product cases, plus other projects.',
+    viewCase: 'Project case',
+    repository: 'Source code',
+    openProduct: 'Open product',
+    additionalTitle: 'More projects',
+    focusLabel: 'Product focus',
+  },
   statement: {
-    line1: 'A portfolio should make the work easy to inspect.',
-    line2: 'Each project links to its published site or repository, where available.',
+    line1: 'Clear products start with a clear next step.',
+    line2: 'TaskFocus caps the daily plan at five tasks. MindTrack keeps questionnaire answers in the browser.',
   },
   about: {
-    title: 'About',
+    title: 'How I work',
     text: [
-      'I work across product management, project coordination and implementation.',
-      'This portfolio focuses on projects that can be explored directly. It avoids presenting unverified research, business outcomes or performance metrics as facts.',
+      'I take independent digital products from problem framing to working software. I own the product decisions and UX, and build with AI tools as part of the process.',
+      'My work focuses on making complex tasks easier to navigate, from planning a manageable day to keeping screening answers on the user’s device.',
     ],
   },
   contact: {
-    title: 'Let’s build something useful.',
-    subtitle: 'For project or product conversations, get in touch.',
+    title: 'Let’s talk about a Product Manager role.',
+    subtitle: 'I’m exploring Product Manager opportunities. Email is the best way to reach me; LinkedIn has more about my background.',
     emailBtn: 'Email me',
+    linkedinBtn: 'Connect on LinkedIn',
     telegramBtn: 'Telegram',
     copied: 'Copied!',
   },
-  footer: { built: 'Designed & built by Egor Matafonov', copyright: '© {year} Egor Matafonov' },
-  commandPalette: {
-    title: 'Command palette',
-    placeholder: 'Type a command…',
-    empty: 'No matching commands',
-    actions: [
-      { label: 'Go to work', action: 'work' },
-      { label: 'Go to about', action: 'about' },
-      { label: 'Contact', action: 'contact' },
-      { label: 'Open GitHub profile', action: 'github' },
-      { label: 'Toggle theme', action: 'theme' },
-    ],
-    navigationHint: 'Navigate',
-    selectHint: 'Select',
-    closeHint: 'Close',
-  },
+  footer: { built: 'Designed & built by Egor Matafonov', copyright: '© {year} Egor Matafonov', github: 'GitHub', linkedin: 'LinkedIn', telegram: 'Telegram', email: 'Email' },
   caseStudy: {
+    caseLabel: 'Product case',
     back: 'Back to portfolio',
+    contextTitle: 'Context and task',
+    roleTitle: 'My role',
+    constraintsTitle: 'Constraints',
+    decisionsTitle: 'Product decisions',
+    deliveredTitle: 'What I built',
+    statusTitle: 'Status and evidence',
+    nextValidationTitle: 'What I would validate next',
+    materialsTitle: 'Materials to inspect',
     projectDetails: 'Project details',
     whatItDoes: 'What it does',
     repository: 'Source code',
@@ -82,51 +121,67 @@ export const en: Content = {
 };
 
 export const ru: Content = {
-  nav: { work: 'Проекты', about: 'Обо мне', contact: 'Контакт', theme: 'Сменить тему', language: 'Сменить язык', palette: 'Открыть палитру команд' },
+  metadata: {
+    title: 'Егор Матафонов — портфолио Product Manager',
+    description: 'Продуктовые кейсы Егора Матафонова: формулировка задач, продуктовые решения, UX и работающие приложения.',
+    projectTitleSuffix: 'Продуктовый кейс Егора Матафонова',
+    socialImageAlt: 'Егор Матафонов, Product Manager — продуктовые кейсы TaskFocus и MindTrack.',
+  },
+  nav: {
+    work: 'Проекты', about: 'Обо мне', contact: 'Контакт', themeToLight: 'Включить светлую тему', themeToDark: 'Включить тёмную тему',
+    language: 'Язык', english: 'Английский', russian: 'Русский', mainNavigation: 'Основная навигация', mobileNavigation: 'Мобильная навигация',
+    siteHome: 'Егор Матафонов — главная', socialLinks: 'Ссылки на профили', skipToContent: 'Перейти к содержимому',
+  },
   hero: {
     headline: 'Product Manager',
-    headlineAccent: 'который создаёт.',
-    supporting: 'Продуктовое мышление, координация и практическая разработка. Здесь собраны реальные проекты со ссылками на сайты и исходный код.',
-    cta: 'Смотреть проекты',
+    headlineAccent: 'от идеи до работающего продукта.',
+    supporting: 'Определяю направление продукта, проектирую понятные сценарии и довожу проекты до работающего решения. ИИ использую как инструмент разработки.',
+    cta: 'Смотреть продуктовые кейсы',
     contactLink: 'Связаться',
+    visualAlt: 'Каталог скрининговых опросников MindTrack, опубликованный продукт.',
+    visualTitle: 'MindTrack',
+    visualSubtitle: 'Опубликованный продукт · ответы остаются в браузере',
   },
-  work: { title: 'Избранные проекты', subtitle: 'Проекты, которые можно проверить.', viewCase: 'О проекте' },
+  work: {
+    title: 'Избранные проекты',
+    subtitle: 'Два проекта полного цикла и дополнительные работы.',
+    viewCase: 'Кейс проекта',
+    repository: 'Исходный код',
+    openProduct: 'Открыть продукт',
+    additionalTitle: 'Другие проекты',
+    focusLabel: 'Продуктовый фокус',
+  },
   statement: {
-    line1: 'Портфолио должно помогать рассмотреть работу.',
-    line2: 'У каждого проекта есть ссылка на опубликованный сайт или репозиторий, если они доступны.',
+    line1: 'Продуктовое решение — сделать следующий шаг яснее.',
+    line2: 'TaskFocus ограничивает план дня пятью задачами. MindTrack хранит ответы в браузере.',
   },
   about: {
-    title: 'Обо мне',
+    title: 'Как я работаю',
     text: [
-      'Я работаю на стыке продуктового управления, координации проектов и разработки.',
-      'В портфолио собраны проекты, которые можно изучить напрямую. Неподтверждённые исследования, бизнес-результаты и метрики не выдаются за факты.',
+      'Я самостоятельно веду цифровые продукты от формулировки задачи до работающего приложения. Продуктовые решения и UX делаю сам, а ИИ использую как инструмент разработки.',
+      'В этих проектах я упрощаю сложные сценарии — от посильного плана на день до локального хранения ответов скрининговых опросников.',
     ],
   },
   contact: {
-    title: 'Давайте создадим что-то полезное.',
-    subtitle: 'Напишите, если хотите обсудить продукт или проект.',
+    title: 'Обсудим позицию Product Manager?',
+    subtitle: 'Я рассматриваю предложения на эту роль. Удобнее всего написать на почту; в LinkedIn можно подробнее узнать о моём опыте.',
     emailBtn: 'Написать на почту',
+    linkedinBtn: 'Связаться в LinkedIn',
     telegramBtn: 'Telegram',
     copied: 'Скопировано!',
   },
-  footer: { built: 'Дизайн и разработка — Егор Матафонов', copyright: '© {year} Егор Матафонов' },
-  commandPalette: {
-    title: 'Палитра команд',
-    placeholder: 'Введите команду…',
-    empty: 'Команды не найдены',
-    actions: [
-      { label: 'К проектам', action: 'work' },
-      { label: 'Обо мне', action: 'about' },
-      { label: 'Контакт', action: 'contact' },
-      { label: 'Открыть профиль GitHub', action: 'github' },
-      { label: 'Сменить тему', action: 'theme' },
-    ],
-    navigationHint: 'Перемещение',
-    selectHint: 'Выбрать',
-    closeHint: 'Закрыть',
-  },
+  footer: { built: 'Дизайн и разработка — Егор Матафонов', copyright: '© {year} Егор Матафонов', github: 'GitHub', linkedin: 'LinkedIn', telegram: 'Telegram', email: 'Почта' },
   caseStudy: {
+    caseLabel: 'Продуктовый кейс',
     back: 'Назад к портфолио',
+    contextTitle: 'Контекст и задача',
+    roleTitle: 'Мой вклад',
+    constraintsTitle: 'Ограничения',
+    decisionsTitle: 'Продуктовые решения',
+    deliveredTitle: 'Что реализовал',
+    statusTitle: 'Статус и подтверждения',
+    nextValidationTitle: 'Что проверил бы следующим',
+    materialsTitle: 'Материалы для проверки',
     projectDetails: 'О проекте',
     whatItDoes: 'Что он делает',
     repository: 'Исходный код',
