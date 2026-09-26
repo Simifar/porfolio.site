@@ -85,7 +85,7 @@ export const projects: Project[] = [
     caseStudy: {
       context: {
         en: 'TaskFocus is an MVP for personal task planning, built as a diploma project. The idea was to keep the daily list small and use date ranges for tasks without a fixed deadline. I have not tested whether this makes planning easier.',
-        ru: 'TaskFocus — MVP персонального планировщика, который я сделал как дипломный проект. Я ограничил список на день и добавил гибкие сроки для задач без точного дедлайна. Помогает ли это планировать легче, я не проверял.',
+        ru: 'TaskFocus: MVP персонального планировщика, который я сделал как дипломный проект. Я ограничил список на день и добавил гибкие сроки для задач без точного дедлайна. Помогает ли это планировать легче, я не проверял.',
       },
       role: {
         en: 'I was the only contributor. I set the product rules, designed the screens and built the app. I used AI tools to help write the code.',
@@ -242,7 +242,7 @@ export const projects: Project[] = [
           title: { en: 'Give people control over local history', ru: 'Дать контроль над локальной историей' },
           rationale: {
             en: 'People can delete their local history or export and import a backup.',
-            ru: 'Историю можно удалить, а резервную копию — экспортировать и импортировать.',
+            ru: 'Историю можно удалить, а резервную копию можно экспортировать и импортировать.',
           },
         },
         {

@@ -9,14 +9,6 @@ import { SelectedWork, About, Contact, Footer } from './components/Sections';
 import CaseStudy from './components/CaseStudy';
 import NotFound from './components/NotFound';
 
-function Divider() {
-  return (
-    <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-20">
-      <div className="h-px bg-gradient-to-r from-transparent via-[var(--color-border)] to-transparent" />
-    </div>
-  );
-}
-
 function PageMetadata() {
   const { pathname } = useLocation();
   const { lang, t } = useApp();
@@ -26,8 +18,8 @@ function PageMetadata() {
     const project = projects.find(item => item.slug === slug);
     const isHome = pathname === '/';
     const title = project
-      ? `${project.name} — ${t.metadata.projectTitleSuffix}`
-      : isHome ? t.metadata.title : `${t.notFound.title} — ${t.metadata.title}`;
+      ? `${project.name} · ${t.metadata.projectTitleSuffix}`
+      : isHome ? t.metadata.title : `${t.notFound.title} · ${t.metadata.title}`;
     const description = project
       ? project.description[lang]
       : isHome ? t.metadata.description : t.notFound.text;
@@ -61,7 +53,6 @@ function HomePage() {
   return (
     <>
       <ScrollProgress />
-      <Navbar />
       <a
         href="#main-content"
         className="skip-link"
@@ -69,17 +60,16 @@ function HomePage() {
           event.preventDefault();
           const main = document.getElementById('main-content');
           main?.focus({ preventScroll: true });
-          main?.scrollIntoView({ behavior: 'smooth' });
+          main?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
         }}
       >
         {t.nav.skipToContent}
       </a>
+      <Navbar />
       <main id="main-content" tabIndex={-1}>
         <Hero />
         <SelectedWork />
-        <Divider />
         <About />
-        <Divider />
         <Contact />
       </main>
       <Footer />
@@ -97,11 +87,7 @@ function CaseStudyPage() {
 }
 
 function NotFoundPage() {
-  return (
-    <>
-      <NotFound />
-    </>
-  );
+  return <NotFound />;
 }
 
 export default function App() {
@@ -111,7 +97,6 @@ export default function App() {
         <MotionConfig reducedMotion="user">
           <ScrollReset />
           <PageMetadata />
-          <div className="noise-overlay" aria-hidden="true" />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/work/:slug" element={<CaseStudyPage />} />

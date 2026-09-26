@@ -16,7 +16,7 @@ export interface Content {
     socialLinks: string;
     skipToContent: string;
   };
-  hero: { headline: string; headlineAccent: string; supporting: string; cta: string; contactLink: string; visualAlt: string; visualTitle: string; visualSubtitle: string };
+  hero: { eyebrow: string; headline: string; headlineAccent: string; supporting: string; cta: string; contactLink: string; visualAlt: string; visualTitle: string; visualSubtitle: string };
   work: {
     title: string;
     subtitle: string;
@@ -26,7 +26,11 @@ export interface Content {
     additionalTitle: string;
     focusLabel: string;
   };
-  about: { title: string; text: string[] };
+  about: {
+    title: string;
+    intro: string;
+    practices: { title: string; detail: string; projects: { slug: string; label: string }[] }[];
+  };
   contact: { title: string; subtitle: string; emailBtn: string; linkedinBtn: string; telegramBtn: string; copied: string };
   footer: { built: string; copyright: string; github: string; linkedin: string; telegram: string; email: string };
   caseStudy: {
@@ -51,18 +55,19 @@ export interface Content {
 
 export const en: Content = {
   metadata: {
-    title: 'Egor Matafonov — Product Manager portfolio',
+    title: 'Egor Matafonov | Product Manager portfolio',
     description: 'Product work by Egor Matafonov: TaskFocus, MindTrack, CortexMap and Telegram Growth Analytics.',
     projectTitleSuffix: 'Product case by Egor Matafonov',
-    socialImageAlt: 'Egor Matafonov, Product Manager. Product work: TaskFocus and MindTrack.',
+    socialImageAlt: 'Egor Matafonov, Product Manager. Selected work: TaskFocus and MindTrack.',
   },
   nav: {
     brand: 'Egor Matafonov',
     work: 'Work', about: 'About', contact: 'Contact', themeToLight: 'Switch to light theme', themeToDark: 'Switch to dark theme',
     language: 'Language', english: 'English', russian: 'Russian', mainNavigation: 'Main navigation', mobileNavigation: 'Mobile navigation',
-    siteHome: 'Egor Matafonov — home', socialLinks: 'Social links', skipToContent: 'Skip to content',
+    siteHome: 'Egor Matafonov, home', socialLinks: 'Social links', skipToContent: 'Skip to content',
   },
   hero: {
+    eyebrow: 'Egor Matafonov / Product Manager',
     headline: 'Product Manager',
     headlineAccent: 'From problem framing to working software.',
     supporting: 'I make product decisions, design the user flows and build the apps myself.',
@@ -82,9 +87,27 @@ export const en: Content = {
     focusLabel: 'Key point',
   },
   about: {
-    title: 'About me',
-    text: [
-      'AI helps me with code. I make the product decisions.',
+    title: 'How I work',
+    intro: 'TaskFocus and MindTrack show how I turn product rules into working apps.',
+    practices: [
+      {
+        title: 'Set product rules',
+        detail: 'TaskFocus has a five-task daily limit, inbox-first capture and flexible dates.',
+        projects: [{ slug: 'taskfocus', label: 'TaskFocus case' }],
+      },
+      {
+        title: 'Keep privacy and context clear',
+        detail: 'MindTrack stores answers in the browser and shows scores alongside their range and limits.',
+        projects: [{ slug: 'mindtrack', label: 'MindTrack case' }],
+      },
+      {
+        title: 'Carry work through',
+        detail: 'I handled product decisions, UX and implementation on both projects. AI tools helped me write code.',
+        projects: [
+          { slug: 'taskfocus', label: 'TaskFocus case' },
+          { slug: 'mindtrack', label: 'MindTrack case' },
+        ],
+      },
     ],
   },
   contact: {
@@ -118,18 +141,19 @@ export const en: Content = {
 
 export const ru: Content = {
   metadata: {
-    title: 'Егор Матафонов — портфолио Product Manager',
+    title: 'Егор Матафонов | портфолио Product Manager',
     description: 'Проекты Егора Матафонова: TaskFocus, MindTrack, CortexMap и Telegram Growth Analytics.',
     projectTitleSuffix: 'Продуктовый кейс Егора Матафонова',
-    socialImageAlt: 'Егор Матафонов, Product Manager. Проекты TaskFocus и MindTrack.',
+    socialImageAlt: 'Егор Матафонов, Product Manager. Избранные проекты TaskFocus и MindTrack.',
   },
   nav: {
     brand: 'Егор Матафонов',
     work: 'Проекты', about: 'Обо мне', contact: 'Связаться', themeToLight: 'Включить светлую тему', themeToDark: 'Включить тёмную тему',
     language: 'Язык', english: 'Английский', russian: 'Русский', mainNavigation: 'Основная навигация', mobileNavigation: 'Мобильная навигация',
-    siteHome: 'Егор Матафонов — главная', socialLinks: 'Ссылки на профили', skipToContent: 'Перейти к содержимому',
+    siteHome: 'Егор Матафонов, главная', socialLinks: 'Ссылки на профили', skipToContent: 'Перейти к содержимому',
   },
   hero: {
+    eyebrow: 'Егор Матафонов / Product Manager',
     headline: 'Product Manager',
     headlineAccent: 'Веду продукт от задачи до рабочего решения.',
     supporting: 'Сам принимаю продуктовые решения, продумываю сценарии и собираю приложения.',
@@ -149,14 +173,32 @@ export const ru: Content = {
     focusLabel: 'Главное',
   },
   about: {
-    title: 'Обо мне',
-    text: [
-      'ИИ помогает мне с кодом. Продуктовые решения принимаю сам.',
+    title: 'Как я работаю',
+    intro: 'В TaskFocus и MindTrack видно, как я превращаю правила продукта в работающие приложения.',
+    practices: [
+      {
+        title: 'Задаю правила продукта',
+        detail: 'В TaskFocus есть лимит в пять задач на день, запись задачи до планирования и гибкие даты.',
+        projects: [{ slug: 'taskfocus', label: 'Кейс TaskFocus' }],
+      },
+      {
+        title: 'Учитываю приватность и контекст',
+        detail: 'MindTrack хранит ответы в браузере и показывает балл вместе с диапазоном и ограничениями методики.',
+        projects: [{ slug: 'mindtrack', label: 'Кейс MindTrack' }],
+      },
+      {
+        title: 'Довожу работу до реализации',
+        detail: 'В обоих проектах я сам принимал продуктовые решения, проектировал UX и реализовал приложения. ИИ помогал писать код.',
+        projects: [
+          { slug: 'taskfocus', label: 'Кейс TaskFocus' },
+          { slug: 'mindtrack', label: 'Кейс MindTrack' },
+        ],
+      },
     ],
   },
   contact: {
     title: 'Ищу работу Product Manager',
-    subtitle: 'Если в вашей команде открыта позиция Product Manager, напишите мне. О моём опыте — в LinkedIn.',
+    subtitle: 'Если в вашей команде открыта позиция Product Manager, напишите мне. О моём опыте можно прочитать в LinkedIn.',
     emailBtn: 'Написать',
     linkedinBtn: 'Открыть LinkedIn',
     telegramBtn: 'Telegram',

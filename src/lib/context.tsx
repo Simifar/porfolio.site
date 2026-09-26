@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { en, ru, Content } from '../content/i18n';
 
 type Lang = 'en' | 'ru';
@@ -64,14 +64,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.classList.toggle('light', theme === 'light');
     document.documentElement.classList.toggle('dark', theme === 'dark');
     document.documentElement.style.colorScheme = theme;
-    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#08090B' : '#F5F5F2');
-    if (theme === 'light') {
-      document.documentElement.style.backgroundColor = '#F5F5F2';
-      document.documentElement.style.color = '#08090B';
-    } else {
-      document.documentElement.style.backgroundColor = '#08090B';
-      document.documentElement.style.color = '#F5F5F2';
-    }
+    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#141817' : '#F2F3EF');
   }, [theme]);
 
   const t = lang === 'en' ? en : ru;
@@ -85,23 +78,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
 export function useApp() {
   return useContext(AppContext);
-}
-
-// Scroll progress hook
-export function useScrollProgress() {
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const p = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
-      setProgress(p);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return progress;
 }
 
 // Intersection observer hook
@@ -125,16 +101,4 @@ export function useInView(threshold = 0.1) {
   }, [ref, threshold]);
 
   return { ref: setRef, inView };
-}
-
-// Mouse position hook for spotlight
-export function useMousePosition() {
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    setPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  }, []);
-
-  return { pos, handleMouseMove };
 }
