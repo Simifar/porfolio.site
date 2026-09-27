@@ -1,24 +1,8 @@
-import { motion } from 'framer-motion';
 import { ArrowUpRight, ExternalLink } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { projects } from '../content/projects';
-import { useApp, useInView } from '../lib/context';
-
-function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const { ref, inView } = useInView(0.08);
-
-  return (
-    <div ref={ref} className={className}>
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.32, delay, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {children}
-      </motion.div>
-    </div>
-  );
-}
+import { experience } from '../content/experience';
+import { useApp } from '../lib/context';
 
 function ProjectActions({ project }: { project: (typeof projects)[number] }) {
   const { t } = useApp();
@@ -43,6 +27,39 @@ function ProjectActions({ project }: { project: (typeof projects)[number] }) {
   );
 }
 
+export function Experience() {
+  const { t, lang } = useApp();
+
+  return (
+    <section id="experience" className="experience-section" aria-labelledby="experience-title">
+      <div className="site-shell">
+        <div className="section-heading">
+          <h2 id="experience-title" className="section-title">{t.experience.title}</h2>
+          <p className="section-subtitle">{t.experience.subtitle}</p>
+        </div>
+        <div className="experience-list">
+          {experience.map(entry => (
+            <article key={entry.company} className={`experience-entry${entry.compact ? ' experience-entry--compact' : ''}`}>
+              <div className="experience-entry__meta">
+                <span>{entry.period[lang]}</span>
+                <span>{entry.context[lang]}</span>
+              </div>
+              <div className="experience-entry__body">
+                <h3 className="experience-entry__company">{entry.company}</h3>
+                <p className="experience-entry__role">{entry.role[lang]}</p>
+                <p className="experience-entry__work">{entry.work[lang]}</p>
+                <ul className="experience-entry__outcomes">
+                  {entry.outcomes.map(outcome => <li key={outcome.en}>{outcome[lang]}</li>)}
+                </ul>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function SelectedWork() {
   const { t, lang } = useApp();
   const featured = projects.filter(project => project.presentation === 'featured');
@@ -51,14 +68,14 @@ export function SelectedWork() {
   return (
     <section id="work" className="work-section" aria-labelledby="work-title">
       <div className="site-shell">
-        <FadeIn className="section-heading">
+        <div className="section-heading">
           <h2 id="work-title" className="section-title">{t.work.title}</h2>
           <p className="section-subtitle">{t.work.subtitle}</p>
-        </FadeIn>
+        </div>
 
         <div className="featured-list">
           {featured.map((project, index) => (
-            <FadeIn key={project.slug} delay={index * 0.04}>
+            <div key={project.slug}>
               <article
                 aria-labelledby={`project-${project.slug}`}
                 className={`feature-project${index % 2 === 1 ? ' feature-project--reverse' : ''}`}
@@ -91,7 +108,7 @@ export function SelectedWork() {
                   <ProjectActions project={project} />
                 </div>
               </article>
-            </FadeIn>
+            </div>
           ))}
         </div>
 
@@ -137,10 +154,10 @@ export function About() {
   return (
     <section id="about" className="practice-section" aria-labelledby="about-title">
       <div className="site-shell practice-layout">
-        <FadeIn className="practice-intro">
+        <div className="practice-intro">
           <h2 id="about-title" className="section-title">{t.about.title}</h2>
           <p className="practice-intro__text">{t.about.intro}</p>
-        </FadeIn>
+        </div>
 
         <div>
           <ul className="practice-list">
@@ -171,10 +188,10 @@ export function Contact() {
   return (
     <section id="contact" className="contact-section" aria-labelledby="contact-title">
       <div className="site-shell contact-layout">
-        <FadeIn>
+        <div>
           <h2 id="contact-title" className="contact-title">{t.contact.title}</h2>
-        </FadeIn>
-        <FadeIn delay={0.04}>
+        </div>
+        <div>
           <p className="contact-copy">{t.contact.subtitle}</p>
           <div className="contact-actions">
             <a href="mailto:Matafonovegor2@gmail.com" className="contact-email" aria-label={t.contact.emailBtn}>
@@ -190,7 +207,7 @@ export function Contact() {
               <ExternalLink size={14} aria-hidden="true" />
             </a>
           </div>
-        </FadeIn>
+        </div>
       </div>
     </section>
   );

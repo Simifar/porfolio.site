@@ -1,14 +1,9 @@
 import { ArrowDown, ArrowUpRight, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router';
 import { useApp } from '../lib/context';
 
 export default function Hero() {
   const { t } = useApp();
-
-  const scrollTo = (id: string) => {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    document.getElementById(id)?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
-  };
 
   return (
     <section id="hero" className="hero" aria-labelledby="hero-title">
@@ -19,14 +14,14 @@ export default function Hero() {
           <p className="hero__deck">{t.hero.headlineAccent} {t.hero.supporting}</p>
 
           <div className="hero__actions">
-            <button type="button" className="button-primary" onClick={() => scrollTo('work')}>
+            <Link to="/?section=work" className="button-primary">
               {t.hero.cta}
               <ArrowDown size={16} aria-hidden="true" />
-            </button>
-            <button type="button" className="button-text" onClick={() => scrollTo('contact')}>
+            </Link>
+            <Link to="/?section=contact" className="button-text">
               <Mail size={16} aria-hidden="true" />
               {t.hero.contactLink}
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -39,6 +34,7 @@ export default function Hero() {
               height={1306}
               loading="eager"
               decoding="async"
+              {...{ fetchpriority: 'high' }}
               className="hero__image"
             />
           </div>

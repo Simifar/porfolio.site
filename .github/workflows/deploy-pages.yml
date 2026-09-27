@@ -27,8 +27,16 @@ jobs:
         run: npm ci
       - name: Type check
         run: npm run typecheck
-      - name: Build the site
+      - name: Install Playwright browser
+        run: npx playwright install --with-deps chromium
+      - name: Run browser and accessibility checks
+        run: npm run test:e2e
+      - name: Run Lighthouse CI
+        run: CHROME_PATH=$(node -p "require('@playwright/test').chromium.executablePath()") npm run lighthouse
+      - name: Build the GitHub Pages version
         run: npm run build
+        env:
+          PAGES_BASE_PATH: /porfolio.site
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

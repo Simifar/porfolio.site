@@ -8,6 +8,7 @@ export interface LocalizedText {
 export interface ProductDecision {
   title: LocalizedText;
   rationale: LocalizedText;
+  tradeoff?: LocalizedText;
 }
 
 export interface CaseMaterial {
@@ -49,6 +50,13 @@ export interface Project {
     width: number;
     height: number;
   };
+  gallery?: {
+    src: string;
+    alt: LocalizedText;
+    caption: LocalizedText;
+    width: number;
+    height: number;
+  }[];
 }
 
 export const projects: Project[] = [
@@ -70,8 +78,8 @@ export const projects: Project[] = [
     },
     category: { en: 'Productivity', ru: 'Планирование' },
     description: {
-      en: 'A task planner with an inbox, a Today list limited to five tasks, flexible dates, subtasks, priority and energy estimates, and a focus timer.',
-      ru: 'Планировщик задач со входящими, списком «Сегодня» не более чем на пять задач, гибкими датами, подзадачами, приоритетами, оценкой энергии и таймером фокуса.',
+      en: 'A personal task planner with an inbox, a five-task Today list and flexible dates.',
+      ru: 'Планировщик с входящими, лимитом пяти задач на день и гибкими сроками.',
     },
     features: [
       { en: 'Save tasks in an inbox and sort them later.', ru: 'Сохранять задачи во входящие и разбирать их позже.' },
@@ -97,8 +105,8 @@ export const projects: Project[] = [
           ru: 'Для планировщика нужны авторизация и настроенная база PostgreSQL/Neon.',
         },
         {
-          en: 'There is no public dashboard demo. The available screenshots show sign-in and registration only.',
-          ru: 'Публичной демоверсии планировщика нет. На скриншотах показаны только вход и регистрация.',
+          en: 'There is no public interactive dashboard demo. The screenshots show a working signed-in app.',
+          ru: 'Публичной интерактивной демоверсии планировщика нет. Скриншоты показывают работающее приложение после входа.',
         },
       ],
       decisions: [
@@ -108,12 +116,20 @@ export const projects: Project[] = [
             en: 'The Today list cannot grow without limit. Whether five is the right number still needs testing.',
             ru: 'Список «Сегодня» не может расти бесконечно. Подходит ли ограничение именно в пять задач, ещё нужно проверить.',
           },
+          tradeoff: {
+            en: 'A sixth active task needs another day or a place in the inbox.',
+            ru: 'Шестую активную задачу нужно оставить во входящих или перенести на другой день.',
+          },
         },
         {
           title: { en: 'Capture first, schedule later', ru: 'Сначала записать, потом планировать' },
           rationale: {
             en: 'Save a task before deciding when to do it or how important it is.',
             ru: 'Задачу можно сохранить, а срок и важность выбрать позже.',
+          },
+          tradeoff: {
+            en: 'The inbox needs a separate review step; capture alone does not create a plan.',
+            ru: 'Входящие нужно разбирать отдельно: быстрая запись сама по себе не создаёт план.',
           },
         },
         {
@@ -126,8 +142,8 @@ export const projects: Project[] = [
         {
           title: { en: 'Give the next task more context', ru: 'Добавить контекст для выбора следующего шага' },
           rationale: {
-            en: 'The Today suggestion uses importance, urgency and estimated energy instead of one priority score.',
-            ru: 'При рекомендации задач на сегодня учитываются важность, срочность и оценка энергозатрат, а не только один приоритет.',
+            en: 'The Today suggestion considers the end of the planned date window, importance and urgency. An optional energy filter narrows the eligible tasks.',
+            ru: 'Рекомендация на сегодня учитывает конец планового периода, важность и срочность. Необязательный фильтр по энергии сужает выбор задач.',
           },
         },
       ],
@@ -138,8 +154,8 @@ export const projects: Project[] = [
         { en: 'An MVP with sign-in. The source code is public.', ru: 'MVP с авторизацией и открытым исходным кодом.' },
       ],
       status: {
-        en: 'The source code is public, but there is no demo of the signed-in dashboard.',
-        ru: 'Исходный код открыт, но демоверсии авторизованного планировщика нет.',
+        en: 'The source code and real dashboard screenshots are public. There is no interactive demo of the signed-in app.',
+        ru: 'Исходный код и реальные скриншоты планировщика доступны. Интерактивной демоверсии после входа нет.',
       },
       nextValidation: {
         en: 'Watch people move tasks from the inbox into Today. Check whether they understand the five-task limit and flexible dates before measuring any effect on productivity.',
@@ -151,19 +167,41 @@ export const projects: Project[] = [
       ],
     },
     screenshot: {
-      src: '/projects/taskfocus-sign-in.png',
+      src: '/projects/taskfocus-today.png',
       alt: {
-        en: 'TaskFocus sign-in screen. There is no public demo of the dashboard.',
-        ru: 'Экран входа в TaskFocus. Публичной демоверсии планировщика нет.',
+        en: 'TaskFocus Today dashboard with a five-task plan and a suggested next task.',
+        ru: 'Раздел «Сегодня» TaskFocus с планом из пяти задач и рекомендацией следующей задачи.',
       },
       caption: {
-        en: 'Sign-in screen · no public dashboard demo',
-        ru: 'Экран входа · демоверсии планировщика нет',
+        en: 'Today · real signed-in dashboard screenshot',
+        ru: 'Сегодня · реальный скриншот планировщика после входа',
       },
-      objectPosition: 'left',
-      width: 1366,
-      height: 1000,
+      width: 1919,
+      height: 1079,
     },
+    gallery: [
+      {
+        src: '/projects/taskfocus-inbox.png',
+        alt: { en: 'TaskFocus Inbox with quick capture and unscheduled tasks.', ru: 'Входящие TaskFocus с быстрым добавлением и задачами без даты.' },
+        caption: { en: 'Inbox · capture before scheduling', ru: 'Входящие · запись до планирования' },
+        width: 1919,
+        height: 1079,
+      },
+      {
+        src: '/projects/taskfocus-week.png',
+        alt: { en: 'TaskFocus weekly planning board with tasks arranged by day.', ru: 'Недельный план TaskFocus с задачами по дням.' },
+        caption: { en: 'Week · tasks arranged by day', ru: 'Неделя · задачи по дням' },
+        width: 1919,
+        height: 1078,
+      },
+      {
+        src: '/projects/taskfocus-calendar.png',
+        alt: { en: 'TaskFocus calendar with tasks on scheduled dates.', ru: 'Календарь TaskFocus с задачами на запланированные даты.' },
+        caption: { en: 'Calendar · scheduled dates', ru: 'Календарь · запланированные даты' },
+        width: 1919,
+        height: 1079,
+      },
+    ],
   },
   {
     slug: 'mindtrack',
@@ -183,8 +221,8 @@ export const projects: Project[] = [
     },
     category: { en: 'Wellbeing', ru: 'Самонаблюдение' },
     description: {
-      en: 'A browser app with screening questionnaires for self-observation. It has no account, backend, analytics or AI features; answers stay in browser storage.',
-      ru: 'Браузерное приложение с опросниками для самонаблюдения. Аккаунта, бэкенда, аналитики и функций ИИ нет; ответы хранятся в браузере.',
+      en: 'Screening questionnaires for self-observation. No account or product server; answers stay in the browser.',
+      ru: 'Скрининговые опросники для самонаблюдения: без аккаунта и сервера, ответы остаются в браузере.',
     },
     features: [
       { en: 'Answer ASRS, MDQ and PSS-10 questionnaires.', ru: 'Заполнять опросники ASRS, MDQ и PSS-10.' },
@@ -229,6 +267,10 @@ export const projects: Project[] = [
           rationale: {
             en: 'The app calculates and stores answers in the browser instead of sending them to a product server.',
             ru: 'Приложение рассчитывает и хранит ответы в браузере, а не отправляет их на сервер.',
+          },
+          tradeoff: {
+            en: 'History does not sync between devices and is lost if browser data is cleared without a backup.',
+            ru: 'История не синхронизируется между устройствами и пропадёт при очистке браузера без резервной копии.',
           },
         },
         {

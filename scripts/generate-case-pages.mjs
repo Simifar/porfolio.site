@@ -1,0 +1,85 @@
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import ts from 'typescript';
+
+const output = resolve('dist');
+const base = process.env.PAGES_BASE_PATH === '/porfolio.site' ? '/porfolio.site/' : '/';
+const site = 'https://simifar.github.io/porfolio.site/';
+const source = await readFile(resolve('src/content/projects.ts'), 'utf8');
+const compiled = ts.transpileModule(source, {
+  compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 },
+}).outputText;
+const { projects } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
+
+const escape = value => String(value).replace(/[&<>"']/g, character => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+})[character]);
+const bulletList = values => `<ul>${values.map(value => `<li>${escape(value)}</li>`).join('')}</ul>`;
+const section = (heading, body) => `<section class="preview-section"><h2>${escape(heading)}</h2><div>${body}</div></section>`;
+const asset = image => `${base}${image.src.replace(/^\/+/, '')}`;
+
+const labels = {
+  en: {
+    home: 'Portfolio', alternate: 'Русский', open: 'Open interactive case', theme: 'Switch theme',
+    source: 'Source code', live: 'Open product', task: 'The task', role: 'What I did',
+    constraints: 'Constraints', decisions: 'Product decisions', tradeoff: 'Trade-off',
+    delivered: 'What I built', status: 'Current status', validation: 'What to test next',
+    materials: 'Project links', features: 'Features', gallery: 'Inside the product',
+  },
+  ru: {
+    home: 'Портфолио', alternate: 'English', open: 'Открыть интерактивный кейс', theme: 'Сменить тему',
+    source: 'Исходный код', live: 'Открыть продукт', task: 'Задача', role: 'Что я сделал',
+    constraints: 'Ограничения', decisions: 'Продуктовые решения', tradeoff: 'Компромисс',
+    delivered: 'Что реализовал', status: 'Текущий статус', validation: 'Что проверить дальше',
+    materials: 'Ссылки на материалы', features: 'Функции', gallery: 'Экраны продукта',
+  },
+};
+
+function renderCase(project, lang) {
+  const l = labels[lang];
+  const caseUrl = `${site}${lang === 'ru' ? 'ru/' : ''}work/${project.slug}/`;
+  const enUrl = `${site}work/${project.slug}/`;
+  const ruUrl = `${site}ru/work/${project.slug}/`;
+  const alternateUrl = `${base}${lang === 'ru' ? '' : 'ru/'}work/${project.slug}/`;
+  const appUrl = `${base}#/work/${project.slug}`;
+  const title = `${project.name} · ${lang === 'ru' ? 'продуктовый кейс Егора Матафонова' : 'product case by Egor Matafonov'}`;
+  const description = project.description[lang];
+  const screenshot = project.screenshot;
+  const socialImage = screenshot ? `${site}${screenshot.src.replace(/^\/+/, '')}` : `${site}og-image.png`;
+  const visual = screenshot ? `<figure class="preview-visual"><img src="${escape(asset(screenshot))}" alt="${escape(screenshot.alt[lang])}" width="${screenshot.width}" height="${screenshot.height}" fetchpriority="high"><figcaption>${escape(screenshot.caption[lang])}</figcaption></figure>` : '';
+  const gallery = project.gallery ? `<section class="preview-gallery" aria-label="${escape(l.gallery)}">${project.gallery.map(image => `<figure><img src="${escape(asset(image))}" alt="${escape(image.alt[lang])}" width="${image.width}" height="${image.height}" loading="lazy"><figcaption>${escape(image.caption[lang])}</figcaption></figure>`).join('')}</section>` : '';
+  const study = project.caseStudy;
+  const details = study ? [
+    section(l.task, `<p>${escape(study.context[lang])}</p>`),
+    section(l.role, `<p>${escape(study.role[lang])}</p><h3>${escape(l.constraints)}</h3>${bulletList(study.constraints.map(item => item[lang]))}`),
+    section(l.decisions, `<ol class="preview-decisions">${study.decisions.map(decision => `<li><h3>${escape(decision.title[lang])}</h3><p>${escape(decision.rationale[lang])}</p>${decision.tradeoff ? `<p class="preview-tradeoff"><strong>${escape(l.tradeoff)}:</strong> ${escape(decision.tradeoff[lang])}</p>` : ''}</li>`).join('')}</ol>`),
+    section(l.delivered, bulletList(study.delivered.map(item => item[lang]))),
+    section(l.status, `<p>${escape(study.status[lang])}</p><h3>${escape(l.validation)}</h3><p>${escape(study.nextValidation[lang])}</p>${study.materials.length ? `<h3>${escape(l.materials)}</h3><ul>${study.materials.map(material => `<li><a href="${escape(material.href)}">${escape(material.label[lang])}</a></li>`).join('')}</ul>` : ''}`),
+  ].join('') : section(l.features, bulletList(project.features.map(item => item[lang])));
+
+  return `<!doctype html>
+<html lang="${lang}"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escape(title)}</title><meta name="description" content="${escape(description)}"><meta name="author" content="Egor Matafonov">
+<link rel="canonical" href="${caseUrl}"><link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="ru" href="${ruUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}">
+<link rel="stylesheet" href="${base}case-preview.css"><link rel="icon" type="image/svg+xml" href="${base}favicon.svg">
+<meta property="og:type" content="article"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${caseUrl}">
+<meta property="og:image" content="${socialImage}"><meta property="og:image:width" content="${screenshot?.width ?? 1200}"><meta property="og:image:height" content="${screenshot?.height ?? 630}"><meta property="og:image:alt" content="${escape(screenshot?.alt[lang] ?? 'Egor Matafonov Product Manager portfolio')}"><meta property="og:locale" content="${lang === 'ru' ? 'ru_RU' : 'en_US'}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escape(title)}"><meta name="twitter:description" content="${escape(description)}"><meta name="twitter:image" content="${socialImage}">
+<script>try{document.documentElement.className=localStorage.getItem('theme')==='dark'?'dark':'light'}catch{}</script>
+</head><body>
+<header class="preview-header"><div class="shell"><a href="${base}">${escape(l.home)} / Egor Matafonov</a><nav aria-label="${lang === 'ru' ? 'Навигация' : 'Navigation'}"><a href="${alternateUrl}">${escape(l.alternate)}</a><button type="button" id="theme-switch">${escape(l.theme)}</button></nav></div></header>
+<main class="shell"><div class="preview-hero"><p class="preview-kicker">${escape(lang === 'ru' ? 'Продуктовый кейс' : 'Product case')} · ${escape(project.category[lang])}</p><h1>${escape(project.name)}</h1><p class="preview-intro">${escape(description)}</p><div class="preview-links"><a href="${appUrl}" id="interactive-case">${escape(l.open)} ↗</a><a href="${escape(project.github)}">${escape(l.source)} ↗</a>${project.live ? `<a href="${escape(project.live)}">${escape(l.live)} ↗</a>` : ''}</div></div>
+${visual}${details}${gallery}</main>
+<footer class="preview-footer"><div class="shell">© Egor Matafonov · <a href="${base}">${escape(l.home)}</a></div></footer>
+<script>document.getElementById('theme-switch').addEventListener('click',()=>{const dark=document.documentElement.classList.toggle('dark');document.documentElement.classList.toggle('light',!dark);try{localStorage.setItem('theme',dark?'dark':'light')}catch{}});document.getElementById('interactive-case').addEventListener('click',()=>{try{localStorage.setItem('lang','${lang}')}catch{}})</script>
+</body></html>`;
+}
+
+for (const project of projects) {
+  for (const lang of ['en', 'ru']) {
+    const directory = resolve(output, lang === 'ru' ? 'ru' : '', 'work', project.slug);
+    await mkdir(directory, { recursive: true });
+    await writeFile(resolve(directory, 'index.html'), renderCase(project, lang));
+  }
+}

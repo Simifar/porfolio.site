@@ -3,6 +3,7 @@ export interface Content {
   nav: {
     brand: string;
     work: string;
+    experience: string;
     about: string;
     contact: string;
     themeToLight: string;
@@ -26,6 +27,7 @@ export interface Content {
     additionalTitle: string;
     focusLabel: string;
   };
+  experience: { title: string; subtitle: string };
   about: {
     title: string;
     intro: string;
@@ -40,6 +42,9 @@ export interface Content {
     roleTitle: string;
     constraintsTitle: string;
     decisionsTitle: string;
+    tradeoffLabel: string;
+    galleryTitle: string;
+    fullImage: string;
     deliveredTitle: string;
     statusTitle: string;
     nextValidationTitle: string;
@@ -48,6 +53,7 @@ export interface Content {
     whatItDoes: string;
     repository: string;
     liveSite: string;
+    shareLink: string;
     nextProject: string;
   };
   notFound: { title: string; text: string; btn: string };
@@ -56,13 +62,13 @@ export interface Content {
 export const en: Content = {
   metadata: {
     title: 'Egor Matafonov | Product Manager portfolio',
-    description: 'Product work by Egor Matafonov: TaskFocus, MindTrack, CortexMap and Telegram Growth Analytics.',
+    description: 'Egor Matafonov, Product Manager: experience at O!task and Web Do, plus TaskFocus and MindTrack product cases.',
     projectTitleSuffix: 'Product case by Egor Matafonov',
     socialImageAlt: 'Egor Matafonov, Product Manager. Selected work: TaskFocus and MindTrack.',
   },
   nav: {
     brand: 'Egor Matafonov',
-    work: 'Work', about: 'About', contact: 'Contact', themeToLight: 'Switch to light theme', themeToDark: 'Switch to dark theme',
+    work: 'Projects', experience: 'Experience', about: 'Approach', contact: 'Contact', themeToLight: 'Switch to light theme', themeToDark: 'Switch to dark theme',
     language: 'Language', english: 'English', russian: 'Russian', mainNavigation: 'Main navigation', mobileNavigation: 'Mobile navigation',
     siteHome: 'Egor Matafonov, home', socialLinks: 'Social links', skipToContent: 'Skip to content',
   },
@@ -85,6 +91,10 @@ export const en: Content = {
     openProduct: 'Open product',
     additionalTitle: 'Other projects',
     focusLabel: 'Key point',
+  },
+  experience: {
+    title: 'Professional experience',
+    subtitle: 'Product, presale and operational work in companies. Personal projects are shown separately below.',
   },
   about: {
     title: 'How I work',
@@ -121,11 +131,14 @@ export const en: Content = {
   footer: { built: 'Made by Egor Matafonov', copyright: '© {year} Egor Matafonov', github: 'GitHub', linkedin: 'LinkedIn', telegram: 'Telegram', email: 'Email' },
   caseStudy: {
     caseLabel: 'Product case',
-    back: 'Back to portfolio',
+    back: 'Back to projects',
     contextTitle: 'The task',
     roleTitle: 'What I did',
     constraintsTitle: 'Constraints',
     decisionsTitle: 'Product decisions',
+    tradeoffLabel: 'Trade-off',
+    galleryTitle: 'Inside the product',
+    fullImage: 'Open full-size screenshot',
     deliveredTitle: 'What I built',
     statusTitle: 'Current status',
     nextValidationTitle: 'What to test next',
@@ -134,6 +147,7 @@ export const en: Content = {
     whatItDoes: 'Features',
     repository: 'Source code',
     liveSite: 'Open live site',
+    shareLink: 'Shareable page',
     nextProject: 'Next project',
   },
   notFound: { title: '404', text: 'This page does not exist.', btn: 'Back to portfolio' },
@@ -142,13 +156,13 @@ export const en: Content = {
 export const ru: Content = {
   metadata: {
     title: 'Егор Матафонов | портфолио Product Manager',
-    description: 'Проекты Егора Матафонова: TaskFocus, MindTrack, CortexMap и Telegram Growth Analytics.',
+    description: 'Егор Матафонов, Product Manager: опыт в O!task и Web Do, продуктовые кейсы TaskFocus и MindTrack.',
     projectTitleSuffix: 'Продуктовый кейс Егора Матафонова',
     socialImageAlt: 'Егор Матафонов, Product Manager. Избранные проекты TaskFocus и MindTrack.',
   },
   nav: {
     brand: 'Егор Матафонов',
-    work: 'Проекты', about: 'Обо мне', contact: 'Связаться', themeToLight: 'Включить светлую тему', themeToDark: 'Включить тёмную тему',
+    work: 'Проекты', experience: 'Опыт', about: 'Подход', contact: 'Контакты', themeToLight: 'Включить светлую тему', themeToDark: 'Включить тёмную тему',
     language: 'Язык', english: 'Английский', russian: 'Русский', mainNavigation: 'Основная навигация', mobileNavigation: 'Мобильная навигация',
     siteHome: 'Егор Матафонов, главная', socialLinks: 'Ссылки на профили', skipToContent: 'Перейти к содержимому',
   },
@@ -171,6 +185,10 @@ export const ru: Content = {
     openProduct: 'Открыть продукт',
     additionalTitle: 'Другие проекты',
     focusLabel: 'Главное',
+  },
+  experience: {
+    title: 'Опыт работы',
+    subtitle: 'Продуктовая, presale и операционная работа в компаниях. Личные проекты — отдельно ниже.',
   },
   about: {
     title: 'Как я работаю',
@@ -207,11 +225,14 @@ export const ru: Content = {
   footer: { built: 'Сайт сделал Егор Матафонов', copyright: '© {year} Егор Матафонов', github: 'GitHub', linkedin: 'LinkedIn', telegram: 'Telegram', email: 'Почта' },
   caseStudy: {
     caseLabel: 'Продуктовый кейс',
-    back: 'Назад к портфолио',
+    back: 'Назад к проектам',
     contextTitle: 'Задача',
     roleTitle: 'Что я сделал',
     constraintsTitle: 'Ограничения',
     decisionsTitle: 'Продуктовые решения',
+    tradeoffLabel: 'Компромисс',
+    galleryTitle: 'Экраны продукта',
+    fullImage: 'Открыть скриншот в полном размере',
     deliveredTitle: 'Что реализовал',
     statusTitle: 'Текущий статус',
     nextValidationTitle: 'Что проверить дальше',
@@ -220,6 +241,7 @@ export const ru: Content = {
     whatItDoes: 'Функции',
     repository: 'Исходный код',
     liveSite: 'Открыть сайт',
+    shareLink: 'Страница для ссылки',
     nextProject: 'Следующий проект',
   },
   notFound: { title: '404', text: 'Такой страницы нет.', btn: 'На главную' },

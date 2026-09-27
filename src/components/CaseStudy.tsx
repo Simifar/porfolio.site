@@ -1,25 +1,9 @@
-import { Link, useParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { Link, useParams } from 'react-router';
 import { ArrowLeft, ArrowUpRight, ExternalLink } from 'lucide-react';
 import { projects } from '../content/projects';
-import { useApp, useInView } from '../lib/context';
+import { useApp } from '../lib/context';
 import { Footer } from './Sections';
 import { LanguageToggle, ThemeToggle } from './Navigation';
-
-function FadeIn({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
-  const { ref, inView } = useInView(0.08);
-  return (
-    <div ref={ref}>
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.3, delay, ease: [0.22, 1, 0.36, 1] }}
-      >
-        {children}
-      </motion.div>
-    </div>
-  );
-}
 
 function CaseSection({ title, children }: { title: string; children: React.ReactNode }) {
   return (
@@ -73,7 +57,7 @@ export default function CaseStudy() {
     <article className="case-page">
       <SkipToCaseContent label={t.nav.skipToContent} />
       <div className="case-toolbar">
-        <Link to="/" className="back-link" aria-label={t.caseStudy.back}>
+        <Link to="/?section=work" className="back-link" aria-label={t.caseStudy.back}>
           <ArrowLeft size={16} aria-hidden="true" />
           <span className="back-link__long">{t.caseStudy.back}</span>
           <span className="back-link__short" aria-hidden="true">{lang === 'en' ? 'Back' : 'Назад'}</span>
@@ -101,6 +85,10 @@ export default function CaseStudy() {
                 </div>
               )}
               <div className="case-actions">
+                <a href={`${import.meta.env.BASE_URL}${lang === 'ru' ? 'ru/' : ''}work/${project.slug}/`} className="case-action">
+                  {t.caseStudy.shareLink}
+                  <ArrowUpRight size={14} aria-hidden="true" />
+                </a>
                 <a href={project.github} target="_blank" rel="noopener noreferrer" className="case-action">
                   {t.caseStudy.repository}
                   <ExternalLink size={14} aria-hidden="true" />
@@ -116,7 +104,13 @@ export default function CaseStudy() {
 
             {project.screenshot && (
               <figure className="case-visual">
-                <div className="case-visual__frame">
+                <a
+                  href={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="case-visual__frame case-image-link"
+                  aria-label={`${t.caseStudy.fullImage}: ${project.name}`}
+                >
                   <img
                     src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
                     alt={project.screenshot.alt[lang]}
@@ -126,7 +120,7 @@ export default function CaseStudy() {
                     decoding="async"
                     className="case-visual__image"
                   />
-                </div>
+                </a>
                 <figcaption className="case-visual__caption">
                   <p className="case-visual__focus">{project.cardFocus[lang]}</p>
                   <p className="case-visual__note">{project.screenshot.caption[lang]}</p>
@@ -139,13 +133,10 @@ export default function CaseStudy() {
         {project.caseStudy ? (
           <div className="case-body">
             <div className="case-body__inner">
-              <FadeIn>
                 <CaseSection title={t.caseStudy.contextTitle}>
                   <p className="case-copy">{project.caseStudy.context[lang]}</p>
                 </CaseSection>
-              </FadeIn>
 
-              <FadeIn delay={0.03}>
                 <CaseSection title={t.caseStudy.roleTitle}>
                   <p className="case-copy">{project.caseStudy.role[lang]}</p>
                   <h3 className="case-subheading">{t.caseStudy.constraintsTitle}</h3>
@@ -153,30 +144,27 @@ export default function CaseStudy() {
                     {project.caseStudy.constraints.map(item => <li key={item.en}>{item[lang]}</li>)}
                   </ul>
                 </CaseSection>
-              </FadeIn>
 
-              <FadeIn delay={0.03}>
                 <CaseSection title={t.caseStudy.decisionsTitle}>
                   <ol className="decision-list">
                     {project.caseStudy.decisions.map(decision => (
                       <li key={decision.title.en} className="decision-item">
                         <h3 className="decision-item__title">{decision.title[lang]}</h3>
                         <p className="decision-item__rationale">{decision.rationale[lang]}</p>
+                        {decision.tradeoff && (
+                          <p className="decision-item__tradeoff"><strong>{t.caseStudy.tradeoffLabel}:</strong> {decision.tradeoff[lang]}</p>
+                        )}
                       </li>
                     ))}
                   </ol>
                 </CaseSection>
-              </FadeIn>
 
-              <FadeIn delay={0.03}>
                 <CaseSection title={t.caseStudy.deliveredTitle}>
                   <ul className="delivered-list">
                     {project.caseStudy.delivered.map(item => <li key={item.en}>{item[lang]}</li>)}
                   </ul>
                 </CaseSection>
-              </FadeIn>
 
-              <FadeIn delay={0.03}>
                 <CaseSection title={t.caseStudy.statusTitle}>
                   <p className="case-copy">{project.caseStudy.status[lang]}</p>
                   <div className="validation-note">
@@ -199,7 +187,6 @@ export default function CaseStudy() {
                     </div>
                   )}
                 </CaseSection>
-              </FadeIn>
             </div>
           </div>
         ) : (
@@ -207,10 +194,41 @@ export default function CaseStudy() {
             <div className="project-details__inner">
               <p className="project-details__label">{t.caseStudy.projectDetails}</p>
               <div>
-                <FadeIn><h2 id="project-details-title" className="project-details__title">{t.caseStudy.whatItDoes}</h2></FadeIn>
+                <h2 id="project-details-title" className="project-details__title">{t.caseStudy.whatItDoes}</h2>
                 <ul className="feature-list">
                   {project.features.map(feature => <li key={feature.en}>{feature[lang]}</li>)}
                 </ul>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {project.gallery && (
+          <section className="case-gallery" aria-labelledby="case-gallery-title">
+            <div className="case-gallery__inner">
+              <h2 id="case-gallery-title" className="case-gallery__title">{t.caseStudy.galleryTitle}</h2>
+              <div className="case-gallery__grid">
+                {project.gallery.map(image => (
+                  <figure key={image.src} className="case-gallery__item">
+                    <a
+                      href={import.meta.env.BASE_URL + image.src.replace(/^\/+/, '')}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="case-image-link"
+                      aria-label={`${t.caseStudy.fullImage}: ${image.caption[lang]}`}
+                    >
+                      <img
+                        src={import.meta.env.BASE_URL + image.src.replace(/^\/+/, '')}
+                        alt={image.alt[lang]}
+                        width={image.width}
+                        height={image.height}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    </a>
+                    <figcaption>{image.caption[lang]}</figcaption>
+                  </figure>
+                ))}
               </div>
             </div>
           </section>

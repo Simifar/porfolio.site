@@ -4,7 +4,7 @@
 
 This is a portfolio for a Product Manager looking for work. A recruiter or hiring manager should be able to understand the role, inspect real product decisions, see what was built, and find a direct contact route without having to interpret decorative visuals.
 
-The source material documents two solo, end-to-end product projects, one published app, and two smaller projects. It does not document employment history, user research, measured business impact, or a public TaskFocus dashboard. The site will show project evidence in place of unsupported career claims.
+The portfolio separates verified company experience from personal product projects. The company roles and dates come from Egor's supplied career details. TaskFocus has genuine signed-in dashboard screenshots, while its interactive dashboard has no public demo. The material does not document user research or measured business impact.
 
 ## Design read
 
@@ -19,6 +19,7 @@ An individual Product Manager portfolio for recruiters, using a product-editoria
 
 - React 18, Vite, TypeScript, Tailwind CSS 4, and React Router's `HashRouter`.
 - GitHub Pages project path `/porfolio.site/`, all hash routes, and the existing section anchors.
+- Static HTML case pages for search engines and social previews, generated from the same project content as the React views.
 - English and Russian copy, persisted language choice, persisted light and dark themes, and dynamic page metadata.
 - The existing name wordmark, navigation labels, verified screenshots, project order, repositories, live links, email, LinkedIn, and Telegram.
 - Skip navigation, keyboard focus, image alt text, and `prefers-reduced-motion` support.
@@ -53,16 +54,17 @@ Avoid gradients, ambient glows, noise overlays, and decorative status dots. Prod
 ### Home
 
 1. A left-aligned role statement and one useful project preview form the first screen. The headline names the role; its short supporting copy describes the confirmed project work.
-2. TaskFocus and MindTrack remain the detailed cases. Their screenshots keep their original aspect ratios and their content blocks use different proportions instead of identical card shells.
-3. CortexMap remains a screenshot-led additional project. Telegram Growth Analytics stays text-led because there is no verified screenshot or public hosted product.
-4. “How I work” presents three evidence-backed themes: product framing, privacy and interpretation, and solo delivery with AI-assisted coding. Each points to its relevant case.
-5. Contact keeps email as the primary action and LinkedIn and Telegram as direct secondary routes.
+2. Company experience appears as open editorial rows. O!task and Web Do carry more detail; the technical and operational role at «Потенциал» is shorter. This section stays separate from personal projects.
+3. TaskFocus and MindTrack remain the detailed cases. Their screenshots keep their original aspect ratios and their content blocks use different proportions instead of identical card shells.
+4. CortexMap remains a screenshot-led additional project. Telegram Growth Analytics stays text-led because there is no verified screenshot or public hosted product.
+5. “How I work” presents three evidence-backed themes: product framing, privacy and interpretation, and solo delivery with AI-assisted coding. Each points to its relevant case.
+6. Contact keeps email as the primary action and LinkedIn and Telegram as direct secondary routes. A CV link appears only after a current PDF is supplied.
 
 ### Case pages
 
 - Keep the current project URLs and the order of task, role and constraints, decisions, delivery, status, and validation.
 - Use a quiet case header and one clear source or live-product action.
-- Show each real screenshot beside its key point on desktop and stack the image above its caption on mobile. Do not crop important interface content to force a shared aspect ratio.
+- Show each real screenshot beside its key point on desktop and stack the image above its caption on mobile. Do not crop important interface content to force a shared aspect ratio. TaskFocus uses a signed-in Today screenshot first, with Inbox, week and calendar images after the decision narrative.
 - Present decisions as open editorial rows with a clear title and rationale, not a grid of repeated bordered cards.
 - Keep additional projects concise and retain the real status of their public materials.
 
@@ -83,6 +85,7 @@ Avoid gradients, ambient glows, noise overlays, and decorative status dots. Prod
 
 ## Search and publishing boundaries
 
-- Preserve canonical URL, Open Graph and Twitter metadata, structured person data, repository links, and GitHub Pages path handling.
+- The React views retain hash routes for navigation on GitHub Pages. Canonical English and Russian HTML pages at `/work/<slug>/` and `/ru/work/<slug>/` expose case content and unique social metadata without requiring JavaScript. The in-app case links to its shareable HTML page.
+- Preserve the homepage canonical URL, Open Graph and Twitter metadata, structured person data, repository links, and GitHub Pages path handling.
 - Local previews and builds do not publish the site. No commit, push, or deployment is part of this redesign.
 - Do not add metrics, employment claims, testimonials, client names, user research, or outcomes that are not present in verified project materials.
