@@ -104,6 +104,9 @@ export default function CaseStudy() {
 
             {project.screenshot && (
               <figure className="case-visual">
+                {project.screenshot.kind === 'concept' && (
+                  <p className="case-visual__disclosure">{project.screenshot.caption[lang]}</p>
+                )}
                 <a
                   href={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
                   target="_blank"
@@ -123,7 +126,7 @@ export default function CaseStudy() {
                 </a>
                 <figcaption className="case-visual__caption">
                   <p className="case-visual__focus">{project.cardFocus[lang]}</p>
-                  <p className="case-visual__note">{project.screenshot.caption[lang]}</p>
+                  {project.screenshot.kind !== 'concept' && <p className="case-visual__note">{project.screenshot.caption[lang]}</p>}
                 </figcaption>
               </figure>
             )}

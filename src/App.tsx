@@ -15,6 +15,7 @@ function PageMetadata() {
   useEffect(() => {
     const slug = pathname.startsWith('/work/') ? pathname.slice('/work/'.length) : '';
     const project = projects.find(item => item.slug === slug);
+    const socialScreenshot = project?.screenshot?.kind === 'concept' ? undefined : project?.screenshot;
     const isHome = pathname === '/';
     const title = project
       ? `${project.name} · ${t.metadata.projectTitleSuffix}`
@@ -30,20 +31,20 @@ function PageMetadata() {
     document.querySelector<HTMLMetaElement>('meta[name="description"]')?.setAttribute('content', description);
     document.querySelector<HTMLMetaElement>('meta[property="og:title"]')?.setAttribute('content', title);
     document.querySelector<HTMLMetaElement>('meta[property="og:description"]')?.setAttribute('content', description);
-    document.querySelector<HTMLMetaElement>('meta[property="og:image:alt"]')?.setAttribute('content', project?.screenshot?.alt[lang] ?? t.metadata.socialImageAlt);
+    document.querySelector<HTMLMetaElement>('meta[property="og:image:alt"]')?.setAttribute('content', socialScreenshot?.alt[lang] ?? t.metadata.socialImageAlt);
     document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', canonicalUrl);
     document.querySelector<HTMLMetaElement>('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
-    document.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.setAttribute('content', project?.screenshot
-      ? `https://simifar.github.io/porfolio.site/${project.screenshot.src.replace(/^\/+/, '')}`
+    document.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.setAttribute('content', socialScreenshot
+      ? `https://simifar.github.io/porfolio.site/${socialScreenshot.src.replace(/^\/+/, '')}`
       : 'https://simifar.github.io/porfolio.site/og-image.png');
-    document.querySelector<HTMLMetaElement>('meta[property="og:image:width"]')?.setAttribute('content', String(project?.screenshot?.width ?? 1200));
-    document.querySelector<HTMLMetaElement>('meta[property="og:image:height"]')?.setAttribute('content', String(project?.screenshot?.height ?? 630));
+    document.querySelector<HTMLMetaElement>('meta[property="og:image:width"]')?.setAttribute('content', String(socialScreenshot?.width ?? 1200));
+    document.querySelector<HTMLMetaElement>('meta[property="og:image:height"]')?.setAttribute('content', String(socialScreenshot?.height ?? 630));
     document.querySelector<HTMLMetaElement>('meta[property="og:type"]')?.setAttribute('content', project ? 'article' : 'website');
     document.querySelector<HTMLMetaElement>('meta[name="twitter:title"]')?.setAttribute('content', title);
     document.querySelector<HTMLMetaElement>('meta[name="twitter:description"]')?.setAttribute('content', description);
-    document.querySelector<HTMLMetaElement>('meta[name="twitter:image:alt"]')?.setAttribute('content', project?.screenshot?.alt[lang] ?? t.metadata.socialImageAlt);
-    document.querySelector<HTMLMetaElement>('meta[name="twitter:image"]')?.setAttribute('content', project?.screenshot
-      ? `https://simifar.github.io/porfolio.site/${project.screenshot.src.replace(/^\/+/, '')}`
+    document.querySelector<HTMLMetaElement>('meta[name="twitter:image:alt"]')?.setAttribute('content', socialScreenshot?.alt[lang] ?? t.metadata.socialImageAlt);
+    document.querySelector<HTMLMetaElement>('meta[name="twitter:image"]')?.setAttribute('content', socialScreenshot
+      ? `https://simifar.github.io/porfolio.site/${socialScreenshot.src.replace(/^\/+/, '')}`
       : 'https://simifar.github.io/porfolio.site/og-image.png');
   }, [lang, pathname, t]);
 

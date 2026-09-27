@@ -46,6 +46,7 @@ export interface Project {
     src: string;
     alt: LocalizedText;
     caption: LocalizedText;
+    kind?: 'concept';
     objectPosition?: 'left' | 'center';
     width: number;
     height: number;
@@ -90,6 +91,8 @@ export const projects: Project[] = [
     ],
     tags: ['Product', 'UX', 'Web app'],
     github: 'https://github.com/Simifar/taskfocus',
+    live: 'https://taskfocus-eight.vercel.app/',
+    status: { en: 'Published', ru: 'Опубликован' },
     caseStudy: {
       context: {
         en: 'TaskFocus is an MVP for personal task planning, built as a diploma project. The idea was to keep the daily list small and use date ranges for tasks without a fixed deadline. I have not tested whether this makes planning easier.',
@@ -101,12 +104,12 @@ export const projects: Project[] = [
       },
       constraints: [
         {
-          en: 'The dashboard needs sign-in and a configured PostgreSQL/Neon database.',
-          ru: 'Для планировщика нужны авторизация и настроенная база PostgreSQL/Neon.',
+          en: 'The web app requires an account; task data is stored in PostgreSQL/Neon.',
+          ru: 'Для работы с задачами нужна учётная запись; данные хранятся в PostgreSQL/Neon.',
         },
         {
-          en: 'There is no public interactive dashboard demo. The screenshots show a working signed-in app.',
-          ru: 'Публичной интерактивной демоверсии планировщика нет. Скриншоты показывают работающее приложение после входа.',
+          en: 'The published app supports sign-in and registration. The screenshots show the dashboard after sign-in.',
+          ru: 'В опубликованном приложении есть вход и регистрация. Скриншоты показывают планировщик после входа.',
         },
       ],
       decisions: [
@@ -154,8 +157,8 @@ export const projects: Project[] = [
         { en: 'An MVP with sign-in. The source code is public.', ru: 'MVP с авторизацией и открытым исходным кодом.' },
       ],
       status: {
-        en: 'The source code and real dashboard screenshots are public. There is no interactive demo of the signed-in app.',
-        ru: 'Исходный код и реальные скриншоты планировщика доступны. Интерактивной демоверсии после входа нет.',
+        en: 'The web app is published. The source code and real signed-in dashboard screenshots are also available.',
+        ru: 'Веб-приложение опубликовано. Исходный код и реальные скриншоты планировщика после входа тоже доступны.',
       },
       nextValidation: {
         en: 'Watch people move tasks from the inbox into Today. Check whether they understand the five-task limit and flexible dates before measuring any effect on productivity.',
@@ -381,5 +384,19 @@ export const projects: Project[] = [
     ],
     tags: ['Telegram', 'Analytics', 'SQLite'],
     github: 'https://github.com/Simifar/StatsTelegramChannels',
+    screenshot: {
+      src: '/projects/telegram-growth-analytics-concept.png',
+      kind: 'concept',
+      alt: {
+        en: 'Illustrative dashboard concept for Telegram Growth Analytics; channel names and figures are examples.',
+        ru: 'Иллюстративный макет панели Telegram Growth Analytics; названия каналов и показатели приведены для примера.',
+      },
+      caption: {
+        en: 'Interface concept supplied for the portfolio · not a screenshot of the current app; figures are illustrative',
+        ru: 'Макет интерфейса для портфолио · не скриншот текущей программы; показатели условные',
+      },
+      width: 1448,
+      height: 1086,
+    },
   },
 ];

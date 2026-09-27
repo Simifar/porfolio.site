@@ -1,6 +1,6 @@
 # Egor Matafonov — Portfolio
 
-A bilingual personal portfolio built with React, TypeScript, Vite, and Tailwind CSS. Company experience is separate from personal projects. Case pages describe real product decisions and link to source material; TaskFocus uses genuine signed-in screenshots from its repository.
+A bilingual personal portfolio built with React, TypeScript, Vite, and Tailwind CSS. Company experience is separate from personal projects. Case pages describe real product decisions and link to source material; TaskFocus links to its published web app and uses genuine signed-in screenshots from its repository.
 
 ## Run locally
 
@@ -47,7 +47,7 @@ If the repository is renamed, update the base path in `vite.config.js`, both bui
 - `src/content/projects.ts` contains the verified project descriptions, features, and links in English and Russian.
 - `src/content/i18n.ts` contains the interface copy.
 - `src/content/experience.ts` contains the supplied company experience, separate from the case projects.
-- `public/projects/` contains real screenshots used on TaskFocus, MindTrack, and CortexMap pages.
+- `public/projects/` contains real screenshots for TaskFocus, MindTrack, and CortexMap, plus a supplied illustrative concept for Telegram Growth Analytics. The concept is labeled as such on the site; its figures are not product data.
 - Add a CV link only after a real, current PDF has been added to the repository.
 
 ## Routes

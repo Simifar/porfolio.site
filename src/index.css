@@ -798,6 +798,22 @@ section[id] {
   height: auto;
 }
 
+.additional-project__caption {
+  padding: 0.55rem 0.75rem;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+.additional-project__disclosure {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
 .additional-project__text-visual {
   display: flex;
   min-height: 8rem;
@@ -1192,6 +1208,13 @@ section[id] {
   justify-content: space-between;
   gap: 0.65rem 1rem;
   margin-top: 0.7rem;
+}
+
+.case-visual__disclosure {
+  margin: 0 0 0.65rem;
+  color: var(--color-text-secondary);
+  font-size: 0.82rem;
+  line-height: 1.45;
 }
 
 .case-visual__focus {

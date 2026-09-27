@@ -119,6 +119,9 @@ export function SelectedWork() {
               <article key={project.slug} className="additional-project" aria-labelledby={`project-${project.slug}`}>
                 {project.screenshot ? (
                   <figure className="additional-project__visual">
+                    {project.screenshot.kind === 'concept' && (
+                      <figcaption className="additional-project__disclosure">{project.screenshot.caption[lang]}</figcaption>
+                    )}
                     <img
                       src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
                       alt={project.screenshot.alt[lang]}
@@ -127,6 +130,9 @@ export function SelectedWork() {
                       loading="lazy"
                       decoding="async"
                     />
+                    {project.screenshot.kind !== 'concept' && (
+                      <figcaption className="additional-project__caption">{project.screenshot.caption[lang]}</figcaption>
+                    )}
                   </figure>
                 ) : (
                   <div className="additional-project__text-visual">{project.cardRole[lang]}</div>

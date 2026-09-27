@@ -4,7 +4,7 @@
 
 This is a portfolio for a Product Manager looking for work. A recruiter or hiring manager should be able to understand the role, inspect real product decisions, see what was built, and find a direct contact route without having to interpret decorative visuals.
 
-The portfolio separates verified company experience from personal product projects. The company roles and dates come from Egor's supplied career details. TaskFocus has genuine signed-in dashboard screenshots, while its interactive dashboard has no public demo. The material does not document user research or measured business impact.
+The portfolio separates verified company experience from personal product projects. The company roles and dates come from Egor's supplied career details. TaskFocus is published and has genuine signed-in dashboard screenshots. The material does not document user research or measured business impact.
 
 ## Design read
 
@@ -56,7 +56,7 @@ Avoid gradients, ambient glows, noise overlays, and decorative status dots. Prod
 1. A left-aligned role statement and one useful project preview form the first screen. The headline names the role; its short supporting copy describes the confirmed project work.
 2. Company experience appears as open editorial rows. O!task and Web Do carry more detail; the technical and operational role at «Потенциал» is shorter. This section stays separate from personal projects.
 3. TaskFocus and MindTrack remain the detailed cases. Their screenshots keep their original aspect ratios and their content blocks use different proportions instead of identical card shells.
-4. CortexMap remains a screenshot-led additional project. Telegram Growth Analytics stays text-led because there is no verified screenshot or public hosted product.
+4. CortexMap remains a screenshot-led additional project. Telegram Growth Analytics uses the supplied illustrative interface concept, clearly labeled as a concept with example figures rather than a screenshot of the local program.
 5. “How I work” presents three evidence-backed themes: product framing, privacy and interpretation, and solo delivery with AI-assisted coding. Each points to its relevant case.
 6. Contact keeps email as the primary action and LinkedIn and Telegram as direct secondary routes. A CV link appears only after a current PDF is supplied.
 

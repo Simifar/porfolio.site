@@ -24,11 +24,13 @@ test('home explains experience and projects, and case back returns to the projec
   await page.getByRole('link', { name: 'See the projects' }).click();
   await expect(page).toHaveURL(/section=work/);
   await expect.poll(() => page.locator('#work').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
+  await expect(page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Open product' })).toHaveAttribute('href', 'https://taskfocus-eight.vercel.app/');
 
   await page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Case study' }).click();
   await expect(page).toHaveURL(/#\/work\/taskfocus/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('TaskFocus');
   await expect(page.getByRole('img', { name: /Today dashboard/ })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Open product' })).toHaveAttribute('href', 'https://taskfocus-eight.vercel.app/');
   await page.getByRole('link', { name: 'Back to projects' }).click();
   await expect(page).toHaveURL(/section=work/);
   await expect.poll(() => page.locator('#work').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
@@ -159,6 +161,7 @@ test('static case pages expose indexable bilingual HTML and usable links', async
   }
   await page.goto('/ru/work/taskfocus/');
   await expect(page.getByRole('heading', { name: 'Продуктовые решения' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Открыть продукт' })).toHaveAttribute('href', 'https://taskfocus-eight.vercel.app/');
   await page.getByRole('button', { name: 'Сменить тему' }).click();
   await expect(page.locator('html')).toHaveClass(/dark/);
   await page.getByRole('link', { name: 'Открыть интерактивный кейс' }).click();
