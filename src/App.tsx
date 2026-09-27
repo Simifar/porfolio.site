@@ -58,7 +58,8 @@ function ScrollReset() {
     const section = pathname === '/' ? new URLSearchParams(search).get('section') : null;
     const frame = window.requestAnimationFrame(() => {
       if (section && ['experience', 'work', 'about', 'contact'].includes(section)) {
-        document.getElementById(section)?.scrollIntoView({ behavior: 'auto', block: 'start' });
+        const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+        document.getElementById(section)?.scrollIntoView({ behavior, block: 'start' });
       } else {
         window.scrollTo({ top: 0, behavior: 'auto' });
       }

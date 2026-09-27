@@ -8,10 +8,10 @@ The portfolio separates verified company experience from personal product projec
 
 ## Design read
 
-An individual Product Manager portfolio for recruiters, using a product-editorial language inspired by working notes and decision records. The visual system is calm, direct, and slightly asymmetric. It uses real product screenshots, compact labels, generous margins, and a single brick accent. Motion stays quiet and supports navigation or feedback.
+An individual Product Manager portfolio for recruiters, using a product-editorial language inspired by working notes and decision records. The visual system is calm, direct, and slightly asymmetric. It uses real product screenshots, compact labels, generous margins, and a single brick accent. Motion supports navigation and feedback without distracting from the content.
 
 - Design variance: 7/10. Uneven image and text proportions add character while keeping the reading path predictable.
-- Motion intensity: 2/10. Transitions are brief and optional; no motion is required to understand the page.
+- Motion intensity: 5/10. Page entry, section navigation, and interactive links use brief, eased motion; all content remains clear with reduced motion enabled.
 - Visual density: 4/10. Project facts stay concise, with full reasoning reserved for case pages.
 - Foundation: custom portfolio styling on the existing React, Vite, and Tailwind CSS stack. This is an editorial aesthetic, not an implementation of a third-party design system.
 
@@ -73,7 +73,7 @@ Avoid gradients, ambient glows, noise overlays, and decorative status dots. Prod
 - Keep the current desktop navigation labels and destinations.
 - On mobile, put the section links in a second header row. This avoids a fixed bottom dock covering the project caption and other content.
 - Keep theme and language controls available on both home and case pages.
-- Use visible hover and focus states with the shared accent. Avoid magnetic controls and movement that does not clarify an action.
+- Use visible hover and focus states with the shared accent. Give buttons, links, page entry, and section navigation a brief, eased response. Avoid magnetic controls and movement that does not clarify an action.
 
 ## Responsive and accessibility rules
 

@@ -1,4 +1,4 @@
-import { ArrowUpRight, ExternalLink } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, Github, Linkedin, Mail, Send } from 'lucide-react';
 import { Link } from 'react-router';
 import { projects } from '../content/projects';
 import { experience } from '../content/experience';
@@ -201,16 +201,24 @@ export function Contact() {
           <p className="contact-copy">{t.contact.subtitle}</p>
           <div className="contact-actions">
             <a href="mailto:Matafonovegor2@gmail.com" className="contact-email" aria-label={t.contact.emailBtn}>
+              <Mail size={17} aria-hidden="true" />
               <span>Matafonovegor2@gmail.com</span>
-              <ArrowUpRight size={15} aria-hidden="true" />
+              <ArrowUpRight className="contact-action__arrow" size={15} aria-hidden="true" />
+            </a>
+            <a href="https://github.com/Simifar" target="_blank" rel="noopener noreferrer" className="contact-link">
+              <Github size={17} aria-hidden="true" />
+              <span>{t.footer.github}</span>
+              <ArrowUpRight className="contact-action__arrow" size={14} aria-hidden="true" />
             </a>
             <a href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer" className="contact-link">
-              {t.contact.linkedinBtn}
-              <ExternalLink size={14} aria-hidden="true" />
+              <Linkedin size={17} aria-hidden="true" />
+              <span>{t.contact.linkedinBtn}</span>
+              <ArrowUpRight className="contact-action__arrow" size={14} aria-hidden="true" />
             </a>
             <a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer" className="contact-link">
-              {t.contact.telegramBtn}
-              <ExternalLink size={14} aria-hidden="true" />
+              <Send size={16} aria-hidden="true" />
+              <span>{t.contact.telegramBtn}</span>
+              <ArrowUpRight className="contact-action__arrow" size={14} aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -231,10 +239,10 @@ export function Footer() {
           <p className="site-footer__built">{t.footer.built}</p>
         </div>
         <nav aria-label={t.nav.socialLinks} className="site-footer__links">
-          <a href="https://github.com/Simifar" target="_blank" rel="noopener noreferrer" className="site-footer__link">{t.footer.github}</a>
-          <a href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer" className="site-footer__link">{t.footer.linkedin}</a>
-          <a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer" className="site-footer__link">{t.footer.telegram}</a>
-          <a href="mailto:Matafonovegor2@gmail.com" className="site-footer__link">{t.footer.email}</a>
+          <a href="https://github.com/Simifar" target="_blank" rel="noopener noreferrer" className="site-footer__link"><Github size={15} aria-hidden="true" />{t.footer.github}</a>
+          <a href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer" className="site-footer__link"><Linkedin size={15} aria-hidden="true" />{t.footer.linkedin}</a>
+          <a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer" className="site-footer__link"><Send size={14} aria-hidden="true" />{t.footer.telegram}</a>
+          <a href="mailto:Matafonovegor2@gmail.com" className="site-footer__link"><Mail size={15} aria-hidden="true" />{t.footer.email}</a>
         </nav>
       </div>
     </footer>
