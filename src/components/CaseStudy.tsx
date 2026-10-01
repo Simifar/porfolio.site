@@ -73,7 +73,7 @@ export default function CaseStudy() {
           <div className="case-hero__layout">
             <div className="case-hero__copy">
               <p className="case-kicker">
-                <span>{t.caseStudy.caseLabel}</span>
+                <span>{project.caseStudy ? t.caseStudy.caseLabel : t.caseStudy.overviewLabel}</span>
                 <span>{project.category[lang]}</span>
                 {project.status && <span className="case-kicker__status">{project.status[lang]}</span>}
               </p>
@@ -150,17 +150,83 @@ export default function CaseStudy() {
 
                 <CaseSection title={t.caseStudy.decisionsTitle}>
                   <ol className="decision-list">
-                    {project.caseStudy.decisions.map(decision => (
-                      <li key={decision.title.en} className="decision-item">
-                        <h3 className="decision-item__title">{decision.title[lang]}</h3>
-                        <p className="decision-item__rationale">{decision.rationale[lang]}</p>
-                        {decision.tradeoff && (
-                          <p className="decision-item__tradeoff"><strong>{t.caseStudy.tradeoffLabel}:</strong> {decision.tradeoff[lang]}</p>
-                        )}
-                      </li>
-                    ))}
+                    {project.caseStudy.decisions.map(decision => {
+                      const structured = Boolean(decision.problem || decision.alternative);
+                      const choice = (
+                        <h3 className="decision-item__title">
+                          <span className="decision-item__label">{t.caseStudy.decisionChoice}</span>
+                          {decision.title[lang]}
+                        </h3>
+                      );
+                      const reasons = (
+                        <dl className="decision-item__details">
+                          <div className="decision-item__detail">
+                            <dt>{t.caseStudy.decisionReason}</dt>
+                            <dd>{decision.rationale[lang]}</dd>
+                          </div>
+                          {decision.tradeoff && (
+                            <div className="decision-item__detail">
+                              <dt>{t.caseStudy.tradeoffLabel}:</dt>
+                              <dd>{decision.tradeoff[lang]}</dd>
+                            </div>
+                          )}
+                        </dl>
+                      );
+                      return (
+                        <li key={decision.title.en} className={`decision-item${structured ? ' decision-item--structured' : ' decision-item--compact'}`}>
+                          {structured && (
+                            <dl className="decision-item__comparison">
+                              {decision.problem && (
+                                <div className="decision-item__detail">
+                                  <dt>{t.caseStudy.decisionProblem}</dt>
+                                  <dd>{decision.problem[lang]}</dd>
+                                </div>
+                              )}
+                              {decision.alternative && (
+                                <div className="decision-item__detail">
+                                  <dt>{t.caseStudy.decisionAlternative}</dt>
+                                  <dd>{decision.alternative[lang]}</dd>
+                                </div>
+                              )}
+                            </dl>
+                          )}
+                          {structured ? <div className="decision-item__choice">{choice}{reasons}</div> : <>{choice}{reasons}</>}
+                        </li>
+                      );
+                    })}
                   </ol>
                 </CaseSection>
+
+                {project.gallery && (
+                  <section className="case-gallery case-gallery--embedded" aria-labelledby="case-gallery-title">
+                    <div className="case-gallery__inner">
+                      <h2 id="case-gallery-title" className="case-gallery__title">{t.caseStudy.galleryTitle}</h2>
+                      <div className="case-gallery__grid">
+                        {project.gallery.map(image => (
+                          <figure key={image.src} className="case-gallery__item">
+                            <a
+                              href={import.meta.env.BASE_URL + image.src.replace(/^\/+/, '')}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="case-image-link"
+                              aria-label={`${t.caseStudy.fullImage}: ${image.caption[lang]}`}
+                            >
+                              <img
+                                src={import.meta.env.BASE_URL + image.src.replace(/^\/+/, '')}
+                                alt={image.alt[lang]}
+                                width={image.width}
+                                height={image.height}
+                                loading="lazy"
+                                decoding="async"
+                              />
+                            </a>
+                            <figcaption>{image.caption[lang]}</figcaption>
+                          </figure>
+                        ))}
+                      </div>
+                    </div>
+                  </section>
+                )}
 
                 <CaseSection title={t.caseStudy.deliveredTitle}>
                   <ul className="delivered-list">
@@ -201,37 +267,6 @@ export default function CaseStudy() {
                 <ul className="feature-list">
                   {project.features.map(feature => <li key={feature.en}>{feature[lang]}</li>)}
                 </ul>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {project.gallery && (
-          <section className="case-gallery" aria-labelledby="case-gallery-title">
-            <div className="case-gallery__inner">
-              <h2 id="case-gallery-title" className="case-gallery__title">{t.caseStudy.galleryTitle}</h2>
-              <div className="case-gallery__grid">
-                {project.gallery.map(image => (
-                  <figure key={image.src} className="case-gallery__item">
-                    <a
-                      href={import.meta.env.BASE_URL + image.src.replace(/^\/+/, '')}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="case-image-link"
-                      aria-label={`${t.caseStudy.fullImage}: ${image.caption[lang]}`}
-                    >
-                      <img
-                        src={import.meta.env.BASE_URL + image.src.replace(/^\/+/, '')}
-                        alt={image.alt[lang]}
-                        width={image.width}
-                        height={image.height}
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </a>
-                    <figcaption>{image.caption[lang]}</figcaption>
-                  </figure>
-                ))}
               </div>
             </div>
           </section>

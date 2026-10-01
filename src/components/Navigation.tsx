@@ -1,4 +1,4 @@
-import { Globe, Moon, Sun } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router';
 import { useApp } from '../lib/context';
@@ -37,7 +37,6 @@ export function LanguageToggle() {
 
   return (
     <div role="group" aria-label={t.nav.language} className="language-toggle">
-      <Globe className="language-toggle__globe" size={15} aria-hidden="true" />
       {(['en', 'ru'] as const).map(language => (
         <button
           key={language}
@@ -47,7 +46,7 @@ export function LanguageToggle() {
           aria-pressed={lang === language}
           className="language-toggle__button"
         >
-          {language.toUpperCase()}
+          {language === 'en' ? 'English' : 'Русский'}
         </button>
       ))}
     </div>

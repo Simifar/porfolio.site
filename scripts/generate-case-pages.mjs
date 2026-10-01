@@ -17,21 +17,34 @@ const escape = value => String(value).replace(/[&<>"']/g, character => ({
 const bulletList = values => `<ul>${values.map(value => `<li>${escape(value)}</li>`).join('')}</ul>`;
 const section = (heading, body) => `<section class="preview-section"><h2>${escape(heading)}</h2><div>${body}</div></section>`;
 const asset = image => `${base}${image.src.replace(/^\/+/, '')}`;
+const decisionItem = (decision, lang, l) => {
+  const structured = Boolean(decision.problem || decision.alternative);
+  const comparison = `<dl class="preview-decision-analysis">${decision.problem ? `<div><dt>${escape(l.problem)}</dt><dd>${escape(decision.problem[lang])}</dd></div>` : ''}${decision.alternative ? `<div><dt>${escape(l.alternative)}</dt><dd>${escape(decision.alternative[lang])}</dd></div>` : ''}</dl>`;
+  const choice = `<h3><span class="preview-decision-label">${escape(l.choice)}</span>${escape(decision.title[lang])}</h3>`;
+  const reasons = `<dl class="preview-decision-details"><div><dt>${escape(l.reason)}</dt><dd>${escape(decision.rationale[lang])}</dd></div>${decision.tradeoff ? `<div><dt>${escape(l.tradeoff)}</dt><dd>${escape(decision.tradeoff[lang])}</dd></div>` : ''}</dl>`;
+  return `<li class="${structured ? 'preview-decision--structured' : 'preview-decision--compact'}">${structured ? `${comparison}<div class="preview-decision-choice">${choice}${reasons}</div>` : `${choice}${reasons}`}</li>`;
+};
 
 const labels = {
   en: {
-    home: 'Portfolio', alternate: 'Русский', open: 'Open interactive case', theme: 'Switch theme',
+    home: 'Portfolio', alternate: 'Русский', open: 'Open interactive case', openOverview: 'Open project overview', theme: 'Switch theme',
     source: 'Source code', live: 'Open product', task: 'The task', role: 'What I did',
-    constraints: 'Constraints', decisions: 'Product decisions', tradeoff: 'Trade-off',
+    case: 'Product case', overview: 'Project overview', scenario: 'User scenario',
+    problem: 'Problem', alternative: 'Alternative', choice: 'Chosen solution', reason: 'Why this option',
+    constraints: 'Constraints', decisions: 'Product decisions', tradeoff: 'Trade-off:',
     delivered: 'What I built', status: 'Current status', validation: 'What to test next',
     materials: 'Project links', features: 'Features', gallery: 'Inside the product',
+    email: 'Email', telegram: 'Telegram',
   },
   ru: {
-    home: 'Портфолио', alternate: 'English', open: 'Открыть интерактивный кейс', theme: 'Сменить тему',
+    home: 'Портфолио', alternate: 'English', open: 'Открыть интерактивный кейс', openOverview: 'Открыть обзор проекта', theme: 'Сменить тему',
     source: 'Исходный код', live: 'Открыть продукт', task: 'Задача', role: 'Что я сделал',
-    constraints: 'Ограничения', decisions: 'Продуктовые решения', tradeoff: 'Компромисс',
+    case: 'Продуктовый кейс', overview: 'Обзор проекта', scenario: 'Пользовательский сценарий',
+    problem: 'Проблема', alternative: 'Альтернатива', choice: 'Выбранное решение', reason: 'Почему этот вариант',
+    constraints: 'Ограничения', decisions: 'Продуктовые решения', tradeoff: 'Компромисс:',
     delivered: 'Что реализовал', status: 'Текущий статус', validation: 'Что проверить дальше',
     materials: 'Ссылки на материалы', features: 'Функции', gallery: 'Экраны продукта',
+    email: 'Почта', telegram: 'Telegram',
   },
 };
 
@@ -42,7 +55,9 @@ function renderCase(project, lang) {
   const ruUrl = `${site}ru/work/${project.slug}/`;
   const alternateUrl = `${base}${lang === 'ru' ? '' : 'ru/'}work/${project.slug}/`;
   const appUrl = `${base}#/work/${project.slug}`;
-  const title = `${project.name} · ${lang === 'ru' ? 'продуктовый кейс Егора Матафонова' : 'product case by Egor Matafonov'}`;
+  const pageType = project.caseStudy ? l.case : l.overview;
+  const openLabel = project.caseStudy ? l.open : l.openOverview;
+  const title = `${project.name} · ${lang === 'ru' ? `${pageType.toLowerCase()} Егора Матафонова` : `${pageType.toLowerCase()} by Egor Matafonov`}`;
   const description = project.description[lang];
   const screenshot = project.screenshot;
   const socialScreenshot = screenshot?.kind === 'concept' ? undefined : screenshot;
@@ -51,9 +66,10 @@ function renderCase(project, lang) {
   const gallery = project.gallery ? `<section class="preview-gallery" aria-label="${escape(l.gallery)}">${project.gallery.map(image => `<figure><img src="${escape(asset(image))}" alt="${escape(image.alt[lang])}" width="${image.width}" height="${image.height}" loading="lazy"><figcaption>${escape(image.caption[lang])}</figcaption></figure>`).join('')}</section>` : '';
   const study = project.caseStudy;
   const details = study ? [
-    section(l.task, `<p>${escape(study.context[lang])}</p>`),
+    section(l.scenario, `<p>${escape(study.context[lang])}</p>`),
     section(l.role, `<p>${escape(study.role[lang])}</p><h3>${escape(l.constraints)}</h3>${bulletList(study.constraints.map(item => item[lang]))}`),
-    section(l.decisions, `<ol class="preview-decisions">${study.decisions.map(decision => `<li><h3>${escape(decision.title[lang])}</h3><p>${escape(decision.rationale[lang])}</p>${decision.tradeoff ? `<p class="preview-tradeoff"><strong>${escape(l.tradeoff)}:</strong> ${escape(decision.tradeoff[lang])}</p>` : ''}</li>`).join('')}</ol>`),
+    section(l.decisions, `<ol class="preview-decisions">${study.decisions.map(decision => decisionItem(decision, lang, l)).join('')}</ol>`),
+    gallery,
     section(l.delivered, bulletList(study.delivered.map(item => item[lang]))),
     section(l.status, `<p>${escape(study.status[lang])}</p><h3>${escape(l.validation)}</h3><p>${escape(study.nextValidation[lang])}</p>${study.materials.length ? `<h3>${escape(l.materials)}</h3><ul>${study.materials.map(material => `<li><a href="${escape(material.href)}">${escape(material.label[lang])}</a></li>`).join('')}</ul>` : ''}`),
   ].join('') : section(l.features, bulletList(project.features.map(item => item[lang])));
@@ -69,9 +85,9 @@ function renderCase(project, lang) {
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escape(title)}"><meta name="twitter:description" content="${escape(description)}"><meta name="twitter:image" content="${socialImage}">
 <script>try{document.documentElement.className=localStorage.getItem('theme')==='dark'?'dark':'light'}catch{}</script>
 </head><body>
-<header class="preview-header"><div class="shell"><a href="${base}">${escape(l.home)} / Egor Matafonov</a><nav aria-label="${lang === 'ru' ? 'Навигация' : 'Navigation'}"><a href="${alternateUrl}">${escape(l.alternate)}</a><button type="button" id="theme-switch">${escape(l.theme)}</button></nav></div></header>
-<main class="shell"><div class="preview-hero"><p class="preview-kicker">${escape(lang === 'ru' ? 'Продуктовый кейс' : 'Product case')} · ${escape(project.category[lang])}</p><h1>${escape(project.name)}</h1><p class="preview-intro">${escape(description)}</p><div class="preview-links"><a href="${appUrl}" id="interactive-case">${escape(l.open)} ↗</a><a href="${escape(project.github)}">${escape(l.source)} ↗</a>${project.live ? `<a href="${escape(project.live)}">${escape(l.live)} ↗</a>` : ''}</div></div>
-${visual}${details}${gallery}</main>
+<header class="preview-header"><div class="shell"><a href="${base}">${escape(l.home)} / Egor Matafonov</a><nav aria-label="${lang === 'ru' ? 'Навигация' : 'Navigation'}"><a href="mailto:Matafonovegor2@gmail.com">${escape(l.email)} · Matafonovegor2@gmail.com</a><a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer">${escape(l.telegram)} · @legionanstek</a><a href="${alternateUrl}">${escape(l.alternate)}</a><button type="button" id="theme-switch">${escape(l.theme)}</button></nav></div></header>
+<main class="shell"><div class="preview-hero"><p class="preview-kicker">${escape(pageType)} · ${escape(project.category[lang])}</p><h1>${escape(project.name)}</h1><p class="preview-intro">${escape(description)}</p><div class="preview-links"><a href="${appUrl}" id="interactive-case">${escape(openLabel)} ↗</a><a href="${escape(project.github)}">${escape(l.source)} ↗</a>${project.live ? `<a href="${escape(project.live)}">${escape(l.live)} ↗</a>` : ''}</div></div>
+${visual}${details}</main>
 <footer class="preview-footer"><div class="shell">© Egor Matafonov · <a href="${base}">${escape(l.home)}</a></div></footer>
 <script>document.getElementById('theme-switch').addEventListener('click',()=>{const dark=document.documentElement.classList.toggle('dark');document.documentElement.classList.toggle('light',!dark);try{localStorage.setItem('theme',dark?'dark':'light')}catch{}});document.getElementById('interactive-case').addEventListener('click',()=>{try{localStorage.setItem('lang','${lang}')}catch{}})</script>
 </body></html>`;

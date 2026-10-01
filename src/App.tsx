@@ -18,7 +18,7 @@ function PageMetadata() {
     const socialScreenshot = project?.screenshot?.kind === 'concept' ? undefined : project?.screenshot;
     const isHome = pathname === '/';
     const title = project
-      ? `${project.name} · ${t.metadata.projectTitleSuffix}`
+      ? `${project.name} · ${project.caseStudy ? t.metadata.projectTitleSuffix : t.metadata.projectOverviewSuffix}`
       : isHome ? t.metadata.title : `${t.notFound.title} · ${t.metadata.title}`;
     const description = project
       ? project.description[lang]

@@ -1,5 +1,5 @@
 export interface Content {
-  metadata: { title: string; description: string; projectTitleSuffix: string; socialImageAlt: string };
+  metadata: { title: string; description: string; projectTitleSuffix: string; projectOverviewSuffix: string; socialImageAlt: string };
   nav: {
     brand: string;
     work: string;
@@ -22,6 +22,7 @@ export interface Content {
     title: string;
     subtitle: string;
     viewCase: string;
+    viewOverview: string;
     repository: string;
     openProduct: string;
     additionalTitle: string;
@@ -30,18 +31,22 @@ export interface Content {
   experience: { title: string; subtitle: string };
   about: {
     title: string;
-    intro: string;
     practices: { title: string; detail: string; projects: { slug: string; label: string }[] }[];
   };
   contact: { title: string; subtitle: string; emailBtn: string; linkedinBtn: string; telegramBtn: string; copied: string };
   footer: { built: string; copyright: string; github: string; linkedin: string; telegram: string; email: string };
   caseStudy: {
     caseLabel: string;
+    overviewLabel: string;
     back: string;
     contextTitle: string;
     roleTitle: string;
     constraintsTitle: string;
     decisionsTitle: string;
+    decisionProblem: string;
+    decisionAlternative: string;
+    decisionChoice: string;
+    decisionReason: string;
     tradeoffLabel: string;
     galleryTitle: string;
     fullImage: string;
@@ -64,6 +69,7 @@ export const en: Content = {
     title: 'Egor Matafonov | Product Manager portfolio',
     description: 'Egor Matafonov, Product Manager: experience at O!task and Web Do, plus TaskFocus and MindTrack product cases.',
     projectTitleSuffix: 'Product case by Egor Matafonov',
+    projectOverviewSuffix: 'Project overview by Egor Matafonov',
     socialImageAlt: 'Egor Matafonov, Product Manager. Selected work: TaskFocus and MindTrack.',
   },
   nav: {
@@ -75,8 +81,8 @@ export const en: Content = {
   hero: {
     eyebrow: 'Egor Matafonov / Product Manager',
     headline: 'Product Manager',
-    headlineAccent: 'From problem framing to working software.',
-    supporting: 'I make product decisions, design the user flows and build the apps myself.',
+    headlineAccent: 'Product/growth work in B2B SaaS.',
+    supporting: 'O!task product/growth · Web Do presale for SaaS clients · my own products: TaskFocus and MindTrack.',
     cta: 'See the projects',
     contactLink: 'Contact me',
     visualAlt: 'MindTrack questionnaire catalog and home screen.',
@@ -85,8 +91,9 @@ export const en: Content = {
   },
   work: {
     title: 'Selected work',
-    subtitle: 'Two detailed cases and two smaller projects.',
+    subtitle: 'Two detailed cases and two project overviews.',
     viewCase: 'Case study',
+    viewOverview: 'Project overview',
     repository: 'Source code',
     openProduct: 'Open product',
     additionalTitle: 'Other projects',
@@ -98,24 +105,23 @@ export const en: Content = {
   },
   about: {
     title: 'How I work',
-    intro: 'TaskFocus and MindTrack show how I turn product rules into working apps.',
     practices: [
       {
-        title: 'Set product rules',
-        detail: 'TaskFocus has a five-task daily limit, inbox-first capture and flexible dates.',
-        projects: [{ slug: 'taskfocus', label: 'TaskFocus case' }],
+        title: 'Make a product constraint visible',
+        detail: 'TaskFocus sets a five-task cap; the right number remains an untested hypothesis.',
+        projects: [{ slug: 'taskfocus', label: 'TaskFocus decision' }],
       },
       {
-        title: 'Keep privacy and context clear',
-        detail: 'MindTrack stores answers in the browser and shows scores alongside their range and limits.',
-        projects: [{ slug: 'mindtrack', label: 'MindTrack case' }],
+        title: 'Keep a result in context',
+        detail: 'MindTrack shows method-specific limits; PSS-10, for example, has no universal cutoff.',
+        projects: [{ slug: 'mindtrack', label: 'MindTrack result design' }],
       },
       {
-        title: 'Carry work through',
-        detail: 'I handled product decisions, UX and implementation on both projects. AI tools helped me write code.',
+        title: 'Carry decisions into implementation',
+        detail: 'I set product rules, designed the flows and built both apps with AI-assisted coding.',
         projects: [
-          { slug: 'taskfocus', label: 'TaskFocus case' },
-          { slug: 'mindtrack', label: 'MindTrack case' },
+          { slug: 'taskfocus', label: 'TaskFocus' },
+          { slug: 'mindtrack', label: 'MindTrack' },
         ],
       },
     ],
@@ -131,11 +137,16 @@ export const en: Content = {
   footer: { built: 'Made by Egor Matafonov', copyright: '© {year} Egor Matafonov', github: 'GitHub', linkedin: 'LinkedIn', telegram: 'Telegram', email: 'Email' },
   caseStudy: {
     caseLabel: 'Product case',
+    overviewLabel: 'Project overview',
     back: 'Back to projects',
-    contextTitle: 'The task',
+    contextTitle: 'User scenario',
     roleTitle: 'What I did',
     constraintsTitle: 'Constraints',
     decisionsTitle: 'Product decisions',
+    decisionProblem: 'Problem',
+    decisionAlternative: 'Alternative',
+    decisionChoice: 'Chosen solution',
+    decisionReason: 'Why this option',
     tradeoffLabel: 'Trade-off',
     galleryTitle: 'Inside the product',
     fullImage: 'Open full-size image',
@@ -158,6 +169,7 @@ export const ru: Content = {
     title: 'Егор Матафонов | портфолио Product Manager',
     description: 'Егор Матафонов, Product Manager: опыт в O!task и Web Do, продуктовые кейсы TaskFocus и MindTrack.',
     projectTitleSuffix: 'Продуктовый кейс Егора Матафонова',
+    projectOverviewSuffix: 'Обзор проекта Егора Матафонова',
     socialImageAlt: 'Егор Матафонов, Product Manager. Избранные проекты TaskFocus и MindTrack.',
   },
   nav: {
@@ -169,8 +181,8 @@ export const ru: Content = {
   hero: {
     eyebrow: 'Егор Матафонов / Product Manager',
     headline: 'Product Manager',
-    headlineAccent: 'Веду продукт от задачи до рабочего решения.',
-    supporting: 'Сам принимаю продуктовые решения, продумываю сценарии и собираю приложения.',
+    headlineAccent: 'Product/growth задачи в B2B SaaS.',
+    supporting: 'O!task · product/growth; Web Do · presale для SaaS-клиентов; собственные проекты — TaskFocus и MindTrack.',
     cta: 'Смотреть проекты',
     contactLink: 'Написать мне',
     visualAlt: 'Каталог опросников и главная страница MindTrack.',
@@ -179,8 +191,9 @@ export const ru: Content = {
   },
   work: {
     title: 'Избранные проекты',
-    subtitle: 'Два подробных кейса и ещё два проекта.',
+    subtitle: 'Два подробных кейса и два обзора проектов.',
     viewCase: 'Разбор проекта',
+    viewOverview: 'Обзор проекта',
     repository: 'Исходный код',
     openProduct: 'Открыть продукт',
     additionalTitle: 'Другие проекты',
@@ -192,24 +205,23 @@ export const ru: Content = {
   },
   about: {
     title: 'Как я работаю',
-    intro: 'В TaskFocus и MindTrack видно, как я превращаю правила продукта в работающие приложения.',
     practices: [
       {
-        title: 'Задаю правила продукта',
-        detail: 'В TaskFocus есть лимит в пять задач на день, запись задачи до планирования и гибкие даты.',
-        projects: [{ slug: 'taskfocus', label: 'Кейс TaskFocus' }],
+        title: 'Делаю ограничение видимым',
+        detail: 'В TaskFocus на день можно выбрать до пяти задач; подходит ли такой лимит, ещё не проверено.',
+        projects: [{ slug: 'taskfocus', label: 'Решение TaskFocus' }],
       },
       {
-        title: 'Учитываю приватность и контекст',
-        detail: 'MindTrack хранит ответы в браузере и показывает балл вместе с диапазоном и ограничениями методики.',
-        projects: [{ slug: 'mindtrack', label: 'Кейс MindTrack' }],
+        title: 'Показываю результат в контексте',
+        detail: 'MindTrack учитывает ограничения каждой методики: например, у PSS-10 нет универсального порога.',
+        projects: [{ slug: 'mindtrack', label: 'Интерпретация MindTrack' }],
       },
       {
-        title: 'Довожу работу до реализации',
-        detail: 'В обоих проектах я сам принимал продуктовые решения, проектировал UX и реализовал приложения. ИИ помогал писать код.',
+        title: 'Довожу решения до реализации',
+        detail: 'Сам задаю продуктовую логику, проектирую сценарии и реализую приложения с помощью ИИ при написании кода.',
         projects: [
-          { slug: 'taskfocus', label: 'Кейс TaskFocus' },
-          { slug: 'mindtrack', label: 'Кейс MindTrack' },
+          { slug: 'taskfocus', label: 'TaskFocus' },
+          { slug: 'mindtrack', label: 'MindTrack' },
         ],
       },
     ],
@@ -225,11 +237,16 @@ export const ru: Content = {
   footer: { built: 'Сайт сделал Егор Матафонов', copyright: '© {year} Егор Матафонов', github: 'GitHub', linkedin: 'LinkedIn', telegram: 'Telegram', email: 'Почта' },
   caseStudy: {
     caseLabel: 'Продуктовый кейс',
+    overviewLabel: 'Обзор проекта',
     back: 'Назад к проектам',
-    contextTitle: 'Задача',
+    contextTitle: 'Пользовательский сценарий',
     roleTitle: 'Что я сделал',
     constraintsTitle: 'Ограничения',
     decisionsTitle: 'Продуктовые решения',
+    decisionProblem: 'Проблема',
+    decisionAlternative: 'Альтернатива',
+    decisionChoice: 'Выбранное решение',
+    decisionReason: 'Почему этот вариант',
     tradeoffLabel: 'Компромисс',
     galleryTitle: 'Экраны продукта',
     fullImage: 'Открыть изображение в полном размере',

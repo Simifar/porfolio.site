@@ -8,6 +8,8 @@ export interface LocalizedText {
 export interface ProductDecision {
   title: LocalizedText;
   rationale: LocalizedText;
+  problem?: LocalizedText;
+  alternative?: LocalizedText;
   tradeoff?: LocalizedText;
 }
 
@@ -66,8 +68,8 @@ export const projects: Project[] = [
     name: 'TaskFocus',
     presentation: 'featured',
     subtitle: {
-      en: 'A task planner with a five-task limit for each day',
-      ru: 'Планировщик с ограничением в пять задач на день',
+      en: 'An inbox-first planner with flexible dates',
+      ru: 'Планирование задач: сначала входящие, затем гибкие сроки',
     },
     cardFocus: {
       en: 'The Today list can hold no more than five tasks.',
@@ -95,8 +97,8 @@ export const projects: Project[] = [
     status: { en: 'Published', ru: 'Опубликован' },
     caseStudy: {
       context: {
-        en: 'TaskFocus is an MVP for personal task planning, built as a diploma project. The idea was to keep the daily list small and use date ranges for tasks without a fixed deadline. I have not tested whether this makes planning easier.',
-        ru: 'TaskFocus: MVP персонального планировщика, который я сделал как дипломный проект. Я ограничил список на день и добавил гибкие сроки для задач без точного дедлайна. Помогает ли это планировать легче, я не проверял.',
+        en: 'Product hypothesis, not tested with users: a person planning personal tasks can face a growing list, while some tasks have a time window rather than a firm deadline. TaskFocus aims to turn capture into a daily plan of up to five tasks and keep flexible work schedulable without inventing a hard due date.',
+        ru: 'Продуктовая гипотеза, не проверенная на пользователях: человек планирует личные дела, список растёт, а у части задач нет точного срока. TaskFocus пытается превратить записи в план максимум из пяти задач на день и задать таким задачам диапазон дат без жёсткого дедлайна.',
       },
       role: {
         en: 'I was the only contributor. I set the product rules, designed the screens and built the app. I used AI tools to help write the code.',
@@ -115,9 +117,17 @@ export const projects: Project[] = [
       decisions: [
         {
           title: { en: 'Cap the daily focus at five tasks', ru: 'Ограничить план дня пятью задачами' },
+          problem: {
+            en: 'An open-ended Today list does not make the daily scope clear.',
+            ru: 'В списке «Сегодня» без лимита не виден объём плана на день.',
+          },
+          alternative: {
+            en: 'Keep the Today list open-ended.',
+            ru: 'Оставить список «Сегодня» без лимита.',
+          },
           rationale: {
-            en: 'The Today list cannot grow without limit. Whether five is the right number still needs testing.',
-            ru: 'Список «Сегодня» не может расти бесконечно. Подходит ли ограничение именно в пять задач, ещё нужно проверить.',
+            en: 'The implemented cap makes the daily scope explicit. Whether five is the right number still needs testing.',
+            ru: 'Лимит делает объём плана на день явным. Подходит ли именно пять задач, ещё нужно проверить.',
           },
           tradeoff: {
             en: 'A sixth active task needs another day or a place in the inbox.',
@@ -126,6 +136,14 @@ export const projects: Project[] = [
         },
         {
           title: { en: 'Capture first, schedule later', ru: 'Сначала записать, потом планировать' },
+          problem: {
+            en: 'A task may be ready to capture before its date or priority is settled.',
+            ru: 'Задачу можно записать до того, как определены срок и важность.',
+          },
+          alternative: {
+            en: 'Require scheduling and task details during capture.',
+            ru: 'Сразу при добавлении требовать срок и остальные параметры задачи.',
+          },
           rationale: {
             en: 'Save a task before deciding when to do it or how important it is.',
             ru: 'Задачу можно сохранить, а срок и важность выбрать позже.',
@@ -239,8 +257,8 @@ export const projects: Project[] = [
     status: { en: 'Published', ru: 'Опубликован' },
     caseStudy: {
       context: {
-        en: 'Questionnaire scores can be mistaken for a diagnosis. MindTrack shows each score with its range, limits and guidance.',
-        ru: 'Балл опросника легко принять за диагноз. MindTrack показывает результат вместе с диапазоном, ограничениями методики и рекомендациями.',
+        en: 'Product hypothesis, not tested with users: a person completing a self-observation questionnaire may see a score without context or wonder where sensitive answers are stored. MindTrack aims to show the score with its range, limits and guidance while keeping answers in that browser.',
+        ru: 'Продуктовая гипотеза, не проверенная на пользователях: человек проходит опросник для самонаблюдения и может увидеть балл без контекста или задуматься, где хранятся чувствительные ответы. MindTrack старается показывать балл вместе с диапазоном, ограничениями и пояснением, а ответы оставлять в этом браузере.',
       },
       role: {
         en: 'I made the product and UX decisions and built MindTrack on my own. I used AI tools to help with development.',
@@ -267,6 +285,14 @@ export const projects: Project[] = [
       decisions: [
         {
           title: { en: 'Keep answers on the device', ru: 'Оставлять ответы на устройстве пользователя' },
+          problem: {
+            en: 'The product needs a clear boundary for where questionnaire answers are kept.',
+            ru: 'Нужно явно определить, где хранятся ответы на опросники.',
+          },
+          alternative: {
+            en: 'Store answers in an account and sync history between devices.',
+            ru: 'Хранить ответы в аккаунте и синхронизировать историю между устройствами.',
+          },
           rationale: {
             en: 'The app calculates and stores answers in the browser instead of sending them to a product server.',
             ru: 'Приложение рассчитывает и хранит ответы в браузере, а не отправляет их на сервер.',
@@ -278,9 +304,21 @@ export const projects: Project[] = [
         },
         {
           title: { en: 'Show score, interpretation and limits together', ru: 'Показывать балл, интерпретацию и ограничения рядом' },
+          problem: {
+            en: 'A score on its own can be read as a diagnosis and hides what the method can actually say.',
+            ru: 'Отдельный балл можно принять за диагноз; без контекста неясно, что именно говорит методика.',
+          },
+          alternative: {
+            en: 'Show only the number or a simplified severity label.',
+            ru: 'Показывать только число или упрощённую категорию результата.',
+          },
           rationale: {
             en: 'Show the score, its range, an explanation and the method source on the same screen. Make clear that the score is not a diagnosis.',
             ru: 'На одном экране видны балл, его диапазон, пояснение и источник методики. Также указано, что балл не является диагнозом.',
+          },
+          tradeoff: {
+            en: 'The result takes more reading than a number or a short severity label.',
+            ru: 'Результат требует больше чтения, чем одно число или короткая категория.',
           },
         },
         {
@@ -319,10 +357,25 @@ export const projects: Project[] = [
     screenshot: {
       src: '/projects/mindtrack-home.png',
       alt: { en: 'MindTrack questionnaire catalog and home page', ru: 'Каталог опросников и главная страница MindTrack' },
-      caption: { en: 'Questionnaire catalog', ru: 'Каталог опросников' },
+      caption: { en: 'Questionnaire catalog · real app screen', ru: 'Каталог опросников · настоящий экран приложения' },
       width: 1280,
       height: 1306,
     },
+    gallery: [
+      {
+        src: '/projects/mindtrack-result.png',
+        alt: {
+          en: 'MindTrack WHO-5 result screen with demonstration answers, method-specific interpretation and a non-diagnostic notice.',
+          ru: 'Экран результата WHO-5 в MindTrack с демонстрационными ответами, пояснением по методике и пометкой, что это не диагноз.',
+        },
+        caption: {
+          en: 'WHO-5 result · demonstration answers entered in the real app',
+          ru: 'Результат WHO-5 · демонстрационные ответы в настоящем приложении',
+        },
+        width: 1440,
+        height: 1000,
+      },
+    ],
   },
   {
     slug: 'cortexmap',

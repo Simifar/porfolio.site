@@ -10,7 +10,7 @@ function ProjectActions({ project }: { project: (typeof projects)[number] }) {
   return (
     <div className="project-actions">
       <Link to={`/work/${project.slug}`} className="project-action project-action--primary">
-        {t.work.viewCase}
+        {project.caseStudy ? t.work.viewCase : t.work.viewOverview}
         <ArrowUpRight size={16} aria-hidden="true" />
       </Link>
       <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-action">
@@ -162,7 +162,6 @@ export function About() {
       <div className="site-shell practice-layout">
         <div className="practice-intro">
           <h2 id="about-title" className="section-title">{t.about.title}</h2>
-          <p className="practice-intro__text">{t.about.intro}</p>
         </div>
 
         <div>
