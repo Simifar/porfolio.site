@@ -62,7 +62,8 @@ function renderCase(project, lang) {
   const enUrl = `${site}work/${project.slug}/`;
   const ruUrl = `${site}ru/work/${project.slug}/`;
   const alternateUrl = `${base}${lang === 'ru' ? '' : 'ru/'}work/${project.slug}/`;
-  const appUrl = `${base}#/work/${project.slug}`;
+  const homeUrl = `${base}${lang === 'ru' ? '?lang=ru' : ''}`;
+  const appUrl = `${base}?lang=${lang}#/work/${project.slug}`;
   const pageType = project.caseStudy ? l.case : l.overview;
   const openLabel = project.caseStudy ? l.open : l.openOverview;
   const title = `${project.name} · ${lang === 'ru' ? `${pageType.toLowerCase()} Егора Матафонова` : `${pageType.toLowerCase()} by Egor Matafonov`}`;
@@ -101,10 +102,10 @@ function renderCase(project, lang) {
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escape(title)}"><meta name="twitter:description" content="${escape(description)}"><meta name="twitter:image" content="${socialImage}">
 <script>try{document.documentElement.className=localStorage.getItem('theme')==='dark'?'dark':'light'}catch{}</script>
 </head><body>
-<header class="preview-header"><div class="shell"><a href="${base}">${escape(l.home)} / Egor Matafonov</a><nav aria-label="${lang === 'ru' ? 'Навигация' : 'Navigation'}"><a href="mailto:Matafonovegor2@gmail.com">${escape(l.email)} · Matafonovegor2@gmail.com</a><a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer">${escape(l.telegram)} · @legionanstek</a><a href="${alternateUrl}">${escape(l.alternate)}</a><button type="button" id="theme-switch">${escape(l.theme)}</button></nav></div></header>
+<header class="preview-header"><div class="shell"><a href="${homeUrl}">${escape(l.home)} / Egor Matafonov</a><nav aria-label="${lang === 'ru' ? 'Навигация' : 'Navigation'}"><a href="mailto:Matafonovegor2@gmail.com">${escape(l.email)} · Matafonovegor2@gmail.com</a><a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer">${escape(l.telegram)} · @legionanstek</a><a href="${alternateUrl}">${escape(l.alternate)}</a><button type="button" id="theme-switch">${escape(l.theme)}</button></nav></div></header>
 <main class="shell"><div class="preview-hero"><p class="preview-kicker">${escape(pageType)} · ${escape(project.category[lang])}</p><h1>${escape(project.name)}</h1><p class="preview-intro">${escape(description)}</p><div class="preview-links"><a href="${appUrl}" id="interactive-case">${escape(openLabel)} ↗</a><a href="${escape(project.github)}">${escape(l.source)} ↗</a>${project.live ? `<a href="${escape(project.live)}">${escape(l.live)} ↗</a>` : ''}</div></div>
 ${visual}${details}${cta}</main>
-<footer class="preview-footer"><div class="shell">© Egor Matafonov · <a href="${base}">${escape(l.home)}</a></div></footer>
+<footer class="preview-footer"><div class="shell">© Egor Matafonov · <a href="${homeUrl}">${escape(l.home)}</a></div></footer>
 <script>document.getElementById('theme-switch').addEventListener('click',()=>{const dark=document.documentElement.classList.toggle('dark');document.documentElement.classList.toggle('light',!dark);try{localStorage.setItem('theme',dark?'dark':'light')}catch{}});document.getElementById('interactive-case').addEventListener('click',()=>{try{localStorage.setItem('lang','${lang}')}catch{}})</script>
 </body></html>`;
 }

@@ -28,6 +28,19 @@ function savePreference(key: string, value: string) {
   }
 }
 
+function isLang(value: string | null): value is Lang {
+  return value === 'en' || value === 'ru';
+}
+
+// The language lives in the query string before the hash, so a shared link
+// opens in the sender's language without touching hash routing.
+function writeLangToUrl(lang: Lang) {
+  const url = new URL(window.location.href);
+  if (url.searchParams.get('lang') === lang) return;
+  url.searchParams.set('lang', lang);
+  window.history.replaceState(window.history.state, '', url);
+}
+
 const AppContext = createContext<AppContextType>({
   lang: 'en',
   setLang: () => {},
@@ -37,13 +50,20 @@ const AppContext = createContext<AppContextType>({
 });
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
-  const [lang, setLang] = useState<Lang>(() => {
+  const [lang, setLangState] = useState<Lang>(() => {
     if (typeof window !== 'undefined') {
+      const fromUrl = new URLSearchParams(window.location.search).get('lang');
+      if (isLang(fromUrl)) return fromUrl;
       const saved = readPreference('lang');
-      if (saved === 'en' || saved === 'ru') return saved;
+      if (isLang(saved)) return saved;
     }
     return 'en';
   });
+
+  const setLang = (next: Lang) => {
+    setLangState(next);
+    writeLangToUrl(next);
+  };
 
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window !== 'undefined') {

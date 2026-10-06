@@ -25,7 +25,7 @@ function PageMetadata() {
       : isHome ? t.metadata.description : t.notFound.text;
     const canonicalUrl = project
       ? `https://simifar.github.io/porfolio.site/${lang === 'ru' ? 'ru/' : ''}work/${project.slug}/`
-      : 'https://simifar.github.io/porfolio.site/';
+      : `https://simifar.github.io/porfolio.site/${isHome && lang === 'ru' ? '?lang=ru' : ''}`;
 
     document.title = title;
     document.querySelector<HTMLMetaElement>('meta[name="description"]')?.setAttribute('content', description);

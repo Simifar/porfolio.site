@@ -104,6 +104,31 @@ test('language and theme persist across routes and reload; keyboard skip link wo
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', /\/ru\/work\/mindtrack\/$/);
 });
 
+test('?lang= in the URL opens that language, wins over the saved one, and follows the toggle', async ({ page }) => {
+  await page.goto('/?lang=ru');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
+  await expect(page.getByRole('heading', { name: 'Ищу удалённую работу Product Manager' })).toBeAttached();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://simifar.github.io/porfolio.site/?lang=ru');
+  await expect(page.locator('link[rel="alternate"][hreflang="ru"]')).toHaveAttribute('href', 'https://simifar.github.io/porfolio.site/?lang=ru');
+  await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute('href', 'https://simifar.github.io/porfolio.site/');
+
+  await page.getByRole('button', { name: 'Английский' }).click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  expect(new URL(page.url()).searchParams.get('lang')).toBe('en');
+
+  await page.getByRole('article', { name: 'MindTrack' }).getByRole('link', { name: 'Case study' }).click();
+  await expect(page).toHaveURL(/\?lang=en#\/work\/mindtrack$/);
+  await page.getByRole('button', { name: 'Russian' }).click();
+  await expect(page).toHaveURL(/\?lang=ru#\/work\/mindtrack$/);
+  await expect(page.getByRole('heading', { name: 'Продуктовые решения' })).toBeVisible();
+  await page.getByRole('link', { name: 'Назад к проектам' }).click();
+  await expect(page).toHaveURL(/\?lang=ru#\/\?section=work$/);
+
+  await page.evaluate(() => localStorage.setItem('lang', 'ru'));
+  await page.goto('/?lang=en');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+});
+
 test('all case routes load directly with real images and distinct canonical pages', async ({ page }) => {
   for (const slug of slugs) {
     await page.goto(`/#/work/${slug}`);
