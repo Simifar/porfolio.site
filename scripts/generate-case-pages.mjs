@@ -29,20 +29,24 @@ const labels = {
   en: {
     home: 'Portfolio', alternate: 'Русский', open: 'Open interactive case', openOverview: 'Open project overview', theme: 'Switch theme',
     source: 'Source code', live: 'Open product', task: 'The task', role: 'What I did',
-    case: 'Product case', overview: 'Project overview', scenario: 'User scenario',
+    case: 'Product case', overview: 'Project overview', alternatives: 'Why not existing tools',
     problem: 'Problem', alternative: 'Alternative', choice: 'Chosen solution', reason: 'Why this option',
-    constraints: 'Constraints', decisions: 'Product decisions', tradeoff: 'Trade-off:',
-    delivered: 'What I built', status: 'Current status', validation: 'What to test next',
+    constraints: 'Constraints', scope: 'MVP scope', included: 'Included', cut: 'Left out',
+    decisions: 'Product decisions', tradeoff: 'Trade-off:',
+    delivered: 'What I built', status: 'Current status', tested: 'What was tested',
+    criteria: 'Success criteria', validation: 'What to test next', lessons: 'What I would do differently',
     materials: 'Project links', features: 'Features', gallery: 'Inside the product',
     email: 'Email', telegram: 'Telegram',
   },
   ru: {
     home: 'Портфолио', alternate: 'English', open: 'Открыть интерактивный кейс', openOverview: 'Открыть обзор проекта', theme: 'Сменить тему',
     source: 'Исходный код', live: 'Открыть продукт', task: 'Задача', role: 'Что я сделал',
-    case: 'Продуктовый кейс', overview: 'Обзор проекта', scenario: 'Пользовательский сценарий',
+    case: 'Продуктовый кейс', overview: 'Обзор проекта', alternatives: 'Почему не готовые решения',
     problem: 'Проблема', alternative: 'Альтернатива', choice: 'Выбранное решение', reason: 'Почему этот вариант',
-    constraints: 'Ограничения', decisions: 'Продуктовые решения', tradeoff: 'Компромисс:',
-    delivered: 'Что реализовал', status: 'Текущий статус', validation: 'Что проверить дальше',
+    constraints: 'Ограничения', scope: 'Рамки MVP', included: 'Вошло', cut: 'Не вошло',
+    decisions: 'Продуктовые решения', tradeoff: 'Компромисс:',
+    delivered: 'Что реализовал', status: 'Текущий статус', tested: 'Что проверено',
+    criteria: 'Критерии успеха', validation: 'Что проверить дальше', lessons: 'Что сделал бы иначе',
     materials: 'Ссылки на материалы', features: 'Функции', gallery: 'Экраны продукта',
     email: 'Почта', telegram: 'Telegram',
   },
@@ -66,12 +70,19 @@ function renderCase(project, lang) {
   const gallery = project.gallery ? `<section class="preview-gallery" aria-label="${escape(l.gallery)}">${project.gallery.map(image => `<figure><img src="${escape(asset(image))}" alt="${escape(image.alt[lang])}" width="${image.width}" height="${image.height}" loading="lazy"><figcaption>${escape(image.caption[lang])}</figcaption></figure>`).join('')}</section>` : '';
   const study = project.caseStudy;
   const details = study ? [
-    section(l.scenario, `<p>${escape(study.context[lang])}</p>`),
+    section(l.problem, `${study.problem ? `<p>${escape(study.problem[lang])}</p>` : ''}<p>${escape(study.context[lang])}</p>`),
+    study.alternatives ? section(l.alternatives, `<p>${escape(study.alternatives[lang])}</p>`) : '',
     section(l.role, `<p>${escape(study.role[lang])}</p><h3>${escape(l.constraints)}</h3>${bulletList(study.constraints.map(item => item[lang]))}`),
+    study.scope ? section(l.scope, `<h3>${escape(l.included)}</h3>${bulletList(study.scope.included.map(item => item[lang]))}${study.scope.cut ? `<h3>${escape(l.cut)}</h3>${bulletList(study.scope.cut.map(item => item[lang]))}` : ''}`) : '',
     section(l.decisions, `<ol class="preview-decisions">${study.decisions.map(decision => decisionItem(decision, lang, l)).join('')}</ol>`),
     gallery,
     section(l.delivered, bulletList(study.delivered.map(item => item[lang]))),
-    section(l.status, `<p>${escape(study.status[lang])}</p><h3>${escape(l.validation)}</h3><p>${escape(study.nextValidation[lang])}</p>${study.materials.length ? `<h3>${escape(l.materials)}</h3><ul>${study.materials.map(material => `<li><a href="${escape(material.href)}">${escape(material.label[lang])}</a></li>`).join('')}</ul>` : ''}`),
+    section(l.status, `${study.validation ? `<h3>${escape(l.tested)}</h3><p>${escape(study.validation[lang])}</p>` : ''}<p>${escape(study.status[lang])}</p>`),
+    study.successCriteria
+      ? section(l.criteria, `${bulletList(study.successCriteria.map(item => item[lang]))}<h3>${escape(l.validation)}</h3><p>${escape(study.nextValidation[lang])}</p>`)
+      : section(l.validation, `<p>${escape(study.nextValidation[lang])}</p>`),
+    study.lessons ? section(l.lessons, bulletList(study.lessons.map(item => item[lang]))) : '',
+    study.materials.length ? section(l.materials, `<ul>${study.materials.map(material => `<li><a href="${escape(material.href)}">${escape(material.label[lang])}</a></li>`).join('')}</ul>`) : '',
   ].join('') : section(l.features, bulletList(project.features.map(item => item[lang])));
 
   return `<!doctype html>

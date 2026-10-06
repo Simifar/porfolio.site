@@ -1430,10 +1430,18 @@ section[id] {
   text-wrap: pretty;
 }
 
+.case-copy + .case-copy {
+  margin-top: 1rem;
+}
+
 .case-subheading {
   margin: 1.8rem 0 0.7rem;
   font-size: 0.88rem;
   font-weight: 600;
+}
+
+.case-subheading:first-child {
+  margin-top: 0;
 }
 
 .case-list {
@@ -1576,16 +1584,6 @@ section[id] {
   color: var(--color-text-secondary);
   font-size: 0.92rem;
   line-height: 1.6;
-}
-
-.materials {
-  margin-top: 1.5rem;
-}
-
-.materials__title {
-  margin: 0 0 0.4rem;
-  font-size: 0.88rem;
-  font-weight: 600;
 }
 
 .materials__list {

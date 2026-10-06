@@ -19,13 +19,19 @@ export interface CaseMaterial {
 }
 
 export interface ProjectCaseStudy {
+  problem?: LocalizedText;
   context: LocalizedText;
+  alternatives?: LocalizedText;
   role: LocalizedText;
   constraints: LocalizedText[];
+  scope?: { included: LocalizedText[]; cut?: LocalizedText[] };
   decisions: ProductDecision[];
   delivered: LocalizedText[];
+  validation?: LocalizedText;
   status: LocalizedText;
+  successCriteria?: LocalizedText[];
   nextValidation: LocalizedText;
+  lessons?: LocalizedText[];
   materials: CaseMaterial[];
 }
 
@@ -96,24 +102,36 @@ export const projects: Project[] = [
     live: 'https://taskfocus-eight.vercel.app/',
     status: { en: 'Published', ru: 'Опубликован' },
     caseStudy: {
+      problem: {
+        en: 'When personal tasks pile up in one list, it is hard to see what actually fits into today. Some tasks also have a time window rather than a firm deadline, so a single due date describes them poorly.',
+        ru: 'Когда личные задачи копятся в одном списке, трудно понять, что реально помещается в сегодняшний день. К тому же у части задач есть не точный срок, а окно во времени, и одна дата описывает их плохо.',
+      },
       context: {
-        en: 'Product hypothesis, not tested with users: a person planning personal tasks can face a growing list, while some tasks have a time window rather than a firm deadline. TaskFocus aims to turn capture into a daily plan of up to five tasks and keep flexible work schedulable without inventing a hard due date.',
-        ru: 'Продуктовая гипотеза, не проверенная на пользователях: человек планирует личные дела, список растёт, а у части задач нет точного срока. TaskFocus пытается превратить записи в план максимум из пяти задач на день и задать таким задачам диапазон дат без жёсткого дедлайна.',
+        en: 'TaskFocus is my diploma project. It turns captured tasks into a daily plan of up to five and gives flexible work a date window instead of an invented hard deadline.',
+        ru: 'TaskFocus — мой дипломный проект. Он превращает записанные задачи в план максимум из пяти задач на день и задаёт гибким задачам диапазон дат вместо выдуманного жёсткого дедлайна.',
       },
       role: {
-        en: 'I was the only contributor. I set the product rules, designed the screens and built the app. I used AI tools to help write the code.',
-        ru: 'Я работал над проектом один: определил правила продукта, спроектировал экраны и собрал приложение. При написании кода использовал ИИ.',
+        en: 'I was the only contributor: I set the product rules, designed the screens and built the app using AI agents.',
+        ru: 'Я работал над проектом один: определил правила продукта, спроектировал экраны и собрал приложение с помощью AI-агентов.',
       },
       constraints: [
         {
-          en: 'The web app requires an account; task data is stored in PostgreSQL/Neon.',
-          ru: 'Для работы с задачами нужна учётная запись; данные хранятся в PostgreSQL/Neon.',
+          en: 'Solo project: one person made the product decisions, the design and the implementation.',
+          ru: 'Проект в одиночку: продуктовые решения, дизайн и разработку делал один человек.',
         },
         {
-          en: 'The published app supports sign-in and registration. The screenshots show the dashboard after sign-in.',
-          ru: 'В опубликованном приложении есть вход и регистрация. Скриншоты показывают планировщик после входа.',
+          en: 'No usage data yet: the decisions rest on product reasoning, not on observed behaviour.',
+          ru: 'Данных об использовании пока нет: решения основаны на продуктовой логике, а не на наблюдении за поведением.',
         },
       ],
+      scope: {
+        included: [
+          { en: 'Capture a task to the Inbox without a date.', ru: 'Записать задачу во «Входящие» без даты.' },
+          { en: 'Move up to five tasks into Today.', ru: 'Перенести в «Сегодня» до пяти задач.' },
+          { en: 'Give a flexible task a date window.', ru: 'Задать гибкой задаче диапазон дат.' },
+          { en: 'Get a suggestion for the next task.', ru: 'Получить рекомендацию следующей задачи.' },
+        ],
+      },
       decisions: [
         {
           title: { en: 'Cap the daily focus at five tasks', ru: 'Ограничить план дня пятью задачами' },
@@ -175,13 +193,33 @@ export const projects: Project[] = [
         { en: 'An MVP with sign-in. The source code is public.', ru: 'MVP с авторизацией и открытым исходным кодом.' },
       ],
       status: {
-        en: 'The web app is published. The source code and real signed-in dashboard screenshots are also available.',
-        ru: 'Веб-приложение опубликовано. Исходный код и реальные скриншоты планировщика после входа тоже доступны.',
+        en: 'The web app and source code are public. The problem and the five-task limit are a product hypothesis: they have not been tested with users, and there is no usage data.',
+        ru: 'Веб-приложение и исходный код опубликованы. Проблема и лимит в пять задач — продуктовая гипотеза: на пользователях они не проверены, данных об использовании нет.',
       },
+      successCriteria: [
+        {
+          en: 'Without prompting, a participant moves tasks from the Inbox to Today and can explain the five-task limit.',
+          ru: 'Участник без подсказки переносит задачи из «Входящих» в «Сегодня» и объясняет лимит в пять задач.',
+        },
+        {
+          en: 'A participant sets a date window for a flexible task and can say how it differs from a deadline.',
+          ru: 'Участник задаёт гибкой задаче диапазон дат и может объяснить, чем он отличается от дедлайна.',
+        },
+        {
+          en: 'A participant can explain why a particular task was suggested as the next one.',
+          ru: 'Участник может объяснить, почему приложение предложило следующей именно эту задачу.',
+        },
+      ],
       nextValidation: {
-        en: 'Watch people move tasks from the inbox into Today. Check whether they understand the five-task limit and flexible dates before measuring any effect on productivity.',
-        ru: 'Посмотреть, как люди переносят задачи из входящих в список «Сегодня». Сначала проверить, понятны ли им ограничение в пять задач и гибкие даты, а уже потом измерять влияние на продуктивность.',
+        en: 'Check these criteria in moderated sessions with the published app, and only then measure any effect on productivity.',
+        ru: 'Проверить эти критерии на модерируемых сессиях с опубликованным приложением и только потом измерять влияние на продуктивность.',
       },
+      lessons: [
+        {
+          en: 'To test the focus hypothesis, the MVP could have been limited to the Today and Inbox views; the other views are worth testing separately.',
+          ru: 'Для проверки гипотезы фокуса MVP можно было ограничить видами «Сегодня» и «Входящие»; остальные виды стоит проверить отдельно.',
+        },
+      ],
       materials: [
         { label: { en: 'Architecture', ru: 'Архитектура' }, href: 'https://github.com/Simifar/taskfocus/blob/main/docs/ARCHITECTURE.md' },
         { label: { en: 'Diploma project', ru: 'Описание дипломного проекта' }, href: 'https://github.com/Simifar/taskfocus/blob/main/docs/THESIS.md' },
@@ -256,13 +294,17 @@ export const projects: Project[] = [
     live: 'https://simifar.github.io/mindtrack/',
     status: { en: 'Published', ru: 'Опубликован' },
     caseStudy: {
+      problem: {
+        en: 'A person filling in a self-observation questionnaire may get a bare score that reads like a diagnosis, and may not know where their sensitive answers end up.',
+        ru: 'Человек, который проходит опросник для самонаблюдения, может получить голый балл, похожий на диагноз, и не знать, куда попадут его чувствительные ответы.',
+      },
       context: {
-        en: 'Product hypothesis, not tested with users: a person completing a self-observation questionnaire may see a score without context or wonder where sensitive answers are stored. MindTrack aims to show the score with its range, limits and guidance while keeping answers in that browser.',
-        ru: 'Продуктовая гипотеза, не проверенная на пользователях: человек проходит опросник для самонаблюдения и может увидеть балл без контекста или задуматься, где хранятся чувствительные ответы. MindTrack старается показывать балл вместе с диапазоном, ограничениями и пояснением, а ответы оставлять в этом браузере.',
+        en: 'MindTrack is a product in a sensitive area, so the key decisions were about data, risk and responsibility: answers stay in the browser, every score comes with its range, limits and guidance, and urgent-help routes are explicit.',
+        ru: 'MindTrack — продукт в чувствительной области, поэтому главные решения касались данных, рисков и ответственности: ответы остаются в браузере, балл показан вместе с диапазоном, ограничениями и пояснением, а помощь в срочной ситуации обозначена явно.',
       },
       role: {
-        en: 'I made the product and UX decisions and built MindTrack on my own. I used AI tools to help with development.',
-        ru: 'Я сам принимал продуктовые решения, проектировал UX и собрал MindTrack. При разработке использовал ИИ.',
+        en: 'I made the product and UX decisions and built MindTrack on my own using AI agents.',
+        ru: 'Я сам принимал продуктовые решения, проектировал UX и собрал MindTrack с помощью AI-агентов.',
       },
       constraints: [
         {
@@ -282,6 +324,18 @@ export const projects: Project[] = [
           ru: 'В приложении нет бэкенда и аналитики, поэтому данных об использовании и клинических результатах нет.',
         },
       ],
+      scope: {
+        included: [
+          { en: 'Screening questionnaires with scores calculated in the browser.', ru: 'Скрининговые опросники с расчётом результата в браузере.' },
+          { en: 'A score shown with its range, interpretation, method source and a non-diagnostic notice.', ru: 'Балл вместе с диапазоном, пояснением, источником методики и пометкой, что это не диагноз.' },
+          { en: 'Local history with delete, backup and export.', ru: 'Локальная история с удалением, резервной копией и экспортом.' },
+          { en: 'Crisis contacts with the region and age they apply to.', ru: 'Кризисные контакты с указанием региона и возрастных условий.' },
+        ],
+        cut: [
+          { en: 'Accounts and sync between devices: answers stay on the device.', ru: 'Аккаунты и синхронизация между устройствами: ответы остаются на устройстве.' },
+          { en: 'A backend and product analytics: answers are not sent to a server.', ru: 'Бэкенд и продуктовая аналитика: ответы не отправляются на сервер.' },
+        ],
+      },
       decisions: [
         {
           title: { en: 'Keep answers on the device', ru: 'Оставлять ответы на устройстве пользователя' },
@@ -343,12 +397,26 @@ export const projects: Project[] = [
         { en: 'Method sources, score limitations and urgent-help guidance.', ru: 'Источники методик, ограничения результатов и рекомендации для срочных ситуаций.' },
       ],
       status: {
-        en: 'The site and source code are public. I have no data on usage, diagnostic accuracy or clinical outcomes.',
-        ru: 'Сайт и исходный код доступны. Данных об использовании, точности диагностики и клинических результатах нет.',
+        en: 'The site and source code are public. The product has not been tested with users; there is no data on usage, diagnostic accuracy or clinical outcomes.',
+        ru: 'Сайт и исходный код опубликованы. На пользователях продукт не проверялся; данных об использовании, точности диагностики и клинических результатах нет.',
       },
+      successCriteria: [
+        {
+          en: 'After seeing a result, a participant explains in their own words that the score is not a diagnosis and what it does show.',
+          ru: 'Увидев результат, участник своими словами объясняет, что балл — не диагноз, и что он показывает.',
+        },
+        {
+          en: 'A participant can say where the answers are stored and how to back them up or delete them.',
+          ru: 'Участник может сказать, где хранятся ответы и как сделать резервную копию или удалить их.',
+        },
+        {
+          en: 'Without prompting, a participant finds the urgent-help contacts for their region.',
+          ru: 'Участник без подсказки находит контакты срочной помощи для своего региона.',
+        },
+      ],
       nextValidation: {
-        en: 'Ask people what a score means, where their answers are stored and how to back them up. Review questionnaire sources, translation rights and crisis contacts.',
-        ru: 'Проверить, как люди понимают баллы, где хранятся ответы и как сделать резервную копию. Перепроверить источники опросников, права на перевод и кризисные контакты.',
+        en: 'Check these criteria in short moderated sessions with the published site. Separately review questionnaire sources, translation rights and crisis contacts.',
+        ru: 'Проверить эти критерии на коротких модерируемых сессиях с опубликованным сайтом. Отдельно перепроверить источники опросников, права на перевод и кризисные контакты.',
       },
       materials: [
         { label: { en: 'Product and questionnaire notes', ru: 'Описание продукта и опросников' }, href: 'https://github.com/Simifar/mindtrack/blob/main/README.md' },

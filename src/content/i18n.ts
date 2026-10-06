@@ -50,9 +50,13 @@ export interface Content {
     caseLabel: string;
     overviewLabel: string;
     back: string;
-    contextTitle: string;
+    problemTitle: string;
+    alternativesTitle: string;
     roleTitle: string;
     constraintsTitle: string;
+    scopeTitle: string;
+    scopeIncluded: string;
+    scopeCut: string;
     decisionsTitle: string;
     decisionProblem: string;
     decisionAlternative: string;
@@ -63,7 +67,10 @@ export interface Content {
     fullImage: string;
     deliveredTitle: string;
     statusTitle: string;
+    validationTitle: string;
+    successCriteriaTitle: string;
     nextValidationTitle: string;
+    lessonsTitle: string;
     materialsTitle: string;
     projectDetails: string;
     whatItDoes: string;
@@ -157,9 +164,13 @@ export const en: Content = {
     caseLabel: 'Product case',
     overviewLabel: 'Project overview',
     back: 'Back to projects',
-    contextTitle: 'User scenario',
+    problemTitle: 'Problem',
+    alternativesTitle: 'Why not existing tools',
     roleTitle: 'What I did',
     constraintsTitle: 'Constraints',
+    scopeTitle: 'MVP scope',
+    scopeIncluded: 'Included',
+    scopeCut: 'Left out',
     decisionsTitle: 'Product decisions',
     decisionProblem: 'Problem',
     decisionAlternative: 'Alternative',
@@ -170,7 +181,10 @@ export const en: Content = {
     fullImage: 'Open full-size image',
     deliveredTitle: 'What I built',
     statusTitle: 'Current status',
+    validationTitle: 'What was tested',
+    successCriteriaTitle: 'Success criteria',
     nextValidationTitle: 'What to test next',
+    lessonsTitle: 'What I would do differently',
     materialsTitle: 'Project links',
     projectDetails: 'Project details',
     whatItDoes: 'Features',
@@ -264,9 +278,13 @@ export const ru: Content = {
     caseLabel: 'Продуктовый кейс',
     overviewLabel: 'Обзор проекта',
     back: 'Назад к проектам',
-    contextTitle: 'Пользовательский сценарий',
+    problemTitle: 'Проблема',
+    alternativesTitle: 'Почему не готовые решения',
     roleTitle: 'Что я сделал',
     constraintsTitle: 'Ограничения',
+    scopeTitle: 'Рамки MVP',
+    scopeIncluded: 'Вошло',
+    scopeCut: 'Не вошло',
     decisionsTitle: 'Продуктовые решения',
     decisionProblem: 'Проблема',
     decisionAlternative: 'Альтернатива',
@@ -277,7 +295,10 @@ export const ru: Content = {
     fullImage: 'Открыть изображение в полном размере',
     deliveredTitle: 'Что реализовал',
     statusTitle: 'Текущий статус',
+    validationTitle: 'Что проверено',
+    successCriteriaTitle: 'Критерии успеха',
     nextValidationTitle: 'Что проверить дальше',
+    lessonsTitle: 'Что сделал бы иначе',
     materialsTitle: 'Ссылки на материалы',
     projectDetails: 'О проекте',
     whatItDoes: 'Функции',

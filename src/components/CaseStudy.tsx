@@ -136,9 +136,16 @@ export default function CaseStudy() {
         {project.caseStudy ? (
           <div className="case-body">
             <div className="case-body__inner">
-                <CaseSection title={t.caseStudy.contextTitle}>
+                <CaseSection title={t.caseStudy.problemTitle}>
+                  {project.caseStudy.problem && <p className="case-copy">{project.caseStudy.problem[lang]}</p>}
                   <p className="case-copy">{project.caseStudy.context[lang]}</p>
                 </CaseSection>
+
+                {project.caseStudy.alternatives && (
+                  <CaseSection title={t.caseStudy.alternativesTitle}>
+                    <p className="case-copy">{project.caseStudy.alternatives[lang]}</p>
+                  </CaseSection>
+                )}
 
                 <CaseSection title={t.caseStudy.roleTitle}>
                   <p className="case-copy">{project.caseStudy.role[lang]}</p>
@@ -147,6 +154,23 @@ export default function CaseStudy() {
                     {project.caseStudy.constraints.map(item => <li key={item.en}>{item[lang]}</li>)}
                   </ul>
                 </CaseSection>
+
+                {project.caseStudy.scope && (
+                  <CaseSection title={t.caseStudy.scopeTitle}>
+                    <h3 className="case-subheading">{t.caseStudy.scopeIncluded}</h3>
+                    <ul className="case-list">
+                      {project.caseStudy.scope.included.map(item => <li key={item.en}>{item[lang]}</li>)}
+                    </ul>
+                    {project.caseStudy.scope.cut && (
+                      <>
+                        <h3 className="case-subheading">{t.caseStudy.scopeCut}</h3>
+                        <ul className="case-list">
+                          {project.caseStudy.scope.cut.map(item => <li key={item.en}>{item[lang]}</li>)}
+                        </ul>
+                      </>
+                    )}
+                  </CaseSection>
+                )}
 
                 <CaseSection title={t.caseStudy.decisionsTitle}>
                   <ol className="decision-list">
@@ -235,27 +259,49 @@ export default function CaseStudy() {
                 </CaseSection>
 
                 <CaseSection title={t.caseStudy.statusTitle}>
+                  {project.caseStudy.validation && (
+                    <>
+                      <h3 className="case-subheading">{t.caseStudy.validationTitle}</h3>
+                      <p className="case-copy">{project.caseStudy.validation[lang]}</p>
+                    </>
+                  )}
                   <p className="case-copy">{project.caseStudy.status[lang]}</p>
+                </CaseSection>
+
+                <CaseSection title={project.caseStudy.successCriteria ? t.caseStudy.successCriteriaTitle : t.caseStudy.nextValidationTitle}>
+                  {project.caseStudy.successCriteria && (
+                    <ul className="case-list">
+                      {project.caseStudy.successCriteria.map(item => <li key={item.en}>{item[lang]}</li>)}
+                    </ul>
+                  )}
                   <div className="validation-note">
-                    <h3 className="validation-note__title">{t.caseStudy.nextValidationTitle}</h3>
+                    {project.caseStudy.successCriteria && <h3 className="validation-note__title">{t.caseStudy.nextValidationTitle}</h3>}
                     <p className="validation-note__text">{project.caseStudy.nextValidation[lang]}</p>
                   </div>
-                  {project.caseStudy.materials.length > 0 && (
-                    <div className="materials">
-                      <h3 className="materials__title">{t.caseStudy.materialsTitle}</h3>
-                      <ul className="materials__list">
-                        {project.caseStudy.materials.map(material => (
-                          <li key={material.href}>
-                            <a href={material.href} target="_blank" rel="noopener noreferrer" className="materials__link">
-                              {material.label[lang]}
-                              <ExternalLink size={14} aria-hidden="true" />
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
                 </CaseSection>
+
+                {project.caseStudy.lessons && (
+                  <CaseSection title={t.caseStudy.lessonsTitle}>
+                    <ul className="case-list">
+                      {project.caseStudy.lessons.map(item => <li key={item.en}>{item[lang]}</li>)}
+                    </ul>
+                  </CaseSection>
+                )}
+
+                {project.caseStudy.materials.length > 0 && (
+                  <CaseSection title={t.caseStudy.materialsTitle}>
+                    <ul className="materials__list">
+                      {project.caseStudy.materials.map(material => (
+                        <li key={material.href}>
+                          <a href={material.href} target="_blank" rel="noopener noreferrer" className="materials__link">
+                            {material.label[lang]}
+                            <ExternalLink size={14} aria-hidden="true" />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </CaseSection>
+                )}
             </div>
           </div>
         ) : (

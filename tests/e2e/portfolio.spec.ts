@@ -176,6 +176,34 @@ test('reduced motion keeps content and navigation available', async ({ page }) =
   await expectNoHorizontalScroll(page);
 });
 
+test('product cases show the same problem-to-lessons sections in the SPA and static pages', async ({ page, request }) => {
+  const required = {
+    en: ['Problem', 'MVP scope', 'Success criteria'],
+    ru: ['Проблема', 'Рамки MVP', 'Критерии успеха'],
+  };
+  for (const slug of ['taskfocus', 'mindtrack']) {
+    for (const lang of ['en', 'ru'] as const) {
+      await page.goto('/');
+      await page.evaluate(language => localStorage.setItem('lang', language), lang);
+      await page.goto(`/#/work/${slug}`);
+      await page.reload();
+      await expect(page.locator('html')).toHaveAttribute('lang', lang);
+      const spaSections = await page.locator('.case-section__title').allTextContents();
+      for (const heading of required[lang]) expect(spaSections).toContain(heading);
+      expect(spaSections.some(heading => ['What I would do differently', 'Что сделал бы иначе', 'Success criteria', 'Критерии успеха'].includes(heading))).toBeTruthy();
+      const html = await (await request.get(`/${lang === 'ru' ? 'ru/' : ''}work/${slug}/`)).text();
+      const staticSections = [...html.matchAll(/<section class="preview-section"><h2>([^<]+)<\/h2>/g)].map(match => match[1]);
+      expect(staticSections).toEqual(spaSections);
+    }
+  }
+  await page.goto('/');
+  await page.evaluate(() => localStorage.setItem('lang', 'en'));
+  await page.goto('/#/work/taskfocus');
+  await page.reload();
+  await expect(page.getByRole('heading', { name: 'What I would do differently' })).toBeVisible();
+  await expect(page.locator('.case-section').first()).not.toContainText('not tested');
+});
+
 test('static case pages expose indexable bilingual HTML and usable links', async ({ page, request }) => {
   for (const slug of slugs) {
     for (const locale of ['', 'ru/']) {
