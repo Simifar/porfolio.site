@@ -1,5 +1,5 @@
-import { Moon, Sun } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { useApp } from '../lib/context';
 
@@ -46,7 +46,8 @@ export function LanguageToggle() {
           aria-pressed={lang === language}
           className="language-toggle__button"
         >
-          {language === 'en' ? 'English' : 'Русский'}
+          <span className="language-toggle__full">{language === 'en' ? 'English' : 'Русский'}</span>
+          <span className="language-toggle__short" aria-hidden="true">{language === 'en' ? 'EN' : 'RU'}</span>
         </button>
       ))}
     </div>
@@ -73,6 +74,28 @@ export function ThemeToggle() {
 
 export function Navbar() {
   const { t } = useApp();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const header = useRef<HTMLElement>(null);
+  const menuButton = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setMenuOpen(false);
+      menuButton.current?.focus();
+    };
+    const closeOnOutsidePress = (event: PointerEvent) => {
+      if (!header.current?.contains(event.target as Node)) setMenuOpen(false);
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    document.addEventListener('pointerdown', closeOnOutsidePress);
+    return () => {
+      document.removeEventListener('keydown', closeOnEscape);
+      document.removeEventListener('pointerdown', closeOnOutsidePress);
+    };
+  }, [menuOpen]);
+
   const navLinks: { label: string; target: SectionName }[] = [
     { label: t.nav.experience, target: 'experience' },
     { label: t.nav.work, target: 'work' },
@@ -81,15 +104,27 @@ export function Navbar() {
   ];
 
   return (
-    <header className="site-header">
+    <header ref={header} className="site-header">
       <div className="site-header__inner">
         <Link to="/" aria-label={t.nav.siteHome} className="site-brand">{t.nav.brand}</Link>
-        <nav aria-label={t.nav.mainNavigation} className="site-nav">
+        <button
+          ref={menuButton}
+          type="button"
+          className="site-menu-button"
+          aria-label={t.nav.menu}
+          aria-expanded={menuOpen}
+          aria-controls="site-nav"
+          onClick={() => setMenuOpen(open => !open)}
+        >
+          {menuOpen ? <X size={18} aria-hidden="true" /> : <Menu size={18} aria-hidden="true" />}
+        </button>
+        <nav id="site-nav" aria-label={t.nav.mainNavigation} className={`site-nav${menuOpen ? ' site-nav--open' : ''}`}>
           {navLinks.map(link => (
             <Link
               key={link.target}
               to={`/?section=${link.target}`}
               className="site-nav__link"
+              onClick={() => setMenuOpen(false)}
             >
               {link.label}
             </Link>

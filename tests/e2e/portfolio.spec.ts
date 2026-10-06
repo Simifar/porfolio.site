@@ -152,11 +152,30 @@ test('all case routes load directly with real images and distinct canonical page
 });
 
 test('320 and 390 px layouts work in both languages and themes', async ({ page }) => {
-  for (const width of [320, 390]) {
+  for (const width of [320, 375, 390]) {
     await page.setViewportSize({ width, height: 780 });
     await page.goto('/');
     await expectNoHorizontalScroll(page);
-    await expect(page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link')).toHaveCount(4);
+    expect(await page.locator('.site-header').evaluate(element => element.getBoundingClientRect().height)).toBeLessThanOrEqual(64);
+    const menu = page.getByRole('button', { name: 'Menu' });
+    const nav = page.getByRole('navigation', { name: 'Main navigation' });
+    await expect(menu).toHaveAttribute('aria-expanded', 'false');
+    await expect(nav.getByRole('link')).toHaveCount(0);
+    await menu.click();
+    await expect(menu).toHaveAttribute('aria-expanded', 'true');
+    await expect(nav.getByRole('link')).toHaveCount(4);
+    await expectNoHorizontalScroll(page);
+    await page.keyboard.press('Escape');
+    await expect(menu).toHaveAttribute('aria-expanded', 'false');
+    await expect(menu).toBeFocused();
+    await page.keyboard.press('Enter');
+    await expect(menu).toHaveAttribute('aria-expanded', 'true');
+    await page.keyboard.press('Tab');
+    await expect(nav.getByRole('link', { name: 'Experience' })).toBeFocused();
+    await nav.getByRole('link', { name: 'Projects' }).click();
+    await expect(menu).toHaveAttribute('aria-expanded', 'false');
+    await expect(page).toHaveURL(/section=work/);
+    await expect.poll(() => page.locator('#work').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
     await page.getByRole('button', { name: 'Russian' }).click();
     await expectNoHorizontalScroll(page);
     await page.getByRole('button', { name: 'Включить светлую тему' }).click();
@@ -216,6 +235,7 @@ test('reduced motion keeps content and navigation available', async ({ page }) =
   await page.setViewportSize({ width: 320, height: 700 });
   await page.goto('/');
   await expect(page.locator('.scroll-progress')).toBeHidden();
+  await page.getByRole('button', { name: 'Menu' }).click();
   await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Experience' }).click();
   await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
   await expectNoHorizontalScroll(page);

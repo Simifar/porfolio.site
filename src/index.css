@@ -254,6 +254,11 @@ a {
   gap: 0.6rem;
 }
 
+.site-menu-button,
+.language-toggle__short {
+  display: none;
+}
+
 .theme-toggle {
   display: inline-grid;
   width: 44px;
@@ -1761,17 +1766,14 @@ section[id] {
 
 @media (max-width: 767px) {
   :root {
-    --header-height: 7.1rem;
+    --header-height: 3.75rem;
     --page-gutter: 1.25rem;
   }
 
   .site-header__inner {
     height: var(--header-height);
-    padding-block: 0.4rem;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: 58px 38px;
-    align-content: center;
-    gap: 0.15rem 0.6rem;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 0 0.4rem;
   }
 
   .site-brand {
@@ -1779,27 +1781,69 @@ section[id] {
   }
 
   .site-actions {
+    grid-column: 2;
+    grid-row: 1;
     gap: 0.35rem;
   }
 
+  .site-menu-button {
+    display: inline-grid;
+    width: 44px;
+    height: 44px;
+    grid-column: 3;
+    grid-row: 1;
+    place-items: center;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-primary);
+    cursor: pointer;
+  }
+
+  .site-menu-button[aria-expanded="true"] {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
   .site-nav {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    justify-content: space-between;
-    gap: 0.5rem;
-    border-top: 1px solid var(--color-border);
+    position: absolute;
+    top: 100%;
+    right: 0;
+    left: 0;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 0.35rem var(--page-gutter) 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg);
+  }
+
+  .site-nav--open {
+    display: flex;
   }
 
   .site-nav__link {
-    min-height: 36px;
-    padding-inline: 0.2rem;
-    font-size: 0.8rem;
+    padding-inline: 0;
+    font-size: 0.95rem;
   }
 
   .site-nav__link::after {
-    right: 0.2rem;
-    bottom: 0.05rem;
-    left: 0.2rem;
+    right: auto;
+    bottom: 0.55rem;
+    left: 0;
+    width: 3rem;
+  }
+
+  .language-toggle__full {
+    display: none;
+  }
+
+  .language-toggle__short {
+    display: inline;
+  }
+
+  .language-toggle__button {
+    min-width: 2.2rem;
   }
 
   .hero {

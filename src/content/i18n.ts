@@ -16,6 +16,7 @@ export interface Content {
     siteHome: string;
     socialLinks: string;
     skipToContent: string;
+    menu: string;
   };
   hero: {
     eyebrow: string;
@@ -96,7 +97,7 @@ export const en: Content = {
     brand: 'Egor Matafonov',
     work: 'Projects', experience: 'Experience', about: 'Approach', contact: 'Contact', themeToLight: 'Switch to light theme', themeToDark: 'Switch to dark theme',
     language: 'Language', english: 'English', russian: 'Russian', mainNavigation: 'Main navigation', mobileNavigation: 'Mobile navigation',
-    siteHome: 'Egor Matafonov, home', socialLinks: 'Social links', skipToContent: 'Skip to content',
+    siteHome: 'Egor Matafonov, home', socialLinks: 'Social links', skipToContent: 'Skip to content', menu: 'Menu',
   },
   hero: {
     eyebrow: 'Egor Matafonov · Product Manager · open to remote roles',
@@ -212,7 +213,7 @@ export const ru: Content = {
     brand: 'Егор Матафонов',
     work: 'Проекты', experience: 'Опыт', about: 'Подход', contact: 'Контакты', themeToLight: 'Включить светлую тему', themeToDark: 'Включить тёмную тему',
     language: 'Язык', english: 'Английский', russian: 'Русский', mainNavigation: 'Основная навигация', mobileNavigation: 'Мобильная навигация',
-    siteHome: 'Егор Матафонов, главная', socialLinks: 'Ссылки на профили', skipToContent: 'Перейти к содержимому',
+    siteHome: 'Егор Матафонов, главная', socialLinks: 'Ссылки на профили', skipToContent: 'Перейти к содержимому', menu: 'Меню',
   },
   hero: {
     eyebrow: 'Егор Матафонов · Product Manager · открыт к удалённой работе',
