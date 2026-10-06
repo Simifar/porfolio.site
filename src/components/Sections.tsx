@@ -13,16 +13,16 @@ function ProjectActions({ project }: { project: (typeof projects)[number] }) {
         {project.caseStudy ? t.work.viewCase : t.work.viewOverview}
         <ArrowUpRight size={16} aria-hidden="true" />
       </Link>
-      <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-action">
-        {t.work.repository}
-        <ExternalLink size={14} aria-hidden="true" />
-      </a>
       {project.live && (
         <a href={project.live} target="_blank" rel="noopener noreferrer" className="project-action">
           {t.work.openProduct}
           <ExternalLink size={14} aria-hidden="true" />
         </a>
       )}
+      <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-action project-action--quiet">
+        {t.work.repository}
+        <ExternalLink size={12} aria-hidden="true" />
+      </a>
     </div>
   );
 }
@@ -112,7 +112,7 @@ export function SelectedWork() {
                   <h3 id={`project-${project.slug}`} className="feature-project__title">{project.name}</h3>
                   <p className="feature-project__subtitle">{project.subtitle[lang]}</p>
                   <p className="project-focus">{project.cardFocus[lang]}</p>
-                  <p className="project-role">{project.cardRole[lang]}</p>
+                  {project.cardRole && <p className="project-role">{project.cardRole[lang]}</p>}
                   <ProjectActions project={project} />
                 </div>
               </article>
@@ -143,7 +143,7 @@ export function SelectedWork() {
                     )}
                   </figure>
                 ) : (
-                  <div className="additional-project__text-visual">{project.cardRole[lang]}</div>
+                  <div className="additional-project__text-visual">{(project.cardRole ?? project.category)[lang]}</div>
                 )}
                 <div className="project-meta">
                   <span>{project.category[lang]}</span>

@@ -47,6 +47,26 @@ test('home explains experience and projects, and case back returns to the projec
   expect(errors).toEqual([]);
 });
 
+test('project cards lead with the case link and keep source code secondary', async ({ page }) => {
+  await page.goto('/');
+  for (const name of ['TaskFocus', 'MindTrack', 'CortexMap']) {
+    const card = page.getByRole('article', { name });
+    const links = card.getByRole('link');
+    await expect(links.first()).toHaveText(name === 'CortexMap' ? 'Project overview' : 'Case study');
+    await expect(links.last()).toHaveText('Source code');
+    const [primary, source] = await Promise.all([links.first(), links.last()].map(link => link.evaluate(element => {
+      const style = getComputedStyle(element);
+      return { size: parseFloat(style.fontSize), weight: Number(style.fontWeight), border: style.borderTopWidth };
+    })));
+    expect(primary.size).toBeGreaterThan(source.size);
+    expect(primary.weight).toBeGreaterThan(source.weight);
+    expect(primary.border).not.toBe('0px');
+  }
+  await expect(page.getByRole('article', { name: 'CortexMap' })).not.toContainText('GitHub Pages');
+  await page.goto('/#/work/cortexmap');
+  await expect(page.locator('.case-tags')).not.toContainText('Next.js');
+});
+
 test('hero shows role, proof points and primary CTA above the fold without duplicating MindTrack', async ({ page }) => {
   for (const viewport of [{ width: 1440, height: 900 }, { width: 375, height: 812 }]) {
     await page.setViewportSize(viewport);

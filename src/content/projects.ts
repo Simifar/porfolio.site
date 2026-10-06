@@ -41,7 +41,7 @@ export interface Project {
   presentation: 'featured' | 'additional';
   subtitle: LocalizedText;
   cardFocus: LocalizedText;
-  cardRole: LocalizedText;
+  cardRole?: LocalizedText;
   category: LocalizedText;
   description: LocalizedText;
   features: LocalizedText[];
@@ -457,7 +457,6 @@ export const projects: Project[] = [
       en: 'Browse by CEFR level, search, filter and save favorites in the browser.',
       ru: 'Каталог по уровням CEFR, поиск, фильтры и избранное в браузере.',
     },
-    cardRole: { en: 'Published on GitHub Pages', ru: 'Опубликован на GitHub Pages' },
     category: { en: 'Education', ru: 'Образование' },
     description: {
       en: 'A Russian-language English-learning catalog with CEFR levels, search, filters and browser-based favorites. The static site is published on GitHub Pages.',
@@ -468,14 +467,14 @@ export const projects: Project[] = [
       { en: 'Search and filter the catalog.', ru: 'Искать и фильтровать материалы каталога.' },
       { en: 'Save favorites in the browser without an account.', ru: 'Сохранять избранное в браузере без регистрации.' },
     ],
-    tags: ['Education', 'Static site', 'Next.js'],
+    tags: ['Education', 'CEFR levels', 'Static site'],
     github: 'https://github.com/Simifar/CortexMap',
     live: 'https://simifar.github.io/CortexMap/',
     status: { en: 'Published', ru: 'Опубликован' },
     screenshot: {
       src: '/projects/cortexmap-home.png',
       alt: { en: 'CortexMap English-learning catalog', ru: 'Каталог CortexMap для изучения английского' },
-      caption: { en: 'Published on GitHub Pages', ru: 'Опубликован на GitHub Pages' },
+      caption: { en: 'CortexMap home page', ru: 'Главная страница CortexMap' },
       width: 1200,
       height: 630,
     },

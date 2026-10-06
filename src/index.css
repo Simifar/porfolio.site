@@ -838,8 +838,17 @@ section[id] {
 }
 
 .project-action--primary {
+  padding-inline: 0.95rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 3px;
   color: var(--color-accent);
+  font-size: 0.9rem;
   font-weight: 600;
+}
+
+.project-action--quiet {
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
 }
 
 .project-action:hover {
@@ -847,6 +856,12 @@ section[id] {
   text-decoration: underline;
   text-underline-offset: 0.22em;
   transform: translateY(-1px);
+}
+
+.project-action--primary:hover {
+  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  color: var(--color-accent);
+  text-decoration: none;
 }
 
 .additional-work {
