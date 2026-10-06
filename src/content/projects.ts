@@ -412,44 +412,4 @@ export const projects: Project[] = [
       height: 630,
     },
   },
-  {
-    slug: 'telegram-growth-analytics',
-    name: 'Telegram Growth Analytics',
-    presentation: 'additional',
-    subtitle: {
-      en: 'A desktop tool for reviewing ads in public Telegram channels',
-      ru: 'Программа для анализа рекламы в публичных Telegram-каналах',
-    },
-    cardFocus: {
-      en: 'Connects through MTProto and stores results in a local SQLite database.',
-      ru: 'Подключается по MTProto и хранит результаты в локальной базе SQLite.',
-    },
-    cardRole: { en: 'Local desktop app', ru: 'Локальная программа' },
-    category: { en: 'Analytics', ru: 'Аналитика' },
-    description: {
-      en: 'A desktop tool for reviewing ads in public Telegram channels. It connects through Telegram MTProto and stores results in a local SQLite database; it is not a hosted website.',
-      ru: 'Программа для анализа рекламы в публичных Telegram-каналах. Она подключается через Telegram MTProto и хранит результаты в локальной базе SQLite. Это не веб-сайт.',
-    },
-    features: [
-      { en: 'Review advertising posts in public Telegram channels.', ru: 'Изучать рекламные публикации в публичных Telegram-каналах.' },
-      { en: 'Connect to Telegram through MTProto.', ru: 'Подключаться к Telegram через MTProto.' },
-      { en: 'Save results in a local SQLite database.', ru: 'Сохранять результаты в локальной базе SQLite.' },
-    ],
-    tags: ['Telegram', 'Analytics', 'SQLite'],
-    github: 'https://github.com/Simifar/StatsTelegramChannels',
-    screenshot: {
-      src: '/projects/telegram-growth-analytics-concept.png',
-      kind: 'concept',
-      alt: {
-        en: 'Illustrative dashboard concept for Telegram Growth Analytics; channel names and figures are examples.',
-        ru: 'Иллюстративный макет панели Telegram Growth Analytics; названия каналов и показатели приведены для примера.',
-      },
-      caption: {
-        en: 'Interface concept supplied for the portfolio · not a screenshot of the current app; figures are illustrative',
-        ru: 'Макет интерфейса для портфолио · не скриншот текущей программы; показатели условные',
-      },
-      width: 1448,
-      height: 1086,
-    },
-  },
 ];

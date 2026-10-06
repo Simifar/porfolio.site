@@ -47,7 +47,7 @@ If the repository is renamed, update the base path in `vite.config.js`, both bui
 - `src/content/projects.ts` contains the verified project descriptions, features, and links in English and Russian.
 - `src/content/i18n.ts` contains the interface copy.
 - `src/content/experience.ts` contains the supplied company experience, separate from the case projects.
-- `public/projects/` contains real screenshots for TaskFocus, MindTrack, and CortexMap, plus a supplied illustrative concept for Telegram Growth Analytics. The concept is labeled as such on the site; its figures are not product data.
+- `public/projects/` contains real screenshots for TaskFocus, MindTrack, and CortexMap.
 - Add a CV link only after a real, current PDF has been added to the repository.
 
 ## Routes

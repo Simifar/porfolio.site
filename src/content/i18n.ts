@@ -107,7 +107,7 @@ export const en: Content = {
   },
   work: {
     title: 'Selected work',
-    subtitle: 'Two detailed cases and two project overviews.',
+    subtitle: 'Two detailed cases and one project overview.',
     viewCase: 'Case study',
     viewOverview: 'Project overview',
     repository: 'Source code',
@@ -214,7 +214,7 @@ export const ru: Content = {
   },
   work: {
     title: 'Избранные проекты',
-    subtitle: 'Два подробных кейса и два обзора проектов.',
+    subtitle: 'Два подробных кейса и обзор ещё одного проекта.',
     viewCase: 'Разбор проекта',
     viewOverview: 'Обзор проекта',
     repository: 'Исходный код',

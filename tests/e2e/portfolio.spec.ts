@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-const slugs = ['taskfocus', 'mindtrack', 'cortexmap', 'telegram-growth-analytics'];
+const slugs = ['taskfocus', 'mindtrack', 'cortexmap'];
 
 async function expectNoHorizontalScroll(page: import('@playwright/test').Page) {
   const widths = await page.evaluate(() => ({
@@ -176,7 +176,7 @@ test('static case pages expose indexable bilingual HTML and usable links', async
       const html = await response.text();
       expect(html).toContain(`<link rel="canonical" href="https://simifar.github.io/porfolio.site/${locale}work/${slug}/">`);
       expect(html).toContain('<meta property="og:title"');
-      expect(html).toContain(`<h1>${slug === 'telegram-growth-analytics' ? 'Telegram Growth Analytics' : slug === 'taskfocus' ? 'TaskFocus' : slug === 'mindtrack' ? 'MindTrack' : 'CortexMap'}</h1>`);
+      expect(html).toContain(`<h1>${slug === 'taskfocus' ? 'TaskFocus' : slug === 'mindtrack' ? 'MindTrack' : 'CortexMap'}</h1>`);
     }
   }
   await page.goto('/ru/work/taskfocus/');
