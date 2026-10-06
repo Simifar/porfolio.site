@@ -22,12 +22,16 @@ export const experience: ExperienceEntry[] = [
     },
     outcomes: [
       {
-        en: 'Produced and refined the CJM, role matrix and key flows; prepared a business model, financial model, pitch deck and risk analysis.',
-        ru: 'Разработал и дорабатывал CJM, матрицу ролей и ключевые сценарии; подготовил бизнес-модель, финансовую модель, pitch deck и анализ рисков.',
+        en: 'Built and refined the CJM and role matrix as the basis for the information architecture and key user flows.',
+        ru: 'Разработал и дорабатывал CJM и матрицу ролей — основу для информационной архитектуры и ключевых сценариев.',
       },
       {
-        en: 'Prepared partner materials and coordinated cross-promotion; O!task appeared in materials by Timetta, Projectum, Sendsay and WEEEK.',
-        ru: 'Готовил партнёрские материалы и вёл cross-promo; O!task получил размещения в материалах Timetta, Projectum, Sendsay и WEEEK.',
+        en: 'Prepared a business model, financial model, pitch deck and risk analysis to describe the product’s economics and risks.',
+        ru: 'Подготовил бизнес-модель, финансовую модель, pitch deck и анализ рисков, чтобы описать экономику продукта и его риски.',
+      },
+      {
+        en: 'Prepared partner materials and coordinated cross-promotion to reach partners’ audiences; O!task appeared in materials by Timetta, Projectum, Sendsay and WEEEK.',
+        ru: 'Готовил партнёрские материалы и вёл cross-promo, чтобы выйти к аудитории партнёров; O!task получил размещения в материалах Timetta, Projectum, Sendsay и WEEEK.',
       },
     ],
   },
@@ -42,12 +46,12 @@ export const experience: ExperienceEntry[] = [
     },
     outcomes: [
       {
-        en: 'Prepared more than 10 site UX audits with current problems, proposed changes and references.',
-        ru: 'Подготовил более 10 UX-аудитов сайтов с описанием проблем, предложенных решений и референсов.',
+        en: 'Prepared more than 10 site UX audits — current problems, proposed changes and references — as the starting point for a presale conversation with a prospect.',
+        ru: 'Подготовил более 10 UX-аудитов сайтов — проблемы, предложенные решения и референсы — как основу для первого presale-разговора с клиентом.',
       },
       {
-        en: 'Reworked cold outreach with personalization and follow-ups; created reusable audit and presale templates.',
-        ru: 'Переработал холодные обращения с персонализацией и follow-up; создал повторно используемые шаблоны аудитов и presale-материалов.',
+        en: 'Reworked cold outreach with personalization and follow-ups; created audit and presale templates so materials for a new prospect did not start from scratch.',
+        ru: 'Переработал холодные обращения с персонализацией и follow-up; создал шаблоны аудитов и presale-материалов, чтобы не готовить их для каждого клиента с нуля.',
       },
     ],
   },

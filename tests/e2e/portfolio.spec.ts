@@ -21,6 +21,8 @@ test('home explains experience and projects, and case back returns to the projec
   await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'O!task' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Web Do' })).toBeVisible();
+  await expect(page.locator('#experience')).toContainText('as the basis for the information architecture and key user flows');
+  await expect(page.locator('#experience')).toContainText('as the starting point for a presale conversation');
   await expect(page.getByRole('heading', { name: 'Information Systems and Programming' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'I’m looking for a remote Product Manager role.' })).toBeAttached();
   await page.getByRole('link', { name: 'See case studies' }).click();
