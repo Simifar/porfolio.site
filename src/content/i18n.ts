@@ -42,7 +42,7 @@ export interface Content {
   experience: { title: string; subtitle: string; educationLabel: string; education: string };
   about: {
     title: string;
-    practices: { title: string; detail: string; projects: { slug: string; label: string }[] }[];
+    practices: { title: string; detail: string; links: { to: string; label: string }[] }[];
   };
   contact: { title: string; subtitle: string; emailBtn: string; linkedinBtn: string; telegramBtn: string; copied: string };
   footer: { built: string; copyright: string; github: string; linkedin: string; telegram: string; email: string };
@@ -125,21 +125,21 @@ export const en: Content = {
     title: 'How I work',
     practices: [
       {
-        title: 'Make a product constraint visible',
-        detail: 'TaskFocus sets a five-task cap; the right number remains an untested hypothesis.',
-        projects: [{ slug: 'taskfocus', label: 'TaskFocus decision' }],
+        title: 'Start with the user and the process',
+        detail: 'At O!task I prepared customer development and the CJM that the information architecture and key flows were built on.',
+        links: [{ to: '/?section=experience', label: 'Experience at O!task' }],
       },
       {
-        title: 'Keep a result in context',
-        detail: 'MindTrack shows method-specific limits; PSS-10, for example, has no universal cutoff.',
-        projects: [{ slug: 'mindtrack', label: 'MindTrack result design' }],
+        title: 'Turn decisions into artifacts for the team',
+        detail: 'At O!task: information architecture, a role matrix and product documentation. At Web Do: UX audit and presale templates.',
+        links: [{ to: '/?section=experience', label: 'Experience at O!task and Web Do' }],
       },
       {
-        title: 'Carry decisions into implementation',
-        detail: 'I set product rules, designed the flows and built both apps with AI-assisted coding.',
-        projects: [
-          { slug: 'taskfocus', label: 'TaskFocus' },
-          { slug: 'mindtrack', label: 'MindTrack' },
+        title: 'Take it all the way to a working product',
+        detail: 'I set the product rules, designed the flows and shipped TaskFocus and MindTrack on my own using AI agents.',
+        links: [
+          { to: '/work/taskfocus', label: 'TaskFocus' },
+          { to: '/work/mindtrack', label: 'MindTrack' },
         ],
       },
     ],
@@ -232,21 +232,21 @@ export const ru: Content = {
     title: 'Как я работаю',
     practices: [
       {
-        title: 'Делаю ограничение видимым',
-        detail: 'В TaskFocus на день можно выбрать до пяти задач; подходит ли такой лимит, ещё не проверено.',
-        projects: [{ slug: 'taskfocus', label: 'Решение TaskFocus' }],
+        title: 'Начинаю с пользователя и процесса',
+        detail: 'В O!task готовил CustDev и CJM, на которых строились информационная архитектура и ключевые сценарии.',
+        links: [{ to: '/?section=experience', label: 'Опыт в O!task' }],
       },
       {
-        title: 'Показываю результат в контексте',
-        detail: 'MindTrack учитывает ограничения каждой методики: например, у PSS-10 нет универсального порога.',
-        projects: [{ slug: 'mindtrack', label: 'Интерпретация MindTrack' }],
+        title: 'Превращаю решения в артефакты для команды',
+        detail: 'В O!task — информационная архитектура, матрица ролей и документация. В Web Do — шаблоны UX-аудитов и presale-материалов.',
+        links: [{ to: '/?section=experience', label: 'Опыт в O!task и Web Do' }],
       },
       {
-        title: 'Довожу решения до реализации',
-        detail: 'Сам задаю продуктовую логику, проектирую сценарии и реализую приложения с помощью ИИ при написании кода.',
-        projects: [
-          { slug: 'taskfocus', label: 'TaskFocus' },
-          { slug: 'mindtrack', label: 'MindTrack' },
+        title: 'Довожу до работающего продукта',
+        detail: 'Сам задаю продуктовую логику, проектирую сценарии и в одиночку выпустил TaskFocus и MindTrack с помощью AI-агентов.',
+        links: [
+          { to: '/work/taskfocus', label: 'TaskFocus' },
+          { to: '/work/mindtrack', label: 'MindTrack' },
         ],
       },
     ],

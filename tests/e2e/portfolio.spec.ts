@@ -25,6 +25,12 @@ test('home explains experience and projects, and case back returns to the projec
   await expect(page.locator('#experience')).toContainText('as the starting point for a presale conversation');
   await expect(page.getByRole('heading', { name: 'Information Systems and Programming' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'I’m looking for a remote Product Manager role.' })).toBeAttached();
+  const approach = page.locator('#about');
+  await expect(approach).not.toContainText('untested hypothesis');
+  await expect(approach.getByRole('link', { name: 'Experience at O!task', exact: true })).toHaveAttribute('href', '#/?section=experience');
+  await expect(approach.getByRole('link', { name: 'Experience at O!task and Web Do' })).toHaveAttribute('href', '#/?section=experience');
+  await approach.getByRole('link', { name: 'Experience at O!task and Web Do' }).click();
+  await expect.poll(() => page.locator('#experience').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
   await page.getByRole('link', { name: 'See case studies' }).click();
   await expect(page).toHaveURL(/section=work/);
   await expect.poll(() => page.locator('#work').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
@@ -165,7 +171,7 @@ test('reduced motion keeps content and navigation available', async ({ page }) =
   await page.setViewportSize({ width: 320, height: 700 });
   await page.goto('/');
   await expect(page.locator('.scroll-progress')).toBeHidden();
-  await page.getByRole('link', { name: 'Experience' }).click();
+  await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Experience' }).click();
   await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
   await expectNoHorizontalScroll(page);
 });

@@ -179,9 +179,9 @@ export function About() {
                 <h3 className="practice-item__title">{practice.title}</h3>
                 <p className="practice-item__detail">{practice.detail}</p>
                 <div className="practice-item__links">
-                  {practice.projects.map(project => (
-                    <Link key={project.slug} to={`/work/${project.slug}`} className="practice-item__link">
-                      {project.label}
+                  {practice.links.map(link => (
+                    <Link key={link.to} to={link.to} className="practice-item__link">
+                      {link.label}
                       <ArrowUpRight size={14} aria-hidden="true" />
                     </Link>
                   ))}
