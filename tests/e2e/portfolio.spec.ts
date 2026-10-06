@@ -21,6 +21,8 @@ test('home explains experience and projects, and case back returns to the projec
   await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'O!task' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Web Do' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Information Systems and Programming' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'I’m looking for a remote Product Manager role.' })).toBeAttached();
   await page.getByRole('link', { name: 'See case studies' }).click();
   await expect(page).toHaveURL(/section=work/);
   await expect.poll(() => page.locator('#work').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
@@ -64,6 +66,8 @@ test('language and theme persist across routes and reload; keyboard skip link wo
   await page.getByRole('button', { name: 'Включить светлую тему' }).click();
   await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
   await expect(page.locator('html')).toHaveClass(/light/);
+  await expect(page.getByRole('heading', { name: 'Информационные системы и программирование' })).toBeAttached();
+  await expect(page.getByRole('heading', { name: 'Ищу удалённую работу Product Manager' })).toBeAttached();
   await page.goto('/#/work/mindtrack');
   await expect(page.getByRole('heading', { name: 'Продуктовые решения' })).toBeVisible();
   await page.reload();

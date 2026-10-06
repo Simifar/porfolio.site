@@ -39,7 +39,7 @@ export interface Content {
     additionalTitle: string;
     focusLabel: string;
   };
-  experience: { title: string; subtitle: string };
+  experience: { title: string; subtitle: string; educationLabel: string; education: string };
   about: {
     title: string;
     practices: { title: string; detail: string; projects: { slug: string; label: string }[] }[];
@@ -118,6 +118,8 @@ export const en: Content = {
   experience: {
     title: 'Professional experience',
     subtitle: 'Product, presale and operational work in companies. Personal projects are shown separately below.',
+    educationLabel: 'Education',
+    education: 'Information Systems and Programming',
   },
   about: {
     title: 'How I work',
@@ -143,8 +145,8 @@ export const en: Content = {
     ],
   },
   contact: {
-    title: 'I’m looking for a Product Manager role.',
-    subtitle: 'If you’re hiring, email is the easiest way to reach me. More about my background is on LinkedIn.',
+    title: 'I’m looking for a remote Product Manager role.',
+    subtitle: 'I can walk you through my artifacts and the reasoning behind decisions on a call. Email is the easiest way to reach me; more about my background is on LinkedIn.',
     emailBtn: 'Send email',
     linkedinBtn: 'View LinkedIn',
     telegramBtn: 'Telegram',
@@ -223,6 +225,8 @@ export const ru: Content = {
   experience: {
     title: 'Опыт работы',
     subtitle: 'Продуктовая, presale и операционная работа в компаниях. Личные проекты — отдельно ниже.',
+    educationLabel: 'Образование',
+    education: 'Информационные системы и программирование',
   },
   about: {
     title: 'Как я работаю',
@@ -248,8 +252,8 @@ export const ru: Content = {
     ],
   },
   contact: {
-    title: 'Ищу работу Product Manager',
-    subtitle: 'Если в вашей команде открыта позиция Product Manager, напишите мне. О моём опыте можно прочитать в LinkedIn.',
+    title: 'Ищу удалённую работу Product Manager',
+    subtitle: 'Могу показать артефакты и рассказать о решениях на звонке. Проще всего написать на почту; о моём опыте можно прочитать в LinkedIn.',
     emailBtn: 'Написать',
     linkedinBtn: 'Открыть LinkedIn',
     telegramBtn: 'Telegram',

@@ -54,6 +54,14 @@ export function Experience() {
               </div>
             </article>
           ))}
+          <article className="experience-entry experience-entry--compact" aria-labelledby="education-title">
+            <div className="experience-entry__meta">
+              <span>{t.experience.educationLabel}</span>
+            </div>
+            <div className="experience-entry__body">
+              <h3 id="education-title" className="experience-entry__company">{t.experience.education}</h3>
+            </div>
+          </article>
         </div>
       </div>
     </section>

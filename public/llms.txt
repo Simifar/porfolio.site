@@ -10,6 +10,9 @@
 - Web Do — Business Development / Presale Specialist, 2026 until August. Prepared more than 10 UX audits and reusable presale materials.
 - УЦ «Потенциал» — IT Support / Administrator, October 2024–August 2026. Technical support and operational data work.
 
+## Education
+- Information Systems and Programming.
+
 ## Projects
 - [TaskFocus case](https://simifar.github.io/porfolio.site/work/taskfocus/): published task planner with a daily list limited to five tasks and genuine signed-in screenshots. [Live app](https://taskfocus-eight.vercel.app/) · [Source](https://github.com/Simifar/taskfocus)
 - [MindTrack case](https://simifar.github.io/porfolio.site/work/mindtrack/): browser app for self-observation with questionnaires; answers stay in browser storage. [Live app](https://simifar.github.io/mindtrack/) · [Source](https://github.com/Simifar/mindtrack)
@@ -17,5 +20,6 @@
 - [Telegram Growth Analytics](https://github.com/Simifar/StatsTelegramChannels): desktop tool for reviewing ads in public Telegram channels; results are stored locally. The portfolio image is an illustrative interface concept with example figures, not a screenshot of the current program.
 
 ## Contact
+- Looking for a remote Product Manager role.
 - Email: Matafonovegor2@gmail.com
 - Telegram: https://t.me/legionanstek
