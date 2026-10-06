@@ -9,7 +9,7 @@ npm ci
 npm run dev
 ```
 
-Vite prints the local URL after the development server starts.
+Vite prints the local URL after the development server starts (usually `http://localhost:5173`).
 
 ## Build
 
