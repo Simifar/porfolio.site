@@ -204,6 +204,34 @@ test('product cases show the same problem-to-lessons sections in the SPA and sta
   await expect(page.locator('.case-section').first()).not.toContainText('not tested');
 });
 
+test('every case ends with an email-first CTA before the next project, in the SPA and static pages', async ({ page, request }) => {
+  const cta = { en: 'Discuss a role?', ru: 'Обсудим роль?' };
+  const linkedin = 'https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US';
+  for (const slug of slugs) {
+    for (const lang of ['en', 'ru'] as const) {
+      await page.goto('/');
+      await page.evaluate(language => localStorage.setItem('lang', language), lang);
+      await page.goto(`/#/work/${slug}`);
+      await page.reload();
+      const region = page.getByRole('region', { name: cta[lang] });
+      await expect(region).toBeVisible();
+      const links = region.getByRole('link');
+      await expect(links).toHaveCount(2);
+      await expect(links.first()).toHaveAttribute('href', 'mailto:Matafonovegor2@gmail.com');
+      await expect(links.nth(1)).toHaveAttribute('href', linkedin);
+      expect(await page.evaluate(() => {
+        const block = document.querySelector('.case-cta');
+        const next = document.querySelector('.next-project');
+        return Boolean(block && next && block.compareDocumentPosition(next) & Node.DOCUMENT_POSITION_FOLLOWING);
+      })).toBeTruthy();
+
+      const html = await (await request.get(`/${lang === 'ru' ? 'ru/' : ''}work/${slug}/`)).text();
+      expect(html).toContain(`<h2 id="cta-title">${cta[lang]}</h2>`);
+      expect(html).toMatch(/<section class="preview-cta"[^]*href="mailto:Matafonovegor2@gmail\.com"[^]*linkedin\.com\/in\/egor-matafonov[^]*<\/section><\/main>/);
+    }
+  }
+});
+
 test('static case pages expose indexable bilingual HTML and usable links', async ({ page, request }) => {
   for (const slug of slugs) {
     for (const locale of ['', 'ru/']) {
@@ -230,6 +258,7 @@ for (const scenario of [
   { name: 'Russian light home', url: '/', width: 320, lang: 'ru', theme: 'light' },
   { name: 'TaskFocus case', url: '/#/work/taskfocus', width: 390, lang: 'ru', theme: 'light' },
   { name: 'MindTrack case', url: '/#/work/mindtrack', width: 1440, lang: 'en', theme: 'dark' },
+  { name: 'Russian dark static CortexMap page', url: '/ru/work/cortexmap/', width: 375, lang: 'ru', theme: 'dark' },
 ] as const) {
   test(`axe accessibility: ${scenario.name}`, async ({ page }) => {
     await page.setViewportSize({ width: scenario.width, height: 900 });

@@ -1656,6 +1656,29 @@ section[id] {
   color: var(--color-accent);
 }
 
+.case-cta {
+  padding: 0 var(--page-gutter) 3.5rem;
+}
+
+.case-cta__inner {
+  display: grid;
+  width: min(100%, 1080px);
+  margin-inline: auto;
+  grid-template-columns: minmax(10rem, 0.65fr) minmax(0, 1.35fr);
+  align-items: start;
+  gap: 1rem 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.case-cta__title {
+  margin: 0;
+  font-size: clamp(1.45rem, 2.5vw, 2rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+}
+
 .next-project {
   padding: 0 var(--page-gutter) 3.5rem;
 }
@@ -2076,6 +2099,16 @@ section[id] {
 
   .feature-list {
     gap: 0.55rem;
+  }
+
+  .case-cta {
+    padding-bottom: 2.5rem;
+  }
+
+  .case-cta__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    padding-top: 2rem;
   }
 
   .next-project {

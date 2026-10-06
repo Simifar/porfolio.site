@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router';
-import { ArrowLeft, ArrowUpRight, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, ExternalLink, Linkedin, Mail } from 'lucide-react';
 import { projects } from '../content/projects';
 import { useApp } from '../lib/context';
 import { Footer } from './Sections';
@@ -317,6 +317,27 @@ export default function CaseStudy() {
             </div>
           </section>
         )}
+
+        <section className="case-cta" aria-labelledby="case-cta-title">
+          <div className="case-cta__inner">
+            <h2 id="case-cta-title" className="case-cta__title">{t.caseStudy.ctaTitle}</h2>
+            <div>
+              <p className="contact-copy">{t.caseStudy.ctaText}</p>
+              <div className="contact-actions">
+                <a href="mailto:Matafonovegor2@gmail.com" className="contact-email">
+                  <Mail size={17} aria-hidden="true" />
+                  <span>Matafonovegor2@gmail.com</span>
+                  <ArrowUpRight className="contact-action__arrow" size={15} aria-hidden="true" />
+                </a>
+                <a href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer" className="contact-link">
+                  <Linkedin size={17} aria-hidden="true" />
+                  <span>{t.contact.linkedinBtn}</span>
+                  <ArrowUpRight className="contact-action__arrow" size={14} aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="next-project">
           <Link to={`/work/${nextProject.slug}`} className="next-project__link">

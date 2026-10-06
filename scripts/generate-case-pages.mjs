@@ -36,7 +36,9 @@ const labels = {
     delivered: 'What I built', status: 'Current status', tested: 'What was tested',
     criteria: 'Success criteria', validation: 'What to test next', lessons: 'What I would do differently',
     materials: 'Project links', features: 'Features', gallery: 'Inside the product',
-    email: 'Email', telegram: 'Telegram',
+    email: 'Email', telegram: 'Telegram', linkedin: 'View LinkedIn',
+    ctaTitle: 'Discuss a role?',
+    ctaText: 'If you are hiring a Product Manager, email me: on a call I can walk you through this project and the decisions behind it.',
   },
   ru: {
     home: 'Портфолио', alternate: 'English', open: 'Открыть интерактивный кейс', openOverview: 'Открыть обзор проекта', theme: 'Сменить тему',
@@ -48,7 +50,9 @@ const labels = {
     delivered: 'Что реализовал', status: 'Текущий статус', tested: 'Что проверено',
     criteria: 'Критерии успеха', validation: 'Что проверить дальше', lessons: 'Что сделал бы иначе',
     materials: 'Ссылки на материалы', features: 'Функции', gallery: 'Экраны продукта',
-    email: 'Почта', telegram: 'Telegram',
+    email: 'Почта', telegram: 'Telegram', linkedin: 'Открыть LinkedIn',
+    ctaTitle: 'Обсудим роль?',
+    ctaText: 'Если вы ищете Product Manager, напишите на почту: на звонке расскажу об этом проекте и решениях за ним.',
   },
 };
 
@@ -84,6 +88,7 @@ function renderCase(project, lang) {
     study.lessons ? section(l.lessons, bulletList(study.lessons.map(item => item[lang]))) : '',
     study.materials.length ? section(l.materials, `<ul>${study.materials.map(material => `<li><a href="${escape(material.href)}">${escape(material.label[lang])}</a></li>`).join('')}</ul>`) : '',
   ].join('') : section(l.features, bulletList(project.features.map(item => item[lang])));
+  const cta = `<section class="preview-cta" aria-labelledby="cta-title"><h2 id="cta-title">${escape(l.ctaTitle)}</h2><div><p>${escape(l.ctaText)}</p><div class="preview-cta-actions"><a class="preview-cta-primary" href="mailto:Matafonovegor2@gmail.com">Matafonovegor2@gmail.com</a><a class="preview-cta-secondary" href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer">${escape(l.linkedin)} ↗</a></div></div></section>`;
 
   return `<!doctype html>
 <html lang="${lang}"><head>
@@ -98,7 +103,7 @@ function renderCase(project, lang) {
 </head><body>
 <header class="preview-header"><div class="shell"><a href="${base}">${escape(l.home)} / Egor Matafonov</a><nav aria-label="${lang === 'ru' ? 'Навигация' : 'Navigation'}"><a href="mailto:Matafonovegor2@gmail.com">${escape(l.email)} · Matafonovegor2@gmail.com</a><a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer">${escape(l.telegram)} · @legionanstek</a><a href="${alternateUrl}">${escape(l.alternate)}</a><button type="button" id="theme-switch">${escape(l.theme)}</button></nav></div></header>
 <main class="shell"><div class="preview-hero"><p class="preview-kicker">${escape(pageType)} · ${escape(project.category[lang])}</p><h1>${escape(project.name)}</h1><p class="preview-intro">${escape(description)}</p><div class="preview-links"><a href="${appUrl}" id="interactive-case">${escape(openLabel)} ↗</a><a href="${escape(project.github)}">${escape(l.source)} ↗</a>${project.live ? `<a href="${escape(project.live)}">${escape(l.live)} ↗</a>` : ''}</div></div>
-${visual}${details}</main>
+${visual}${details}${cta}</main>
 <footer class="preview-footer"><div class="shell">© Egor Matafonov · <a href="${base}">${escape(l.home)}</a></div></footer>
 <script>document.getElementById('theme-switch').addEventListener('click',()=>{const dark=document.documentElement.classList.toggle('dark');document.documentElement.classList.toggle('light',!dark);try{localStorage.setItem('theme',dark?'dark':'light')}catch{}});document.getElementById('interactive-case').addEventListener('click',()=>{try{localStorage.setItem('lang','${lang}')}catch{}})</script>
 </body></html>`;

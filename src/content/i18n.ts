@@ -77,6 +77,8 @@ export interface Content {
     repository: string;
     liveSite: string;
     shareLink: string;
+    ctaTitle: string;
+    ctaText: string;
     nextProject: string;
   };
   notFound: { title: string; text: string; btn: string };
@@ -191,6 +193,8 @@ export const en: Content = {
     repository: 'Source code',
     liveSite: 'Open product',
     shareLink: 'Shareable page',
+    ctaTitle: 'Discuss a role?',
+    ctaText: 'If you are hiring a Product Manager, email me: on a call I can walk you through this project and the decisions behind it.',
     nextProject: 'Next project',
   },
   notFound: { title: '404', text: 'This page does not exist.', btn: 'Back to portfolio' },
@@ -305,6 +309,8 @@ export const ru: Content = {
     repository: 'Исходный код',
     liveSite: 'Открыть продукт',
     shareLink: 'Страница для ссылки',
+    ctaTitle: 'Обсудим роль?',
+    ctaText: 'Если вы ищете Product Manager, напишите на почту: на звонке расскажу об этом проекте и решениях за ним.',
     nextProject: 'Следующий проект',
   },
   notFound: { title: '404', text: 'Такой страницы нет.', btn: 'На главную' },
