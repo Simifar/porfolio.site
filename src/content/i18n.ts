@@ -17,7 +17,18 @@ export interface Content {
     socialLinks: string;
     skipToContent: string;
   };
-  hero: { eyebrow: string; headline: string; headlineAccent: string; supporting: string; cta: string; contactLink: string; visualAlt: string; visualTitle: string; visualSubtitle: string };
+  hero: {
+    eyebrow: string;
+    headline: string;
+    supporting: string;
+    proofsLabel: string;
+    proofs: { value: string; label: string }[];
+    cta: string;
+    contactLink: string;
+    visualAlt: string;
+    visualTitle: string;
+    visualSubtitle: string;
+  };
   work: {
     title: string;
     subtitle: string;
@@ -67,7 +78,7 @@ export interface Content {
 export const en: Content = {
   metadata: {
     title: 'Egor Matafonov | Product Manager portfolio',
-    description: 'Egor Matafonov, Product Manager: experience at O!task and Web Do, plus TaskFocus and MindTrack product cases.',
+    description: 'Egor Matafonov, Product Manager with a technical background: product/growth at B2B SaaS O!task, presale at Web Do, and two products shipped solo — TaskFocus and MindTrack.',
     projectTitleSuffix: 'Product case by Egor Matafonov',
     projectOverviewSuffix: 'Project overview by Egor Matafonov',
     socialImageAlt: 'Egor Matafonov, Product Manager. Selected work: TaskFocus and MindTrack.',
@@ -79,15 +90,20 @@ export const en: Content = {
     siteHome: 'Egor Matafonov, home', socialLinks: 'Social links', skipToContent: 'Skip to content',
   },
   hero: {
-    eyebrow: 'Egor Matafonov / Product Manager',
-    headline: 'Product Manager',
-    headlineAccent: 'Product/growth work in B2B SaaS.',
-    supporting: 'O!task product/growth · Web Do presale for SaaS clients · my own products: TaskFocus and MindTrack.',
-    cta: 'See the projects',
+    eyebrow: 'Egor Matafonov · Product Manager · open to remote roles',
+    headline: 'Product Manager with a technical background — from discovery to a shipped product',
+    supporting: 'At B2B SaaS O!task I prepared customer development, CJM, information architecture, a role matrix, business and financial models, and ran partnerships. I designed and shipped two web products on my own using AI agents.',
+    proofsLabel: 'Key facts',
+    proofs: [
+      { value: '8 months', label: 'of product/growth in B2B SaaS' },
+      { value: '10+', label: 'presale UX audits' },
+      { value: '2 products', label: 'shipped solo' },
+    ],
+    cta: 'See case studies',
     contactLink: 'Contact me',
-    visualAlt: 'MindTrack questionnaire catalog and home screen.',
-    visualTitle: 'MindTrack',
-    visualSubtitle: 'Published app · answers stay in your browser',
+    visualAlt: 'TaskFocus Today dashboard with a five-task plan and a suggested next task.',
+    visualTitle: 'TaskFocus',
+    visualSubtitle: 'Real signed-in screen · Today list capped at five tasks',
   },
   work: {
     title: 'Selected work',
@@ -167,7 +183,7 @@ export const en: Content = {
 export const ru: Content = {
   metadata: {
     title: 'Егор Матафонов | портфолио Product Manager',
-    description: 'Егор Матафонов, Product Manager: опыт в O!task и Web Do, продуктовые кейсы TaskFocus и MindTrack.',
+    description: 'Егор Матафонов, Product Manager с техническим бэкграундом: product/growth в B2B SaaS O!task, presale в Web Do и два продукта, выпущенных в одиночку, — TaskFocus и MindTrack.',
     projectTitleSuffix: 'Продуктовый кейс Егора Матафонова',
     projectOverviewSuffix: 'Обзор проекта Егора Матафонова',
     socialImageAlt: 'Егор Матафонов, Product Manager. Избранные проекты TaskFocus и MindTrack.',
@@ -179,15 +195,20 @@ export const ru: Content = {
     siteHome: 'Егор Матафонов, главная', socialLinks: 'Ссылки на профили', skipToContent: 'Перейти к содержимому',
   },
   hero: {
-    eyebrow: 'Егор Матафонов / Product Manager',
-    headline: 'Product Manager',
-    headlineAccent: 'Product/growth задачи в B2B SaaS.',
-    supporting: 'O!task · product/growth; Web Do · presale для SaaS-клиентов; собственные проекты — TaskFocus и MindTrack.',
-    cta: 'Смотреть проекты',
-    contactLink: 'Написать мне',
-    visualAlt: 'Каталог опросников и главная страница MindTrack.',
-    visualTitle: 'MindTrack',
-    visualSubtitle: 'Опубликованное приложение · ответы остаются в браузере',
+    eyebrow: 'Егор Матафонов · Product Manager · открыт к удалённой работе',
+    headline: 'Продакт с техническим бэкграундом — от CustDev и CJM до запущенного продукта',
+    supporting: 'В B2B SaaS O!task готовил CustDev, CJM, информационную архитектуру, матрицу ролей, бизнес- и финансовую модель, вёл партнёрства. Два собственных веб-продукта спроектировал и выпустил сам с помощью AI-агентов.',
+    proofsLabel: 'Ключевые факты',
+    proofs: [
+      { value: '8 мес.', label: 'product/growth в B2B SaaS' },
+      { value: '10+', label: 'UX-аудитов для presale' },
+      { value: '2 продукта', label: 'запущены в одиночку' },
+    ],
+    cta: 'Смотреть кейсы',
+    contactLink: 'Написать',
+    visualAlt: 'Раздел «Сегодня» TaskFocus с планом из пяти задач и рекомендацией следующей задачи.',
+    visualTitle: 'TaskFocus',
+    visualSubtitle: 'Реальный экран после входа · в «Сегодня» не больше пяти задач',
   },
   work: {
     title: 'Избранные проекты',

@@ -11,7 +11,15 @@ export default function Hero() {
         <div className="hero__copy">
           <p className="hero__eyebrow">{t.hero.eyebrow}</p>
           <h1 id="hero-title" className="hero__headline">{t.hero.headline}</h1>
-          <p className="hero__deck">{t.hero.headlineAccent} {t.hero.supporting}</p>
+          <p className="hero__deck">{t.hero.supporting}</p>
+          <ul className="hero__proofs" aria-label={t.hero.proofsLabel}>
+            {t.hero.proofs.map(proof => (
+              <li key={proof.value} className="hero__proof">
+                <span className="hero__proof-value">{proof.value}</span>
+                <span className="hero__proof-label">{proof.label}</span>
+              </li>
+            ))}
+          </ul>
 
           <div className="hero__actions">
             <Link to="/?section=work" className="button-primary">
@@ -28,10 +36,10 @@ export default function Hero() {
         <figure className="hero__visual">
           <div className="hero__image-frame">
             <img
-              src={import.meta.env.BASE_URL + 'projects/mindtrack-home.png'}
+              src={import.meta.env.BASE_URL + 'projects/taskfocus-today.png'}
               alt={t.hero.visualAlt}
-              width={1280}
-              height={1306}
+              width={1919}
+              height={1079}
               loading="eager"
               decoding="async"
               {...{ fetchpriority: 'high' }}
@@ -43,7 +51,7 @@ export default function Hero() {
               <span className="hero__caption-title">{t.hero.visualTitle}</span>
               <span className="hero__caption-detail">{t.hero.visualSubtitle}</span>
             </span>
-            <Link to="/work/mindtrack" className="hero__case-link">
+            <Link to="/work/taskfocus" className="hero__case-link">
               {t.work.viewCase}
               <ArrowUpRight size={15} aria-hidden="true" />
             </Link>

@@ -421,10 +421,10 @@ a {
 
 .hero__headline {
   margin: 1.15rem 0 0;
-  font-size: clamp(3rem, 5.1vw, 4.65rem);
+  font-size: clamp(2.4rem, 3.7vw, 3.35rem);
   font-weight: 600;
-  letter-spacing: -0.065em;
-  line-height: 0.98;
+  letter-spacing: -0.05em;
+  line-height: 1.04;
   text-wrap: balance;
 }
 
@@ -435,6 +435,37 @@ a {
   font-size: clamp(1.03rem, 1.45vw, 1.23rem);
   line-height: 1.55;
   text-wrap: pretty;
+}
+
+.hero__proofs {
+  display: grid;
+  max-width: 39rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+  padding: 0.95rem 0 0;
+  border-top: 1px solid var(--color-border);
+  list-style: none;
+}
+
+.hero__proof {
+  display: grid;
+  align-content: start;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.hero__proof-value {
+  color: var(--color-text-primary);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.hero__proof-label {
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.35;
 }
 
 .hero__actions {
@@ -1727,14 +1758,29 @@ section[id] {
   }
 
   .hero__headline {
-    max-width: 12ch;
-    font-size: clamp(2rem, 9.4vw, 3.1rem);
-    letter-spacing: -0.06em;
+    margin-top: 0.8rem;
+    font-size: clamp(1.55rem, 7vw, 2.2rem);
+    letter-spacing: -0.045em;
   }
 
   .hero__deck {
+    margin-top: 0.85rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .hero__proofs {
+    gap: 0.6rem;
     margin-top: 1rem;
-    font-size: 1rem;
+    padding-top: 0.75rem;
+  }
+
+  .hero__proof-value {
+    font-size: 0.95rem;
+  }
+
+  .hero__proof-label {
+    font-size: 0.74rem;
   }
 
   .hero__actions {

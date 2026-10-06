@@ -1,6 +1,6 @@
 # Egor Matafonov — Product Manager
 
-> A bilingual Product Manager portfolio with company experience and real product cases.
+> Product Manager with a technical background, open to remote roles. At B2B SaaS O!task: customer development, CJM, information architecture, a role matrix, business and financial models, partnerships. Designed and shipped two web products solo using AI agents. Bilingual (EN/RU) portfolio with company experience and product cases.
 
 ## Portfolio
 - [Portfolio home](https://simifar.github.io/porfolio.site/)

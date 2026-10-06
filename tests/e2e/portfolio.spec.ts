@@ -17,11 +17,11 @@ test('home explains experience and projects, and case back returns to the projec
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
 
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Product Manager');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Product Manager with a technical background');
   await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'O!task' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Web Do' })).toBeVisible();
-  await page.getByRole('link', { name: 'See the projects' }).click();
+  await page.getByRole('link', { name: 'See case studies' }).click();
   await expect(page).toHaveURL(/section=work/);
   await expect.poll(() => page.locator('#work').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
   await expect(page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Open product' })).toHaveAttribute('href', 'https://taskfocus-eight.vercel.app/');
@@ -35,6 +35,22 @@ test('home explains experience and projects, and case back returns to the projec
   await expect(page).toHaveURL(/section=work/);
   await expect.poll(() => page.locator('#work').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
   expect(errors).toEqual([]);
+});
+
+test('hero shows role, proof points and primary CTA above the fold without duplicating MindTrack', async ({ page }) => {
+  for (const viewport of [{ width: 1440, height: 900 }, { width: 375, height: 812 }]) {
+    await page.setViewportSize(viewport);
+    await page.goto('/');
+    const hero = page.locator('#hero');
+    await expect(hero.getByText('Egor Matafonov · Product Manager · open to remote roles')).toBeInViewport();
+    await expect(hero.getByRole('heading', { level: 1 })).toBeInViewport();
+    await expect(hero.getByRole('list', { name: 'Key facts' }).getByRole('listitem')).toHaveCount(3);
+    for (const item of await hero.getByRole('list', { name: 'Key facts' }).getByRole('listitem').all()) {
+      await expect(item).toBeInViewport({ ratio: 1 });
+    }
+    await expect(hero.getByRole('link', { name: 'See case studies' })).toBeInViewport({ ratio: 1 });
+    await expect(page.locator('img[src$="mindtrack-home.png"]')).toHaveCount(1);
+  }
 });
 
 test('language and theme persist across routes and reload; keyboard skip link works', async ({ page }) => {
@@ -119,7 +135,7 @@ test('every case renders on desktop and phone in both languages and themes', asy
         await page.goto('/');
         await expect(page.locator('html')).toHaveAttribute('lang', lang);
         await expect(page.locator('html')).toHaveClass(new RegExp(theme));
-        await expect(page.getByRole('heading', { level: 1 })).toHaveText('Product Manager');
+        await expect(page.getByRole('heading', { level: 1 })).toContainText(lang === 'en' ? 'Product Manager' : 'Продакт');
         await expectNoHorizontalScroll(page);
         for (const slug of slugs) {
           await page.goto(`/#/work/${slug}`);
