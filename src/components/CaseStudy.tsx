@@ -4,11 +4,14 @@ import { projects } from '../content/projects';
 import { useApp } from '../lib/context';
 import { Footer } from './Sections';
 import { LanguageToggle, ThemeToggle } from './Navigation';
+import TransitionLink from './TransitionLink';
 
-function CaseSection({ title, children }: { title: string; children: React.ReactNode }) {
+// A section either reveals as one block, or (revealItems) lets its rows
+// reveal one by one while only the heading moves with the section.
+function CaseSection({ title, revealItems = false, children }: { title: string; revealItems?: boolean; children: React.ReactNode }) {
   return (
-    <section className="case-section">
-      <h2 className="case-section__title">{title}</h2>
+    <section className="case-section" data-reveal={revealItems ? undefined : ''}>
+      <h2 className="case-section__title" data-reveal={revealItems ? '' : undefined}>{title}</h2>
       <div className="case-section__content">{children}</div>
     </section>
   );
@@ -54,14 +57,14 @@ export default function CaseStudy() {
   }
 
   return (
-    <article className="case-page">
+    <article className="case-page" data-morph-scope="case">
       <SkipToCaseContent label={t.nav.skipToContent} />
       <div className="case-toolbar">
-        <Link to="/?section=work" className="back-link" aria-label={t.caseStudy.back}>
+        <TransitionLink to="/?section=work" className="back-link" aria-label={t.caseStudy.back}>
           <ArrowLeft size={16} aria-hidden="true" />
           <span className="back-link__long">{t.caseStudy.back}</span>
           <span className="back-link__short" aria-hidden="true">{lang === 'en' ? 'Back' : 'Назад'}</span>
-        </Link>
+        </TransitionLink>
         <div className="case-toolbar__controls">
           <ThemeToggle />
           <LanguageToggle />
@@ -77,7 +80,7 @@ export default function CaseStudy() {
                 <span>{project.category[lang]}</span>
                 {project.status && <span className="case-kicker__status">{project.status[lang]}</span>}
               </p>
-              <h1 id="case-title" className="case-title">{project.name}</h1>
+              <h1 id="case-title" className="case-title" data-morph="title">{project.name}</h1>
               <p className="case-description">{project.description[lang]}</p>
               {!project.caseStudy && (
                 <div className="case-tags" aria-label={t.caseStudy.projectDetails}>
@@ -122,6 +125,7 @@ export default function CaseStudy() {
                     loading="eager"
                     decoding="async"
                     className="case-visual__image"
+                    data-morph="image"
                   />
                 </a>
                 <figcaption className="case-visual__caption">
@@ -172,7 +176,7 @@ export default function CaseStudy() {
                   </CaseSection>
                 )}
 
-                <CaseSection title={t.caseStudy.decisionsTitle}>
+                <CaseSection title={t.caseStudy.decisionsTitle} revealItems>
                   <ol className="decision-list">
                     {project.caseStudy.decisions.map(decision => {
                       const structured = Boolean(decision.problem || decision.alternative);
@@ -197,7 +201,7 @@ export default function CaseStudy() {
                         </dl>
                       );
                       return (
-                        <li key={decision.title.en} className={`decision-item${structured ? ' decision-item--structured' : ' decision-item--compact'}`}>
+                        <li key={decision.title.en} className={`decision-item${structured ? ' decision-item--structured' : ' decision-item--compact'}`} data-reveal="">
                           {structured && (
                             <dl className="decision-item__comparison">
                               {decision.problem && (
@@ -207,9 +211,9 @@ export default function CaseStudy() {
                                 </div>
                               )}
                               {decision.alternative && (
-                                <div className="decision-item__detail">
+                                <div className="decision-item__detail decision-item__detail--rejected">
                                   <dt>{t.caseStudy.decisionAlternative}</dt>
-                                  <dd>{decision.alternative[lang]}</dd>
+                                  <dd><span className="decision-item__rejected">{decision.alternative[lang]}</span></dd>
                                 </div>
                               )}
                             </dl>
@@ -227,7 +231,7 @@ export default function CaseStudy() {
                       <h2 id="case-gallery-title" className="case-gallery__title">{t.caseStudy.galleryTitle}</h2>
                       <div className="case-gallery__grid">
                         {project.gallery.map(image => (
-                          <figure key={image.src} className="case-gallery__item">
+                          <figure key={image.src} className="case-gallery__item" data-reveal="">
                             <a
                               href={import.meta.env.BASE_URL + image.src.replace(/^\/+/, '')}
                               target="_blank"
@@ -319,7 +323,7 @@ export default function CaseStudy() {
         )}
 
         <section className="case-cta" aria-labelledby="case-cta-title">
-          <div className="case-cta__inner">
+          <div className="case-cta__inner" data-reveal="">
             <h2 id="case-cta-title" className="case-cta__title">{t.caseStudy.ctaTitle}</h2>
             <div>
               <p className="contact-copy">{t.caseStudy.ctaText}</p>
@@ -340,12 +344,12 @@ export default function CaseStudy() {
         </section>
 
         <section className="next-project">
-          <Link to={`/work/${nextProject.slug}`} className="next-project__link">
+          <TransitionLink to={`/work/${nextProject.slug}`} className="next-project__link" data-morph-scope="next">
             <span className="next-project__label">{t.caseStudy.nextProject}</span>
-            <span className="next-project__name">{nextProject.name}</span>
+            <span className="next-project__name" data-morph="title">{nextProject.name}</span>
             <ArrowUpRight size={22} aria-hidden="true" />
             <span className="case-copy">{nextProject.subtitle[lang]}</span>
-          </Link>
+          </TransitionLink>
         </section>
       </main>
       <Footer />

@@ -402,7 +402,6 @@ a {
     }
   }
 
-  .hero__copy,
   .case-hero__copy {
     animation: soft-arrive 640ms var(--motion-ease) both;
   }
@@ -410,6 +409,12 @@ a {
   .hero__visual,
   .case-visual {
     animation: soft-arrive 720ms var(--motion-ease) 100ms both;
+  }
+
+  /* A case reached through a view transition already arrived with it. */
+  .case-page[data-arrived] .case-hero__copy,
+  .case-page[data-arrived] .case-visual {
+    animation: none;
   }
 }
 
@@ -2209,6 +2214,317 @@ section[id] {
     min-height: 40px;
     padding-inline: 0.3rem;
     font-size: 0.62rem;
+  }
+}
+
+/* Motion system
+   Motion explains a product decision or a change of state: the hero marks the
+   five-task limit, decision rows strike the rejected alternative, and shared
+   elements carry the reader between pages. Everything below has a complete
+   static state; animation is only layered on with no-preference. */
+
+.hero__word {
+  display: inline-block;
+  overflow: hidden;
+  padding-block: 0.06em 0.14em;
+  margin-block: -0.06em -0.14em;
+  vertical-align: top;
+}
+
+.hero__word-inner {
+  display: inline-block;
+}
+
+.hero__image-frame {
+  position: relative;
+}
+
+.hero__annotation {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: transform var(--motion-slow) var(--motion-ease);
+}
+
+.hero__image-frame:hover .hero__annotation {
+  transform: scale(1.008);
+}
+
+/* The screenshot is a dark interface in both site themes, so the marks keep
+   the dark-theme accent for contrast against it. */
+.hero__annotation-dim {
+  fill: #060807;
+  opacity: 0.46;
+  transition: opacity var(--motion-slow) var(--motion-ease);
+}
+
+.hero__visual:hover .hero__annotation-dim,
+.hero__visual:focus-within .hero__annotation-dim {
+  opacity: 0;
+}
+
+.hero__annotation-mark {
+  fill: none;
+  stroke: #F27A65;
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Brick ticks mark where a record starts on its rule. */
+.hero__proofs,
+.experience-entry {
+  position: relative;
+}
+
+.hero__proofs::before,
+.experience-entry::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--color-accent);
+  transform-origin: left center;
+}
+
+.decision-item__rejected {
+  --strike: color-mix(in srgb, var(--color-accent) 65%, transparent);
+  background-image: linear-gradient(var(--strike), var(--strike));
+  background-position: 0 60%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.decision-item--structured .decision-item__choice {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.decision-item--structured .decision-item__choice::before {
+  content: "";
+  position: absolute;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  left: 0;
+  width: 2px;
+  background: var(--color-accent);
+  transform-origin: center top;
+}
+
+/* Shared elements morph between pages; a fitted box keeps text from stretching. */
+[data-morph="title"] {
+  width: fit-content;
+  max-width: 100%;
+}
+
+@keyframes word-rise {
+  from { transform: translate3d(0, 108%, 0); }
+  to { transform: none; }
+}
+
+@keyframes wipe-rise {
+  from { clip-path: inset(0 0 100% 0); transform: translate3d(0, 14px, 0); }
+  to { clip-path: inset(0); transform: none; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes draw-mark {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes draw-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes draw-y {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes strike {
+  from { background-size: 0% 1px; }
+  to { background-size: 100% 1px; }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translate3d(0, 28px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes reveal-media {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0); }
+}
+
+@keyframes settle {
+  from { transform: scale(1.08); }
+  to { transform: none; }
+}
+
+@keyframes icon-turn {
+  from { transform: rotate(-90deg) scale(0.6); }
+  to { transform: none; }
+}
+
+@keyframes grow-x {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+@keyframes vt-fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes vt-rise-in {
+  from { opacity: 0; transform: translate3d(0, 16px, 0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero intro: plays once per visit while the section carries data-intro. */
+  .hero[data-intro] .hero__eyebrow {
+    animation: wipe-rise 700ms var(--motion-ease) both;
+  }
+
+  .hero[data-intro] .hero__word-inner {
+    animation: word-rise 900ms var(--motion-ease) calc(120ms + var(--word-index, 0) * 40ms) both;
+  }
+
+  .hero[data-intro] .hero__deck {
+    animation: wipe-rise 800ms var(--motion-ease) 420ms both;
+  }
+
+  .hero[data-intro] .hero__proofs {
+    animation: wipe-rise 800ms var(--motion-ease) 520ms both;
+  }
+
+  .hero[data-intro] .hero__proofs::before {
+    animation: draw-x 700ms var(--motion-ease) 860ms both;
+  }
+
+  .hero[data-intro] .hero__actions {
+    animation: wipe-rise 800ms var(--motion-ease) 620ms both;
+  }
+
+  .hero[data-intro] .hero__annotation-dim {
+    animation: fade-in 800ms var(--motion-ease) 1100ms backwards;
+  }
+
+  .hero[data-intro] .hero__annotation-mark {
+    stroke-dasharray: 1;
+    animation: draw-mark 750ms cubic-bezier(0.65, 0, 0.35, 1) calc(1250ms + var(--mark-index, 0) * 450ms) both;
+  }
+
+  /* Scroll reveal. Elements on screen at mount are marked "instant" and skip it. */
+  html.reveal-ready [data-reveal=""]:not([data-revealed]) {
+    opacity: 0;
+  }
+
+  html.reveal-ready [data-reveal="media"]:not([data-revealed]) {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  [data-reveal=""][data-revealed=""] {
+    animation: reveal-up 900ms var(--motion-ease) var(--reveal-delay, 0ms) backwards;
+  }
+
+  [data-reveal="media"][data-revealed=""] {
+    animation: reveal-media 900ms cubic-bezier(0.65, 0, 0.35, 1) var(--reveal-delay, 0ms) backwards;
+  }
+
+  [data-reveal="media"][data-revealed=""] img {
+    animation: settle 1400ms var(--motion-ease) var(--reveal-delay, 0ms) backwards;
+  }
+
+  html.reveal-ready .experience-entry:not([data-revealed])::before {
+    transform: scaleX(0);
+  }
+
+  .experience-entry[data-revealed=""]::before {
+    animation: draw-x 800ms var(--motion-ease) calc(var(--reveal-delay, 0ms) + 250ms) backwards;
+  }
+
+  html.reveal-ready .decision-item:not([data-revealed]) .decision-item__choice::before {
+    transform: scaleY(0);
+  }
+
+  .decision-item[data-revealed=""] .decision-item__choice::before {
+    animation: draw-y 800ms var(--motion-ease) calc(var(--reveal-delay, 0ms) + 300ms) backwards;
+  }
+
+  html.reveal-ready .decision-item:not([data-revealed]) .decision-item__rejected {
+    background-size: 0% 1px;
+  }
+
+  .decision-item[data-revealed=""] .decision-item__rejected {
+    animation: strike 700ms cubic-bezier(0.65, 0, 0.35, 1) calc(var(--reveal-delay, 0ms) + 500ms) backwards;
+  }
+
+  .theme-toggle svg {
+    animation: icon-turn 420ms var(--motion-ease);
+  }
+
+  /* View transitions: route changes rise in, shared elements morph. */
+  ::view-transition-old(root) {
+    animation: 160ms cubic-bezier(0.4, 0, 1, 1) both vt-fade-out;
+  }
+
+  /* The new page enters once the old one has mostly gone, so text never overlaps. */
+  ::view-transition-new(root) {
+    animation: 480ms var(--motion-ease) 140ms both vt-rise-in;
+  }
+
+  ::view-transition-group(case-image),
+  ::view-transition-group(case-title) {
+    animation-duration: 640ms;
+    animation-timing-function: var(--motion-ease);
+  }
+
+  html[data-vt="lang"]::view-transition-old(root) {
+    animation: 180ms ease both vt-fade-out;
+  }
+
+  html[data-vt="lang"]::view-transition-new(root) {
+    animation: 260ms ease 60ms both fade-in;
+  }
+
+  /* The theme spreads as a circle from the toggle (clip-path set in JS). */
+  html[data-vt="theme"]::view-transition-old(root),
+  html[data-vt="theme"]::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+}
+
+/* Printed pages and saved PDFs show everything, whatever was scrolled to. */
+@media print {
+  [data-reveal] {
+    opacity: 1 !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
+}
+
+html[data-vt="theme"],
+html[data-vt="theme"] * {
+  transition: none !important;
+}
+
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .scroll-progress {
+      animation: grow-x linear both;
+      animation-timeline: scroll(root block);
+    }
   }
 }
 
