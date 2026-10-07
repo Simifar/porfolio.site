@@ -3,16 +3,17 @@ import { Link } from 'react-router';
 import { projects } from '../content/projects';
 import { experience } from '../content/experience';
 import { useApp } from '../lib/context';
+import TransitionLink from './TransitionLink';
 
 function ProjectActions({ project }: { project: (typeof projects)[number] }) {
   const { t } = useApp();
 
   return (
     <div className="project-actions">
-      <Link to={`/work/${project.slug}`} className="project-action project-action--primary">
+      <TransitionLink to={`/work/${project.slug}`} className="project-action project-action--primary">
         {project.caseStudy ? t.work.viewCase : t.work.viewOverview}
         <ArrowUpRight size={16} aria-hidden="true" />
-      </Link>
+      </TransitionLink>
       {project.live && (
         <a href={project.live} target="_blank" rel="noopener noreferrer" className="project-action">
           {t.work.openProduct}
@@ -33,13 +34,13 @@ export function Experience() {
   return (
     <section id="experience" className="experience-section" aria-labelledby="experience-title">
       <div className="site-shell">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal="">
           <h2 id="experience-title" className="section-title">{t.experience.title}</h2>
           <p className="section-subtitle">{t.experience.subtitle}</p>
         </div>
         <div className="experience-list">
           {experience.map(entry => (
-            <article key={entry.company} className={`experience-entry${entry.compact ? ' experience-entry--compact' : ''}`}>
+            <article key={entry.company} className={`experience-entry${entry.compact ? ' experience-entry--compact' : ''}`} data-reveal="">
               <div className="experience-entry__meta">
                 <span>{entry.period[lang]}</span>
                 <span>{entry.context[lang]}</span>
@@ -54,7 +55,7 @@ export function Experience() {
               </div>
             </article>
           ))}
-          <article className="experience-entry experience-entry--compact" aria-labelledby="education-title">
+          <article className="experience-entry experience-entry--compact" aria-labelledby="education-title" data-reveal="">
             <div className="experience-entry__meta">
               <span>{t.experience.educationLabel}</span>
             </div>
@@ -76,7 +77,7 @@ export function SelectedWork() {
   return (
     <section id="work" className="work-section" aria-labelledby="work-title">
       <div className="site-shell">
-        <div className="section-heading">
+        <div className="section-heading" data-reveal="">
           <h2 id="work-title" className="section-title">{t.work.title}</h2>
           <p className="section-subtitle">{t.work.subtitle}</p>
         </div>
@@ -87,10 +88,11 @@ export function SelectedWork() {
               <article
                 aria-labelledby={`project-${project.slug}`}
                 className={`feature-project${index % 2 === 1 ? ' feature-project--reverse' : ''}`}
+                data-morph-scope={`project-${project.slug}`}
               >
                 {project.screenshot && (
                   <figure className="feature-project__figure">
-                    <div className="project-image-frame">
+                    <div className="project-image-frame" data-reveal="media">
                       <img
                         src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
                         alt={project.screenshot.alt[lang]}
@@ -99,17 +101,18 @@ export function SelectedWork() {
                         loading="lazy"
                         decoding="async"
                         className="project-image"
+                        data-morph="image"
                       />
                     </div>
                     <figcaption className="project-image-caption">{project.screenshot.caption[lang]}</figcaption>
                   </figure>
                 )}
-                <div className="feature-project__copy">
+                <div className="feature-project__copy" data-reveal="">
                   <div className="project-meta">
                     <span>{project.category[lang]}</span>
                     {project.status && <span className="project-meta__status">{project.status[lang]}</span>}
                   </div>
-                  <h3 id={`project-${project.slug}`} className="feature-project__title">{project.name}</h3>
+                  <h3 id={`project-${project.slug}`} className="feature-project__title" data-morph="title">{project.name}</h3>
                   <p className="feature-project__subtitle">{project.subtitle[lang]}</p>
                   <p className="project-focus">{project.cardFocus[lang]}</p>
                   {project.cardRole && <p className="project-role">{project.cardRole[lang]}</p>}
@@ -121,10 +124,10 @@ export function SelectedWork() {
         </div>
 
         <div className="additional-work">
-          <h3 className="additional-work__title">{t.work.additionalTitle}</h3>
+          <h3 className="additional-work__title" data-reveal="">{t.work.additionalTitle}</h3>
           <div className="additional-grid">
             {additional.map(project => (
-              <article key={project.slug} className="additional-project" aria-labelledby={`project-${project.slug}`}>
+              <article key={project.slug} className="additional-project" aria-labelledby={`project-${project.slug}`} data-reveal="" data-morph-scope={`project-${project.slug}`}>
                 {project.screenshot ? (
                   <figure className="additional-project__visual">
                     {project.screenshot.kind === 'concept' && (
@@ -137,6 +140,7 @@ export function SelectedWork() {
                       height={project.screenshot.height}
                       loading="lazy"
                       decoding="async"
+                      data-morph="image"
                     />
                     {project.screenshot.kind !== 'concept' && (
                       <figcaption className="additional-project__caption">{project.screenshot.caption[lang]}</figcaption>
@@ -149,7 +153,7 @@ export function SelectedWork() {
                   <span>{project.category[lang]}</span>
                   {project.status && <span className="project-meta__status">{project.status[lang]}</span>}
                 </div>
-                <h4 id={`project-${project.slug}`} className="additional-project__title">{project.name}</h4>
+                <h4 id={`project-${project.slug}`} className="additional-project__title" data-morph="title">{project.name}</h4>
                 <p className="additional-project__subtitle">{project.subtitle[lang]}</p>
                 <p className="additional-project__focus">{project.cardFocus[lang]}</p>
                 <ProjectActions project={project} />
@@ -168,23 +172,26 @@ export function About() {
   return (
     <section id="about" className="practice-section" aria-labelledby="about-title">
       <div className="site-shell practice-layout">
-        <div className="practice-intro">
+        <div className="practice-intro" data-reveal="">
           <h2 id="about-title" className="section-title">{t.about.title}</h2>
         </div>
 
         <div>
           <ul className="practice-list">
             {t.about.practices.map(practice => (
-              <li key={practice.title} className="practice-item">
+              <li key={practice.title} className="practice-item" data-reveal="">
                 <h3 className="practice-item__title">{practice.title}</h3>
                 <p className="practice-item__detail">{practice.detail}</p>
                 <div className="practice-item__links">
-                  {practice.links.map(link => (
-                    <Link key={link.to} to={link.to} className="practice-item__link">
-                      {link.label}
-                      <ArrowUpRight size={14} aria-hidden="true" />
-                    </Link>
-                  ))}
+                  {practice.links.map(link => {
+                    const LinkComponent = link.to.startsWith('/work/') ? TransitionLink : Link;
+                    return (
+                      <LinkComponent key={link.to} to={link.to} className="practice-item__link">
+                        {link.label}
+                        <ArrowUpRight size={14} aria-hidden="true" />
+                      </LinkComponent>
+                    );
+                  })}
                 </div>
               </li>
             ))}
@@ -201,10 +208,10 @@ export function Contact() {
   return (
     <section id="contact" className="contact-section" aria-labelledby="contact-title">
       <div className="site-shell contact-layout">
-        <div>
+        <div data-reveal="">
           <h2 id="contact-title" className="contact-title">{t.contact.title}</h2>
         </div>
-        <div>
+        <div data-reveal="">
           <p className="contact-copy">{t.contact.subtitle}</p>
           <div className="contact-actions">
             <a href="mailto:Matafonovegor2@gmail.com" className="contact-email" aria-label={t.contact.emailBtn}>

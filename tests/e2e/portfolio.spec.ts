@@ -340,3 +340,36 @@ for (const scenario of [
     }))).toEqual([]);
   });
 }
+
+test('scroll reveal shows every section once it is reached and never hides what is already on screen', async ({ page }) => {
+  await page.goto('/');
+  const hiddenOnScreen = await page.evaluate(() => [...document.querySelectorAll<HTMLElement>('[data-reveal]')]
+    .filter(element => element.getBoundingClientRect().top < window.innerHeight && element.dataset.revealed === undefined).length);
+  expect(hiddenOnScreen).toBe(0);
+  await page.locator('#contact').scrollIntoViewIfNeeded();
+  await expect.poll(() => page.locator('#contact [data-reveal]').evaluateAll(elements => elements.every(element => element.hasAttribute('data-revealed')))).toBeTruthy();
+  await expect.poll(() => page.locator('#contact [data-reveal]').first().evaluate(element => getComputedStyle(element).opacity)).toBe('1');
+});
+
+test('reduced motion shows all content and the hero annotation without animation', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  expect(await page.evaluate(() => document.querySelectorAll('[data-reveal]:not([data-revealed="instant"])').length)).toBe(0);
+  expect(await page.locator('#hero').getAttribute('data-intro')).toBeNull();
+  await expect(page.locator('.hero__annotation-mark')).toHaveCount(2);
+  await page.locator('#work').scrollIntoViewIfNeeded();
+  expect(await page.locator('#work .project-image-frame').first().evaluate(element => getComputedStyle(element).clipPath)).toBe('none');
+});
+
+test('page transitions open the case at the top and release shared element names', async ({ page }) => {
+  await page.goto('/?section=work');
+  await page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Case study' }).click();
+  await expect(page).toHaveURL(/#\/work\/taskfocus/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('TaskFocus');
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+  await expect.poll(() => page.evaluate(() => document.documentElement.dataset.vt ?? null)).toBeNull();
+  expect(await page.evaluate(() => document.querySelectorAll('[style*="view-transition-name"]').length)).toBe(0);
+  await page.locator('.next-project__link').click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('MindTrack');
+  await expect.poll(() => page.evaluate(() => document.querySelectorAll('[style*="view-transition-name"]').length)).toBe(0);
+});

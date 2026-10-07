@@ -1,6 +1,7 @@
 import { HashRouter, Routes, Route, useLocation } from 'react-router';
 import { useEffect } from 'react';
 import { AppProvider, useApp } from './lib/context';
+import { useScrollReveal } from './lib/motion';
 import { projects } from './content/projects';
 import { Navbar, ScrollProgress } from './components/Navigation';
 import Hero from './components/Hero';
@@ -70,6 +71,13 @@ function ScrollReset() {
   return null;
 }
 
+// Runs after the route's own effects, once its content is in the DOM.
+function RevealController() {
+  const { pathname } = useLocation();
+  useScrollReveal(pathname);
+  return null;
+}
+
 function HomePage() {
   const { t } = useApp();
 
@@ -126,6 +134,7 @@ export default function App() {
           <Route path="/not-found" element={<NotFoundPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        <RevealController />
       </HashRouter>
     </AppProvider>
   );

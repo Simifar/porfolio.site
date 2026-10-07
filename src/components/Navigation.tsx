@@ -2,6 +2,7 @@ import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { useApp } from '../lib/context';
+import { runViewTransition } from '../lib/motion';
 
 type SectionName = 'experience' | 'work' | 'about' | 'contact';
 
@@ -10,6 +11,8 @@ export function ScrollProgress() {
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Browsers with scroll-driven animations draw the bar in CSS.
+    if (CSS.supports('animation-timeline: scroll()')) return;
     let frame = 0;
     const update = () => {
       frame = 0;
@@ -41,7 +44,9 @@ export function LanguageToggle() {
         <button
           key={language}
           type="button"
-          onClick={() => setLang(language)}
+          onClick={() => {
+            if (language !== lang) runViewTransition(() => setLang(language), 'lang');
+          }}
           aria-label={language === 'en' ? t.nav.english : t.nav.russian}
           aria-pressed={lang === language}
           className="language-toggle__button"
@@ -61,7 +66,20 @@ export function ThemeToggle() {
   return (
     <button
       type="button"
-      onClick={() => setTheme(nextTheme)}
+      onClick={event => {
+        const button = event.currentTarget.getBoundingClientRect();
+        const x = button.left + button.width / 2;
+        const y = button.top + button.height / 2;
+        const transition = runViewTransition(() => setTheme(nextTheme), 'theme');
+        // The new theme spreads as a circle from the toggle.
+        transition?.ready.then(() => {
+          const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+          document.documentElement.animate(
+            { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+            { duration: 620, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', pseudoElement: '::view-transition-new(root)' },
+          );
+        }).catch(() => {});
+      }}
       className="theme-toggle"
       aria-label={theme === 'dark' ? t.nav.themeToLight : t.nav.themeToDark}
       title={theme === 'dark' ? t.nav.themeToLight : t.nav.themeToDark}

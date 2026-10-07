@@ -1,0 +1,146 @@
+import { useLayoutEffect } from 'react';
+import { flushSync } from 'react-dom';
+
+type TransitionKind = 'route' | 'theme' | 'lang';
+
+const MORPH_NAMES = ['case-image', 'case-title'] as const;
+type MorphName = (typeof MORPH_NAMES)[number];
+
+export function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+export function canUseViewTransition() {
+  return typeof document.startViewTransition === 'function' && !prefersReducedMotion();
+}
+
+// Wraps a React state update in a View Transition. Browsers without the API,
+// and readers who ask for reduced motion, get the plain update.
+export function runViewTransition(update: () => void, kind: TransitionKind) {
+  if (!canUseViewTransition()) {
+    update();
+    return null;
+  }
+  const root = document.documentElement;
+  root.dataset.vt = kind;
+  const transition = document.startViewTransition(() => {
+    flushSync(update);
+  });
+  transition.ready.catch(() => {});
+  transition.finished.finally(() => {
+    if (root.dataset.vt === kind) delete root.dataset.vt;
+  });
+  return transition;
+}
+
+function isInViewport(element: Element | null): element is HTMLElement {
+  if (!element) return false;
+  const rect = element.getBoundingClientRect();
+  return rect.bottom > 0 && rect.top < window.innerHeight && rect.width > 0;
+}
+
+function setMorph(element: HTMLElement, name: MorphName | '') {
+  if (name) element.style.setProperty('view-transition-name', name);
+  else element.style.removeProperty('view-transition-name');
+}
+
+function findMorphs(scope: Element | null) {
+  return {
+    'case-image': scope?.querySelector('[data-morph="image"]') ?? null,
+    'case-title': scope?.querySelector('[data-morph="title"]') ?? null,
+  } satisfies Record<MorphName, Element | null>;
+}
+
+// After the route renders, find where the shared image and title land.
+function findTargets(to: string, fromSlug: string | null) {
+  if (to.startsWith('/work/')) return findMorphs(document.querySelector('[data-morph-scope="case"]'));
+  if (fromSlug && new URLSearchParams(to.split('?')[1]).get('section') === 'work') {
+    return findMorphs(document.querySelector(`[data-morph-scope="project-${fromSlug}"]`));
+  }
+  return findMorphs(null);
+}
+
+function scrollForRoute(to: string) {
+  const section = new URLSearchParams(to.split('?')[1] ?? '').get('section');
+  const target = section ? document.getElementById(section) : null;
+  if (target) target.scrollIntoView({ block: 'start', behavior: 'instant' });
+  else window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+}
+
+// Route change with a shared-element morph: the screenshot and project name
+// the reader clicked travel to their place on the next page.
+export function navigateWithTransition(navigate: () => void, link: HTMLElement, to: string) {
+  const fromSlug = window.location.hash.match(/^#\/work\/([^/?]+)/)?.[1] ?? null;
+  const sources = findMorphs(link.closest('[data-morph-scope]'));
+  const morphing = canUseViewTransition() ? MORPH_NAMES.filter(name => isInViewport(sources[name])) : [];
+  const tagged: HTMLElement[] = [];
+
+  for (const name of morphing) {
+    const source = sources[name] as HTMLElement;
+    setMorph(source, name);
+    tagged.push(source);
+  }
+
+  const transition = runViewTransition(() => {
+    navigate();
+    // Names must be unique in the new state, so the sources give them up first.
+    for (const element of tagged.splice(0)) setMorph(element, '');
+    document.querySelector('[data-morph-scope="case"]')?.setAttribute('data-arrived', '');
+    scrollForRoute(to);
+    showRevealsInViewport();
+    const targets = findTargets(to, fromSlug);
+    for (const name of morphing) {
+      const target = targets[name];
+      if (isInViewport(target)) {
+        setMorph(target, name);
+        tagged.push(target);
+      }
+    }
+  }, 'route');
+
+  const cleanup = () => {
+    for (const element of tagged.splice(0)) setMorph(element, '');
+  };
+  if (transition) transition.finished.finally(cleanup);
+  else cleanup();
+}
+
+function showRevealsInViewport() {
+  for (const element of document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-revealed])')) {
+    const rect = element.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) element.dataset.revealed = 'instant';
+  }
+}
+
+// Reveals content as it scrolls into view. Anything already on screen when a
+// page mounts is shown immediately, so nothing visible ever blinks out.
+export function useScrollReveal(key: string) {
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    const targets = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-revealed])'));
+    if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
+      for (const element of targets) element.dataset.revealed = 'instant';
+      return;
+    }
+
+    for (const element of targets) {
+      if (element.getBoundingClientRect().top < window.innerHeight) element.dataset.revealed = 'instant';
+    }
+    root.classList.add('reveal-ready');
+
+    const observer = new IntersectionObserver(entries => {
+      const entering = entries.filter(entry => entry.isIntersecting);
+      for (const entry of entering) observer.unobserve(entry.target);
+      entering.filter(entry => (entry.target as HTMLElement).dataset.revealed === undefined).forEach((entry, index) => {
+        const element = entry.target as HTMLElement;
+        element.style.setProperty('--reveal-delay', `${Math.min(index * 90, 360)}ms`);
+        element.dataset.revealed = '';
+      });
+    }, { rootMargin: '0px 0px -10% 0px' });
+
+    for (const element of targets) {
+      if (element.dataset.revealed === undefined) observer.observe(element);
+    }
+    return () => observer.disconnect();
+  }, [key]);
+}
