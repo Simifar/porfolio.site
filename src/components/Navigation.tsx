@@ -1,7 +1,7 @@
 import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
-import { useApp } from '../lib/context';
+import { rememberLang, rememberTheme, useApp } from '../lib/context';
 import { runViewTransition } from '../lib/motion';
 
 type SectionName = 'experience' | 'work' | 'about' | 'contact';
@@ -45,7 +45,9 @@ export function LanguageToggle() {
           key={language}
           type="button"
           onClick={() => {
-            if (language !== lang) runViewTransition(() => setLang(language), 'lang');
+            if (language === lang) return;
+            rememberLang(language);
+            runViewTransition(() => setLang(language), 'lang');
           }}
           aria-label={language === 'en' ? t.nav.english : t.nav.russian}
           aria-pressed={lang === language}
@@ -70,6 +72,7 @@ export function ThemeToggle() {
         const button = event.currentTarget.getBoundingClientRect();
         const x = button.left + button.width / 2;
         const y = button.top + button.height / 2;
+        rememberTheme(nextTheme);
         const transition = runViewTransition(() => setTheme(nextTheme), 'theme');
         // The new theme spreads as a circle from the toggle.
         transition?.ready.then(() => {
