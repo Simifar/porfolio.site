@@ -11,7 +11,7 @@ The portfolio separates verified company experience from personal product projec
 An individual Product Manager portfolio for recruiters, using a product-editorial language inspired by working notes and decision records. The visual system is calm, direct, and slightly asymmetric. It uses real product screenshots, compact labels, generous margins, and a single brick accent. Motion supports navigation and feedback without distracting from the content.
 
 - Design variance: 7/10. Uneven image and text proportions add character while keeping the reading path predictable.
-- Motion intensity: 5/10. Page entry, section navigation, and interactive links use brief, eased motion; all content remains clear with reduced motion enabled.
+- Motion intensity: 6/10. Motion explains product decisions and changes of state: the hero marks the five-task limit, decision rows strike the rejected alternative, and the screenshot and project name travel between pages. All content remains complete and clear with reduced motion enabled.
 - Visual density: 4/10. Project facts stay concise, with full reasoning reserved for case pages.
 - Foundation: custom portfolio styling on the existing React, Vite, and Tailwind CSS stack. This is an editorial aesthetic, not an implementation of a third-party design system.
 
@@ -48,6 +48,19 @@ Avoid gradients, ambient glows, noise overlays, and decorative status dots. Prod
 - Use a compact type scale with clear weight contrast, balanced headings, and body copy limited to a readable measure.
 - Use an eight-pixel spacing rhythm, a centered content width near 1,240 pixels, and progressively wider desktop gutters.
 - Keep controls and image frames square or lightly rounded. Let whitespace and rules, rather than nested cards, separate content.
+
+### Motion
+
+Every animation answers one of four questions: what matters here, what happened, where did it go, or what was decided. Decoration alone is not a reason to move.
+
+- Easing: `--motion-ease` (`cubic-bezier(0.22, 1, 0.36, 1)`) for arrivals; a symmetric in-out curve only for wipes and strikes. UI feedback uses `--motion-ui` (260 ms); reveals run 700 to 900 ms.
+- Properties: transform and opacity first. Clip-path wipes, the decision strike and the SVG annotation stroke are the only exceptions, and each covers a small area.
+- Hero intro, once per visit: the headline rises word by word behind a mask, the supporting copy wipes up, a brick tick draws on the proof rule, then the TaskFocus screenshot dims and two marks outline the "5 of 5 slots" summary and the 5/5 counter. The screenshot stays real; the marks are an overlay, not a mock interface. Hover or focus on the figure lifts the dim.
+- Scroll reveal: section headings, experience rows, project copy and case sections rise in once. Screenshots open with a top-down wipe. Anything already on screen when a page mounts is shown at once, and print shows everything.
+- Brick ticks: a short accent segment marks where a record starts on its rule (hero proofs, experience rows). It draws in with the row.
+- Decisions: the rejected alternative receives a thin accent strike and the chosen solution a vertical accent rule. Both stay visible as the static state.
+- Page changes use the View Transitions API: the clicked screenshot and project name morph into the case header, and back again to the project card. The theme spreads as a circle from its toggle; language changes cross-fade. Browsers without the API and reduced-motion readers get instant changes.
+- Reduced motion: no intro, no reveal, no view transitions, no scroll progress bar. The annotation, ticks, strikes and rules are shown in their final state.
 
 ## Page composition
 
