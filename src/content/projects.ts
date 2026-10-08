@@ -50,6 +50,8 @@ export interface Project {
   live?: string;
   status?: LocalizedText;
   caseStudy?: ProjectCaseStudy;
+  // A playable model of one decision, shown under the decisions in the SPA case.
+  interactiveDemo?: 'today-limit';
   screenshot?: {
     src: string;
     alt: LocalizedText;
@@ -73,6 +75,7 @@ export const projects: Project[] = [
     slug: 'taskfocus',
     name: 'TaskFocus',
     presentation: 'featured',
+    interactiveDemo: 'today-limit',
     subtitle: {
       en: 'An inbox-first planner with flexible dates',
       ru: 'Планирование задач: сначала входящие, затем гибкие сроки',

@@ -1,9 +1,42 @@
-import { ArrowUpRight, ExternalLink, Github, Linkedin, Mail, Send } from 'lucide-react';
+import { ArrowUpRight, Copy, ExternalLink, Github, Linkedin, Mail, Send } from 'lucide-react';
+import { useState } from 'react';
 import { Link } from 'react-router';
 import { projects } from '../content/projects';
 import { experience } from '../content/experience';
 import { useApp } from '../lib/context';
 import TransitionLink from './TransitionLink';
+import { copyEmail } from './Toast';
+
+// A case link that shows the case's screenshot on hover, so the reader sees
+// what they are about to open. The card repeats the link, so it is hidden from
+// assistive technology.
+function CasePreviewLink({ to, children }: { to: string; children: React.ReactNode }) {
+  const { lang } = useApp();
+  // Mounted on first hover or focus, so the page does not load or carry the image up front.
+  const [armed, setArmed] = useState(false);
+  const project = projects.find(item => `/work/${item.slug}` === to);
+  const screenshot = project?.screenshot;
+
+  return (
+    <span className="case-preview" onPointerEnter={() => setArmed(true)} onFocus={() => setArmed(true)}>
+      <TransitionLink to={to} className="practice-item__link">{children}</TransitionLink>
+      {armed && project && screenshot && (
+        <span className="case-preview__card" aria-hidden="true">
+          <img
+            src={import.meta.env.BASE_URL + screenshot.src.replace(/^\/+/, '')}
+            alt=""
+            width={screenshot.width}
+            height={screenshot.height}
+            loading="lazy"
+            decoding="async"
+          />
+          <span className="case-preview__name">{project.name}</span>
+          <span className="case-preview__subtitle">{project.subtitle[lang]}</span>
+        </span>
+      )}
+    </span>
+  );
+}
 
 function ProjectActions({ project }: { project: (typeof projects)[number] }) {
   const { t } = useApp();
@@ -183,15 +216,17 @@ export function About() {
                 <h3 className="practice-item__title">{practice.title}</h3>
                 <p className="practice-item__detail">{practice.detail}</p>
                 <div className="practice-item__links">
-                  {practice.links.map(link => {
-                    const LinkComponent = link.to.startsWith('/work/') ? TransitionLink : Link;
-                    return (
-                      <LinkComponent key={link.to} to={link.to} className="practice-item__link">
-                        {link.label}
-                        <ArrowUpRight size={14} aria-hidden="true" />
-                      </LinkComponent>
-                    );
-                  })}
+                  {practice.links.map(link => link.to.startsWith('/work/') ? (
+                    <CasePreviewLink key={link.to} to={link.to}>
+                      {link.label}
+                      <ArrowUpRight size={14} aria-hidden="true" />
+                    </CasePreviewLink>
+                  ) : (
+                    <Link key={link.to} to={link.to} className="practice-item__link">
+                      {link.label}
+                      <ArrowUpRight size={14} aria-hidden="true" />
+                    </Link>
+                  ))}
                 </div>
               </li>
             ))}
@@ -214,11 +249,16 @@ export function Contact() {
         <div data-reveal="">
           <p className="contact-copy">{t.contact.subtitle}</p>
           <div className="contact-actions">
-            <a href="mailto:Matafonovegor2@gmail.com" className="contact-email" aria-label={t.contact.emailBtn}>
-              <Mail size={17} aria-hidden="true" />
-              <span>Matafonovegor2@gmail.com</span>
-              <ArrowUpRight className="contact-action__arrow" size={15} aria-hidden="true" />
-            </a>
+            <span className="contact-email-group">
+              <a href="mailto:Matafonovegor2@gmail.com" className="contact-email" aria-label={t.contact.emailBtn}>
+                <Mail size={17} aria-hidden="true" />
+                <span>Matafonovegor2@<wbr />gmail.com</span>
+                <ArrowUpRight className="contact-action__arrow" size={15} aria-hidden="true" />
+              </a>
+              <button type="button" className="contact-copy-button" onClick={() => { void copyEmail(t); }} aria-label={t.contact.copyEmail} title={t.contact.copyEmail}>
+                <Copy size={16} aria-hidden="true" />
+              </button>
+            </span>
             <a href="https://github.com/Simifar" target="_blank" rel="noopener noreferrer" className="contact-link">
               <Github size={17} aria-hidden="true" />
               <span>{t.footer.github}</span>

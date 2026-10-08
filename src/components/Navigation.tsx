@@ -2,7 +2,8 @@ import { Menu, Moon, Sun, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router';
 import { rememberLang, rememberTheme, useApp } from '../lib/context';
-import { runViewTransition } from '../lib/motion';
+import { animateThemeChange, runViewTransition } from '../lib/motion';
+import { CommandMenuTrigger } from './CommandMenuTrigger';
 
 type SectionName = 'experience' | 'work' | 'about' | 'contact';
 
@@ -73,15 +74,7 @@ export function ThemeToggle() {
         const x = button.left + button.width / 2;
         const y = button.top + button.height / 2;
         rememberTheme(nextTheme);
-        const transition = runViewTransition(() => setTheme(nextTheme), 'theme');
-        // The new theme spreads as a circle from the toggle.
-        transition?.ready.then(() => {
-          const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
-          document.documentElement.animate(
-            { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-            { duration: 620, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', pseudoElement: '::view-transition-new(root)' },
-          );
-        }).catch(() => {});
+        animateThemeChange(() => setTheme(nextTheme), x, y);
       }}
       className="theme-toggle"
       aria-label={theme === 'dark' ? t.nav.themeToLight : t.nav.themeToDark}
@@ -152,6 +145,7 @@ export function Navbar() {
           ))}
         </nav>
         <div className="site-actions">
+          <CommandMenuTrigger />
           <ThemeToggle />
           <LanguageToggle />
         </div>

@@ -373,3 +373,63 @@ test('page transitions open the case at the top and release shared element names
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('MindTrack');
   await expect.poll(() => page.evaluate(() => document.querySelectorAll('[style*="view-transition-name"]').length)).toBe(0);
 });
+
+test('command menu opens from the keyboard, filters and opens a case', async ({ page }) => {
+  await page.goto('/');
+  const dialog = page.getByRole('dialog', { name: 'Command menu' });
+  // The shortcut listener attaches after the app renders, which can trail the load event.
+  await expect(page.getByRole('button', { name: 'Open command menu' })).toBeVisible();
+  await expect(async () => {
+    await page.keyboard.press('Control+k');
+    await expect(dialog).toBeVisible({ timeout: 500 });
+  }).toPass();
+  await expect(dialog.getByRole('combobox')).toBeFocused();
+  await page.keyboard.type('mindtrack');
+  await expect(dialog.getByRole('option')).toHaveCount(1);
+  await page.keyboard.press('Enter');
+  await expect(page).toHaveURL(/#\/work\/mindtrack/);
+  await expect(dialog).toBeHidden();
+  await page.keyboard.press('/');
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press('ArrowDown');
+  await expect(dialog.getByRole('option', { selected: true })).toHaveText('Experience');
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+});
+
+test('the copy button puts the email address on the clipboard and confirms it', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  await page.goto('/#/?section=contact');
+  await page.locator('#contact').getByRole('button', { name: 'Copy email address' }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Email copied' })).toBeVisible();
+  expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('Matafonovegor2@gmail.com');
+});
+
+test('the TaskFocus case lets the reader try the five-task limit', async ({ page }) => {
+  await page.goto('/#/work/taskfocus');
+  const demo = page.getByRole('region', { name: 'Try the first decision' });
+  await expect(demo).toContainText('This is not the TaskFocus app');
+  await demo.getByRole('button', { name: 'Move to Today: Prepare the team demo' }).click();
+  await expect(demo).toContainText('5 of 5 slots');
+  await expect(demo.getByRole('button', { name: 'Move to Today: Update the onboarding doc' })).toBeFocused();
+  await page.keyboard.press('Enter');
+  await expect(demo.getByRole('status')).toContainText('Today already has five tasks');
+  await demo.getByRole('button', { name: 'Start over' }).click();
+  await expect(demo).toContainText('4 of 5 slots');
+  await page.goto('/#/work/mindtrack');
+  await expect(page.locator('.limit-demo')).toHaveCount(0);
+});
+
+test('wide case pages show contents that follow the reader', async ({ page }) => {
+  await page.setViewportSize({ width: 1600, height: 900 });
+  await page.goto('/#/work/taskfocus');
+  const toc = page.getByRole('navigation', { name: 'On this page' });
+  await expect(toc).toBeHidden();
+  await page.locator('#case-decisions').scrollIntoViewIfNeeded();
+  await expect(toc).toBeVisible();
+  await expect(toc.locator('[aria-current="true"]')).toHaveText('Product decisions');
+  await toc.getByRole('button', { name: 'Problem', exact: true }).click();
+  await expect(page.locator('#case-problem h2')).toBeFocused();
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await expect(toc).toBeHidden();
+});

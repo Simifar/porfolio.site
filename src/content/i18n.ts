@@ -45,7 +45,42 @@ export interface Content {
     title: string;
     practices: { title: string; detail: string; links: { to: string; label: string }[] }[];
   };
-  contact: { title: string; subtitle: string; emailBtn: string; linkedinBtn: string; telegramBtn: string; copied: string };
+  contact: { title: string; subtitle: string; emailBtn: string; linkedinBtn: string; telegramBtn: string; copied: string; copyEmail: string; copyFailed: string };
+  command: {
+    open: string;
+    title: string;
+    placeholder: string;
+    empty: string;
+    groupNavigate: string;
+    groupCases: string;
+    groupActions: string;
+    home: string;
+    toggleTheme: string;
+    switchLanguage: string;
+    copyEmail: string;
+    writeEmail: string;
+    openLinkedin: string;
+    openTelegram: string;
+    openGithub: string;
+    hintMove: string;
+    hintOpen: string;
+    hintClose: string;
+  };
+  demo: {
+    title: string;
+    intro: string;
+    disclosure: string;
+    inbox: string;
+    today: string;
+    slots: string;
+    move: string;
+    unplan: string;
+    inboxEmpty: string;
+    blocked: string;
+    reset: string;
+    tasks: string[];
+  };
+  toc: { label: string };
   footer: { built: string; copyright: string; github: string; linkedin: string; telegram: string; email: string };
   caseStudy: {
     caseLabel: string;
@@ -160,8 +195,45 @@ export const en: Content = {
     emailBtn: 'Send email',
     linkedinBtn: 'View LinkedIn',
     telegramBtn: 'Telegram',
-    copied: 'Copied!',
+    copied: 'Email copied',
+    copyEmail: 'Copy email address',
+    copyFailed: 'Could not copy. The address is Matafonovegor2@gmail.com',
   },
+  command: {
+    open: 'Open command menu',
+    title: 'Command menu',
+    placeholder: 'Search sections, cases and actions',
+    empty: 'Nothing found',
+    groupNavigate: 'Go to',
+    groupCases: 'Cases',
+    groupActions: 'Actions',
+    home: 'Home',
+    toggleTheme: 'Switch theme',
+    switchLanguage: 'Русская версия',
+    copyEmail: 'Copy email address',
+    writeEmail: 'Write an email',
+    openLinkedin: 'Open LinkedIn',
+    openTelegram: 'Open Telegram',
+    openGithub: 'Open GitHub',
+    hintMove: 'to move',
+    hintOpen: 'to open',
+    hintClose: 'to close',
+  },
+  demo: {
+    title: 'Try the first decision',
+    intro: 'Move tasks from the inbox into Today and see where the limit stops you.',
+    disclosure: 'Interactive model of the rule with sample tasks. This is not the TaskFocus app.',
+    inbox: 'Inbox',
+    today: 'Today',
+    slots: '{count} of 5 slots',
+    move: 'Move to Today: {task}',
+    unplan: 'Back to inbox: {task}',
+    inboxEmpty: 'The inbox is empty.',
+    blocked: 'Today already has five tasks. Leave “{task}” in the inbox or plan it for another day.',
+    reset: 'Start over',
+    tasks: ['Market and competitor analysis', 'Draft the roadmap', 'Sprint planning', 'Review user feedback', 'Prepare the team demo', 'Update the onboarding doc', 'Call with the designer'],
+  },
+  toc: { label: 'On this page' },
   footer: { built: 'Made by Egor Matafonov', copyright: '© {year} Egor Matafonov', github: 'GitHub', linkedin: 'LinkedIn', telegram: 'Telegram', email: 'Email' },
   caseStudy: {
     caseLabel: 'Product case',
@@ -276,8 +348,45 @@ export const ru: Content = {
     emailBtn: 'Написать',
     linkedinBtn: 'Открыть LinkedIn',
     telegramBtn: 'Telegram',
-    copied: 'Скопировано!',
+    copied: 'Почта скопирована',
+    copyEmail: 'Скопировать адрес почты',
+    copyFailed: 'Не получилось скопировать. Адрес: Matafonovegor2@gmail.com',
   },
+  command: {
+    open: 'Открыть меню команд',
+    title: 'Меню команд',
+    placeholder: 'Поиск по разделам, кейсам и действиям',
+    empty: 'Ничего не найдено',
+    groupNavigate: 'Перейти',
+    groupCases: 'Кейсы',
+    groupActions: 'Действия',
+    home: 'Главная',
+    toggleTheme: 'Сменить тему',
+    switchLanguage: 'English version',
+    copyEmail: 'Скопировать адрес почты',
+    writeEmail: 'Написать письмо',
+    openLinkedin: 'Открыть LinkedIn',
+    openTelegram: 'Открыть Telegram',
+    openGithub: 'Открыть GitHub',
+    hintMove: 'выбор',
+    hintOpen: 'открыть',
+    hintClose: 'закрыть',
+  },
+  demo: {
+    title: 'Попробуйте первое решение',
+    intro: 'Переносите задачи из входящих в «Сегодня» и посмотрите, где сработает лимит.',
+    disclosure: 'Интерактивная модель правила с задачами-примерами. Это не приложение TaskFocus.',
+    inbox: 'Входящие',
+    today: 'Сегодня',
+    slots: 'Занято {count} из 5 слотов',
+    move: 'Перенести в «Сегодня»: {task}',
+    unplan: 'Вернуть во входящие: {task}',
+    inboxEmpty: 'Входящие пусты.',
+    blocked: 'В «Сегодня» уже пять задач. Оставьте «{task}» во входящих или запланируйте на другой день.',
+    reset: 'Начать заново',
+    tasks: ['Анализ рынка и конкурентов', 'Формирование Roadmap', 'Спринт-планирование', 'Разбор отзывов пользователей', 'Подготовка демо для команды', 'Обновить онбординг', 'Созвон с дизайнером'],
+  },
+  toc: { label: 'В этом кейсе' },
   footer: { built: 'Сайт сделал Егор Матафонов', copyright: '© {year} Егор Матафонов', github: 'GitHub', linkedin: 'LinkedIn', telegram: 'Telegram', email: 'Почта' },
   caseStudy: {
     caseLabel: 'Продуктовый кейс',
