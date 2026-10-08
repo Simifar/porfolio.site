@@ -26,9 +26,7 @@ export interface Content {
     proofs: { value: string; label: string }[];
     cta: string;
     contactLink: string;
-    visualAlt: string;
     visualTitle: string;
-    visualSubtitle: string;
   };
   work: {
     title: string;
@@ -146,9 +144,7 @@ export const en: Content = {
     ],
     cta: 'See case studies',
     contactLink: 'Contact me',
-    visualAlt: 'TaskFocus Today dashboard with a five-task plan and a suggested next task.',
     visualTitle: 'TaskFocus',
-    visualSubtitle: 'Real signed-in screen · Today list capped at five tasks',
   },
   work: {
     title: 'Selected work',
@@ -299,9 +295,7 @@ export const ru: Content = {
     ],
     cta: 'Смотреть кейсы',
     contactLink: 'Написать',
-    visualAlt: 'Раздел «Сегодня» TaskFocus с планом из пяти задач и рекомендацией следующей задачи.',
     visualTitle: 'TaskFocus',
-    visualSubtitle: 'Реальный экран после входа · в «Сегодня» не больше пяти задач',
   },
   work: {
     title: 'Избранные проекты',

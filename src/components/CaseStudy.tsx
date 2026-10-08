@@ -78,7 +78,7 @@ export default function CaseStudy() {
 
       <main id="case-main" className="case-content" tabIndex={-1}>
         <section className="case-hero" aria-labelledby="case-title">
-          <div className="case-hero__layout">
+          <div className={`case-hero__layout${project.visual?.kind === 'cover' ? ' case-hero__layout--cover' : ''}`}>
             <div className="case-hero__copy">
               <p className="case-kicker">
                 <span>{project.caseStudy ? t.caseStudy.caseLabel : t.caseStudy.overviewLabel}</span>
@@ -110,23 +110,23 @@ export default function CaseStudy() {
               </div>
             </div>
 
-            {project.screenshot && (
+            {project.visual && (
               <figure className="case-visual">
-                {project.screenshot.kind === 'concept' && (
-                  <p className="case-visual__disclosure">{project.screenshot.caption[lang]}</p>
+                {project.visual.kind === 'concept' && (
+                  <p className="case-visual__disclosure">{project.visual.caption[lang]}</p>
                 )}
                 <a
-                  href={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
+                  href={import.meta.env.BASE_URL + project.visual.src.replace(/^\/+/, '')}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="case-visual__frame case-image-link"
+                  className={`case-visual__frame case-image-link${project.visual.kind === 'cover' ? ' portfolio-cover' : ''}`}
                   aria-label={`${t.caseStudy.fullImage}: ${project.name}`}
                 >
                   <img
-                    src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
-                    alt={project.screenshot.alt[lang]}
-                    width={project.screenshot.width}
-                    height={project.screenshot.height}
+                    src={import.meta.env.BASE_URL + project.visual.src.replace(/^\/+/, '')}
+                    alt={project.visual.alt[lang]}
+                    width={project.visual.width}
+                    height={project.visual.height}
                     loading="eager"
                     decoding="async"
                     className="case-visual__image"
@@ -135,7 +135,7 @@ export default function CaseStudy() {
                 </a>
                 <figcaption className="case-visual__caption">
                   <p className="case-visual__focus">{project.cardFocus[lang]}</p>
-                  {project.screenshot.kind !== 'concept' && <p className="case-visual__note">{project.screenshot.caption[lang]}</p>}
+                  {project.visual.kind !== 'concept' && <p className="case-visual__note">{project.visual.caption[lang]}</p>}
                 </figcaption>
               </figure>
             )}

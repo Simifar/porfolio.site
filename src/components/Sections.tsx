@@ -7,7 +7,7 @@ import { useApp } from '../lib/context';
 import TransitionLink from './TransitionLink';
 import { copyEmail } from './Toast';
 
-// A case link that shows the case's screenshot on hover, so the reader sees
+// A case link that shows the project's visual on hover, so the reader sees
 // what they are about to open. The card repeats the link, so it is hidden from
 // assistive technology.
 function CasePreviewLink({ to, children }: { to: string; children: React.ReactNode }) {
@@ -15,18 +15,18 @@ function CasePreviewLink({ to, children }: { to: string; children: React.ReactNo
   // Mounted on first hover or focus, so the page does not load or carry the image up front.
   const [armed, setArmed] = useState(false);
   const project = projects.find(item => `/work/${item.slug}` === to);
-  const screenshot = project?.screenshot;
+  const visual = project?.visual;
 
   return (
     <span className="case-preview" onPointerEnter={() => setArmed(true)} onFocus={() => setArmed(true)}>
       <TransitionLink to={to} className="practice-item__link">{children}</TransitionLink>
-      {armed && project && screenshot && (
+      {armed && project && visual && (
         <span className="case-preview__card" aria-hidden="true">
           <img
-            src={import.meta.env.BASE_URL + screenshot.src.replace(/^\/+/, '')}
+            src={import.meta.env.BASE_URL + visual.src.replace(/^\/+/, '')}
             alt=""
-            width={screenshot.width}
-            height={screenshot.height}
+            width={visual.width}
+            height={visual.height}
             loading="lazy"
             decoding="async"
           />
@@ -120,24 +120,24 @@ export function SelectedWork() {
             <div key={project.slug}>
               <article
                 aria-labelledby={`project-${project.slug}`}
-                className={`feature-project${index % 2 === 1 ? ' feature-project--reverse' : ''}`}
+                className={`feature-project${index % 2 === 1 ? ' feature-project--reverse' : ''}${project.visual?.kind === 'cover' ? ' feature-project--cover' : ''}`}
                 data-morph-scope={`project-${project.slug}`}
               >
-                {project.screenshot && (
+                {project.visual && (
                   <figure className="feature-project__figure">
-                    <div className="project-image-frame" data-reveal="media">
+                    <div className={`project-image-frame${project.visual.kind === 'cover' ? ' portfolio-cover' : ''}`} data-reveal="media">
                       <img
-                        src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
-                        alt={project.screenshot.alt[lang]}
-                        width={project.screenshot.width}
-                        height={project.screenshot.height}
+                        src={import.meta.env.BASE_URL + project.visual.src.replace(/^\/+/, '')}
+                        alt={project.visual.alt[lang]}
+                        width={project.visual.width}
+                        height={project.visual.height}
                         loading="lazy"
                         decoding="async"
                         className="project-image"
                         data-morph="image"
                       />
                     </div>
-                    <figcaption className="project-image-caption">{project.screenshot.caption[lang]}</figcaption>
+                    <figcaption className="project-image-caption">{project.visual.caption[lang]}</figcaption>
                   </figure>
                 )}
                 <div className="feature-project__copy" data-reveal="">
@@ -161,22 +161,22 @@ export function SelectedWork() {
           <div className="additional-grid">
             {additional.map(project => (
               <article key={project.slug} className="additional-project" aria-labelledby={`project-${project.slug}`} data-reveal="" data-morph-scope={`project-${project.slug}`}>
-                {project.screenshot ? (
-                  <figure className="additional-project__visual">
-                    {project.screenshot.kind === 'concept' && (
-                      <figcaption className="additional-project__disclosure">{project.screenshot.caption[lang]}</figcaption>
+                {project.visual ? (
+                  <figure className={`additional-project__visual${project.visual.kind === 'cover' ? ' portfolio-cover' : ''}`}>
+                    {project.visual.kind === 'concept' && (
+                      <figcaption className="additional-project__disclosure">{project.visual.caption[lang]}</figcaption>
                     )}
                     <img
-                      src={import.meta.env.BASE_URL + project.screenshot.src.replace(/^\/+/, '')}
-                      alt={project.screenshot.alt[lang]}
-                      width={project.screenshot.width}
-                      height={project.screenshot.height}
+                      src={import.meta.env.BASE_URL + project.visual.src.replace(/^\/+/, '')}
+                      alt={project.visual.alt[lang]}
+                      width={project.visual.width}
+                      height={project.visual.height}
                       loading="lazy"
                       decoding="async"
                       data-morph="image"
                     />
-                    {project.screenshot.kind !== 'concept' && (
-                      <figcaption className="additional-project__caption">{project.screenshot.caption[lang]}</figcaption>
+                    {project.visual.kind !== 'concept' && (
+                      <figcaption className="additional-project__caption">{project.visual.caption[lang]}</figcaption>
                     )}
                   </figure>
                 ) : (

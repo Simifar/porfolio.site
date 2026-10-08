@@ -2,18 +2,14 @@ import { ArrowDown, ArrowUpRight, Mail } from 'lucide-react';
 import { Fragment, useEffect, useState, type CSSProperties } from 'react';
 import { Link } from 'react-router';
 import { useApp } from '../lib/context';
+import { projects } from '../content/projects';
 import { prefersReducedMotion } from '../lib/motion';
 import TransitionLink from './TransitionLink';
 
 // The intro plays once per visit, not on every return to the home page.
 let introPlayed = false;
 
-// Areas of taskfocus-today.png (1919 × 1079) that show the five-task limit:
-// the "5 of 5 slots" summary and the 5/5 counter.
-const LIMIT_MARKS = [
-  { x: 468, y: 150, width: 352, height: 40 },
-  { x: 1706, y: 766, width: 64, height: 46 },
-];
+const taskfocusVisual = projects.find(project => project.slug === 'taskfocus')!.visual!;
 
 function useIntro() {
   const [playing, setPlaying] = useState(() => !introPlayed && !prefersReducedMotion());
@@ -29,7 +25,7 @@ function useIntro() {
 }
 
 export default function Hero() {
-  const { t } = useApp();
+  const { t, lang } = useApp();
   const intro = useIntro();
   const words = t.hero.headline.split(' ');
 
@@ -71,42 +67,23 @@ export default function Hero() {
         </div>
 
         <figure className="hero__visual" data-morph-scope="hero">
-          <div className="hero__image-frame">
+          <div className="hero__image-frame portfolio-cover">
             <img
-              src={import.meta.env.BASE_URL + 'projects/taskfocus-today.png'}
-              alt={t.hero.visualAlt}
-              width={1919}
-              height={1079}
+              src={import.meta.env.BASE_URL + taskfocusVisual.src.replace(/^\/+/, '')}
+              alt={taskfocusVisual.alt[lang]}
+              width={taskfocusVisual.width}
+              height={taskfocusVisual.height}
               loading="eager"
               decoding="async"
               {...{ fetchpriority: 'high' }}
               className="hero__image"
               data-morph="image"
             />
-            <svg className="hero__annotation" viewBox="0 0 1919 1079" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-              <defs>
-                <mask id="hero-spotlight">
-                  <rect width="1919" height="1079" fill="white" />
-                  {LIMIT_MARKS.map(mark => <rect key={mark.x} {...mark} rx="10" fill="black" />)}
-                </mask>
-              </defs>
-              <rect className="hero__annotation-dim" width="1919" height="1079" mask="url(#hero-spotlight)" />
-              {LIMIT_MARKS.map((mark, index) => (
-                <rect
-                  key={mark.x}
-                  {...mark}
-                  rx="10"
-                  pathLength={1}
-                  className="hero__annotation-mark"
-                  style={{ '--mark-index': index } as CSSProperties}
-                />
-              ))}
-            </svg>
           </div>
           <figcaption className="hero__caption">
             <span className="hero__caption-copy">
               <span className="hero__caption-title">{t.hero.visualTitle}</span>
-              <span className="hero__caption-detail">{t.hero.visualSubtitle}</span>
+              <span className="hero__caption-detail">{taskfocusVisual.caption[lang]}</span>
             </span>
             <TransitionLink to="/work/taskfocus" className="hero__case-link">
               {t.work.viewCase}

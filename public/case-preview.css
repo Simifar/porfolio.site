@@ -38,6 +38,7 @@ h3 { margin: 1.5rem 0 .4rem; font-size: 1rem; }
 .preview-links { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 1.5rem; }
 .preview-visual { margin: 0 0 3rem; }
 .preview-visual img, .preview-gallery img { display: block; max-width: 100%; height: auto; border: 1px solid var(--border); }
+.preview-visual--cover img { width: 100%; border: 0; border-radius: 4px; }
 figcaption { margin-top: .45rem; color: var(--muted); font-size: .8rem; }
 .preview-disclosure { margin: 0 0 .65rem; color: var(--secondary); font-size: .85rem; }
 .preview-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; margin-bottom: 3rem; }

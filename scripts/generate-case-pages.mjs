@@ -68,10 +68,10 @@ function renderCase(project, lang) {
   const openLabel = project.caseStudy ? l.open : l.openOverview;
   const title = `${project.name} · ${lang === 'ru' ? `${pageType.toLowerCase()} Егора Матафонова` : `${pageType.toLowerCase()} by Egor Matafonov`}`;
   const description = project.description[lang];
-  const screenshot = project.screenshot;
-  const socialScreenshot = screenshot?.kind === 'concept' ? undefined : screenshot;
-  const socialImage = socialScreenshot ? `${site}${socialScreenshot.src.replace(/^\/+/, '')}` : `${site}og-image.png`;
-  const visual = screenshot ? `<figure class="preview-visual">${screenshot.kind === 'concept' ? `<figcaption class="preview-disclosure">${escape(screenshot.caption[lang])}</figcaption>` : ''}<img src="${escape(asset(screenshot))}" alt="${escape(screenshot.alt[lang])}" width="${screenshot.width}" height="${screenshot.height}" fetchpriority="high">${screenshot.kind !== 'concept' ? `<figcaption>${escape(screenshot.caption[lang])}</figcaption>` : ''}</figure>` : '';
+  const image = project.visual;
+  const socialVisual = image?.kind === 'concept' ? undefined : image;
+  const socialImage = socialVisual ? `${site}${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}` : `${site}og-image.png`;
+  const visual = image ? `<figure class="preview-visual${image.kind === 'cover' ? ' preview-visual--cover' : ''}">${image.kind === 'concept' ? `<figcaption class="preview-disclosure">${escape(image.caption[lang])}</figcaption>` : ''}<img src="${escape(asset(image))}" alt="${escape(image.alt[lang])}" width="${image.width}" height="${image.height}" fetchpriority="high">${image.kind !== 'concept' ? `<figcaption>${escape(image.caption[lang])}</figcaption>` : ''}</figure>` : '';
   const gallery = project.gallery ? `<section class="preview-gallery" aria-label="${escape(l.gallery)}">${project.gallery.map(image => `<figure><img src="${escape(asset(image))}" alt="${escape(image.alt[lang])}" width="${image.width}" height="${image.height}" loading="lazy"><figcaption>${escape(image.caption[lang])}</figcaption></figure>`).join('')}</section>` : '';
   const study = project.caseStudy;
   const details = study ? [
@@ -98,7 +98,7 @@ function renderCase(project, lang) {
 <link rel="canonical" href="${caseUrl}"><link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="ru" href="${ruUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}">
 <link rel="stylesheet" href="${base}case-preview.css"><link rel="icon" type="image/svg+xml" href="${base}favicon.svg">
 <meta property="og:type" content="article"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${caseUrl}">
-<meta property="og:image" content="${socialImage}"><meta property="og:image:width" content="${socialScreenshot?.width ?? 1200}"><meta property="og:image:height" content="${socialScreenshot?.height ?? 630}"><meta property="og:image:alt" content="${escape(socialScreenshot?.alt[lang] ?? 'Egor Matafonov Product Manager portfolio')}"><meta property="og:locale" content="${lang === 'ru' ? 'ru_RU' : 'en_US'}">
+<meta property="og:image" content="${socialImage}"><meta property="og:image:width" content="${socialVisual?.width ?? 1200}"><meta property="og:image:height" content="${socialVisual?.height ?? 630}"><meta property="og:image:alt" content="${escape(socialVisual?.alt[lang] ?? 'Egor Matafonov Product Manager portfolio')}"><meta property="og:locale" content="${lang === 'ru' ? 'ru_RU' : 'en_US'}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escape(title)}"><meta name="twitter:description" content="${escape(description)}"><meta name="twitter:image" content="${socialImage}">
 <script>try{document.documentElement.className=localStorage.getItem('theme')==='dark'?'dark':'light'}catch{}</script>
 </head><body>
