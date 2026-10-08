@@ -62,6 +62,17 @@ Every animation answers one of four questions: what matters here, what happened,
 - Page changes use the View Transitions API: the clicked screenshot and project name morph into the case header, and back again to the project card. The theme spreads as a circle from its toggle; language changes cross-fade. Browsers without the API and reduced-motion readers get instant changes.
 - Reduced motion: no intro, no reveal, no view transitions, no scroll progress bar. The annotation, ticks, strikes and rules are shown in their final state.
 
+### Interaction details
+
+Small tools that save a reader time. Each one has a plain fallback and none replaces the visible navigation.
+
+- Command menu: Ctrl/⌘+K or "/" opens a searchable list of sections, cases and contact actions (theme, language, copy or write email, LinkedIn, Telegram, GitHub). It is a native modal dialog with a combobox and listbox. The trigger shows from 768 px; on phones the header menu remains the route. The menu loads in its own chunk after the first screen.
+- Copy email: a square button beside every email link copies the address and confirms it in one polite toast. The mailto link stays the primary action.
+- Try the decision: the TaskFocus case includes an interactive model of the five-task rule. It uses sample tasks, is labelled as a model rather than the app, and repeats the real trade-off text when the limit stops the reader. Projects opt in with `interactiveDemo`.
+- Case contents: from 1440 px a contents rail sits in the left margin of product cases. It appears after the case header, marks the current section with the brick tick, and steps aside before the closing call to action.
+- Case previews: links to cases in "How I work" show the case screenshot and subtitle on hover or focus, on pointer devices only. The card mounts on first hover so the page does not load extra images.
+- DevTools note: the console prints a short greeting with the email address and the source repository.
+
 ## Page composition
 
 ### Home

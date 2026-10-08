@@ -28,6 +28,18 @@ function savePreference(key: string, value: string) {
   }
 }
 
+// Toggles animate the change through a view transition, which applies it a
+// frame later. Saving the choice first keeps it even if the reader leaves the
+// page before that frame.
+export function rememberLang(lang: Lang) {
+  savePreference('lang', lang);
+  writeLangToUrl(lang);
+}
+
+export function rememberTheme(theme: Theme) {
+  savePreference('theme', theme);
+}
+
 function isLang(value: string | null): value is Lang {
   return value === 'en' || value === 'ru';
 }

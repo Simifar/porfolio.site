@@ -33,6 +33,18 @@ export function runViewTransition(update: () => void, kind: TransitionKind) {
   return transition;
 }
 
+// The new theme spreads as a circle from (x, y), usually the control's centre.
+export function animateThemeChange(apply: () => void, x: number, y: number) {
+  const transition = runViewTransition(apply, 'theme');
+  transition?.ready.then(() => {
+    const radius = Math.hypot(Math.max(x, window.innerWidth - x), Math.max(y, window.innerHeight - y));
+    document.documentElement.animate(
+      { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+      { duration: 620, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', pseudoElement: '::view-transition-new(root)' },
+    );
+  }).catch(() => {});
+}
+
 function isInViewport(element: Element | null): element is HTMLElement {
   if (!element) return false;
   const rect = element.getBoundingClientRect();
@@ -69,9 +81,9 @@ function scrollForRoute(to: string) {
 
 // Route change with a shared-element morph: the screenshot and project name
 // the reader clicked travel to their place on the next page.
-export function navigateWithTransition(navigate: () => void, link: HTMLElement, to: string) {
+export function navigateWithTransition(navigate: () => void, link: HTMLElement | null, to: string) {
   const fromSlug = window.location.hash.match(/^#\/work\/([^/?]+)/)?.[1] ?? null;
-  const sources = findMorphs(link.closest('[data-morph-scope]'));
+  const sources = findMorphs(link?.closest('[data-morph-scope]') ?? null);
   const morphing = canUseViewTransition() ? MORPH_NAMES.filter(name => isInViewport(sources[name])) : [];
   const tagged: HTMLElement[] = [];
 
