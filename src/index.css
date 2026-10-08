@@ -2972,9 +2972,9 @@ section[id] {
   to { opacity: 1; transform: none; }
 }
 
-@keyframes reveal-media {
-  from { clip-path: inset(0 0 100% 0); }
-  to { clip-path: inset(0); }
+@keyframes curtain {
+  from { transform: scaleY(1); }
+  to { transform: scaleY(0); }
 }
 
 @keyframes settle {
@@ -3060,16 +3060,33 @@ section[id] {
     opacity: 0;
   }
 
+  /* Screenshots wipe open top-down under a page-coloured curtain. The frame's
+     own box is never clipped, so the observer sees it whichever way it enters
+     the screen (clipping it hid frames entered from above). */
+  [data-reveal="media"] {
+    position: relative;
+  }
+
+  [data-reveal="media"]::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--color-bg);
+    pointer-events: none;
+    transform: scaleY(0);
+    transform-origin: center bottom;
+  }
+
   html.reveal-ready [data-reveal="media"]:not([data-revealed]) {
-    clip-path: inset(0 0 100% 0);
+    opacity: 0;
   }
 
   [data-reveal=""][data-revealed=""] {
     animation: reveal-up 900ms var(--motion-ease) var(--reveal-delay, 0ms) backwards;
   }
 
-  [data-reveal="media"][data-revealed=""] {
-    animation: reveal-media 900ms cubic-bezier(0.65, 0, 0.35, 1) var(--reveal-delay, 0ms) backwards;
+  [data-reveal="media"][data-revealed=""]::after {
+    animation: curtain 900ms cubic-bezier(0.65, 0, 0.35, 1) var(--reveal-delay, 0ms) backwards;
   }
 
   [data-reveal="media"][data-revealed=""] img {
@@ -3168,6 +3185,10 @@ section[id] {
     opacity: 1 !important;
     clip-path: none !important;
     animation: none !important;
+  }
+
+  [data-reveal="media"]::after {
+    display: none !important;
   }
 }
 

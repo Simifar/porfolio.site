@@ -129,30 +129,48 @@ function showRevealsInViewport() {
 export function useScrollReveal(key: string) {
   useLayoutEffect(() => {
     const root = document.documentElement;
-    const targets = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-revealed])'));
-    if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
-      for (const element of targets) element.dataset.revealed = 'instant';
-      return;
-    }
+    const animate = !prefersReducedMotion() && 'IntersectionObserver' in window;
 
-    for (const element of targets) {
-      if (element.getBoundingClientRect().top < window.innerHeight) element.dataset.revealed = 'instant';
-    }
-    root.classList.add('reveal-ready');
-
-    const observer = new IntersectionObserver(entries => {
+    const observer = animate ? new IntersectionObserver((entries, io) => {
       const entering = entries.filter(entry => entry.isIntersecting);
-      for (const entry of entering) observer.unobserve(entry.target);
+      for (const entry of entering) io.unobserve(entry.target);
       entering.filter(entry => (entry.target as HTMLElement).dataset.revealed === undefined).forEach((entry, index) => {
         const element = entry.target as HTMLElement;
         element.style.setProperty('--reveal-delay', `${Math.min(index * 90, 360)}ms`);
         element.dataset.revealed = '';
       });
-    }, { rootMargin: '0px 0px -10% 0px' });
+    }, { rootMargin: '0px 0px -10% 0px' }) : null;
 
-    for (const element of targets) {
-      if (element.dataset.revealed === undefined) observer.observe(element);
-    }
-    return () => observer.disconnect();
+    const register = (elements: Iterable<HTMLElement>) => {
+      for (const element of elements) {
+        if (element.dataset.revealed !== undefined) continue;
+        if (!observer || element.getBoundingClientRect().top < window.innerHeight) element.dataset.revealed = 'instant';
+        else observer.observe(element);
+      }
+    };
+
+    register(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    if (observer) root.classList.add('reveal-ready');
+
+    // Content can mount after the page does, for example a list re-rendered in
+    // another language. New nodes join here, in a microtask before the next
+    // paint, so nothing on screen is ever left hidden.
+    const mutations = new MutationObserver(records => {
+      const added: HTMLElement[] = [];
+      for (const record of records) {
+        for (const node of record.addedNodes) {
+          if (!(node instanceof HTMLElement)) continue;
+          if (node.matches('[data-reveal]')) added.push(node);
+          added.push(...node.querySelectorAll<HTMLElement>('[data-reveal]'));
+        }
+      }
+      register(added);
+    });
+    mutations.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      observer?.disconnect();
+      mutations.disconnect();
+    };
   }, [key]);
 }

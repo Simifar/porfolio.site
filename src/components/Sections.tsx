@@ -211,8 +211,9 @@ export function About() {
 
         <div>
           <ul className="practice-list">
-            {t.about.practices.map(practice => (
-              <li key={practice.title} className="practice-item" data-reveal="">
+            {t.about.practices.map((practice, index) => (
+              // Keyed by position so a language switch updates the rows instead of replacing them.
+              <li key={index} className="practice-item" data-reveal="">
                 <h3 className="practice-item__title">{practice.title}</h3>
                 <p className="practice-item__detail">{practice.detail}</p>
                 <div className="practice-item__links">

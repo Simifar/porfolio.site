@@ -433,3 +433,30 @@ test('wide case pages show contents that follow the reader', async ({ page }) =>
   await page.setViewportSize({ width: 1280, height: 900 });
   await expect(toc).toBeHidden();
 });
+
+test('sections re-rendered by a language switch still reveal when the reader reaches them', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  await page.getByRole('button', { name: 'Russian' }).click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
+  await page.locator('#about').scrollIntoViewIfNeeded();
+  const items = page.locator('#about .practice-item');
+  await expect(items).toHaveCount(3);
+  await expect.poll(() => items.evaluateAll(elements => elements.every(element => element.hasAttribute('data-revealed')))).toBeTruthy();
+  await expect.poll(() => items.evaluateAll(elements => elements.map(element => getComputedStyle(element).opacity).join())).toBe('1,1,1');
+});
+
+test('screenshots reveal when the reader scrolls back up to them', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+  const frame = page.locator('#work .project-image-frame').first();
+  // Jump past the projects without scrolling through them, then come back up
+  // so the screenshot enters the screen from the top edge.
+  await page.evaluate(() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+  await page.waitForTimeout(300);
+  await expect(frame).not.toHaveAttribute('data-revealed');
+  await frame.evaluate(element => window.scrollTo({ top: element.getBoundingClientRect().top + window.scrollY + 160, behavior: 'instant' }));
+  await expect(frame).toHaveAttribute('data-revealed', '');
+  await expect.poll(() => frame.evaluate(element => getComputedStyle(element).opacity)).toBe('1');
+});
