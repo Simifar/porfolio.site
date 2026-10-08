@@ -79,7 +79,7 @@ test('hero shows role, proof points and primary CTA above the fold without dupli
       await expect(item).toBeInViewport({ ratio: 1 });
     }
     await expect(hero.getByRole('link', { name: 'See case studies' })).toBeInViewport({ ratio: 1 });
-    await expect(page.locator('img[src$="mindtrack-home.png"]')).toHaveCount(1);
+    await expect(page.locator('img[src$="mindtrack-cover.webp"]')).toHaveCount(1);
   }
 });
 
@@ -129,7 +129,7 @@ test('?lang= in the URL opens that language, wins over the saved one, and follow
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
 });
 
-test('all case routes load directly with real images and distinct canonical pages', async ({ page }) => {
+test('all case routes load directly with covers and distinct canonical pages', async ({ page }) => {
   for (const slug of slugs) {
     await page.goto(`/#/work/${slug}`);
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
@@ -137,13 +137,15 @@ test('all case routes load directly with real images and distinct canonical page
     await expectNoHorizontalScroll(page);
     const mainImage = page.locator('.case-visual__image');
     if (await mainImage.count()) {
-      await expect.poll(() => mainImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBeGreaterThan(0);
+      await expect(mainImage).toHaveAttribute('src', new RegExp(`${slug}-cover\\.webp$`));
+      await expect.poll(() => mainImage.evaluate((image: HTMLImageElement) => image.naturalWidth)).toBe(1600);
+      await expect(page.locator('meta[property="og:image"]')).toHaveAttribute('content', new RegExp(`${slug}-cover\\.png$`));
     }
     await expect(page.getByRole('link', { name: 'Shareable page' })).toHaveAttribute('href', new RegExp(`/work/${slug}/$`));
   }
 
   await page.goto('/#/work/taskfocus');
-  await expect(page.locator('.case-gallery img')).toHaveCount(3);
+  await expect(page.locator('.case-gallery img')).toHaveCount(4);
   for (const image of await page.locator('.case-gallery img').all()) {
     await image.scrollIntoViewIfNeeded();
     await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.naturalWidth)).toBeGreaterThan(0);
@@ -351,12 +353,13 @@ test('scroll reveal shows every section once it is reached and never hides what 
   await expect.poll(() => page.locator('#contact [data-reveal]').first().evaluate(element => getComputedStyle(element).opacity)).toBe('1');
 });
 
-test('reduced motion shows all content and the hero annotation without animation', async ({ page }) => {
+test('reduced motion shows all content and the hero cover without animation', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   expect(await page.evaluate(() => document.querySelectorAll('[data-reveal]:not([data-revealed="instant"])').length)).toBe(0);
   expect(await page.locator('#hero').getAttribute('data-intro')).toBeNull();
-  await expect(page.locator('.hero__annotation-mark')).toHaveCount(2);
+  await expect(page.locator('.hero__image')).toHaveAttribute('src', /taskfocus-cover\.webp$/);
+  await expect.poll(() => page.locator('.hero__image').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBe(1600);
   await page.locator('#work').scrollIntoViewIfNeeded();
   expect(await page.locator('#work .project-image-frame').first().evaluate(element => getComputedStyle(element).clipPath)).toBe('none');
 });

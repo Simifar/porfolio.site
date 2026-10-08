@@ -11,7 +11,7 @@ The portfolio separates verified company experience from personal product projec
 An individual Product Manager portfolio for recruiters, using a product-editorial language inspired by working notes and decision records. The visual system is calm, direct, and slightly asymmetric. It uses real product screenshots, compact labels, generous margins, and a single brick accent. Motion supports navigation and feedback without distracting from the content.
 
 - Design variance: 7/10. Uneven image and text proportions add character while keeping the reading path predictable.
-- Motion intensity: 6/10. Motion explains product decisions and changes of state: the hero marks the five-task limit, decision rows strike the rejected alternative, and the screenshot and project name travel between pages. All content remains complete and clear with reduced motion enabled.
+- Motion intensity: 6/10. Motion explains product decisions and changes of state: decision rows strike the rejected alternative, and the cover and project name travel between pages. All content remains complete and clear with reduced motion enabled.
 - Visual density: 4/10. Project facts stay concise, with full reasoning reserved for case pages.
 - Foundation: custom portfolio styling on the existing React, Vite, and Tailwind CSS stack. This is an editorial aesthetic, not an implementation of a third-party design system.
 
@@ -54,13 +54,13 @@ Avoid gradients, ambient glows, noise overlays, and decorative status dots. Prod
 Every animation answers one of four questions: what matters here, what happened, where did it go, or what was decided. Decoration alone is not a reason to move.
 
 - Easing: `--motion-ease` (`cubic-bezier(0.22, 1, 0.36, 1)`) for arrivals; a symmetric in-out curve only for wipes and strikes. UI feedback uses `--motion-ui` (260 ms); reveals run 700 to 900 ms.
-- Properties: transform and opacity first. Clip-path wipes, the decision strike and the SVG annotation stroke are the only exceptions, and each covers a small area.
-- Hero intro, once per visit: the headline rises word by word behind a mask, the supporting copy wipes up, a brick tick draws on the proof rule, then the TaskFocus screenshot dims and two marks outline the "5 of 5 slots" summary and the 5/5 counter. The screenshot stays real; the marks are an overlay, not a mock interface. Hover or focus on the figure lifts the dim.
+- Properties: transform and opacity first. Clip-path wipes and the decision strike are the exceptions, and each covers a small area.
+- Hero intro, once per visit: the headline rises word by word behind a mask, the supporting copy wipes up and a brick tick draws on the proof rule. The TaskFocus cover stays undimmed, without overlays or enlargement that would clip its margins.
 - Scroll reveal: section headings, experience rows, project copy and case sections rise in once. Screenshots open with a top-down wipe. Anything already on screen when a page mounts is shown at once, and print shows everything.
 - Brick ticks: a short accent segment marks where a record starts on its rule (hero proofs, experience rows). It draws in with the row.
 - Decisions: the rejected alternative receives a thin accent strike and the chosen solution a vertical accent rule. Both stay visible as the static state.
-- Page changes use the View Transitions API: the clicked screenshot and project name morph into the case header, and back again to the project card. The theme spreads as a circle from its toggle; language changes cross-fade. Browsers without the API and reduced-motion readers get instant changes.
-- Reduced motion: no intro, no reveal, no view transitions, no scroll progress bar. The annotation, ticks, strikes and rules are shown in their final state.
+- Page changes use the View Transitions API: the clicked cover and project name morph into the case header, and back again to the project card. The theme spreads as a circle from its toggle; language changes cross-fade. Browsers without the API and reduced-motion readers get instant changes.
+- Reduced motion: no intro, no reveal, no view transitions, no scroll progress bar. Covers, ticks, strikes and rules are shown in their final state.
 
 ### Interaction details
 
@@ -70,7 +70,7 @@ Small tools that save a reader time. Each one has a plain fallback and none repl
 - Copy email: a square button beside every email link copies the address and confirms it in one polite toast. The mailto link stays the primary action.
 - Try the decision: the TaskFocus case includes an interactive model of the five-task rule. It uses sample tasks, is labelled as a model rather than the app, and repeats the real trade-off text when the limit stops the reader. Projects opt in with `interactiveDemo`.
 - Case contents: from 1440 px a contents rail sits in the left margin of product cases. It appears after the case header, marks the current section with the brick tick, and steps aside before the closing call to action.
-- Case previews: links to cases in "How I work" show the case screenshot and subtitle on hover or focus, on pointer devices only. The card mounts on first hover so the page does not load extra images.
+- Case previews: links to cases in "How I work" show the project cover and subtitle on hover or focus, on pointer devices only. The card mounts on first hover so the page does not load extra images.
 - DevTools note: the console prints a short greeting with the email address and the source repository.
 
 ## Page composition
@@ -79,8 +79,8 @@ Small tools that save a reader time. Each one has a plain fallback and none repl
 
 1. A left-aligned role statement and one useful project preview form the first screen. The headline names the role; its short supporting copy describes the confirmed project work.
 2. Company experience appears as open editorial rows. O!task and Web Do carry more detail; the technical and operational role at «Потенциал» is shorter. This section stays separate from personal projects.
-3. TaskFocus and MindTrack remain the detailed cases. Their screenshots keep their original aspect ratios and their content blocks use different proportions instead of identical card shells.
-4. CortexMap remains a screenshot-led additional project. Telegram Growth Analytics uses the supplied illustrative interface concept, clearly labeled as a concept with example figures rather than a screenshot of the local program.
+3. TaskFocus and MindTrack remain the detailed cases. The supplied editorial covers appear on the home page and in case headers, at their complete 16:9 aspect ratio. Covers have their own canvas and margins, so they receive no extra frame, crop, dimming or annotation. Captions identify them as compositions based on the product interface; the MindTrack score is an example. WebP is used on the page and PNG for social previews.
+4. CortexMap uses the matching editorial cover as an additional project. Real product screens remain inside detailed cases as evidence for specific decisions.
 5. “How I work” presents three evidence-backed themes: product framing, privacy and interpretation, and solo delivery with AI-assisted coding. Each points to its relevant case.
 6. Contact keeps email as the primary action and LinkedIn and Telegram as direct secondary routes. A CV link appears only after a current PDF is supplied.
 
@@ -88,7 +88,7 @@ Small tools that save a reader time. Each one has a plain fallback and none repl
 
 - Keep the current project URLs and the order of task, role and constraints, decisions, delivery, status, and validation.
 - Use a quiet case header and one clear source or live-product action.
-- Show each real screenshot beside its key point on desktop and stack the image above its caption on mobile. Do not crop important interface content to force a shared aspect ratio. TaskFocus uses a signed-in Today screenshot first, with Inbox, week and calendar images after the decision narrative.
+- Case headers place the cover below the introduction at full content width, keeping the composition legible. Real screenshots keep their original aspect ratios in the product gallery: TaskFocus Today, Inbox, week and calendar, and the MindTrack result with demonstration answers.
 - Present decisions as open editorial rows with a clear title and rationale, not a grid of repeated bordered cards.
 - Keep additional projects concise and retain the real status of their public materials.
 

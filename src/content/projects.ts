@@ -52,11 +52,12 @@ export interface Project {
   caseStudy?: ProjectCaseStudy;
   // A playable model of one decision, shown under the decisions in the SPA case.
   interactiveDemo?: 'today-limit';
-  screenshot?: {
+  visual?: {
     src: string;
     alt: LocalizedText;
     caption: LocalizedText;
-    kind?: 'concept';
+    kind?: 'concept' | 'cover';
+    socialSrc?: string;
     objectPosition?: 'left' | 'center';
     width: number;
     height: number;
@@ -228,20 +229,29 @@ export const projects: Project[] = [
         { label: { en: 'Diploma project', ru: 'Описание дипломного проекта' }, href: 'https://github.com/Simifar/taskfocus/blob/main/docs/THESIS.md' },
       ],
     },
-    screenshot: {
-      src: '/projects/taskfocus-today.png',
+    visual: {
+      src: '/projects/taskfocus-cover.webp',
+      socialSrc: '/projects/taskfocus-cover.png',
+      kind: 'cover',
       alt: {
-        en: 'TaskFocus Today dashboard with a five-task plan and a suggested next task.',
-        ru: 'Раздел «Сегодня» TaskFocus с планом из пяти задач и рекомендацией следующей задачи.',
+        en: 'TaskFocus editorial cover: a five-task Today plan and a weekly calendar, composed from the product interface.',
+        ru: 'Обложка TaskFocus по мотивам интерфейса: план на пять задач и недельный календарь.',
       },
       caption: {
-        en: 'Today · real signed-in dashboard screenshot',
-        ru: 'Сегодня · реальный скриншот планировщика после входа',
+        en: 'Editorial cover · based on the product interface',
+        ru: 'Обложка проекта · по мотивам интерфейса',
       },
-      width: 1919,
-      height: 1079,
+      width: 1600,
+      height: 900,
     },
     gallery: [
+      {
+        src: '/projects/taskfocus-today.png',
+        alt: { en: 'TaskFocus Today dashboard with a five-task plan and a suggested next task.', ru: 'Раздел «Сегодня» TaskFocus с планом из пяти задач и рекомендацией следующей задачи.' },
+        caption: { en: 'Today · real signed-in dashboard screenshot', ru: 'Сегодня · реальный скриншот планировщика после входа' },
+        width: 1919,
+        height: 1079,
+      },
       {
         src: '/projects/taskfocus-inbox.png',
         alt: { en: 'TaskFocus Inbox with quick capture and unscheduled tasks.', ru: 'Входящие TaskFocus с быстрым добавлением и задачами без даты.' },
@@ -425,12 +435,14 @@ export const projects: Project[] = [
         { label: { en: 'Product and questionnaire notes', ru: 'Описание продукта и опросников' }, href: 'https://github.com/Simifar/mindtrack/blob/main/README.md' },
       ],
     },
-    screenshot: {
-      src: '/projects/mindtrack-home.png',
-      alt: { en: 'MindTrack questionnaire catalog and home page', ru: 'Каталог опросников и главная страница MindTrack' },
-      caption: { en: 'Questionnaire catalog · real app screen', ru: 'Каталог опросников · настоящий экран приложения' },
-      width: 1280,
-      height: 1306,
+    visual: {
+      src: '/projects/mindtrack-cover.webp',
+      socialSrc: '/projects/mindtrack-cover.png',
+      kind: 'cover',
+      alt: { en: 'MindTrack editorial cover: a questionnaire catalog and an example WHO-5 result, composed from the product interface.', ru: 'Обложка MindTrack по мотивам интерфейса: каталог опросников и пример результата WHO-5.' },
+      caption: { en: 'Editorial cover · result shown as an example', ru: 'Обложка проекта · результат показан для примера' },
+      width: 1600,
+      height: 900,
     },
     gallery: [
       {
@@ -474,12 +486,14 @@ export const projects: Project[] = [
     github: 'https://github.com/Simifar/CortexMap',
     live: 'https://simifar.github.io/CortexMap/',
     status: { en: 'Published', ru: 'Опубликован' },
-    screenshot: {
-      src: '/projects/cortexmap-home.png',
-      alt: { en: 'CortexMap English-learning catalog', ru: 'Каталог CortexMap для изучения английского' },
-      caption: { en: 'CortexMap home page', ru: 'Главная страница CortexMap' },
-      width: 1200,
-      height: 630,
+    visual: {
+      src: '/projects/cortexmap-cover.webp',
+      socialSrc: '/projects/cortexmap-cover.png',
+      kind: 'cover',
+      alt: { en: 'CortexMap editorial cover: an English-learning catalog with CEFR levels A1 to C2, composed from the product interface.', ru: 'Обложка CortexMap по мотивам интерфейса: каталог английского с уровнями CEFR от A1 до C2.' },
+      caption: { en: 'Editorial cover · based on the product interface', ru: 'Обложка проекта · по мотивам интерфейса' },
+      width: 1600,
+      height: 900,
     },
   },
 ];
