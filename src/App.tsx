@@ -1,5 +1,5 @@
 import { HashRouter, Routes, Route, useLocation } from 'react-router';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { AppProvider, useApp } from './lib/context';
 import { useScrollReveal } from './lib/motion';
 import { projects } from './content/projects';
@@ -8,6 +8,7 @@ import Hero from './components/Hero';
 import { Experience, SelectedWork, About, Contact, Footer } from './components/Sections';
 import CaseStudy from './components/CaseStudy';
 import NotFound from './components/NotFound';
+import { ToastRegion } from './components/Toast';
 
 function PageMetadata() {
   const { pathname } = useLocation();
@@ -70,6 +71,9 @@ function ScrollReset() {
 
   return null;
 }
+
+// Not needed for the first screen, so it loads in its own chunk after render.
+const CommandMenu = lazy(() => import('./components/CommandMenu'));
 
 // Runs after the route's own effects, once its content is in the DOM.
 function RevealController() {
@@ -135,6 +139,10 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <RevealController />
+        <Suspense fallback={null}>
+          <CommandMenu />
+        </Suspense>
+        <ToastRegion />
       </HashRouter>
     </AppProvider>
   );

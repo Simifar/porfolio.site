@@ -1,16 +1,20 @@
 import { Link, useParams } from 'react-router';
-import { ArrowLeft, ArrowUpRight, ExternalLink, Linkedin, Mail } from 'lucide-react';
+import { ArrowLeft, ArrowUpRight, Copy, ExternalLink, Linkedin, Mail } from 'lucide-react';
 import { projects } from '../content/projects';
 import { useApp } from '../lib/context';
 import { Footer } from './Sections';
 import { LanguageToggle, ThemeToggle } from './Navigation';
+import { CommandMenuTrigger } from './CommandMenuTrigger';
 import TransitionLink from './TransitionLink';
+import CaseToc from './CaseToc';
+import TodayLimitDemo from './TodayLimitDemo';
+import { copyEmail } from './Toast';
 
 // A section either reveals as one block, or (revealItems) lets its rows
 // reveal one by one while only the heading moves with the section.
-function CaseSection({ title, revealItems = false, children }: { title: string; revealItems?: boolean; children: React.ReactNode }) {
+function CaseSection({ id, title, revealItems = false, children }: { id: string; title: string; revealItems?: boolean; children: React.ReactNode }) {
   return (
-    <section className="case-section" data-reveal={revealItems ? undefined : ''}>
+    <section id={`case-${id}`} className="case-section" data-reveal={revealItems ? undefined : ''} data-toc="">
       <h2 className="case-section__title" data-reveal={revealItems ? '' : undefined}>{title}</h2>
       <div className="case-section__content">{children}</div>
     </section>
@@ -66,6 +70,7 @@ export default function CaseStudy() {
           <span className="back-link__short" aria-hidden="true">{lang === 'en' ? 'Back' : 'Назад'}</span>
         </TransitionLink>
         <div className="case-toolbar__controls">
+          <CommandMenuTrigger />
           <ThemeToggle />
           <LanguageToggle />
         </div>
@@ -140,18 +145,18 @@ export default function CaseStudy() {
         {project.caseStudy ? (
           <div className="case-body">
             <div className="case-body__inner">
-                <CaseSection title={t.caseStudy.problemTitle}>
+                <CaseSection id="problem" title={t.caseStudy.problemTitle}>
                   {project.caseStudy.problem && <p className="case-copy">{project.caseStudy.problem[lang]}</p>}
                   <p className="case-copy">{project.caseStudy.context[lang]}</p>
                 </CaseSection>
 
                 {project.caseStudy.alternatives && (
-                  <CaseSection title={t.caseStudy.alternativesTitle}>
+                  <CaseSection id="alternatives" title={t.caseStudy.alternativesTitle}>
                     <p className="case-copy">{project.caseStudy.alternatives[lang]}</p>
                   </CaseSection>
                 )}
 
-                <CaseSection title={t.caseStudy.roleTitle}>
+                <CaseSection id="role" title={t.caseStudy.roleTitle}>
                   <p className="case-copy">{project.caseStudy.role[lang]}</p>
                   <h3 className="case-subheading">{t.caseStudy.constraintsTitle}</h3>
                   <ul className="case-list">
@@ -160,7 +165,7 @@ export default function CaseStudy() {
                 </CaseSection>
 
                 {project.caseStudy.scope && (
-                  <CaseSection title={t.caseStudy.scopeTitle}>
+                  <CaseSection id="scope" title={t.caseStudy.scopeTitle}>
                     <h3 className="case-subheading">{t.caseStudy.scopeIncluded}</h3>
                     <ul className="case-list">
                       {project.caseStudy.scope.included.map(item => <li key={item.en}>{item[lang]}</li>)}
@@ -176,7 +181,7 @@ export default function CaseStudy() {
                   </CaseSection>
                 )}
 
-                <CaseSection title={t.caseStudy.decisionsTitle} revealItems>
+                <CaseSection id="decisions" title={t.caseStudy.decisionsTitle} revealItems>
                   <ol className="decision-list">
                     {project.caseStudy.decisions.map(decision => {
                       const structured = Boolean(decision.problem || decision.alternative);
@@ -223,10 +228,11 @@ export default function CaseStudy() {
                       );
                     })}
                   </ol>
+                  {project.interactiveDemo === 'today-limit' && <TodayLimitDemo />}
                 </CaseSection>
 
                 {project.gallery && (
-                  <section className="case-gallery case-gallery--embedded" aria-labelledby="case-gallery-title">
+                  <section id="case-gallery" className="case-gallery case-gallery--embedded" aria-labelledby="case-gallery-title" data-toc="">
                     <div className="case-gallery__inner">
                       <h2 id="case-gallery-title" className="case-gallery__title">{t.caseStudy.galleryTitle}</h2>
                       <div className="case-gallery__grid">
@@ -256,13 +262,13 @@ export default function CaseStudy() {
                   </section>
                 )}
 
-                <CaseSection title={t.caseStudy.deliveredTitle}>
+                <CaseSection id="delivered" title={t.caseStudy.deliveredTitle}>
                   <ul className="delivered-list">
                     {project.caseStudy.delivered.map(item => <li key={item.en}>{item[lang]}</li>)}
                   </ul>
                 </CaseSection>
 
-                <CaseSection title={t.caseStudy.statusTitle}>
+                <CaseSection id="status" title={t.caseStudy.statusTitle}>
                   {project.caseStudy.validation && (
                     <>
                       <h3 className="case-subheading">{t.caseStudy.validationTitle}</h3>
@@ -272,7 +278,7 @@ export default function CaseStudy() {
                   <p className="case-copy">{project.caseStudy.status[lang]}</p>
                 </CaseSection>
 
-                <CaseSection title={project.caseStudy.successCriteria ? t.caseStudy.successCriteriaTitle : t.caseStudy.nextValidationTitle}>
+                <CaseSection id="criteria" title={project.caseStudy.successCriteria ? t.caseStudy.successCriteriaTitle : t.caseStudy.nextValidationTitle}>
                   {project.caseStudy.successCriteria && (
                     <ul className="case-list">
                       {project.caseStudy.successCriteria.map(item => <li key={item.en}>{item[lang]}</li>)}
@@ -285,7 +291,7 @@ export default function CaseStudy() {
                 </CaseSection>
 
                 {project.caseStudy.lessons && (
-                  <CaseSection title={t.caseStudy.lessonsTitle}>
+                  <CaseSection id="lessons" title={t.caseStudy.lessonsTitle}>
                     <ul className="case-list">
                       {project.caseStudy.lessons.map(item => <li key={item.en}>{item[lang]}</li>)}
                     </ul>
@@ -293,7 +299,7 @@ export default function CaseStudy() {
                 )}
 
                 {project.caseStudy.materials.length > 0 && (
-                  <CaseSection title={t.caseStudy.materialsTitle}>
+                  <CaseSection id="materials" title={t.caseStudy.materialsTitle}>
                     <ul className="materials__list">
                       {project.caseStudy.materials.map(material => (
                         <li key={material.href}>
@@ -328,11 +334,16 @@ export default function CaseStudy() {
             <div>
               <p className="contact-copy">{t.caseStudy.ctaText}</p>
               <div className="contact-actions">
-                <a href="mailto:Matafonovegor2@gmail.com" className="contact-email">
-                  <Mail size={17} aria-hidden="true" />
-                  <span>Matafonovegor2@gmail.com</span>
-                  <ArrowUpRight className="contact-action__arrow" size={15} aria-hidden="true" />
-                </a>
+                <span className="contact-email-group">
+                  <a href="mailto:Matafonovegor2@gmail.com" className="contact-email">
+                    <Mail size={17} aria-hidden="true" />
+                    <span>Matafonovegor2@<wbr />gmail.com</span>
+                    <ArrowUpRight className="contact-action__arrow" size={15} aria-hidden="true" />
+                  </a>
+                  <button type="button" className="contact-copy-button" onClick={() => { void copyEmail(t); }} aria-label={t.contact.copyEmail} title={t.contact.copyEmail}>
+                    <Copy size={16} aria-hidden="true" />
+                  </button>
+                </span>
                 <a href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer" className="contact-link">
                   <Linkedin size={17} aria-hidden="true" />
                   <span>{t.contact.linkedinBtn}</span>
@@ -352,6 +363,7 @@ export default function CaseStudy() {
           </TransitionLink>
         </section>
       </main>
+      {project.caseStudy && <CaseToc watchKey={`${project.slug}-${lang}`} />}
       <Footer />
     </article>
   );
