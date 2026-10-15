@@ -135,11 +135,11 @@ export const en: Content = {
   hero: {
     eyebrow: 'Egor Matafonov · Product Manager · open to remote roles',
     headline: 'Product Manager with a technical background — from discovery to a shipped product',
-    supporting: 'At B2B SaaS O!task I prepared customer development, CJM, information architecture, a role matrix, business and financial models, and ran partnerships. I designed and shipped two web products on my own using AI agents.',
+    supporting: 'At B2B SaaS O!task I ran a partner channel with no ad budget — 5 publications with Projectum, Timetta, Sendsay and WEEEK — and prepared the interview script, CJM, information architecture, role matrix and financial model. I designed and shipped two web products on my own using AI agents.',
     proofsLabel: 'Key facts',
     proofs: [
-      { value: '8 months', label: 'of product/growth in B2B SaaS' },
-      { value: '10+', label: 'presale UX audits' },
+      { value: '5 publications', label: 'with partners, no ad budget' },
+      { value: '15 UX audits', label: 'for presale' },
       { value: '2 products', label: 'shipped solo' },
     ],
     cta: 'See case studies',
@@ -167,7 +167,7 @@ export const en: Content = {
     practices: [
       {
         title: 'Start with the user and the process',
-        detail: 'At O!task I prepared customer development and the CJM that the information architecture and key flows were built on.',
+        detail: 'At O!task I wrote the customer interview script and built the CJM that the information architecture and key flows were built on.',
         links: [{ to: '/?section=experience', label: 'Experience at O!task' }],
       },
       {
@@ -286,11 +286,11 @@ export const ru: Content = {
   hero: {
     eyebrow: 'Егор Матафонов · Product Manager · открыт к удалённой работе',
     headline: 'Продакт с техническим бэкграундом — от CustDev и CJM до запущенного продукта',
-    supporting: 'В B2B SaaS O!task готовил CustDev, CJM, информационную архитектуру, матрицу ролей, бизнес- и финансовую модель, вёл партнёрства. Два собственных веб-продукта спроектировал и выпустил сам с помощью AI-агентов.',
+    supporting: 'В B2B SaaS O!task вёл партнёрский канал без рекламного бюджета — 5 публикаций у Projectum, Timetta, Sendsay и WEEEK — и готовил сценарий CustDev, CJM, информационную архитектуру, матрицу ролей и финмодель. Два собственных веб-продукта спроектировал и выпустил сам с помощью AI-агентов.',
     proofsLabel: 'Ключевые факты',
     proofs: [
-      { value: '8 мес.', label: 'product/growth в B2B SaaS' },
-      { value: '10+', label: 'UX-аудитов для presale' },
+      { value: '5 публикаций', label: 'у партнёров без бюджета' },
+      { value: '15 UX-аудитов', label: 'для presale' },
       { value: '2 продукта', label: 'запущены в одиночку' },
     ],
     cta: 'Смотреть кейсы',
@@ -318,7 +318,7 @@ export const ru: Content = {
     practices: [
       {
         title: 'Начинаю с пользователя и процесса',
-        detail: 'В O!task готовил CustDev и CJM, на которых строились информационная архитектура и ключевые сценарии.',
+        detail: 'В O!task составил сценарий CustDev и CJM, на которых строились информационная архитектура и ключевые сценарии.',
         links: [{ to: '/?section=experience', label: 'Опыт в O!task' }],
       },
       {

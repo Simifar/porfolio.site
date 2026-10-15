@@ -17,21 +17,25 @@ export const experience: ExperienceEntry[] = [
     period: { en: 'Jan–Aug 2026', ru: 'Янв–авг 2026' },
     context: { en: 'B2B SaaS · tasks, CRM, finance, knowledge base', ru: 'B2B SaaS · задачи, CRM, финансы, база знаний' },
     work: {
-      en: 'Prepared customer development, mapped user journeys, information architecture and key flows, defined roles and permissions, and worked on product documentation, business modeling and competitor analysis.',
-      ru: 'Готовил CustDev, CJM, информационную архитектуру и пользовательские сценарии; работал над матрицей ролей и прав, документацией, бизнес-моделью и анализом конкурентов.',
+      en: 'Ran a partner channel without an ad budget, wrote the customer interview script, mapped user journeys, information architecture, roles and permissions, and prepared business and financial models.',
+      ru: 'Вёл партнёрский канал без рекламного бюджета, писал сценарий CustDev-интервью, готовил CJM, информационную архитектуру, матрицу ролей и прав, бизнес- и финансовую модель.',
     },
     outcomes: [
       {
-        en: 'Built and refined the CJM and role matrix as the basis for the information architecture and key user flows.',
-        ru: 'Разработал и дорабатывал CJM и матрицу ролей — основу для информационной архитектуры и ключевых сценариев.',
+        en: 'Sent 130 placement proposals to 91 sites (Feb–Jun 2026) and got 5 publications with Projectum, Timetta, Sendsay and WEEEK through barter or for free; declined paid offers of up to ₽180,000.',
+        ru: 'Отправил 130 предложений о размещении в 91 источник (февраль–июнь 2026) и получил 5 публикаций у Projectum, Timetta, Sendsay и WEEEK — по бартеру или бесплатно; от платных предложений до 180 000 ₽ отказались.',
       },
       {
-        en: 'Prepared a business model, financial model, pitch deck and risk analysis to describe the product’s economics and risks.',
-        ru: 'Подготовил бизнес-модель, финансовую модель, pitch deck и анализ рисков, чтобы описать экономику продукта и его риски.',
+        en: 'Wrote a 30–40-minute customer interview script that the team put into use; analyzed a competitor’s 14-day onboarding sequence (13 emails) and drafted 10 onboarding emails for O!task.',
+        ru: 'Составил сценарий CustDev-интервью на 30–40 минут, который взяли в работу; разобрал 14-дневную онбординг-цепочку конкурента (13 писем) и подготовил 10 макетов писем для O!task.',
       },
       {
-        en: 'Prepared partner materials and coordinated cross-promotion to reach partners’ audiences; O!task appeared in materials by Timetta, Projectum, Sendsay and WEEEK.',
-        ru: 'Готовил партнёрские материалы и вёл cross-promo, чтобы выйти к аудитории партнёров; O!task получил размещения в материалах Timetta, Projectum, Sendsay и WEEEK.',
+        en: 'Built the CJM, information architecture and role matrix; the roles and permissions guide was published on the O!task website and the knowledge base structure was adopted.',
+        ru: 'Разработал CJM, информационную архитектуру и матрицу ролей; руководство по ролям и правам опубликовано на сайте O!task, структура базы знаний внедрена.',
+      },
+      {
+        en: 'Prepared a business model, financial model, pitch deck and financial risk analysis.',
+        ru: 'Подготовил бизнес-модель, финансовую модель, pitch deck и анализ финансовых рисков.',
       },
     ],
   },
@@ -46,8 +50,8 @@ export const experience: ExperienceEntry[] = [
     },
     outcomes: [
       {
-        en: 'Prepared more than 10 site UX audits — current problems, proposed changes and references — as the starting point for a presale conversation with a prospect.',
-        ru: 'Подготовил более 10 UX-аудитов сайтов — проблемы, предложенные решения и референсы — как основу для первого presale-разговора с клиентом.',
+        en: 'Prepared 15 site UX audits — current problems, proposed changes and references — as the starting point for a presale conversation with a prospect.',
+        ru: 'Подготовил 15 UX-аудитов сайтов — проблемы, предложенные решения и референсы — как основу для первого presale-разговора с клиентом.',
       },
       {
         en: 'Reworked cold outreach with personalization and follow-ups; created audit and presale templates so materials for a new prospect did not start from scratch.',
