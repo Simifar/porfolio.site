@@ -17,26 +17,30 @@ test('home explains experience and projects, and case back returns to the projec
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
 
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Product Manager with a technical background');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('IT Support & PC Hardware');
   await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'УЦ «Потенциал»' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'O!task' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Web Do' })).toBeVisible();
-  await expect(page.locator('#experience')).toContainText('as the basis for the information architecture and key user flows');
+  await expect(page.locator('#experience')).toContainText('Assembled and reassembled more than 50 computers.');
+  await expect(page.locator('#experience')).toContainText('Inventoried computer equipment in classrooms.');
+  await expect(page.locator('#experience')).toContainText('the roles and permissions guide was published on the O!task website');
   await expect(page.locator('#experience')).toContainText('as the starting point for a presale conversation');
-  await expect(page.getByRole('heading', { name: 'Information Systems and Programming' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'I’m looking for a remote Product Manager role.' })).toBeAttached();
+  await expect(page.getByRole('heading', { name: /Yekaterinburg College of Economics and Technology/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Open to IT support roles' })).toBeAttached();
   const approach = page.locator('#about');
   await expect(approach).not.toContainText('untested hypothesis');
-  await expect(approach.getByRole('link', { name: 'Experience at O!task', exact: true })).toHaveAttribute('href', '#/?section=experience');
-  await expect(approach.getByRole('link', { name: 'Experience at O!task and Web Do' })).toHaveAttribute('href', '#/?section=experience');
-  await approach.getByRole('link', { name: 'Experience at O!task and Web Do' }).click();
+  await expect(approach).toContainText('PC hardware and inventory');
+  await expect(approach).toContainText('Windows, Linux including Debian, and virtualization');
+  await expect(approach.getByRole('link', { name: 'Work at Potencial', exact: true })).toHaveAttribute('href', '#/?section=experience');
+  await approach.getByRole('link', { name: 'Work at Potencial', exact: true }).click();
   await expect.poll(() => page.locator('#experience').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
   await page.getByRole('link', { name: 'See case studies' }).click();
   await expect(page).toHaveURL(/section=work/);
   await expect.poll(() => page.locator('#work').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
   await expect(page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Open product' })).toHaveAttribute('href', 'https://taskfocus-eight.vercel.app/');
 
-  await page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Case study' }).click();
+  await page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Project case' }).click();
   await expect(page).toHaveURL(/#\/work\/taskfocus/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('TaskFocus');
   await expect(page.getByRole('img', { name: /Today dashboard/ })).toBeVisible();
@@ -52,7 +56,7 @@ test('project cards lead with the case link and keep source code secondary', asy
   for (const name of ['TaskFocus', 'MindTrack', 'CortexMap']) {
     const card = page.getByRole('article', { name });
     const links = card.getByRole('link');
-    await expect(links.first()).toHaveText(name === 'CortexMap' ? 'Project overview' : 'Case study');
+    await expect(links.first()).toHaveText(name === 'CortexMap' ? 'Project overview' : 'Project case');
     await expect(links.last()).toHaveText('Source code');
     const [primary, source] = await Promise.all([links.first(), links.last()].map(link => link.evaluate(element => {
       const style = getComputedStyle(element);
@@ -72,7 +76,7 @@ test('hero shows role, proof points and primary CTA above the fold without dupli
     await page.setViewportSize(viewport);
     await page.goto('/');
     const hero = page.locator('#hero');
-    await expect(hero.getByText('Egor Matafonov · Product Manager · open to remote roles')).toBeInViewport();
+    await expect(hero.getByText('Egor Matafonov · open to IT support and PC hardware roles')).toBeInViewport();
     await expect(hero.getByRole('heading', { level: 1 })).toBeInViewport();
     await expect(hero.getByRole('list', { name: 'Key facts' }).getByRole('listitem')).toHaveCount(3);
     for (const item of await hero.getByRole('list', { name: 'Key facts' }).getByRole('listitem').all()) {
@@ -95,9 +99,9 @@ test('language and theme persist across routes and reload; keyboard skip link wo
   await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
   await expect(page.locator('html')).toHaveClass(/light/);
   await expect(page.getByRole('heading', { name: 'Информационные системы и программирование' })).toBeAttached();
-  await expect(page.getByRole('heading', { name: 'Ищу удалённую работу Product Manager' })).toBeAttached();
+  await expect(page.getByRole('heading', { name: 'Ищу работу в техподдержке' })).toBeAttached();
   await page.goto('/#/work/mindtrack');
-  await expect(page.getByRole('heading', { name: 'Продуктовые решения' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Решения проекта' })).toBeVisible();
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
   await expect(page.locator('html')).toHaveClass(/light/);
@@ -107,7 +111,7 @@ test('language and theme persist across routes and reload; keyboard skip link wo
 test('?lang= in the URL opens that language, wins over the saved one, and follows the toggle', async ({ page }) => {
   await page.goto('/?lang=ru');
   await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
-  await expect(page.getByRole('heading', { name: 'Ищу удалённую работу Product Manager' })).toBeAttached();
+  await expect(page.getByRole('heading', { name: 'Ищу работу в техподдержке' })).toBeAttached();
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://simifar.github.io/porfolio.site/?lang=ru');
   await expect(page.locator('link[rel="alternate"][hreflang="ru"]')).toHaveAttribute('href', 'https://simifar.github.io/porfolio.site/?lang=ru');
   await expect(page.locator('link[rel="alternate"][hreflang="en"]')).toHaveAttribute('href', 'https://simifar.github.io/porfolio.site/');
@@ -116,11 +120,11 @@ test('?lang= in the URL opens that language, wins over the saved one, and follow
   await expect(page.locator('html')).toHaveAttribute('lang', 'en');
   expect(new URL(page.url()).searchParams.get('lang')).toBe('en');
 
-  await page.getByRole('article', { name: 'MindTrack' }).getByRole('link', { name: 'Case study' }).click();
+  await page.getByRole('article', { name: 'MindTrack' }).getByRole('link', { name: 'Project case' }).click();
   await expect(page).toHaveURL(/\?lang=en#\/work\/mindtrack$/);
   await page.getByRole('button', { name: 'Russian' }).click();
   await expect(page).toHaveURL(/\?lang=ru#\/work\/mindtrack$/);
-  await expect(page.getByRole('heading', { name: 'Продуктовые решения' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Решения проекта' })).toBeVisible();
   await page.getByRole('link', { name: 'Назад к проектам' }).click();
   await expect(page).toHaveURL(/\?lang=ru#\/\?section=work$/);
 
@@ -213,7 +217,7 @@ test('every case renders on desktop and phone in both languages and themes', asy
         await page.goto('/');
         await expect(page.locator('html')).toHaveAttribute('lang', lang);
         await expect(page.locator('html')).toHaveClass(new RegExp(theme));
-        await expect(page.getByRole('heading', { level: 1 })).toContainText(lang === 'en' ? 'Product Manager' : 'Продакт');
+        await expect(page.getByRole('heading', { level: 1 })).toContainText(lang === 'en' ? 'IT Support & PC Hardware' : 'Техническая поддержка');
         await expectNoHorizontalScroll(page);
         for (const slug of slugs) {
           await page.goto(`/#/work/${slug}`);
@@ -272,7 +276,7 @@ test('product cases show the same problem-to-lessons sections in the SPA and sta
 });
 
 test('every case ends with an email-first CTA before the next project, in the SPA and static pages', async ({ page, request }) => {
-  const cta = { en: 'Discuss a role?', ru: 'Обсудим роль?' };
+  const cta = { en: 'Looking for technical roles', ru: 'Ищу техническую работу' };
   const linkedin = 'https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US';
   for (const slug of slugs) {
     for (const lang of ['en', 'ru'] as const) {
@@ -311,7 +315,7 @@ test('static case pages expose indexable bilingual HTML and usable links', async
     }
   }
   await page.goto('/ru/work/taskfocus/');
-  await expect(page.getByRole('heading', { name: 'Продуктовые решения' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Решения проекта' })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Открыть продукт' })).toHaveAttribute('href', 'https://taskfocus-eight.vercel.app/');
   await page.getByRole('button', { name: 'Сменить тему' }).click();
   await expect(page.locator('html')).toHaveClass(/dark/);
@@ -366,7 +370,7 @@ test('reduced motion shows all content and the hero cover without animation', as
 
 test('page transitions open the case at the top and release shared element names', async ({ page }) => {
   await page.goto('/?section=work');
-  await page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Case study' }).click();
+  await page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Project case' }).click();
   await expect(page).toHaveURL(/#\/work\/taskfocus/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('TaskFocus');
   expect(await page.evaluate(() => window.scrollY)).toBe(0);
@@ -430,7 +434,7 @@ test('wide case pages show contents that follow the reader', async ({ page }) =>
   await expect(toc).toBeHidden();
   await page.locator('#case-decisions').scrollIntoViewIfNeeded();
   await expect(toc).toBeVisible();
-  await expect(toc.locator('[aria-current="true"]')).toHaveText('Product decisions');
+  await expect(toc.locator('[aria-current="true"]')).toHaveText('Project decisions');
   await toc.getByRole('button', { name: 'Problem', exact: true }).click();
   await expect(page.locator('#case-problem h2')).toBeFocused();
   await page.setViewportSize({ width: 1280, height: 900 });
@@ -444,9 +448,9 @@ test('sections re-rendered by a language switch still reveal when the reader rea
   await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
   await page.locator('#about').scrollIntoViewIfNeeded();
   const items = page.locator('#about .practice-item');
-  await expect(items).toHaveCount(3);
+  await expect(items).toHaveCount(4);
   await expect.poll(() => items.evaluateAll(elements => elements.every(element => element.hasAttribute('data-revealed')))).toBeTruthy();
-  await expect.poll(() => items.evaluateAll(elements => elements.map(element => getComputedStyle(element).opacity).join())).toBe('1,1,1');
+  await expect.poll(() => items.evaluateAll(elements => elements.map(element => getComputedStyle(element).opacity).join())).toBe('1,1,1,1');
 });
 
 test('screenshots reveal when the reader scrolls back up to them', async ({ page }) => {

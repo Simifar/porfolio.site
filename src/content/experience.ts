@@ -12,6 +12,26 @@ export interface ExperienceEntry {
 
 export const experience: ExperienceEntry[] = [
   {
+    company: 'УЦ «Потенциал»',
+    role: { en: 'PC hardware work', ru: 'Работа с компьютерным оборудованием' },
+    period: { en: 'Oct 2024–Aug 2026', ru: 'Окт 2024–авг 2026' },
+    context: { en: 'Classroom computer equipment', ru: 'Компьютерная техника аудиторий' },
+    work: {
+      en: 'Worked with computer equipment at the training center.',
+      ru: 'Работал с компьютерным оборудованием учебного центра.',
+    },
+    outcomes: [
+      {
+        en: 'Assembled and reassembled more than 50 computers.',
+        ru: 'Собрал и пересобрал более 50 компьютеров.',
+      },
+      {
+        en: 'Inventoried computer equipment in classrooms.',
+        ru: 'Инвентаризировал компьютерную технику учебных аудиторий.',
+      },
+    ],
+  },
+  {
     company: 'O!task',
     role: { en: 'Junior Product / Growth Specialist', ru: 'Junior Product / Growth Specialist' },
     period: { en: 'Jan–Aug 2026', ru: 'Янв–авг 2026' },
@@ -58,22 +78,5 @@ export const experience: ExperienceEntry[] = [
         ru: 'Переработал холодные обращения с персонализацией и follow-up; создал шаблоны аудитов и presale-материалов, чтобы не готовить их для каждого клиента с нуля.',
       },
     ],
-  },
-  {
-    company: 'УЦ «Потенциал»',
-    role: { en: 'IT Support / Administrator', ru: 'Специалист IT-отдела / администратор' },
-    period: { en: 'Oct 2024–Aug 2026', ru: 'Окт 2024–авг 2026' },
-    context: { en: 'Technical and operational work', ru: 'Техническая и операционная работа' },
-    work: {
-      en: 'Supported staff, configured computers and software, processed requests, maintained 1C records and published information on external platforms.',
-      ru: 'Поддерживал сотрудников, настраивал ПК и ПО, обрабатывал заявки, вёл данные в 1С и размещал информацию на внешних площадках.',
-    },
-    outcomes: [
-      {
-        en: 'Simplified recurring operations and data preparation; kept 1C and external listings, including Yandex Business, current.',
-        ru: 'Упростил повторяющиеся операции и подготовку данных; поддерживал актуальность 1С и внешних площадок, включая Яндекс Бизнес.',
-      },
-    ],
-    compact: true,
   },
 ];

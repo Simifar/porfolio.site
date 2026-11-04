@@ -82,12 +82,12 @@ export const projects: Project[] = [
       ru: 'Планирование задач: сначала входящие, затем гибкие сроки',
     },
     cardFocus: {
-      en: 'The Today list can hold no more than five tasks.',
-      ru: 'В списке «Сегодня» может быть не больше пяти задач.',
+      en: 'A diploma project implemented as a working task-planning app.',
+      ru: 'Дипломный проект, реализованный как приложение для планирования задач.',
     },
     cardRole: {
-      en: 'Built solo · product decisions, UX and implementation',
-      ru: 'Сделал сам: продуктовые решения, UX и разработка',
+      en: 'Solo software project · design and implementation',
+      ru: 'Самостоятельный проект · дизайн и разработка',
     },
     category: { en: 'Productivity', ru: 'Планирование' },
     description: {
@@ -101,7 +101,7 @@ export const projects: Project[] = [
       { en: 'See task priority, urgency and estimated energy in one place.', ru: 'Видеть важность, срочность и оценку энергозатрат для каждой задачи.' },
       { en: 'Start a focus timer from a task.', ru: 'Запускать таймер фокуса из задачи.' },
     ],
-    tags: ['Product', 'UX', 'Web app'],
+    tags: ['Task planning', 'Web app', 'Diploma project'],
     github: 'https://github.com/Simifar/taskfocus',
     live: 'https://taskfocus-eight.vercel.app/',
     status: { en: 'Published', ru: 'Опубликован' },
@@ -288,8 +288,8 @@ export const projects: Project[] = [
       ru: 'Без аккаунта. Ответы хранятся в браузере.',
     },
     cardRole: {
-      en: 'Built solo · product decisions, UX and implementation',
-      ru: 'Сделал сам: продуктовые решения, UX и разработка',
+      en: 'Solo software project · browser storage and implementation',
+      ru: 'Самостоятельный проект · хранение данных в браузере и разработка',
     },
     category: { en: 'Wellbeing', ru: 'Самонаблюдение' },
     description: {
