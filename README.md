@@ -1,17 +1,42 @@
-# Egor Matafonov — Portfolio
+# Egor Matafonov | Portfolio
 
-A bilingual personal portfolio built with React, TypeScript, Vite, and Tailwind CSS. Company experience is separate from personal projects. Case pages describe real product decisions and link to source material; TaskFocus links to its published web app and uses genuine signed-in screenshots from its repository.
+Personal portfolio for my move into **IT Support & PC Hardware**. It brings together my vocational education, hands-on computer equipment experience, and software projects in one bilingual (English and Russian) site.
+
+**[Open the portfolio](https://simifar.github.io/porfolio.site/)** · [English](https://simifar.github.io/porfolio.site/) · [Русская версия](https://simifar.github.io/porfolio.site/?lang=ru)
+
+The site documents my work assembling and reassembling more than 50 computers and taking inventory of classroom equipment at Potencial Training Center. I also share software projects built independently; they are presented as projects, not as IT support employment.
+
+## What is here
+
+- **Experience and education:** computer equipment work and my 2026 vocational qualification in Information Systems and Programming (09.02.07).
+- **Technical profile:** PC hardware, personal computer assembly and maintenance, and technologies I am learning, including Windows, Linux, Debian and virtualization.
+- **Software projects:** TaskFocus, MindTrack and CortexMap, with project pages in English and Russian.
+- **Contact:** email, LinkedIn, GitHub and Telegram.
+
+## Project pages
+
+- [TaskFocus](https://simifar.github.io/porfolio.site/work/taskfocus/) - diploma project and task-planning app. [Open app](https://taskfocus-eight.vercel.app/) · [Source](https://github.com/Simifar/taskfocus)
+- [MindTrack](https://simifar.github.io/porfolio.site/work/mindtrack/) - browser-based self-observation app. [Open app](https://simifar.github.io/mindtrack/) · [Source](https://github.com/Simifar/mindtrack)
+- [CortexMap](https://simifar.github.io/porfolio.site/work/cortexmap/) - English-learning catalog. [Open site](https://simifar.github.io/CortexMap/) · [Source](https://github.com/Simifar/CortexMap)
+
+Each project page is also available in Russian under `/ru/work/<project>/`. The site includes real project screenshots in its case pages.
+
+## Built with
+
+React, TypeScript, Vite, Tailwind CSS, and React Router. The project keeps its bilingual content in source files and generates static case pages for GitHub Pages.
 
 ## Run locally
+
+Requires Node.js and npm.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Vite prints the local URL after the development server starts (usually `http://localhost:5173`).
+Vite prints the local development URL in the terminal.
 
-## Build
+## Build and checks
 
 ```bash
 npm run typecheck
@@ -19,37 +44,23 @@ npm run build
 npm run preview
 ```
 
-The build output is written to `dist/`. The build script also creates the GitHub Pages 404 fallback, `.nojekyll` marker, and bilingual static case pages from `src/content/projects.ts`.
-
-## Automated checks
+The build writes the site to `dist/` and prepares GitHub Pages fallback files and English/Russian static project pages.
 
 ```bash
 npm run test:e2e
-npm run lighthouse
 ```
 
-Playwright tests cover routes, navigation, English/Russian, both themes, 320/390 px screens, reduced motion, image loading, and axe-core accessibility. On Windows they launch a separate headless Chrome session without attaching to a personal browser profile. On Linux CI, install Chromium with `npx playwright install --with-deps chromium` first.
+End-to-end tests use Playwright and cover navigation, project pages, language and theme switching, responsive layouts, reduced motion and accessibility checks.
 
-Lighthouse CI runs two mobile audits for the home page and the TaskFocus/MindTrack static cases. Reports stay in the ignored `.lighthouseci/` directory. If Chrome is not found on Windows, set `CHROME_PATH` to an installed Chrome executable before running the command. Baseline on the local pre-iteration build (27 September 2026): mobile home performance 0.96, accessibility/best practices/SEO 1.00, LCP 2.43 s, CLS 0.030; desktop scores 1.00. CI thresholds allow normal run variation: performance ≥0.90, other categories ≥0.95, LCP ≤3.5 s, TBT ≤300 ms, CLS ≤0.1. These are local lab measurements, not field metrics.
+## Content and project structure
 
-## Publish on GitHub Pages
+- `src/content/experience.ts` - work experience.
+- `src/content/projects.ts` - project descriptions and case-study content.
+- `src/content/i18n.ts` - interface copy in English and Russian.
+- `src/components/` - site sections, navigation and project views.
+- `scripts/generate-case-pages.mjs` - static bilingual project-page generator.
+- `public/projects/` - project screenshots used by the site.
 
-The workflow in `.github/workflows/deploy-pages.yml` checks TypeScript, Playwright/axe and Lighthouse before building and deploying the `master` branch. Its final build uses `PAGES_BASE_PATH=/porfolio.site`.
+## Publish
 
-1. In the GitHub repository, open **Settings → Pages** and choose **GitHub Actions** as the build and deployment source.
-2. Push the reviewed changes to `master`, or start **Deploy portfolio to GitHub Pages** from the Actions tab.
-3. GitHub publishes the site at `https://simifar.github.io/porfolio.site/` after the workflow succeeds.
-
-If the repository is renamed, update the base path in `vite.config.js`, both build scripts, and the canonical, sitemap, and social-preview URLs in `index.html` and `public/robots.txt` / `public/sitemap.xml`.
-
-## Content
-
-- `src/content/projects.ts` contains the verified project descriptions, features, and links in English and Russian.
-- `src/content/i18n.ts` contains the interface copy.
-- `src/content/experience.ts` contains the supplied company experience, separate from the case projects.
-- `public/projects/` contains real screenshots for TaskFocus, MindTrack, and CortexMap.
-- Add a CV link only after a real, current PDF has been added to the repository.
-
-## Routes
-
-The interactive site uses hash routes (`/#/work/<slug>`) so navigation works on GitHub Pages without server rewrites. Because URL fragments are not sent to the server, every hash route otherwise returns the homepage HTML to crawlers and link-preview bots. The build generates indexable English and Russian case pages at `/work/<slug>/` and `/ru/work/<slug>/` with unique canonical, Open Graph, Twitter and hreflang metadata. Each interactive case links to its shareable static page; both page types use the same project content.
+The repository is configured to publish through GitHub Actions at [simifar.github.io/porfolio.site](https://simifar.github.io/porfolio.site/). Enable **GitHub Actions** as the Pages build source in repository settings, then push changes to `master` or run the deployment workflow from the Actions tab.
