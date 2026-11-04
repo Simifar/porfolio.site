@@ -29,30 +29,30 @@ const labels = {
   en: {
     home: 'Portfolio', alternate: 'Русский', open: 'Open interactive case', openOverview: 'Open project overview', theme: 'Switch theme',
     source: 'Source code', live: 'Open product', task: 'The task', role: 'What I did',
-    case: 'Product case', overview: 'Project overview', alternatives: 'Why not existing tools',
+    case: 'Project case', overview: 'Project overview', alternatives: 'Why not existing tools',
     problem: 'Problem', alternative: 'Alternative', choice: 'Chosen solution', reason: 'Why this option',
     constraints: 'Constraints', scope: 'MVP scope', included: 'Included', cut: 'Left out',
-    decisions: 'Product decisions', tradeoff: 'Trade-off:',
+    decisions: 'Project decisions', tradeoff: 'Trade-off:',
     delivered: 'What I built', status: 'Current status', tested: 'What was tested',
     criteria: 'Success criteria', validation: 'What to test next', lessons: 'What I would do differently',
     materials: 'Project links', features: 'Features', gallery: 'Inside the product',
     email: 'Email', telegram: 'Telegram', linkedin: 'View LinkedIn',
-    ctaTitle: 'Discuss a role?',
-    ctaText: 'If you are hiring a Product Manager, email me: on a call I can walk you through this project and the decisions behind it.',
+    ctaTitle: 'Looking for technical roles',
+    ctaText: 'I am looking for opportunities in IT support and PC hardware. Email is the easiest way to reach me; my LinkedIn has more background.',
   },
   ru: {
     home: 'Портфолио', alternate: 'English', open: 'Открыть интерактивный кейс', openOverview: 'Открыть обзор проекта', theme: 'Сменить тему',
     source: 'Исходный код', live: 'Открыть продукт', task: 'Задача', role: 'Что я сделал',
-    case: 'Продуктовый кейс', overview: 'Обзор проекта', alternatives: 'Почему не готовые решения',
+    case: 'Кейс проекта', overview: 'Обзор проекта', alternatives: 'Почему не готовые решения',
     problem: 'Проблема', alternative: 'Альтернатива', choice: 'Выбранное решение', reason: 'Почему этот вариант',
     constraints: 'Ограничения', scope: 'Рамки MVP', included: 'Вошло', cut: 'Не вошло',
-    decisions: 'Продуктовые решения', tradeoff: 'Компромисс:',
+    decisions: 'Решения проекта', tradeoff: 'Компромисс:',
     delivered: 'Что реализовал', status: 'Текущий статус', tested: 'Что проверено',
     criteria: 'Критерии успеха', validation: 'Что проверить дальше', lessons: 'Что сделал бы иначе',
-    materials: 'Ссылки на материалы', features: 'Функции', gallery: 'Экраны продукта',
+    materials: 'Ссылки на материалы', features: 'Функции', gallery: 'Экраны проекта',
     email: 'Почта', telegram: 'Telegram', linkedin: 'Открыть LinkedIn',
-    ctaTitle: 'Обсудим роль?',
-    ctaText: 'Если вы ищете Product Manager, напишите на почту: на звонке расскажу об этом проекте и решениях за ним.',
+    ctaTitle: 'Ищу техническую работу',
+    ctaText: 'Рассматриваю возможности в технической поддержке и работе с компьютерной техникой. Напишите на почту; больше информации обо мне есть в LinkedIn.',
   },
 };
 
@@ -98,7 +98,7 @@ function renderCase(project, lang) {
 <link rel="canonical" href="${caseUrl}"><link rel="alternate" hreflang="en" href="${enUrl}"><link rel="alternate" hreflang="ru" href="${ruUrl}"><link rel="alternate" hreflang="x-default" href="${enUrl}">
 <link rel="stylesheet" href="${base}case-preview.css"><link rel="icon" type="image/svg+xml" href="${base}favicon.svg">
 <meta property="og:type" content="article"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${caseUrl}">
-<meta property="og:image" content="${socialImage}"><meta property="og:image:width" content="${socialVisual?.width ?? 1200}"><meta property="og:image:height" content="${socialVisual?.height ?? 630}"><meta property="og:image:alt" content="${escape(socialVisual?.alt[lang] ?? 'Egor Matafonov Product Manager portfolio')}"><meta property="og:locale" content="${lang === 'ru' ? 'ru_RU' : 'en_US'}">
+<meta property="og:image" content="${socialImage}"><meta property="og:image:width" content="${socialVisual?.width ?? 1200}"><meta property="og:image:height" content="${socialVisual?.height ?? 630}"><meta property="og:image:alt" content="${escape(socialVisual?.alt[lang] ?? 'Egor Matafonov IT Support & PC Hardware portfolio')}"><meta property="og:locale" content="${lang === 'ru' ? 'ru_RU' : 'en_US'}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${escape(title)}"><meta name="twitter:description" content="${escape(description)}"><meta name="twitter:image" content="${socialImage}">
 <script>try{document.documentElement.className=localStorage.getItem('theme')==='dark'?'dark':'light'}catch{}</script>
 </head><body>

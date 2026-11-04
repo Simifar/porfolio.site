@@ -1,17 +1,18 @@
-# Egor Matafonov — Product Manager
+# Egor Matafonov | IT Support & PC Hardware
 
-> Product Manager with a technical background, open to remote roles. At B2B SaaS O!task: a partner channel with no ad budget (5 publications with Projectum, Timetta, Sendsay and WEEEK), a customer interview script, CJM, information architecture, a role matrix, business and financial models, partnerships. Designed and shipped two web products solo using AI agents. Bilingual (EN/RU) portfolio with company experience and product cases.
+> Seeking opportunities in IT support and PC hardware. In 2026, graduated from Yekaterinburg College of Economics and Technology with a vocational qualification in Information Systems and Programming (09.02.07). Assembled and reassembled more than 50 computers and inventoried classroom equipment at Potencial Training Center. Also assembled, maintained and troubleshot personal computers. Learning Windows, Linux including Debian, virtualization and IT infrastructure.
 
 ## Portfolio
 - [Portfolio home](https://simifar.github.io/porfolio.site/)
 
-## Company experience
-- O!task — Junior Product / Growth Specialist, January–August 2026. Sent 130 placement proposals to 91 sites and got 5 partner publications without an ad budget; wrote the customer interview script; worked on CJM, information architecture, roles and permissions, business and financial models.
-- Web Do — Business Development / Presale Specialist, 2026 until August. Prepared 15 UX audits and reusable presale materials.
-- УЦ «Потенциал» — IT Support / Administrator, October 2024–August 2026. Technical support and operational data work.
+## Experience
+- Potencial Training Center — computer equipment work, October 2024–August 2026. Assembled and reassembled 50+ computers; inventoried classroom equipment.
+- O!task — Junior Product / Growth Specialist, January–August 2026. Historical role; prepared product and business artifacts and partnership placements.
+- Web Do — Business Development / Presale Specialist, 2026 until August. Historical role; prepared UX audits and presale materials.
 
 ## Education
-- Information Systems and Programming.
+- Yekaterinburg College of Economics and Technology (EETC), 2026.
+- 09.02.07 Information Systems and Programming, secondary vocational education.
 
 ## Projects
 - [TaskFocus case](https://simifar.github.io/porfolio.site/work/taskfocus/): published task planner with a daily list limited to five tasks and genuine signed-in screenshots. [Live app](https://taskfocus-eight.vercel.app/) · [Source](https://github.com/Simifar/taskfocus)
@@ -19,6 +20,6 @@
 - [CortexMap](https://simifar.github.io/CortexMap/): Russian-language catalog for learning English, with CEFR levels, search and filters. [Source](https://github.com/Simifar/CortexMap)
 
 ## Contact
-- Looking for a remote Product Manager role.
+- Looking for opportunities in IT support and PC hardware.
 - Email: Matafonovegor2@gmail.com
 - Telegram: https://t.me/legionanstek
