@@ -85,6 +85,12 @@ export function Experience() {
                 <ul className="experience-entry__outcomes">
                   {entry.outcomes.map(outcome => <li key={outcome.en}>{outcome[lang]}</li>)}
                 </ul>
+                {entry.practice && (
+                  <div className="experience-practice">
+                    <h4>{entry.practice.title[lang]}</h4>
+                    <p>{entry.practice.detail[lang]}</p>
+                  </div>
+                )}
               </div>
             </article>
           ))}
@@ -239,7 +245,7 @@ export function About() {
 }
 
 export function Contact() {
-  const { t } = useApp();
+  const { t, lang } = useApp();
 
   return (
     <section id="contact" className="contact-section" aria-labelledby="contact-title">
@@ -249,7 +255,12 @@ export function Contact() {
         </div>
         <div data-reveal="">
           <p className="contact-copy">{t.contact.subtitle}</p>
+          <p className="contact-format">{t.contact.workFormat}</p>
           <div className="contact-actions">
+            <a href={`${import.meta.env.BASE_URL}resume/egor-matafonov-${lang}.pdf`} download className="contact-link">
+              {t.contact.resumeBtn}
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
             <span className="contact-email-group">
               <a href="mailto:Matafonovegor2@gmail.com" className="contact-email" aria-label={t.contact.emailBtn}>
                 <Mail size={17} aria-hidden="true" />

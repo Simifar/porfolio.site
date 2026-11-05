@@ -27,6 +27,8 @@ export interface Content {
     cta: string;
     contactLink: string;
     visualTitle: string;
+    practiceTitle: string;
+    practicePoints: string[];
   };
   work: {
     title: string;
@@ -43,7 +45,7 @@ export interface Content {
     title: string;
     practices: { title: string; detail: string; links: { to: string; label: string }[] }[];
   };
-  contact: { title: string; subtitle: string; emailBtn: string; linkedinBtn: string; telegramBtn: string; copied: string; copyEmail: string; copyFailed: string };
+  contact: { title: string; subtitle: string; workFormat: string; resumeBtn: string; emailBtn: string; linkedinBtn: string; telegramBtn: string; copied: string; copyEmail: string; copyFailed: string };
   command: {
     open: string;
     title: string;
@@ -124,27 +126,29 @@ export const en: Content = {
     description: 'Egor Matafonov, IT Support & PC Hardware. Information systems and programming graduate with hands-on PC assembly and equipment inventory experience.',
     projectTitleSuffix: 'Project case by Egor Matafonov',
     projectOverviewSuffix: 'Project overview by Egor Matafonov',
-    socialImageAlt: 'Egor Matafonov, IT Support & PC Hardware. Software projects: TaskFocus and MindTrack.',
+    socialImageAlt: 'Egor Matafonov. IT support and PC hardware. 50+ PCs assembled and rebuilt. Information systems and programming graduate, 2026.',
   },
   nav: {
     brand: 'Egor Matafonov',
-    work: 'Projects', experience: 'Experience', about: 'Approach', contact: 'Contact', themeToLight: 'Switch to light theme', themeToDark: 'Switch to dark theme',
+    work: 'Projects', experience: 'Experience', about: 'Skills', contact: 'Contact', themeToLight: 'Switch to light theme', themeToDark: 'Switch to dark theme',
     language: 'Language', english: 'English', russian: 'Russian', mainNavigation: 'Main navigation', mobileNavigation: 'Mobile navigation',
     siteHome: 'Egor Matafonov, home', socialLinks: 'Social links', skipToContent: 'Skip to content', menu: 'Menu',
   },
   hero: {
     eyebrow: 'Egor Matafonov · open to IT support and PC hardware roles',
     headline: 'IT Support & PC Hardware',
-    supporting: 'Assembled and rebuilt 50+ PCs and inventoried classroom equipment. Graduated in information systems and programming in 2026.',
+    supporting: 'Hands-on experience assembling and servicing classroom PCs. Worked with 1C databases and Windows Server. Graduated in information systems and programming in 2026.',
     proofsLabel: 'Key facts',
     proofs: [
       { value: '50+', label: 'PCs assembled and reassembled' },
       { value: 'EETC · 2026', label: 'information systems and programming' },
-      { value: 'Windows / Linux', label: 'learning, including Debian and virtualization' },
+      { value: '1C / Windows Server', label: 'practical work at the training center' },
     ],
-    cta: 'See case studies',
+    cta: 'See technical experience',
     contactLink: 'Contact me',
-    visualTitle: 'TaskFocus',
+    visualTitle: 'Hands-on experience',
+    practiceTitle: 'PCs, components and equipment inventory',
+    practicePoints: ['PC assembly and rebuilding', 'Power supply repairs and fan maintenance', 'Classroom equipment inventory'],
   },
   work: {
     title: 'Software projects',
@@ -166,30 +170,32 @@ export const en: Content = {
     title: 'Technical profile',
     practices: [
       {
-        title: 'PC hardware and inventory',
-        detail: 'At the training center, I assembled and reassembled more than 50 computers and inventoried classroom equipment.',
+        title: 'Hands-on · PC hardware',
+        detail: 'PC assembly and rebuilding, power supply repairs, fan lubrication and classroom equipment inventory at Potencial Training Center.',
         links: [{ to: '/?section=experience', label: 'Work at Potencial' }],
       },
       {
-        title: 'Personal computer work',
-        detail: 'I have assembled and maintained personal computers and worked through their technical issues.',
+        title: 'Practical exposure · 1C and Windows Server',
+        detail: 'Worked with 1C databases and Windows Server at the training center. I also assemble, maintain and troubleshoot personal PCs.',
         links: [],
       },
       {
-        title: 'Operating systems and virtualization',
+        title: 'Learning · operating systems and virtualization',
         detail: 'I am learning Windows, Linux including Debian, and virtualization.',
         links: [],
       },
       {
-        title: 'Infrastructure and technical practice',
-        detail: 'I am interested in IT infrastructure, technical documentation and practical IT projects. Programming is part of my vocational training.',
-        links: [],
+        title: 'Hands-on · documentation',
+        detail: 'Prepared a roles and permissions guide and a knowledge base structure for O!task. Software projects give me practice working with source code and technical documentation, with AI assistance.',
+        links: [{ to: '/work/taskfocus', label: 'Technical details of TaskFocus' }],
       },
     ],
   },
   contact: {
     title: 'Open to IT support roles',
     subtitle: 'I am a 2026 graduate in information systems and programming with hands-on computer equipment experience. Email is the easiest way to reach me; more background is on LinkedIn.',
+    workFormat: 'Seeking remote work, or office / hybrid roles in Yekaterinburg.',
+    resumeBtn: 'Download resume · PDF',
     emailBtn: 'Send email',
     linkedinBtn: 'View LinkedIn',
     telegramBtn: 'Telegram',
@@ -277,27 +283,29 @@ export const ru: Content = {
     description: 'Егор Матафонов: техническая поддержка и компьютерное оборудование. Выпускник ЕЭТК по ИСиП, собрал более 50 компьютеров и инвентаризировал технику.',
     projectTitleSuffix: 'Кейс проекта Егора Матафонова',
     projectOverviewSuffix: 'Обзор проекта Егора Матафонова',
-    socialImageAlt: 'Егор Матафонов, техническая поддержка и компьютерное оборудование. Программные проекты TaskFocus и MindTrack.',
+    socialImageAlt: 'Егор Матафонов. Техническая поддержка и компьютерное оборудование. Более 50 собранных и пересобранных ПК. Выпускник ИСиП, 2026.',
   },
   nav: {
     brand: 'Егор Матафонов',
-    work: 'Проекты', experience: 'Опыт', about: 'Подход', contact: 'Контакты', themeToLight: 'Включить светлую тему', themeToDark: 'Включить тёмную тему',
+    work: 'Проекты', experience: 'Опыт', about: 'Навыки', contact: 'Контакты', themeToLight: 'Включить светлую тему', themeToDark: 'Включить тёмную тему',
     language: 'Язык', english: 'Английский', russian: 'Русский', mainNavigation: 'Основная навигация', mobileNavigation: 'Мобильная навигация',
     siteHome: 'Егор Матафонов, главная', socialLinks: 'Ссылки на профили', skipToContent: 'Перейти к содержимому', menu: 'Меню',
   },
   hero: {
     eyebrow: 'Егор Матафонов · открыт к работе с компьютерной техникой',
     headline: 'Техническая поддержка и компьютерное оборудование',
-    supporting: 'Собрал и пересобрал более 50 ПК, инвентаризировал технику аудиторий. В 2026 году окончил ЕЭТК по специальности «Информационные системы и программирование».',
+    supporting: 'Практика сборки и обслуживания ПК учебных аудиторий. Работал с базами 1С и Windows Server. В 2026 году окончил ЕЭТК по специальности «Информационные системы и программирование».',
     proofsLabel: 'Ключевые факты',
     proofs: [
       { value: '50+', label: 'собранных и пересобранных ПК' },
       { value: 'ЕЭТК · 2026', label: 'СПО по специальности 09.02.07' },
-      { value: 'Windows / Linux', label: 'изучаю, включая Debian и виртуализацию' },
+      { value: '1С / Windows Server', label: 'практика в учебном центре' },
     ],
-    cta: 'Смотреть кейсы',
+    cta: 'Технический опыт',
     contactLink: 'Написать',
-    visualTitle: 'TaskFocus',
+    visualTitle: 'Практика с техникой',
+    practiceTitle: 'Компьютеры, комплектующие и учёт оборудования',
+    practicePoints: ['Сборка и пересборка ПК', 'Ремонт блоков питания и обслуживание вентиляторов', 'Инвентаризация техники аудиторий'],
   },
   work: {
     title: 'Программные проекты',
@@ -319,30 +327,32 @@ export const ru: Content = {
     title: 'Технический профиль',
     practices: [
       {
-        title: 'Компьютерное оборудование и инвентаризация',
-        detail: 'В учебном центре собрал и пересобрал более 50 компьютеров, инвентаризировал технику учебных аудиторий.',
+        title: 'Практика · компьютерное оборудование',
+        detail: 'Сборка и пересборка ПК, ремонт блоков питания, смазка вентиляторов и инвентаризация техники аудиторий в УЦ «Потенциал».',
         links: [{ to: '/?section=experience', label: 'Работа в УЦ «Потенциал»' }],
       },
       {
-        title: 'Сборка и обслуживание личных ПК',
-        detail: 'Собирал и обслуживал личные компьютеры, разбирался с возникавшими техническими проблемами.',
+        title: 'Работал с · 1С и Windows Server',
+        detail: 'Работал с базами 1С и Windows Server в учебном центре. Также собирал и обслуживал личные компьютеры, разбирался с техническими проблемами.',
         links: [],
       },
       {
-        title: 'Изучаю операционные системы и виртуализацию',
-        detail: 'Windows, Linux и Debian, виртуализация, устранение неисправностей и основы IT-инфраструктуры.',
+        title: 'Изучаю · ОС и виртуализацию',
+        detail: 'Углубляю знания Windows, изучаю Linux (Debian), виртуализацию и основы IT-инфраструктуры.',
         links: [],
       },
       {
-        title: 'Техническая документация и практика',
-        detail: 'Интересуюсь технической документацией и практическими IT-проектами. Программирование изучал в рамках специальности.',
-        links: [],
+        title: 'Практика · документация',
+        detail: 'Подготовил руководство по ролям и правам и структуру базы знаний O!task. В программных проектах работаю с исходным кодом и технической документацией с помощью AI-агентов.',
+        links: [{ to: '/work/taskfocus', label: 'Техническая часть TaskFocus' }],
       },
     ],
   },
   contact: {
     title: 'Ищу работу в техподдержке',
     subtitle: 'В 2026 году окончил ЕЭТК по специальности «Информационные системы и программирование» и имею практический опыт работы с компьютерной техникой. Напишите на почту; подробнее обо мне можно прочитать в LinkedIn.',
+    workFormat: 'Ищу удалённую работу либо офис / гибрид в Екатеринбурге.',
+    resumeBtn: 'Скачать резюме · PDF',
     emailBtn: 'Написать',
     linkedinBtn: 'Открыть LinkedIn',
     telegramBtn: 'Telegram',

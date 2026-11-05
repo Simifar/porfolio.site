@@ -1,13 +1,13 @@
 # Egor Matafonov | IT Support & PC Hardware
 
-> Seeking opportunities in IT support and PC hardware. In 2026, graduated from Yekaterinburg College of Economics and Technology with a vocational qualification in Information Systems and Programming (09.02.07). Assembled and reassembled more than 50 computers and inventoried classroom equipment at Potencial Training Center. Also assembled, maintained and troubleshot personal computers. Learning Windows, Linux including Debian, virtualization and IT infrastructure.
+> Seeking opportunities in IT support and PC hardware. In 2026, graduated from Yekaterinburg College of Economics and Technology with a vocational qualification in Information Systems and Programming (09.02.07). Assembled and reassembled more than 50 computers and inventoried classroom equipment at Potencial Training Center. Also assembled, maintained and troubleshot personal computers. Worked with 1C databases and Windows Server. Learning Windows, Linux (Debian), virtualization and IT infrastructure.
 
 ## Portfolio
 - [Portfolio home](https://simifar.github.io/porfolio.site/)
 
 ## Experience
-- Potencial Training Center — computer equipment work, October 2024–August 2026. Assembled and reassembled 50+ computers; inventoried classroom equipment.
-- O!task — Junior Product / Growth Specialist, January–August 2026. Historical role; prepared product and business artifacts and partnership placements.
+- Potencial Training Center — computer equipment work, October 2024–August 2026. Assembled and reassembled 50+ computers; inventoried classroom equipment; repaired power supplies and lubricated fans. Worked with 1C databases and Windows Server.
+- O!task — Junior Product / Growth Specialist, January–August 2026. Historical role; prepared a published roles and permissions guide and an adopted knowledge base structure.
 - Web Do — Business Development / Presale Specialist, 2026 until August. Historical role; prepared UX audits and presale materials.
 
 ## Education
@@ -20,6 +20,8 @@
 - [CortexMap](https://simifar.github.io/CortexMap/): Russian-language catalog for learning English, with CEFR levels, search and filters. [Source](https://github.com/Simifar/CortexMap)
 
 ## Contact
-- Looking for opportunities in IT support and PC hardware.
+- Seeking remote IT support / PC hardware work, or office / hybrid roles in Yekaterinburg.
+- [Resume in English (PDF)](https://simifar.github.io/porfolio.site/resume/egor-matafonov-en.pdf)
+- [Resume in Russian (PDF)](https://simifar.github.io/porfolio.site/resume/egor-matafonov-ru.pdf)
 - Email: Matafonovegor2@gmail.com
 - Telegram: https://t.me/legionanstek

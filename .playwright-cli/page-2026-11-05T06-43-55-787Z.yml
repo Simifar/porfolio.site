@@ -1,0 +1,262 @@
+- generic [active] [ref=f2e1]:
+  - link "Перейти к содержимому" [ref=f2e2] [cursor=pointer]:
+    - /url: "#page-start"
+  - banner [ref=f2e3]:
+    - generic [ref=f2e4]:
+      - link "CortexMap — на главную" [ref=f2e5] [cursor=pointer]:
+        - /url: /CortexMap/
+        - generic [ref=f2e6]: CortexMap
+      - search [ref=f2e14]:
+        - generic [ref=f2e15]:
+          - generic [ref=f2e16]: Поиск по справочнику
+          - searchbox "Поиск по справочнику" [ref=f2e17]
+          - button "Найти" [ref=f2e18]
+  - main [ref=f2e22]:
+    - generic [ref=f2e24]:
+      - paragraph [ref=f2e25]: Справочник по языковым экзаменам
+      - generic [ref=f2e26]:
+        - generic [ref=f2e27]:
+          - heading "Подготовка к экзаменам по английскому языку" [level=1] [ref=f2e28]
+          - paragraph [ref=f2e29]: Сравните IELTS, TOEFL и экзамены Cambridge English, изучите формат заданий и соберите план подготовки по своему уровню.
+        - generic [ref=f2e30]:
+          - generic [ref=f2e31]:
+            - strong [ref=f2e32]: "8"
+            - text: экзаменов
+          - generic [ref=f2e33]:
+            - strong [ref=f2e34]: "6"
+            - text: уровней CEFR
+          - generic [ref=f2e35]:
+            - strong [ref=f2e36]: "20"
+            - text: ресурсов
+      - generic [ref=f2e38]:
+        - generic [ref=f2e39]: Поисковый запрос
+        - searchbox "Поисковый запрос" [ref=f2e40]
+        - button "Найти" [ref=f2e41]
+      - generic [ref=f2e42]:
+        - generic [ref=f2e43]: "Популярные запросы:"
+        - link "IELTS" [ref=f2e44] [cursor=pointer]:
+          - /url: /CortexMap/search/?q=IELTS
+        - link "TOEFL" [ref=f2e45] [cursor=pointer]:
+          - /url: /CortexMap/search/?q=TOEFL
+        - link "B2 First" [ref=f2e46] [cursor=pointer]:
+          - /url: /CortexMap/search/?q=B2%20First
+        - link "C1 Advanced" [ref=f2e47] [cursor=pointer]:
+          - /url: /CortexMap/search/?q=C1%20Advanced
+    - generic [ref=f2e48]:
+      - generic [ref=f2e49]:
+        - generic [ref=f2e50]:
+          - heading "С чего начать подготовку" [level=2] [ref=f2e51]
+          - paragraph [ref=f2e52]: Выберите задачу, которая соответствует вашему текущему этапу.
+        - link "Поиск по справочнику" [ref=f2e53] [cursor=pointer]:
+          - /url: /CortexMap/search/
+      - generic [ref=f2e57]:
+        - link "Выбрать экзамен Сравнить назначение, формат и шкалу оценивания. Открыть" [ref=f2e58] [cursor=pointer]:
+          - /url: /CortexMap/exams/
+          - generic [ref=f2e63]:
+            - text: Выбрать экзамен
+            - generic [ref=f2e64]: Сравнить назначение, формат и шкалу оценивания.
+            - generic [ref=f2e65]: Открыть
+        - link "Составить план подготовки Проверить темы и навыки для нужного уровня CEFR. Открыть" [ref=f2e68] [cursor=pointer]:
+          - /url: /CortexMap/plans/
+          - generic [ref=f2e73]:
+            - text: Составить план подготовки
+            - generic [ref=f2e74]: Проверить темы и навыки для нужного уровня CEFR.
+            - generic [ref=f2e75]: Открыть
+        - link "Подобрать учебник Найти пособия для общего английского и экзаменов. Открыть" [ref=f2e78] [cursor=pointer]:
+          - /url: /CortexMap/textbooks/
+          - generic [ref=f2e83]:
+            - text: Подобрать учебник
+            - generic [ref=f2e84]: Найти пособия для общего английского и экзаменов.
+            - generic [ref=f2e85]: Открыть
+    - generic [ref=f2e89]:
+      - generic [ref=f2e90]:
+        - generic [ref=f2e91]:
+          - heading "Основные экзамены" [level=2] [ref=f2e92]
+          - paragraph [ref=f2e93]: Сравните назначение, структуру, шкалу оценивания и условия сдачи.
+        - generic [ref=f2e94]:
+          - link "Сравнить экзамены" [ref=f2e95] [cursor=pointer]:
+            - /url: /CortexMap/exams/compare/
+          - link "Все экзамены →" [ref=f2e96] [cursor=pointer]:
+            - /url: /CortexMap/exams/
+      - generic [ref=f2e97]:
+        - article [ref=f2e98]:
+          - paragraph [ref=f2e99]: Отдельный экзамен · CEFR B1–B2–C1–C2
+          - heading [level=2] [ref=f2e100]:
+            - link "IELTS" [ref=f2e101] [cursor=pointer]:
+              - /url: /CortexMap/exams/ielts/
+          - paragraph [ref=f2e102]: "Международный экзамен для учёбы, работы и миграции. Версии Academic и General Training: аудирование и говорение совпадают, чтение и письмо различаются."
+          - list "Теги" [ref=f2e104]:
+            - listitem [ref=f2e105]: международный
+            - listitem [ref=f2e106]: учёба
+            - listitem [ref=f2e107]: миграция
+            - listitem [ref=f2e108]: "+3"
+          - generic [ref=f2e109]:
+            - link "Подробнее →" [ref=f2e110] [cursor=pointer]:
+              - /url: /CortexMap/exams/ielts/
+            - button "В избранное" [ref=f2e112]
+        - article [ref=f2e115]:
+          - paragraph [ref=f2e116]: Отдельный экзамен · CEFR B2–C1–C2
+          - heading [level=2] [ref=f2e117]:
+            - link "TOEFL iBT" [ref=f2e118] [cursor=pointer]:
+              - /url: /CortexMap/exams/toefl/
+          - paragraph [ref=f2e119]: Академический экзамен для поступления в зарубежные вузы. Сдаётся на компьютере в центре или дома.
+          - list "Теги" [ref=f2e121]:
+            - listitem [ref=f2e122]: академический
+            - listitem [ref=f2e123]: поступление
+            - listitem [ref=f2e124]: учёба
+            - listitem [ref=f2e125]: "+1"
+          - generic [ref=f2e126]:
+            - link "Подробнее →" [ref=f2e127] [cursor=pointer]:
+              - /url: /CortexMap/exams/toefl/
+            - button "В избранное" [ref=f2e129]
+        - article [ref=f2e132]:
+          - paragraph [ref=f2e133]: Серия экзаменов · CEFR A2–B1–B2–C1–C2
+          - heading [level=2] [ref=f2e134]:
+            - link "Cambridge English" [ref=f2e135] [cursor=pointer]:
+              - /url: /CortexMap/exams/cambridge/
+          - paragraph [ref=f2e136]: Линейка квалификационных экзаменов A2 Key, B1 Preliminary, B2 First, C1 Advanced и C2 Proficiency. Сертификат бессрочный, уровень подтверждает конкретная квалификация.
+          - list "Теги" [ref=f2e138]:
+            - listitem [ref=f2e139]: кембриджский
+            - listitem [ref=f2e140]: квалификация
+            - listitem [ref=f2e141]: учёба
+            - listitem [ref=f2e142]: "+2"
+          - generic [ref=f2e143]:
+            - link "Подробнее →" [ref=f2e144] [cursor=pointer]:
+              - /url: /CortexMap/exams/cambridge/
+            - button "В избранное" [ref=f2e146]
+    - generic [ref=f2e150]:
+      - generic [ref=f2e151]:
+        - generic [ref=f2e152]:
+          - heading "Планы по уровням CEFR" [level=2] [ref=f2e153]
+          - paragraph [ref=f2e154]: Используйте их, чтобы найти пробелы в грамматике, лексике и языковых навыках.
+        - link "Все уровни →" [ref=f2e155] [cursor=pointer]:
+          - /url: /CortexMap/plans/
+      - generic [ref=f2e156]:
+        - 'link "A1 · Beginner Ориентировочный срок: 2–3 месяца 8 тем по грамматике 3 практических навыка" [ref=f2e157] [cursor=pointer]':
+          - /url: /CortexMap/plans/a1/
+          - generic [ref=f2e164]:
+            - heading "A1 · Beginner" [level=3] [ref=f2e165]:
+              - text: A1
+              - generic [ref=f2e166]: · Beginner
+            - paragraph [ref=f2e167]: "Ориентировочный срок: 2–3 месяца"
+          - generic [ref=f2e168]:
+            - generic [ref=f2e169]: 8 тем по грамматике
+            - generic [ref=f2e170]: 3 практических навыка
+        - 'link "A2 · Pre-Intermediate Ориентировочный срок: 3–4 месяца 7 тем по грамматике 3 практических навыка" [ref=f2e171] [cursor=pointer]':
+          - /url: /CortexMap/plans/a2/
+          - generic [ref=f2e176]:
+            - heading "A2 · Pre-Intermediate" [level=3] [ref=f2e177]:
+              - text: A2
+              - generic [ref=f2e178]: · Pre-Intermediate
+            - paragraph [ref=f2e179]: "Ориентировочный срок: 3–4 месяца"
+          - generic [ref=f2e180]:
+            - generic [ref=f2e181]: 7 тем по грамматике
+            - generic [ref=f2e182]: 3 практических навыка
+        - 'link "B1 · Intermediate Ориентировочный срок: 4–6 месяцев 7 тем по грамматике 4 практических навыка" [ref=f2e183] [cursor=pointer]':
+          - /url: /CortexMap/plans/b1/
+          - generic [ref=f2e188]:
+            - heading "B1 · Intermediate" [level=3] [ref=f2e189]:
+              - text: B1
+              - generic [ref=f2e190]: · Intermediate
+            - paragraph [ref=f2e191]: "Ориентировочный срок: 4–6 месяцев"
+          - generic [ref=f2e192]:
+            - generic [ref=f2e193]: 7 тем по грамматике
+            - generic [ref=f2e194]: 4 практических навыка
+        - 'link "B2 · Upper-Intermediate Ориентировочный срок: 6–8 месяцев 6 тем по грамматике 4 практических навыка" [ref=f2e195] [cursor=pointer]':
+          - /url: /CortexMap/plans/b2/
+          - generic [ref=f2e201]:
+            - heading "B2 · Upper-Intermediate" [level=3] [ref=f2e202]:
+              - text: B2
+              - generic [ref=f2e203]: · Upper-Intermediate
+            - paragraph [ref=f2e204]: "Ориентировочный срок: 6–8 месяцев"
+          - generic [ref=f2e205]:
+            - generic [ref=f2e206]: 6 тем по грамматике
+            - generic [ref=f2e207]: 4 практических навыка
+        - 'link "C1 · Advanced Ориентировочный срок: 8–12 месяцев 5 тем по грамматике 4 практических навыка" [ref=f2e208] [cursor=pointer]':
+          - /url: /CortexMap/plans/c1/
+          - generic [ref=f2e214]:
+            - heading "C1 · Advanced" [level=3] [ref=f2e215]:
+              - text: C1
+              - generic [ref=f2e216]: · Advanced
+            - paragraph [ref=f2e217]: "Ориентировочный срок: 8–12 месяцев"
+          - generic [ref=f2e218]:
+            - generic [ref=f2e219]: 5 тем по грамматике
+            - generic [ref=f2e220]: 4 практических навыка
+        - 'link "C2 · Proficiency Ориентировочный срок: 12+ месяцев 3 тем по грамматике 4 практических навыка" [ref=f2e221] [cursor=pointer]':
+          - /url: /CortexMap/plans/c2/
+          - generic [ref=f2e227]:
+            - heading "C2 · Proficiency" [level=3] [ref=f2e228]:
+              - text: C2
+              - generic [ref=f2e229]: · Proficiency
+            - paragraph [ref=f2e230]: "Ориентировочный срок: 12+ месяцев"
+          - generic [ref=f2e231]:
+            - generic [ref=f2e232]: 3 тем по грамматике
+            - generic [ref=f2e233]: 4 практических навыка
+    - generic [ref=f2e235]:
+      - generic [ref=f2e236]:
+        - generic [ref=f2e237]:
+          - heading "Материалы для подготовки" [level=2] [ref=f2e238]
+          - paragraph [ref=f2e239]: Официальные сайты экзаменов и внешние ресурсы для практики отдельных навыков.
+        - link "Каталог ресурсов →" [ref=f2e240] [cursor=pointer]:
+          - /url: /CortexMap/resources/
+      - generic [ref=f2e241]:
+        - link "Грамматика" [ref=f2e242] [cursor=pointer]:
+          - /url: /CortexMap/resources/?category=grammar
+        - link "Чтение" [ref=f2e243] [cursor=pointer]:
+          - /url: /CortexMap/resources/?category=reading
+        - link "Аудирование" [ref=f2e244] [cursor=pointer]:
+          - /url: /CortexMap/resources/?category=listening
+        - link "Говорение" [ref=f2e245] [cursor=pointer]:
+          - /url: /CortexMap/resources/?category=speaking
+        - link "Словари" [ref=f2e246] [cursor=pointer]:
+          - /url: /CortexMap/resources/?category=dictionary
+        - link "Произношение" [ref=f2e247] [cursor=pointer]:
+          - /url: /CortexMap/resources/?category=pronunciation
+      - generic [ref=f2e248]:
+        - link [ref=f2e249] [cursor=pointer]:
+          - /url: /CortexMap/resources/resource-ielts-org/
+          - generic [ref=f2e250]:
+            - paragraph [ref=f2e251]: Экзамены · бесплатно
+            - heading "IELTS.org" [level=3] [ref=f2e252]
+            - paragraph [ref=f2e253]: "Официальная информация об IELTS: формат, результаты, регистрация и материалы для знакомства с заданиями."
+        - link [ref=f2e256] [cursor=pointer]:
+          - /url: /CortexMap/resources/resource-cambridge-english/
+          - generic [ref=f2e257]:
+            - paragraph [ref=f2e258]: Экзамены · бесплатно
+            - heading "Cambridge English" [level=3] [ref=f2e259]
+            - paragraph [ref=f2e260]: Официальная информация об экзаменах Cambridge English, их формате, уровнях и материалах для подготовки.
+        - link [ref=f2e263] [cursor=pointer]:
+          - /url: /CortexMap/resources/resource-bbc-learning-english/
+          - generic [ref=f2e264]:
+            - paragraph [ref=f2e265]: Чтение · бесплатно
+            - heading "BBC Learning English" [level=3] [ref=f2e266]
+            - paragraph [ref=f2e267]: "Учебные программы BBC: видео, подкасты, статьи, объяснения лексики и задания для самопроверки."
+  - contentinfo [ref=f2e270]:
+    - generic [ref=f2e271]:
+      - generic [ref=f2e272]:
+        - link "CortexMap — на главную" [ref=f2e273] [cursor=pointer]:
+          - /url: /CortexMap/
+          - generic [ref=f2e274]: CortexMap
+        - paragraph [ref=f2e282]: Справочник по подготовке к IELTS, TOEFL и экзаменам Cambridge English.
+      - navigation "Навигация в подвале" [ref=f2e283]:
+        - link "Уровни CEFR" [ref=f2e284] [cursor=pointer]:
+          - /url: /CortexMap/plans/#page-start
+        - link "Экзамены" [ref=f2e285] [cursor=pointer]:
+          - /url: /CortexMap/exams/#page-start
+        - link "Учебники" [ref=f2e286] [cursor=pointer]:
+          - /url: /CortexMap/textbooks/#page-start
+        - link "Ресурсы" [ref=f2e287] [cursor=pointer]:
+          - /url: /CortexMap/resources/#page-start
+  - navigation "Нижняя навигация" [ref=f2e288]:
+    - generic [ref=f2e289]:
+      - link "Главная" [ref=f2e290] [cursor=pointer]:
+        - /url: /CortexMap/#page-start
+      - link "Уровни" [ref=f2e295] [cursor=pointer]:
+        - /url: /CortexMap/plans/#page-start
+      - link "Экзамены" [ref=f2e300] [cursor=pointer]:
+        - /url: /CortexMap/exams/#page-start
+      - link "Ресурсы" [ref=f2e305] [cursor=pointer]:
+        - /url: /CortexMap/resources/#page-start
+      - link "Избранное" [ref=f2e310] [cursor=pointer]:
+        - /url: /CortexMap/favorites/#page-start
+  - alert [ref=f2e314]
