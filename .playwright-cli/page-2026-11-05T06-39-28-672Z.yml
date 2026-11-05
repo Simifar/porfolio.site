@@ -1,0 +1,214 @@
+- generic [ref=f1e2]:
+  - link "Перейти к содержимому" [ref=f1e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f1e4]:
+    - generic [ref=f1e5]:
+      - link "Егор Матафонов, главная" [ref=f1e6] [cursor=pointer]:
+        - /url: "#/"
+        - text: Егор Матафонов
+      - navigation "Основная навигация" [ref=f1e7]:
+        - link "Опыт" [ref=f1e8] [cursor=pointer]:
+          - /url: "#/?section=experience"
+        - link "Проекты" [ref=f1e9] [cursor=pointer]:
+          - /url: "#/?section=work"
+        - link "Подход" [ref=f1e10] [cursor=pointer]:
+          - /url: "#/?section=about"
+        - link "Контакты" [ref=f1e11] [cursor=pointer]:
+          - /url: "#/?section=contact"
+      - generic [ref=f1e12]:
+        - button "Открыть меню команд" [ref=f1e13] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f1e17]: Ctrl K
+        - button "Включить тёмную тему" [pressed] [ref=f1e18] [cursor=pointer]
+        - group "Язык" [ref=f1e21]:
+          - button "Английский" [ref=f1e22] [cursor=pointer]:
+            - generic [ref=f1e23]: English
+          - button "Русский" [pressed] [ref=f1e24] [cursor=pointer]
+  - main [ref=f1e26]:
+    - region [ref=f1e27]:
+      - generic [ref=f1e28]:
+        - generic [ref=f1e29]:
+          - paragraph [ref=f1e30]: Егор Матафонов · открыт к работе с компьютерной техникой
+          - heading "Техническая поддержка и компьютерное оборудование" [level=1] [ref=f1e31]:
+            - generic [ref=f1e32]: Техническая
+            - generic [ref=f1e34]: поддержка
+            - generic [ref=f1e36]: и
+            - generic [ref=f1e38]: компьютерное
+            - generic [ref=f1e40]: оборудование
+          - paragraph [ref=f1e42]: Собрал и пересобрал более 50 ПК, инвентаризировал технику аудиторий. В 2026 году окончил ЕЭТК по специальности «Информационные системы и программирование».
+          - list "Ключевые факты" [ref=f1e43]:
+            - listitem [ref=f1e44]:
+              - generic [ref=f1e45]: 50+
+              - generic [ref=f1e46]: собранных и пересобранных ПК
+            - listitem [ref=f1e47]:
+              - generic [ref=f1e48]: ЕЭТК · 2026
+              - generic [ref=f1e49]: СПО по специальности 09.02.07
+            - listitem [ref=f1e50]:
+              - generic [ref=f1e51]: Windows / Linux
+              - generic [ref=f1e52]: изучаю, включая Debian и виртуализацию
+          - generic [ref=f1e53]:
+            - link "Смотреть кейсы" [ref=f1e54] [cursor=pointer]:
+              - /url: "#/?section=work"
+            - link "Написать" [ref=f1e57] [cursor=pointer]:
+              - /url: "#/?section=contact"
+        - figure "TaskFocus Обложка проекта · по мотивам интерфейса Кейс проекта" [ref=f1e61]:
+          - 'img "Обложка TaskFocus по мотивам интерфейса: план на пять задач и недельный календарь." [ref=f1e63]'
+          - generic [ref=f1e64]:
+            - generic [ref=f1e65]:
+              - generic [ref=f1e66]: TaskFocus
+              - generic [ref=f1e67]: Обложка проекта · по мотивам интерфейса
+            - link "Кейс проекта" [ref=f1e68] [cursor=pointer]:
+              - /url: "#/work/taskfocus"
+    - region [ref=f1e72]:
+      - generic [ref=f1e73]:
+        - generic [ref=f1e74]:
+          - heading "Опыт работы" [level=2] [ref=f1e75]
+          - paragraph [ref=f1e76]: Практическая работа с компьютерной техникой и техническое образование, а также предыдущий опыт в других сферах.
+        - generic [ref=f1e77]:
+          - article [ref=f1e78]:
+            - generic [ref=f1e79]:
+              - generic [ref=f1e80]: Окт 2024–авг 2026
+              - generic [ref=f1e81]: Компьютерная техника аудиторий
+            - generic [ref=f1e82]:
+              - heading "УЦ «Потенциал»" [level=3] [ref=f1e83]
+              - paragraph [ref=f1e84]: Работа с компьютерным оборудованием
+              - paragraph [ref=f1e85]: Работал с компьютерным оборудованием учебного центра.
+              - list [ref=f1e86]:
+                - listitem [ref=f1e87]: Собрал и пересобрал более 50 компьютеров.
+                - listitem [ref=f1e88]: Инвентаризировал компьютерную технику учебных аудиторий.
+          - article [ref=f1e89]:
+            - generic [ref=f1e90]:
+              - generic [ref=f1e91]: Янв–авг 2026
+              - generic [ref=f1e92]: B2B SaaS · задачи, CRM, финансы, база знаний
+            - generic [ref=f1e93]:
+              - heading "O!task" [level=3] [ref=f1e94]
+              - paragraph [ref=f1e95]: Junior Product / Growth Specialist
+              - paragraph [ref=f1e96]: Вёл партнёрский канал без рекламного бюджета, писал сценарий CustDev-интервью, готовил CJM, информационную архитектуру, матрицу ролей и прав, бизнес- и финансовую модель.
+              - list [ref=f1e97]:
+                - listitem [ref=f1e98]: Отправил 130 предложений о размещении в 91 источник (февраль–июнь 2026) и получил 5 публикаций у Projectum, Timetta, Sendsay и WEEEK — по бартеру или бесплатно; от платных предложений до 180 000 ₽ отказались.
+                - listitem [ref=f1e99]: Составил сценарий CustDev-интервью на 30–40 минут, который взяли в работу; разобрал 14-дневную онбординг-цепочку конкурента (13 писем) и подготовил 10 макетов писем для O!task.
+                - listitem [ref=f1e100]: Разработал CJM, информационную архитектуру и матрицу ролей; руководство по ролям и правам опубликовано на сайте O!task, структура базы знаний внедрена.
+                - listitem [ref=f1e101]: Подготовил бизнес-модель, финансовую модель, pitch deck и анализ финансовых рисков.
+          - article [ref=f1e102]:
+            - generic [ref=f1e103]:
+              - generic [ref=f1e104]: 2026 · до августа
+              - generic [ref=f1e105]: Веб-студия · IT и SaaS-клиенты
+            - generic [ref=f1e106]:
+              - heading "Web Do" [level=3] [ref=f1e107]
+              - paragraph [ref=f1e108]: Business Development / Presale Specialist
+              - paragraph [ref=f1e109]: Искал потенциальных клиентов, писал персонализированные обращения, готовил первичные UX-аудиты и presale-документы, вёл CRM и передавал лиды в продажи.
+              - list [ref=f1e110]:
+                - listitem [ref=f1e111]: Подготовил 15 UX-аудитов сайтов — проблемы, предложенные решения и референсы — как основу для первого presale-разговора с клиентом.
+                - listitem [ref=f1e112]: Переработал холодные обращения с персонализацией и follow-up; создал шаблоны аудитов и presale-материалов, чтобы не готовить их для каждого клиента с нуля.
+          - article [ref=f1e113]:
+            - generic [ref=f1e114]: Образование
+            - heading "Екатеринбургский экономико-технологический колледж (ЕЭТК), 09.02.07 «Информационные системы и программирование». Среднее профессиональное образование, 2026." [level=3] [ref=f1e117]
+    - region [ref=f1e118]:
+      - generic [ref=f1e119]:
+        - generic [ref=f1e120]:
+          - heading "Программные проекты" [level=2] [ref=f1e121]
+          - paragraph [ref=f1e122]: Личные программные проекты дополняют практический опыт работы с компьютерной техникой.
+        - generic [ref=f1e123]:
+          - article [ref=f1e125]:
+            - figure "Обложка проекта · по мотивам интерфейса" [ref=f1e126]:
+              - 'img "Обложка TaskFocus по мотивам интерфейса: план на пять задач и недельный календарь." [ref=f1e128]'
+            - generic [ref=f1e130]:
+              - generic [ref=f1e131]:
+                - generic [ref=f1e132]: Планирование
+                - generic [ref=f1e133]: Опубликован
+              - heading "TaskFocus" [level=3] [ref=f1e134]
+              - paragraph [ref=f1e135]: "Планирование задач: сначала входящие, затем гибкие сроки"
+              - paragraph [ref=f1e136]: Дипломный проект, реализованный как приложение для планирования задач.
+              - paragraph [ref=f1e137]: Самостоятельный проект · дизайн и разработка
+              - generic [ref=f1e138]:
+                - link "Кейс проекта" [ref=f1e139] [cursor=pointer]:
+                  - /url: "#/work/taskfocus"
+                - link "Открыть продукт" [ref=f1e143] [cursor=pointer]:
+                  - /url: https://taskfocus-eight.vercel.app/
+                - link "Исходный код" [ref=f1e148] [cursor=pointer]:
+                  - /url: https://github.com/Simifar/taskfocus
+          - article [ref=f1e154]:
+            - figure "Обложка проекта · результат показан для примера" [ref=f1e155]:
+              - 'img "Обложка MindTrack по мотивам интерфейса: каталог опросников и пример результата WHO-5." [ref=f1e157]'
+            - generic [ref=f1e159]:
+              - generic [ref=f1e160]:
+                - generic [ref=f1e161]: Самонаблюдение
+                - generic [ref=f1e162]: Опубликован
+              - heading "MindTrack" [level=3] [ref=f1e163]
+              - paragraph [ref=f1e164]: Приложение для самонаблюдения с опросниками
+              - paragraph [ref=f1e165]: Без аккаунта. Ответы хранятся в браузере.
+              - paragraph [ref=f1e166]: Самостоятельный проект · хранение данных в браузере и разработка
+              - generic [ref=f1e167]:
+                - link "Кейс проекта" [ref=f1e168] [cursor=pointer]:
+                  - /url: "#/work/mindtrack"
+                - link "Открыть продукт" [ref=f1e172] [cursor=pointer]:
+                  - /url: https://simifar.github.io/mindtrack/
+                - link "Исходный код" [ref=f1e177] [cursor=pointer]:
+                  - /url: https://github.com/Simifar/mindtrack
+        - generic [ref=f1e182]:
+          - heading "Другие проекты" [level=3] [ref=f1e183]
+          - article [ref=f1e185]:
+            - figure "Обложка проекта · по мотивам интерфейса" [ref=f1e186]:
+              - 'img "Обложка CortexMap по мотивам интерфейса: каталог английского с уровнями CEFR от A1 до C2." [ref=f1e187]'
+            - generic [ref=f1e189]:
+              - generic [ref=f1e190]: Образование
+              - generic [ref=f1e191]: Опубликован
+            - heading "CortexMap" [level=4] [ref=f1e192]
+            - paragraph [ref=f1e193]: Русскоязычный каталог для изучения английского
+            - paragraph [ref=f1e194]: Каталог по уровням CEFR, поиск, фильтры и избранное в браузере.
+            - generic [ref=f1e195]:
+              - link "Обзор проекта" [ref=f1e196] [cursor=pointer]:
+                - /url: "#/work/cortexmap"
+              - link "Открыть продукт" [ref=f1e200] [cursor=pointer]:
+                - /url: https://simifar.github.io/CortexMap/
+              - link "Исходный код" [ref=f1e205] [cursor=pointer]:
+                - /url: https://github.com/Simifar/CortexMap
+    - region [ref=f1e210]:
+      - generic [ref=f1e211]:
+        - heading "Технический профиль" [level=2] [ref=f1e213]
+        - list [ref=f1e215]:
+          - listitem [ref=f1e216]:
+            - heading "Компьютерное оборудование и инвентаризация" [level=3] [ref=f1e217]
+            - paragraph [ref=f1e218]: В учебном центре собрал и пересобрал более 50 компьютеров, инвентаризировал технику учебных аудиторий.
+            - link "Работа в УЦ «Потенциал»" [ref=f1e220] [cursor=pointer]:
+              - /url: "#/?section=experience"
+          - listitem [ref=f1e224]:
+            - heading "Сборка и обслуживание личных ПК" [level=3] [ref=f1e225]
+            - paragraph [ref=f1e226]: Собирал и обслуживал личные компьютеры, разбирался с возникавшими техническими проблемами.
+          - listitem [ref=f1e228]:
+            - heading "Изучаю операционные системы и виртуализацию" [level=3] [ref=f1e229]
+            - paragraph [ref=f1e230]: Windows, Linux и Debian, виртуализация, устранение неисправностей и основы IT-инфраструктуры.
+          - listitem [ref=f1e232]:
+            - heading "Техническая документация и практика" [level=3] [ref=f1e233]
+            - paragraph [ref=f1e234]: Интересуюсь технической документацией и практическими IT-проектами. Программирование изучал в рамках специальности.
+    - region [ref=f1e236]:
+      - generic [ref=f1e237]:
+        - heading "Ищу работу в техподдержке" [level=2] [ref=f1e239]
+        - generic [ref=f1e240]:
+          - paragraph [ref=f1e241]: В 2026 году окончил ЕЭТК по специальности «Информационные системы и программирование» и имею практический опыт работы с компьютерной техникой. Напишите на почту; подробнее обо мне можно прочитать в LinkedIn.
+          - generic [ref=f1e242]:
+            - generic [ref=f1e243]:
+              - link "Написать" [ref=f1e244] [cursor=pointer]:
+                - /url: mailto:Matafonovegor2@gmail.com
+                - generic [ref=f1e248]: Matafonovegor2@gmail.com
+              - button "Скопировать адрес почты" [ref=f1e252] [cursor=pointer]
+            - link "GitHub" [ref=f1e256] [cursor=pointer]:
+              - /url: https://github.com/Simifar
+            - link "Открыть LinkedIn" [ref=f1e264] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US
+            - link "Telegram" [ref=f1e273] [cursor=pointer]:
+              - /url: https://t.me/legionanstek
+  - contentinfo [ref=f1e281]:
+    - generic [ref=f1e282]:
+      - generic [ref=f1e283]:
+        - paragraph [ref=f1e284]: © 2026 Егор Матафонов
+        - paragraph [ref=f1e285]: Сайт сделал Егор Матафонов
+      - navigation "Ссылки на профили" [ref=f1e286]:
+        - link "GitHub" [ref=f1e287] [cursor=pointer]:
+          - /url: https://github.com/Simifar
+        - link "LinkedIn" [ref=f1e291] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US
+        - link "Telegram" [ref=f1e296] [cursor=pointer]:
+          - /url: https://t.me/legionanstek
+        - link "Почта" [ref=f1e300] [cursor=pointer]:
+          - /url: mailto:Matafonovegor2@gmail.com
+  - status

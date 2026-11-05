@@ -11,6 +11,10 @@ const compiled = ts.transpileModule(source, {
 }).outputText;
 const { projects } = await import(`data:text/javascript;base64,${Buffer.from(compiled).toString('base64')}`);
 
+const i18nSource = await readFile(resolve('src/content/i18n.ts'), 'utf8');
+const i18nCompiled = ts.transpileModule(i18nSource, { compilerOptions: { module: ts.ModuleKind.ESNext, target: ts.ScriptTarget.ES2022 } }).outputText;
+const content = await import(`data:text/javascript;base64,${Buffer.from(i18nCompiled).toString('base64')}`);
+
 const escape = value => String(value).replace(/[&<>"']/g, character => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[character]);
@@ -58,6 +62,7 @@ const labels = {
 
 function renderCase(project, lang) {
   const l = labels[lang];
+  const t = content[lang];
   const caseUrl = `${site}${lang === 'ru' ? 'ru/' : ''}work/${project.slug}/`;
   const enUrl = `${site}work/${project.slug}/`;
   const ruUrl = `${site}ru/work/${project.slug}/`;
@@ -70,7 +75,7 @@ function renderCase(project, lang) {
   const description = project.description[lang];
   const image = project.visual;
   const socialVisual = image?.kind === 'concept' ? undefined : image;
-  const socialImage = socialVisual ? `${site}${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}` : `${site}og-image.png`;
+  const socialImage = socialVisual ? `${site}${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}` : `${site}og-image.png?v=20261105`;
   const visual = image ? `<figure class="preview-visual${image.kind === 'cover' ? ' preview-visual--cover' : ''}">${image.kind === 'concept' ? `<figcaption class="preview-disclosure">${escape(image.caption[lang])}</figcaption>` : ''}<img src="${escape(asset(image))}" alt="${escape(image.alt[lang])}" width="${image.width}" height="${image.height}" fetchpriority="high">${image.kind !== 'concept' ? `<figcaption>${escape(image.caption[lang])}</figcaption>` : ''}</figure>` : '';
   const gallery = project.gallery ? `<section class="preview-gallery" aria-label="${escape(l.gallery)}">${project.gallery.map(image => `<figure><img src="${escape(asset(image))}" alt="${escape(image.alt[lang])}" width="${image.width}" height="${image.height}" loading="lazy"><figcaption>${escape(image.caption[lang])}</figcaption></figure>`).join('')}</section>` : '';
   const study = project.caseStudy;
@@ -89,7 +94,7 @@ function renderCase(project, lang) {
     study.lessons ? section(l.lessons, bulletList(study.lessons.map(item => item[lang]))) : '',
     study.materials.length ? section(l.materials, `<ul>${study.materials.map(material => `<li><a href="${escape(material.href)}">${escape(material.label[lang])}</a></li>`).join('')}</ul>`) : '',
   ].join('') : section(l.features, bulletList(project.features.map(item => item[lang])));
-  const cta = `<section class="preview-cta" aria-labelledby="cta-title"><h2 id="cta-title">${escape(l.ctaTitle)}</h2><div><p>${escape(l.ctaText)}</p><div class="preview-cta-actions"><a class="preview-cta-primary" href="mailto:Matafonovegor2@gmail.com">Matafonovegor2@gmail.com</a><a class="preview-cta-secondary" href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer">${escape(l.linkedin)} ↗</a></div></div></section>`;
+  const cta = `<section class="preview-cta" aria-labelledby="cta-title"><h2 id="cta-title">${escape(t.caseStudy.ctaTitle)}</h2><div><p>${escape(t.caseStudy.ctaText)}</p><p>${escape(t.contact.workFormat)}</p><div class="preview-cta-actions"><a class="preview-cta-secondary" href="${base}resume/egor-matafonov-${lang}.pdf" download>${escape(t.contact.resumeBtn)}</a><a class="preview-cta-secondary" href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer">Telegram ↗</a><a class="preview-cta-primary" href="mailto:Matafonovegor2@gmail.com">Matafonovegor2@gmail.com</a><a class="preview-cta-secondary" href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer">${escape(l.linkedin)} ↗</a></div></div></section>`;
 
   return `<!doctype html>
 <html lang="${lang}"><head>

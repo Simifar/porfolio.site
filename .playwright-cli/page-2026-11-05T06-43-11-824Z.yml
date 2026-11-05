@@ -1,0 +1,73 @@
+- generic [active] [ref=f1e1]:
+  - generic [ref=f1e2]:
+    - link "К основному содержимому" [ref=f1e3] [cursor=pointer]:
+      - /url: "#main-content"
+    - complementary [ref=f1e4]:
+      - link "MindTrack — на главную" [ref=f1e6] [cursor=pointer]:
+        - /url: /mindtrack/
+        - generic [ref=f1e8]:
+          - generic [ref=f1e9]: MindTrack
+          - generic [ref=f1e10]: самонаблюдение и подготовка
+      - navigation "Основные разделы" [ref=f1e11]:
+        - generic [ref=f1e12]:
+          - paragraph [ref=f1e13]: Обзор
+          - link "Главная" [ref=f1e14] [cursor=pointer]:
+            - /url: /mindtrack/
+        - generic [ref=f1e18]:
+          - paragraph [ref=f1e19]: Пройти
+          - link "Тесты" [ref=f1e20] [cursor=pointer]:
+            - /url: /mindtrack/tests
+        - generic [ref=f1e24]:
+          - paragraph [ref=f1e25]: Мои данные
+          - link "Дневник" [ref=f1e26] [cursor=pointer]:
+            - /url: /mindtrack/diary
+          - link "К врачу" [ref=f1e30] [cursor=pointer]:
+            - /url: /mindtrack/visit
+          - link "История" [ref=f1e36] [cursor=pointer]:
+            - /url: /mindtrack/results
+        - generic [ref=f1e41]:
+          - paragraph [ref=f1e42]: Справка
+          - link "Методики" [ref=f1e43] [cursor=pointer]:
+            - /url: /mindtrack/about
+      - generic [ref=f1e46]:
+        - generic [ref=f1e47]:
+          - paragraph [ref=f1e48]: Только на этом устройстве
+          - paragraph [ref=f1e49]: Без аккаунта и отправки ответов на сервер.
+        - link "Помощь" [ref=f1e50] [cursor=pointer]:
+          - /url: /mindtrack/help
+        - link "Приватность и удаление данных" [ref=f1e58] [cursor=pointer]:
+          - /url: /mindtrack/privacy
+    - generic [ref=f1e59]:
+      - banner [ref=f1e60]:
+        - paragraph [ref=f1e61]: Главная
+        - 'button "Тема: как в системе. Переключить на светлую" [ref=f1e62]'
+      - main [ref=f1e63]:
+        - generic [ref=f1e66]:
+          - paragraph [ref=f1e67]: Главная
+          - heading "Как вы сегодня?" [level=1] [ref=f1e68]
+          - generic [ref=f1e69]: "Здесь собрано то, к чему стоит вернуться: незавершённые ответы, последние результаты и записи."
+      - contentinfo [ref=f1e74]:
+        - generic [ref=f1e75]:
+          - paragraph [ref=f1e76]:
+            - text: "MindTrack — не медицинское ПО. Результаты тестов — самонаблюдение, а не диагноз. Обсуждайте их с врачом / психотерапевтом. В непосредственной опасности:"
+            - link "112" [ref=f1e77] [cursor=pointer]:
+              - /url: tel:112
+            - text: ". Детский телефон доверия в России:"
+            - link "8-800-2000-122" [ref=f1e78] [cursor=pointer]:
+              - /url: tel:88002000122
+            - text: или
+            - link "124 с мобильного" [ref=f1e79] [cursor=pointer]:
+              - /url: tel:124
+            - text: .
+          - generic [ref=f1e80]:
+            - generic [ref=f1e81]: © 2026 MindTrack · справочник тестов
+            - navigation "Дополнительные разделы" [ref=f1e82]:
+              - generic [ref=f1e83]: Без регистрации · данные хранятся только в вашем браузере
+              - link "О методиках и ограничениях" [ref=f1e84] [cursor=pointer]:
+                - /url: /mindtrack/about
+              - link "Помощь" [ref=f1e85] [cursor=pointer]:
+                - /url: /mindtrack/help
+              - link "Приватность" [ref=f1e86] [cursor=pointer]:
+                - /url: /mindtrack/privacy
+  - region "Notifications (F8)":
+    - list

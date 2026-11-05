@@ -30,14 +30,14 @@ test('home explains experience and projects, and case back returns to the projec
   await expect(page.getByRole('heading', { name: 'Open to IT support roles' })).toBeAttached();
   const approach = page.locator('#about');
   await expect(approach).not.toContainText('untested hypothesis');
-  await expect(approach).toContainText('PC hardware and inventory');
+  await expect(approach).toContainText('Hands-on · PC hardware');
   await expect(approach).toContainText('Windows, Linux including Debian, and virtualization');
   await expect(approach.getByRole('link', { name: 'Work at Potencial', exact: true })).toHaveAttribute('href', '#/?section=experience');
   await approach.getByRole('link', { name: 'Work at Potencial', exact: true }).click();
   await expect.poll(() => page.locator('#experience').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
-  await page.getByRole('link', { name: 'See case studies' }).click();
-  await expect(page).toHaveURL(/section=work/);
-  await expect.poll(() => page.locator('#work').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
+  await page.getByRole('link', { name: 'See technical experience' }).click();
+  await expect(page).toHaveURL(/section=experience/);
+  await expect.poll(() => page.locator('#experience').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
   await expect(page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Open product' })).toHaveAttribute('href', 'https://taskfocus-eight.vercel.app/');
 
   await page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Project case' }).click();
@@ -82,7 +82,7 @@ test('hero shows role, proof points and primary CTA above the fold without dupli
     for (const item of await hero.getByRole('list', { name: 'Key facts' }).getByRole('listitem').all()) {
       await expect(item).toBeInViewport({ ratio: 1 });
     }
-    await expect(hero.getByRole('link', { name: 'See case studies' })).toBeInViewport({ ratio: 1 });
+    await expect(hero.getByRole('link', { name: 'See technical experience' })).toBeInViewport({ ratio: 1 });
     await expect(page.locator('img[src$="mindtrack-cover.webp"]')).toHaveCount(1);
   }
 });
@@ -287,7 +287,7 @@ test('every case ends with an email-first CTA before the next project, in the SP
       const region = page.getByRole('region', { name: cta[lang] });
       await expect(region).toBeVisible();
       const links = region.getByRole('link');
-      await expect(links).toHaveCount(2);
+      await expect(links).toHaveCount(4);
       await expect(links.first()).toHaveAttribute('href', 'mailto:Matafonovegor2@gmail.com');
       await expect(links.nth(1)).toHaveAttribute('href', linkedin);
       expect(await page.evaluate(() => {
@@ -357,13 +357,13 @@ test('scroll reveal shows every section once it is reached and never hides what 
   await expect.poll(() => page.locator('#contact [data-reveal]').first().evaluate(element => getComputedStyle(element).opacity)).toBe('1');
 });
 
-test('reduced motion shows all content and the hero cover without animation', async ({ page }) => {
+test('reduced motion shows all content and technical hero without animation', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
   expect(await page.evaluate(() => document.querySelectorAll('[data-reveal]:not([data-revealed="instant"])').length)).toBe(0);
   expect(await page.locator('#hero').getAttribute('data-intro')).toBeNull();
-  await expect(page.locator('.hero__image')).toHaveAttribute('src', /taskfocus-cover\.webp$/);
-  await expect.poll(() => page.locator('.hero__image').evaluate((image: HTMLImageElement) => image.naturalWidth)).toBe(1600);
+  await expect(page.locator('.hero-practice')).toBeVisible();
+  await expect(page.locator('#hero img')).toHaveCount(0);
   await page.locator('#work').scrollIntoViewIfNeeded();
   expect(await page.locator('#work .project-image-frame').first().evaluate(element => getComputedStyle(element).clipPath)).toBe('none');
 });

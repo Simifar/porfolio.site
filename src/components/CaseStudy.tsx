@@ -333,6 +333,7 @@ export default function CaseStudy() {
             <h2 id="case-cta-title" className="case-cta__title">{t.caseStudy.ctaTitle}</h2>
             <div>
               <p className="contact-copy">{t.caseStudy.ctaText}</p>
+              <p className="contact-format">{t.contact.workFormat}</p>
               <div className="contact-actions">
                 <span className="contact-email-group">
                   <a href="mailto:Matafonovegor2@gmail.com" className="contact-email">
@@ -349,6 +350,8 @@ export default function CaseStudy() {
                   <span>{t.contact.linkedinBtn}</span>
                   <ArrowUpRight className="contact-action__arrow" size={14} aria-hidden="true" />
                 </a>
+                <a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer" className="contact-link">{t.contact.telegramBtn}</a>
+                <a href={`${import.meta.env.BASE_URL}resume/egor-matafonov-${lang}.pdf`} download className="contact-link">{t.contact.resumeBtn}</a>
               </div>
             </div>
           </div>

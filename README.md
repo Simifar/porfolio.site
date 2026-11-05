@@ -9,9 +9,11 @@ The site documents my work assembling and reassembling more than 50 computers an
 ## What is here
 
 - **Experience and education:** computer equipment work and my 2026 vocational qualification in Information Systems and Programming (09.02.07).
-- **Technical profile:** PC hardware, personal computer assembly and maintenance, and technologies I am learning, including Windows, Linux, Debian and virtualization.
+- **Technical profile:** PC assembly and maintenance, power supply repairs and fan servicing, practical exposure to 1C databases and Windows Server; ongoing study of Windows, Linux (Debian) and virtualization.
 - **Software projects:** TaskFocus, MindTrack and CortexMap, with project pages in English and Russian.
-- **Contact:** email, LinkedIn, GitHub and Telegram.
+- **Contact:** email, LinkedIn, GitHub and Telegram, plus English and Russian PDF resumes. Seeking remote work or office / hybrid roles in Yekaterinburg.
+
+The social image and resumes can be rebuilt with `node scripts/generate-portfolio-assets.mjs` after installing dependencies. The script uses the site's local fonts and shared experience / skills content. Review the resulting PDFs visually after content changes.
 
 ## Project pages
 

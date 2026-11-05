@@ -112,8 +112,8 @@ export function Navbar() {
 
   const navLinks: { label: string; target: SectionName }[] = [
     { label: t.nav.experience, target: 'experience' },
-    { label: t.nav.work, target: 'work' },
     { label: t.nav.about, target: 'about' },
+    { label: t.nav.work, target: 'work' },
     { label: t.nav.contact, target: 'contact' },
   ];
 

@@ -1,0 +1,191 @@
+{
+  "base": "http://127.0.0.1:4174/porfolio.site/",
+  "results": [
+    {
+      "page": "home",
+      "width": 320,
+      "lang": "ru",
+      "theme": "dark",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 320,
+      "lang": "ru",
+      "theme": "light",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 320,
+      "lang": "en",
+      "theme": "dark",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 320,
+      "lang": "en",
+      "theme": "light",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 390,
+      "lang": "ru",
+      "theme": "dark",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 390,
+      "lang": "ru",
+      "theme": "light",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 390,
+      "lang": "en",
+      "theme": "dark",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 390,
+      "lang": "en",
+      "theme": "light",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 768,
+      "lang": "ru",
+      "theme": "dark",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 768,
+      "lang": "ru",
+      "theme": "light",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 768,
+      "lang": "en",
+      "theme": "dark",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 768,
+      "lang": "en",
+      "theme": "light",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 1440,
+      "lang": "ru",
+      "theme": "dark",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 1440,
+      "lang": "ru",
+      "theme": "light",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 1440,
+      "lang": "en",
+      "theme": "dark",
+      "ok": true
+    },
+    {
+      "page": "home",
+      "width": 1440,
+      "lang": "en",
+      "theme": "light",
+      "ok": true
+    },
+    {
+      "page": "spa+static/taskfocus",
+      "width": 320,
+      "lang": "ru",
+      "ok": true
+    },
+    {
+      "page": "spa+static/taskfocus",
+      "width": 1440,
+      "lang": "ru",
+      "ok": true
+    },
+    {
+      "page": "spa+static/taskfocus",
+      "width": 320,
+      "lang": "en",
+      "ok": true
+    },
+    {
+      "page": "spa+static/taskfocus",
+      "width": 1440,
+      "lang": "en",
+      "ok": true
+    },
+    {
+      "page": "spa+static/mindtrack",
+      "width": 320,
+      "lang": "ru",
+      "ok": true
+    },
+    {
+      "page": "spa+static/mindtrack",
+      "width": 1440,
+      "lang": "ru",
+      "ok": true
+    },
+    {
+      "page": "spa+static/mindtrack",
+      "width": 320,
+      "lang": "en",
+      "ok": true
+    },
+    {
+      "page": "spa+static/mindtrack",
+      "width": 1440,
+      "lang": "en",
+      "ok": true
+    },
+    {
+      "page": "spa+static/cortexmap",
+      "width": 320,
+      "lang": "ru",
+      "ok": true
+    },
+    {
+      "page": "spa+static/cortexmap",
+      "width": 1440,
+      "lang": "ru",
+      "ok": true
+    },
+    {
+      "page": "spa+static/cortexmap",
+      "width": 320,
+      "lang": "en",
+      "ok": true
+    },
+    {
+      "page": "spa+static/cortexmap",
+      "width": 1440,
+      "lang": "en",
+      "ok": true
+    }
+  ],
+  "errors": [],
+  "og": "1200x630"
+}

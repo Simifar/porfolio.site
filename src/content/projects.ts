@@ -195,7 +195,13 @@ export const projects: Project[] = [
         { en: 'Day, week, calendar, Eisenhower matrix and archive views.', ru: 'Виды дня, недели, календарь, матрица Эйзенхауэра и архив.' },
         { en: 'Subtasks, priority and urgency, energy estimates, flexible dates and a focus timer.', ru: 'Подзадачи, важность и срочность, оценка энергии, гибкие даты и таймер фокуса.' },
         { en: 'An MVP with sign-in. The source code is public.', ru: 'MVP с авторизацией и открытым исходным кодом.' },
+        { en: 'The server checks the session and task ownership before accessing data; the daily task cap is also enforced on the server.', ru: 'Сервер проверяет сессию и принадлежность задачи пользователю перед доступом к данным; дневной лимит задач также проверяется на сервере.' },
+        { en: 'The API client uses a 15-second request timeout and preserves the error code, message and HTTP status for handling failures.', ru: 'Клиент API ограничивает ожидание запроса 15 секундами и сохраняет код, сообщение и HTTP-статус ошибки для обработки сбоев.' },
       ],
+      validation: {
+        en: 'The source includes automated checks for authentication policy, date rules and daily task capacity, plus setup and architecture documentation. The published app requires sign-in or registration; signed-in workflows were not rechecked for this portfolio update.',
+        ru: 'В исходниках есть автоматические проверки правил авторизации, дат и дневного лимита, инструкции запуска и описание архитектуры. Для работы с опубликованным приложением нужен вход или регистрация; сценарии после входа при этом обновлении портфолио не перепроверялись.',
+      },
       status: {
         en: 'The web app and source code are public. The problem and the five-task limit are a product hypothesis: they have not been tested with users, and there is no usage data.',
         ru: 'Веб-приложение и исходный код опубликованы. Проблема и лимит в пять задач — продуктовая гипотеза: на пользователях они не проверены, данных об использовании нет.',
@@ -226,6 +232,7 @@ export const projects: Project[] = [
       ],
       materials: [
         { label: { en: 'Architecture', ru: 'Архитектура' }, href: 'https://github.com/Simifar/taskfocus/blob/main/docs/ARCHITECTURE.md' },
+        { label: { en: 'API client: timeout and typed errors', ru: 'Клиент API: тайм-аут и типизированные ошибки' }, href: 'https://github.com/Simifar/taskfocus/blob/f3f4a0cf01d8f9c17cd1aa8373faf26bcbabcc3f/src/shared/lib/fetcher.ts' },
         { label: { en: 'Diploma project', ru: 'Описание дипломного проекта' }, href: 'https://github.com/Simifar/taskfocus/blob/main/docs/THESIS.md' },
       ],
     },

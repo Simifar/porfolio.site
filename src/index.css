@@ -418,6 +418,49 @@ a {
   min-width: 0;
 }
 
+.hero-practice {
+  padding: clamp(1.4rem, 3vw, 2.5rem) 0;
+  border-top: 3px solid var(--color-accent);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.hero-practice h2 {
+  margin: 1rem 0 1.5rem;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.hero-practice ul {
+  display: grid;
+  gap: 0.85rem;
+  padding-left: 1.1rem;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.hero-practice li::marker { color: var(--color-accent); }
+.hero-practice__format, .contact-format {
+  margin-top: 1.5rem;
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.experience-practice {
+  max-width: 70ch;
+  margin-top: 1.5rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-accent);
+}
+
+.experience-practice h4 { margin: 0; font-size: 0.95rem; font-weight: 600; }
+.experience-practice p { margin: 0.5rem 0 0; color: var(--color-text-secondary); font-size: 0.95rem; line-height: 1.65; }
+
+.experience-entry--compact .experience-entry__company { font-size: 1.4rem; }
+
 @media (prefers-reduced-motion: no-preference) {
   @keyframes soft-arrive {
     from {

@@ -1,0 +1,242 @@
+- generic [ref=e2]:
+  - article [ref=e304]:
+    - link "Перейти к содержимому" [ref=e305] [cursor=pointer]:
+      - /url: "#case-main"
+    - generic:
+      - link "Назад к проектам" [ref=e306] [cursor=pointer]:
+        - /url: "#/?section=work"
+      - generic [ref=e310]:
+        - button "Открыть меню команд" [ref=e311] [cursor=pointer]:
+          - generic [aria-hidden] [ref=e315]: Ctrl K
+        - button "Включить тёмную тему" [pressed] [ref=e316] [cursor=pointer]
+        - group "Язык" [ref=e319]:
+          - button "Английский" [ref=e320] [cursor=pointer]:
+            - generic [ref=e321]: English
+          - button "Русский" [pressed] [ref=e322] [cursor=pointer]
+    - main [ref=e324]:
+      - region [ref=e325]:
+        - generic [ref=e326]:
+          - generic [ref=e327]:
+            - paragraph [ref=e328]:
+              - generic [ref=e329]: Кейс проекта
+              - generic [ref=e330]: Планирование
+              - generic [ref=e331]: Опубликован
+            - heading "TaskFocus" [level=1] [ref=e332]
+            - paragraph [ref=e333]: Планировщик с входящими, лимитом пяти задач на день и гибкими сроками.
+            - generic [ref=e334]:
+              - link "Страница для ссылки" [ref=e335] [cursor=pointer]:
+                - /url: /porfolio.site/ru/work/taskfocus/
+              - link "Исходный код" [ref=e339] [cursor=pointer]:
+                - /url: https://github.com/Simifar/taskfocus
+              - link "Открыть продукт" [ref=e344] [cursor=pointer]:
+                - /url: https://taskfocus-eight.vercel.app/
+          - figure [ref=e349]:
+            - 'link "Открыть изображение в полном размере: TaskFocus" [ref=e350] [cursor=pointer]':
+              - /url: /porfolio.site/projects/taskfocus-cover.webp
+              - 'img "Обложка TaskFocus по мотивам интерфейса: план на пять задач и недельный календарь." [ref=e351]'
+            - generic [ref=e352]:
+              - paragraph [ref=e353]: Дипломный проект, реализованный как приложение для планирования задач.
+              - paragraph [ref=e354]: Обложка проекта · по мотивам интерфейса
+      - generic [ref=e356]:
+        - generic [ref=e357]:
+          - heading "Проблема" [level=2] [ref=e358]
+          - generic [ref=e359]:
+            - paragraph [ref=e360]: Когда личные задачи копятся в одном списке, трудно понять, что реально помещается в сегодняшний день. К тому же у части задач есть не точный срок, а окно во времени, и одна дата описывает их плохо.
+            - paragraph [ref=e361]: TaskFocus — мой дипломный проект. Он превращает записанные задачи в план максимум из пяти задач на день и задаёт гибким задачам диапазон дат вместо выдуманного жёсткого дедлайна.
+        - generic [ref=e362]:
+          - heading "Что я сделал" [level=2] [ref=e363]
+          - generic [ref=e364]:
+            - paragraph [ref=e365]: "Я работал над проектом один: определил правила продукта, спроектировал экраны и собрал приложение с помощью AI-агентов."
+            - heading "Ограничения" [level=3] [ref=e366]
+            - list [ref=e367]:
+              - listitem [ref=e368]: "Проект в одиночку: продуктовые решения, дизайн и разработку делал один человек."
+              - listitem [ref=e369]: "Данных об использовании пока нет: решения основаны на продуктовой логике, а не на наблюдении за поведением."
+        - generic [ref=e370]:
+          - heading "Рамки MVP" [level=2] [ref=e371]
+          - generic [ref=e372]:
+            - heading "Вошло" [level=3] [ref=e373]
+            - list [ref=e374]:
+              - listitem [ref=e375]: Записать задачу во «Входящие» без даты.
+              - listitem [ref=e376]: Перенести в «Сегодня» до пяти задач.
+              - listitem [ref=e377]: Задать гибкой задаче диапазон дат.
+              - listitem [ref=e378]: Получить рекомендацию следующей задачи.
+        - generic [ref=e379]:
+          - heading "Решения проекта" [level=2] [ref=e380]
+          - generic [ref=e381]:
+            - list [ref=e382]:
+              - listitem [ref=e383]:
+                - generic [ref=e384]:
+                  - generic [ref=e385]:
+                    - term [ref=e386]: Проблема
+                    - definition [ref=e387]: В списке «Сегодня» без лимита не виден объём плана на день.
+                  - generic [ref=e388]:
+                    - term [ref=e389]: Альтернатива
+                    - definition [ref=e390]: Оставить список «Сегодня» без лимита.
+                - generic [ref=e391]:
+                  - heading "Выбранное решение Ограничить план дня пятью задачами" [level=3] [ref=e392]:
+                    - generic [ref=e393]: Выбранное решение
+                    - text: Ограничить план дня пятью задачами
+                  - generic [ref=e394]:
+                    - generic [ref=e395]:
+                      - term [ref=e396]: Почему этот вариант
+                      - definition [ref=e397]: Лимит делает объём плана на день явным. Подходит ли именно пять задач, ещё нужно проверить.
+                    - generic [ref=e398]:
+                      - term [ref=e399]: "Компромисс:"
+                      - definition [ref=e400]: Шестую активную задачу нужно оставить во входящих или перенести на другой день.
+              - listitem [ref=e401]:
+                - generic [ref=e402]:
+                  - generic [ref=e403]:
+                    - term [ref=e404]: Проблема
+                    - definition [ref=e405]: Задачу можно записать до того, как определены срок и важность.
+                  - generic [ref=e406]:
+                    - term [ref=e407]: Альтернатива
+                    - definition [ref=e408]: Сразу при добавлении требовать срок и остальные параметры задачи.
+                - generic [ref=e409]:
+                  - heading "Выбранное решение Сначала записать, потом планировать" [level=3] [ref=e410]:
+                    - generic [ref=e411]: Выбранное решение
+                    - text: Сначала записать, потом планировать
+                  - generic [ref=e412]:
+                    - generic [ref=e413]:
+                      - term [ref=e414]: Почему этот вариант
+                      - definition [ref=e415]: Задачу можно сохранить, а срок и важность выбрать позже.
+                    - generic [ref=e416]:
+                      - term [ref=e417]: "Компромисс:"
+                      - definition [ref=e418]: "Входящие нужно разбирать отдельно: быстрая запись сама по себе не создаёт план."
+              - listitem [ref=e419]:
+                - heading "Выбранное решение Задавать гибкий диапазон дат" [level=3] [ref=e420]:
+                  - generic [ref=e421]: Выбранное решение
+                  - text: Задавать гибкий диапазон дат
+                - generic [ref=e423]:
+                  - term [ref=e424]: Почему этот вариант
+                  - definition [ref=e425]: Начало и конец периода задают окно для планирования, но не превращают его в жёсткий дедлайн.
+              - listitem [ref=e426]:
+                - heading "Выбранное решение Добавить контекст для выбора следующего шага" [level=3] [ref=e427]:
+                  - generic [ref=e428]: Выбранное решение
+                  - text: Добавить контекст для выбора следующего шага
+                - generic [ref=e430]:
+                  - term [ref=e431]: Почему этот вариант
+                  - definition [ref=e432]: Рекомендация на сегодня учитывает конец планового периода, важность и срочность. Необязательный фильтр по энергии сужает выбор задач.
+            - region [ref=e433]:
+              - generic [ref=e434]:
+                - heading "Попробуйте первое решение" [level=3] [ref=e435]
+                - paragraph [ref=e436]: Переносите задачи из входящих в «Сегодня» и посмотрите, где сработает лимит.
+                - paragraph [ref=e437]: Интерактивная модель правила с задачами-примерами. Это не приложение TaskFocus.
+              - generic [ref=e438]:
+                - generic [ref=e439]:
+                  - heading "Входящие 3" [level=4] [ref=e440]:
+                    - text: Входящие
+                    - generic [ref=e441]: "3"
+                  - list [ref=e442]:
+                    - listitem [ref=e443]:
+                      - generic [ref=e444]: Подготовка демо для команды
+                      - 'button "Перенести в «Сегодня»: Подготовка демо для команды" [ref=e445] [cursor=pointer]'
+                    - listitem [ref=e448]:
+                      - generic [ref=e449]: Обновить онбординг
+                      - 'button "Перенести в «Сегодня»: Обновить онбординг" [ref=e450] [cursor=pointer]'
+                    - listitem [ref=e453]:
+                      - generic [ref=e454]: Созвон с дизайнером
+                      - 'button "Перенести в «Сегодня»: Созвон с дизайнером" [ref=e455] [cursor=pointer]'
+                - generic [ref=e458]:
+                  - heading "Сегодня Занято 4 из 5 слотов" [level=4] [ref=e459]:
+                    - text: Сегодня
+                    - generic [ref=e460]: Занято 4 из 5 слотов
+                  - list [ref=e467]:
+                    - listitem [ref=e468]:
+                      - generic [ref=e469]: Анализ рынка и конкурентов
+                      - 'button "Вернуть во входящие: Анализ рынка и конкурентов" [ref=e470] [cursor=pointer]'
+                    - listitem [ref=e474]:
+                      - generic [ref=e475]: Формирование Roadmap
+                      - 'button "Вернуть во входящие: Формирование Roadmap" [ref=e476] [cursor=pointer]'
+                    - listitem [ref=e480]:
+                      - generic [ref=e481]: Спринт-планирование
+                      - 'button "Вернуть во входящие: Спринт-планирование" [ref=e482] [cursor=pointer]'
+                    - listitem [ref=e486]:
+                      - generic [ref=e487]: Разбор отзывов пользователей
+                      - 'button "Вернуть во входящие: Разбор отзывов пользователей" [ref=e488] [cursor=pointer]'
+                    - listitem [aria-hidden] [ref=e492]
+              - generic [ref=e493]:
+                - status
+        - region [ref=e494]:
+          - generic [ref=e495]:
+            - heading "Экраны продукта" [level=2] [ref=e496]
+            - generic [ref=e497]:
+              - figure "Сегодня · реальный скриншот планировщика после входа" [ref=e498]:
+                - 'link "Открыть изображение в полном размере: Сегодня · реальный скриншот планировщика после входа" [ref=e499] [cursor=pointer]':
+                  - /url: /porfolio.site/projects/taskfocus-today.png
+                  - img "Раздел «Сегодня» TaskFocus с планом из пяти задач и рекомендацией следующей задачи." [ref=e500]
+              - figure "Входящие · запись до планирования" [ref=e502]:
+                - 'link "Открыть изображение в полном размере: Входящие · запись до планирования" [ref=e503] [cursor=pointer]':
+                  - /url: /porfolio.site/projects/taskfocus-inbox.png
+                  - img "Входящие TaskFocus с быстрым добавлением и задачами без даты." [ref=e504]
+              - figure "Неделя · задачи по дням" [ref=e506]:
+                - 'link "Открыть изображение в полном размере: Неделя · задачи по дням" [ref=e507] [cursor=pointer]':
+                  - /url: /porfolio.site/projects/taskfocus-week.png
+                  - img "Недельный план TaskFocus с задачами по дням." [ref=e508]
+              - figure "Календарь · запланированные даты" [ref=e510]:
+                - 'link "Открыть изображение в полном размере: Календарь · запланированные даты" [ref=e511] [cursor=pointer]':
+                  - /url: /porfolio.site/projects/taskfocus-calendar.png
+                  - img "Календарь TaskFocus с задачами на запланированные даты." [ref=e512]
+        - generic [ref=e514]:
+          - heading "Что реализовал" [level=2] [ref=e515]
+          - list [ref=e517]:
+            - listitem [ref=e518]: Входящие и список «Сегодня» максимум на пять задач.
+            - listitem [ref=e519]: Виды дня, недели, календарь, матрица Эйзенхауэра и архив.
+            - listitem [ref=e520]: Подзадачи, важность и срочность, оценка энергии, гибкие даты и таймер фокуса.
+            - listitem [ref=e521]: MVP с авторизацией и открытым исходным кодом.
+        - generic [ref=e522]:
+          - heading "Текущий статус" [level=2] [ref=e523]
+          - paragraph [ref=e525]: "Веб-приложение и исходный код опубликованы. Проблема и лимит в пять задач — продуктовая гипотеза: на пользователях они не проверены, данных об использовании нет."
+        - generic [ref=e526]:
+          - heading "Критерии успеха" [level=2] [ref=e527]
+          - generic [ref=e528]:
+            - list [ref=e529]:
+              - listitem [ref=e530]: Участник без подсказки переносит задачи из «Входящих» в «Сегодня» и объясняет лимит в пять задач.
+              - listitem [ref=e531]: Участник задаёт гибкой задаче диапазон дат и может объяснить, чем он отличается от дедлайна.
+              - listitem [ref=e532]: Участник может объяснить, почему приложение предложило следующей именно эту задачу.
+            - generic [ref=e533]:
+              - heading "Что проверить дальше" [level=3] [ref=e534]
+              - paragraph [ref=e535]: Проверить эти критерии на модерируемых сессиях с опубликованным приложением и только потом измерять влияние на продуктивность.
+        - generic [ref=e536]:
+          - heading "Что сделал бы иначе" [level=2] [ref=e537]
+          - list [ref=e539]:
+            - listitem [ref=e540]: Для проверки гипотезы фокуса MVP можно было ограничить видами «Сегодня» и «Входящие»; остальные виды стоит проверить отдельно.
+        - generic [ref=e541]:
+          - heading "Ссылки на материалы" [level=2] [ref=e542]
+          - list [ref=e544]:
+            - listitem [ref=e545]:
+              - link "Архитектура" [ref=e546] [cursor=pointer]:
+                - /url: https://github.com/Simifar/taskfocus/blob/main/docs/ARCHITECTURE.md
+            - listitem [ref=e551]:
+              - link "Описание дипломного проекта" [ref=e552] [cursor=pointer]:
+                - /url: https://github.com/Simifar/taskfocus/blob/main/docs/THESIS.md
+      - region [ref=e557]:
+        - generic [ref=e558]:
+          - heading "Ищу техническую работу" [level=2] [ref=e559]
+          - generic [ref=e560]:
+            - paragraph [ref=e561]: Рассматриваю возможности в технической поддержке и работе с компьютерной техникой. Напишите на почту; больше информации обо мне есть в LinkedIn.
+            - generic [ref=e562]:
+              - generic [ref=e563]:
+                - link "Matafonovegor2@gmail.com" [ref=e564] [cursor=pointer]:
+                  - /url: mailto:Matafonovegor2@gmail.com
+                - button "Скопировать адрес почты" [ref=e572] [cursor=pointer]
+              - link "Открыть LinkedIn" [ref=e576] [cursor=pointer]:
+                - /url: https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US
+      - link "Следующий проект MindTrack Приложение для самонаблюдения с опросниками" [ref=e586] [cursor=pointer]:
+        - /url: "#/work/mindtrack"
+        - generic [ref=e587]: Следующий проект
+        - generic [ref=e588]: MindTrack
+        - generic [ref=e592]: Приложение для самонаблюдения с опросниками
+    - generic [ref=e594]:
+      - generic [ref=e595]:
+        - paragraph [ref=e596]: © 2026 Егор Матафонов
+        - paragraph [ref=e597]: Сайт сделал Егор Матафонов
+      - navigation "Ссылки на профили" [ref=e598]:
+        - link "GitHub" [ref=e599] [cursor=pointer]:
+          - /url: https://github.com/Simifar
+        - link "LinkedIn" [ref=e603] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US
+        - link "Telegram" [ref=e608] [cursor=pointer]:
+          - /url: https://t.me/legionanstek
+        - link "Почта" [ref=e612] [cursor=pointer]:
+          - /url: mailto:Matafonovegor2@gmail.com
+  - status
