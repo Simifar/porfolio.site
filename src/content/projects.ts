@@ -45,7 +45,7 @@ export interface Project {
   category: LocalizedText;
   description: LocalizedText;
   features: LocalizedText[];
-  tags: string[];
+  tags: LocalizedText[];
   github: string;
   live?: string;
   status?: LocalizedText;
@@ -79,7 +79,7 @@ export const projects: Project[] = [
     interactiveDemo: 'today-limit',
     subtitle: {
       en: 'An inbox-first planner with flexible dates',
-      ru: 'Планирование задач: сначала входящие, затем гибкие сроки',
+      ru: 'Планировщик с разделом «Входящие» и диапазонами дат',
     },
     cardFocus: {
       en: 'A diploma project implemented as a working task-planning app.',
@@ -92,27 +92,27 @@ export const projects: Project[] = [
     category: { en: 'Productivity', ru: 'Планирование' },
     description: {
       en: 'A personal task planner with an inbox, a five-task Today list and flexible dates.',
-      ru: 'Планировщик с входящими, лимитом пяти задач на день и гибкими сроками.',
+      ru: 'Планировщик с разделом «Входящие», лимитом в пять задач на день и диапазонами дат.',
     },
     features: [
-      { en: 'Save tasks in an inbox and sort them later.', ru: 'Сохранять задачи во входящие и разбирать их позже.' },
+      { en: 'Save tasks in an inbox and sort them later.', ru: 'Сохранять задачи во «Входящие» и разбирать их позже.' },
       { en: 'Limit the Today list to five tasks.', ru: 'Ограничивать список «Сегодня» пятью задачами.' },
-      { en: 'Plan work with flexible dates, calendar views and subtasks.', ru: 'Планировать с помощью гибких дат, календаря и подзадач.' },
+      { en: 'Plan work with flexible dates, calendar views and subtasks.', ru: 'Планировать работу с помощью диапазонов дат, календаря и подзадач.' },
       { en: 'See task priority, urgency and estimated energy in one place.', ru: 'Видеть важность, срочность и оценку энергозатрат для каждой задачи.' },
       { en: 'Start a focus timer from a task.', ru: 'Запускать таймер фокуса из задачи.' },
     ],
-    tags: ['Task planning', 'Web app', 'Diploma project'],
+    tags: [{ en: 'Task planning', ru: 'Планирование задач' }, { en: 'Web app', ru: 'Веб-приложение' }, { en: 'Diploma project', ru: 'Дипломный проект' }],
     github: 'https://github.com/Simifar/taskfocus',
     live: 'https://taskfocus-eight.vercel.app/',
     status: { en: 'Published', ru: 'Опубликован' },
     caseStudy: {
       problem: {
         en: 'When personal tasks pile up in one list, it is hard to see what actually fits into today. Some tasks also have a time window rather than a firm deadline, so a single due date describes them poorly.',
-        ru: 'Когда личные задачи копятся в одном списке, трудно понять, что реально помещается в сегодняшний день. К тому же у части задач есть не точный срок, а окно во времени, и одна дата описывает их плохо.',
+        ru: 'Когда личные задачи копятся в одном списке, трудно выбрать, что выполнить сегодня. При этом некоторые задачи можно выполнить в течение нескольких дней: для них удобнее задать период, чем одну дату.',
       },
       context: {
-        en: 'TaskFocus is my diploma project. It turns captured tasks into a daily plan of up to five and gives flexible work a date window instead of an invented hard deadline.',
-        ru: 'TaskFocus — мой дипломный проект. Он превращает записанные задачи в план максимум из пяти задач на день и задаёт гибким задачам диапазон дат вместо выдуманного жёсткого дедлайна.',
+        en: 'TaskFocus is my diploma project. Users choose up to five captured tasks for their daily plan and can set a date range when a task does not need a single fixed deadline.',
+        ru: 'TaskFocus — мой дипломный проект. Пользователь сам выбирает до пяти записанных задач для плана на день. Если задаче не нужен точный срок, можно задать диапазон дат.',
       },
       role: {
         en: 'I was the only contributor: I set the product rules, designed the screens and built the app using AI agents.',
@@ -132,7 +132,7 @@ export const projects: Project[] = [
         included: [
           { en: 'Capture a task to the Inbox without a date.', ru: 'Записать задачу во «Входящие» без даты.' },
           { en: 'Move up to five tasks into Today.', ru: 'Перенести в «Сегодня» до пяти задач.' },
-          { en: 'Give a flexible task a date window.', ru: 'Задать гибкой задаче диапазон дат.' },
+          { en: 'Give a flexible task a date window.', ru: 'Задать диапазон дат для выполнения задачи.' },
           { en: 'Get a suggestion for the next task.', ru: 'Получить рекомендацию следующей задачи.' },
         ],
       },
@@ -140,20 +140,20 @@ export const projects: Project[] = [
         {
           title: { en: 'Cap the daily focus at five tasks', ru: 'Ограничить план дня пятью задачами' },
           problem: {
-            en: 'An open-ended Today list does not make the daily scope clear.',
-            ru: 'В списке «Сегодня» без лимита не виден объём плана на день.',
+            en: 'Without a limit, the Today list can grow without requiring a choice about which tasks to keep in the daily plan.',
+            ru: 'Без лимита список «Сегодня» можно пополнять, не выбирая, какие задачи оставить в плане на день.',
           },
           alternative: {
             en: 'Keep the Today list open-ended.',
             ru: 'Оставить список «Сегодня» без лимита.',
           },
           rationale: {
-            en: 'The implemented cap makes the daily scope explicit. Whether five is the right number still needs testing.',
-            ru: 'Лимит делает объём плана на день явным. Подходит ли именно пять задач, ещё нужно проверить.',
+            en: 'The cap limits the daily plan to five tasks. Whether five is the right number still needs testing.',
+            ru: 'Лимит ограничивает план дня пятью задачами. Подходит ли именно такое число, ещё нужно проверить.',
           },
           tradeoff: {
             en: 'A sixth active task needs another day or a place in the inbox.',
-            ru: 'Шестую активную задачу нужно оставить во входящих или перенести на другой день.',
+            ru: 'Шестую активную задачу нужно оставить во «Входящих» или перенести на другой день.',
           },
         },
         {
@@ -172,28 +172,28 @@ export const projects: Project[] = [
           },
           tradeoff: {
             en: 'The inbox needs a separate review step; capture alone does not create a plan.',
-            ru: 'Входящие нужно разбирать отдельно: быстрая запись сама по себе не создаёт план.',
+            ru: 'Задачи во «Входящих» нужно разбирать отдельно: быстрая запись сама по себе не создаёт план.',
           },
         },
         {
-          title: { en: 'Use a date window for flexible work', ru: 'Задавать гибкий диапазон дат' },
+          title: { en: 'Use a date window for flexible work', ru: 'Задавать период для выполнения задачи' },
           rationale: {
             en: 'A start and end date give flexible work a planning window without turning it into a fixed deadline.',
-            ru: 'Начало и конец периода задают окно для планирования, но не превращают его в жёсткий дедлайн.',
+            ru: 'Можно указать начало и конец периода, в течение которого нужно выполнить задачу, вместо одной фиксированной даты.',
           },
         },
         {
           title: { en: 'Give the next task more context', ru: 'Добавить контекст для выбора следующего шага' },
           rationale: {
             en: 'The Today suggestion considers the end of the planned date window, importance and urgency. An optional energy filter narrows the eligible tasks.',
-            ru: 'Рекомендация на сегодня учитывает конец планового периода, важность и срочность. Необязательный фильтр по энергии сужает выбор задач.',
+            ru: 'Рекомендация следующей задачи учитывает конец запланированного периода, важность и срочность. Дополнительно можно отфильтровать задачи по оценке энергозатрат.',
           },
         },
       ],
       delivered: [
-        { en: 'An inbox and a Today list limited to five tasks.', ru: 'Входящие и список «Сегодня» максимум на пять задач.' },
-        { en: 'Day, week, calendar, Eisenhower matrix and archive views.', ru: 'Виды дня, недели, календарь, матрица Эйзенхауэра и архив.' },
-        { en: 'Subtasks, priority and urgency, energy estimates, flexible dates and a focus timer.', ru: 'Подзадачи, важность и срочность, оценка энергии, гибкие даты и таймер фокуса.' },
+        { en: 'An inbox and a Today list limited to five tasks.', ru: 'Раздел «Входящие» и список «Сегодня» максимум на пять задач.' },
+        { en: 'Day, week, calendar, Eisenhower matrix and archive views.', ru: 'Представления задач на день и неделю, календарь, матрица Эйзенхауэра и архив.' },
+        { en: 'Subtasks, priority and urgency, energy estimates, flexible dates and a focus timer.', ru: 'Подзадачи, важность и срочность, оценка энергозатрат, диапазоны дат и таймер фокуса.' },
         { en: 'An MVP with sign-in. The source code is public.', ru: 'MVP с авторизацией и открытым исходным кодом.' },
         { en: 'The server checks the session and task ownership before accessing data; the daily task cap is also enforced on the server.', ru: 'Сервер проверяет сессию и принадлежность задачи пользователю перед доступом к данным; дневной лимит задач также проверяется на сервере.' },
         { en: 'The API client uses a 15-second request timeout and preserves the error code, message and HTTP status for handling failures.', ru: 'Клиент API ограничивает ожидание запроса 15 секундами и сохраняет код, сообщение и HTTP-статус ошибки для обработки сбоев.' },
@@ -213,7 +213,7 @@ export const projects: Project[] = [
         },
         {
           en: 'A participant sets a date window for a flexible task and can say how it differs from a deadline.',
-          ru: 'Участник задаёт гибкой задаче диапазон дат и может объяснить, чем он отличается от дедлайна.',
+          ru: 'Участник задаёт период для выполнения задачи и может объяснить, чем он отличается от точного срока.',
         },
         {
           en: 'A participant can explain why a particular task was suggested as the next one.',
@@ -227,7 +227,7 @@ export const projects: Project[] = [
       lessons: [
         {
           en: 'To test the focus hypothesis, the MVP could have been limited to the Today and Inbox views; the other views are worth testing separately.',
-          ru: 'Для проверки гипотезы фокуса MVP можно было ограничить видами «Сегодня» и «Входящие»; остальные виды стоит проверить отдельно.',
+          ru: 'Чтобы проверить, помогает ли дневной лимит выбирать задачи, в MVP можно было оставить только разделы «Сегодня» и «Входящие». Другие способы просмотра задач стоит проверить отдельно.',
         },
       ],
       materials: [
@@ -255,14 +255,14 @@ export const projects: Project[] = [
       {
         src: '/projects/taskfocus-today.png',
         alt: { en: 'TaskFocus Today dashboard with a five-task plan and a suggested next task.', ru: 'Раздел «Сегодня» TaskFocus с планом из пяти задач и рекомендацией следующей задачи.' },
-        caption: { en: 'Today · real signed-in dashboard screenshot', ru: 'Сегодня · реальный скриншот планировщика после входа' },
+        caption: { en: 'Today · real signed-in dashboard screenshot', ru: '«Сегодня» · реальный скриншот планировщика после входа' },
         width: 1919,
         height: 1079,
       },
       {
         src: '/projects/taskfocus-inbox.png',
-        alt: { en: 'TaskFocus Inbox with quick capture and unscheduled tasks.', ru: 'Входящие TaskFocus с быстрым добавлением и задачами без даты.' },
-        caption: { en: 'Inbox · capture before scheduling', ru: 'Входящие · запись до планирования' },
+        alt: { en: 'TaskFocus Inbox with quick capture and unscheduled tasks.', ru: 'Раздел «Входящие» в TaskFocus с быстрым добавлением и задачами без даты.' },
+        caption: { en: 'Inbox · capture before scheduling', ru: '«Входящие» · запись до планирования' },
         width: 1919,
         height: 1079,
       },
@@ -301,7 +301,7 @@ export const projects: Project[] = [
     category: { en: 'Wellbeing', ru: 'Самонаблюдение' },
     description: {
       en: 'Screening questionnaires for self-observation. No account or product server; answers stay in the browser.',
-      ru: 'Скрининговые опросники для самонаблюдения: без аккаунта и сервера, ответы остаются в браузере.',
+      ru: 'Скрининговые опросники для самонаблюдения: без аккаунта и серверной обработки ответов. Ответы остаются в браузере.',
     },
     features: [
       { en: 'Answer ASRS, MDQ and PSS-10 questionnaires.', ru: 'Заполнять опросники ASRS, MDQ и PSS-10.' },
@@ -309,18 +309,18 @@ export const projects: Project[] = [
       { en: 'Save answers and continue later on the same device.', ru: 'Сохранять ответы и продолжать на том же устройстве.' },
       { en: 'Find urgent-help guidance alongside the results.', ru: 'Находить рекомендации для экстренных ситуаций рядом с результатами.' },
     ],
-    tags: ['Privacy', 'Questionnaires', 'Static site'],
+    tags: [{ en: 'Privacy', ru: 'Приватность' }, { en: 'Questionnaires', ru: 'Опросники' }, { en: 'Static site', ru: 'Статический сайт' }],
     github: 'https://github.com/Simifar/mindtrack',
     live: 'https://simifar.github.io/mindtrack/',
     status: { en: 'Published', ru: 'Опубликован' },
     caseStudy: {
       problem: {
         en: 'A person filling in a self-observation questionnaire may get a bare score that reads like a diagnosis, and may not know where their sensitive answers end up.',
-        ru: 'Человек, который проходит опросник для самонаблюдения, может получить голый балл, похожий на диагноз, и не знать, куда попадут его чувствительные ответы.',
+        ru: 'Человек, который заполняет опросник для самонаблюдения, может принять балл без пояснений за диагноз. Кроме того, ему может быть неясно, где будут храниться ответы с личной информацией.',
       },
       context: {
         en: 'MindTrack is a product in a sensitive area, so the key decisions were about data, risk and responsibility: answers stay in the browser, every score comes with its range, limits and guidance, and urgent-help routes are explicit.',
-        ru: 'MindTrack — продукт в чувствительной области, поэтому главные решения касались данных, рисков и ответственности: ответы остаются в браузере, балл показан вместе с диапазоном, ограничениями и пояснением, а помощь в срочной ситуации обозначена явно.',
+        ru: 'В MindTrack ответы остаются в браузере. Рядом с баллом показаны диапазон значений, пояснение и границы применения результата. Также указаны контакты срочной помощи.',
       },
       role: {
         en: 'I made the product and UX decisions and built MindTrack on my own using AI agents.',
@@ -333,15 +333,15 @@ export const projects: Project[] = [
         },
         {
           en: 'Answers and history stay in browser storage. Clearing browser data deletes them; JSON export is available for backup.',
-          ru: 'Ответы и история хранятся в браузере. Если очистить данные браузера, они удалятся; резервную копию можно сохранить в JSON.',
+          ru: 'Ответы и история хранятся в браузере. Очистка сохранённых данных сайта удалит их; для резервного копирования доступен экспорт в JSON.',
         },
         {
           en: 'Russian questionnaire text is not described as an official translation unless the rights holder confirms it.',
-          ru: 'Русский текст опросников не называется официальным переводом без подтверждения правообладателя.',
+          ru: 'Нет подтверждения правообладателя, что русский текст опросников является официальным переводом.',
         },
         {
-          en: 'There is no backend or analytics, so I have no data on usage or clinical outcomes.',
-          ru: 'В приложении нет бэкенда и аналитики, поэтому данных об использовании и клинических результатах нет.',
+          en: 'The app has no backend or product analytics. There is no usage data, and clinical effectiveness has not been evaluated.',
+          ru: 'В приложении нет бэкенда и продуктовой аналитики. Данных об использовании нет, клиническая эффективность не оценивалась.',
         },
       ],
       scope: {
@@ -349,7 +349,7 @@ export const projects: Project[] = [
           { en: 'Screening questionnaires with scores calculated in the browser.', ru: 'Скрининговые опросники с расчётом результата в браузере.' },
           { en: 'A score shown with its range, interpretation, method source and a non-diagnostic notice.', ru: 'Балл вместе с диапазоном, пояснением, источником методики и пометкой, что это не диагноз.' },
           { en: 'Local history with delete, backup and export.', ru: 'Локальная история с удалением, резервной копией и экспортом.' },
-          { en: 'Crisis contacts with the region and age they apply to.', ru: 'Кризисные контакты с указанием региона и возрастных условий.' },
+          { en: 'Crisis contacts with the region and age they apply to.', ru: 'Контакты срочной помощи с указанием региона и возраста людей, которым доступна помощь.' },
         ],
         cut: [
           { en: 'Accounts and sync between devices: answers stay on the device.', ru: 'Аккаунты и синхронизация между устройствами: ответы остаются на устройстве.' },
@@ -368,16 +368,16 @@ export const projects: Project[] = [
             ru: 'Хранить ответы в аккаунте и синхронизировать историю между устройствами.',
           },
           rationale: {
-            en: 'The app calculates and stores answers in the browser instead of sending them to a product server.',
-            ru: 'Приложение рассчитывает и хранит ответы в браузере, а не отправляет их на сервер.',
+            en: 'The app calculates results in the browser and stores answers there without sending them to a product server.',
+            ru: 'Приложение рассчитывает результаты в браузере и сохраняет там ответы, не отправляя их на сервер.',
           },
           tradeoff: {
             en: 'History does not sync between devices and is lost if browser data is cleared without a backup.',
-            ru: 'История не синхронизируется между устройствами и пропадёт при очистке браузера без резервной копии.',
+            ru: 'История не синхронизируется между устройствами. При очистке сохранённых данных сайта она удалится; восстановить её можно только из резервной копии.',
           },
         },
         {
-          title: { en: 'Show score, interpretation and limits together', ru: 'Показывать балл, интерпретацию и ограничения рядом' },
+          title: { en: 'Show score, interpretation and limits together', ru: 'Показывать балл вместе с пояснением и границами его применения' },
           problem: {
             en: 'A score on its own can be read as a diagnosis and hides what the method can actually say.',
             ru: 'Отдельный балл можно принять за диагноз; без контекста неясно, что именно говорит методика.',
@@ -392,7 +392,7 @@ export const projects: Project[] = [
           },
           tradeoff: {
             en: 'The result takes more reading than a number or a short severity label.',
-            ru: 'Результат требует больше чтения, чем одно число или короткая категория.',
+            ru: 'Чтобы разобраться в результате, нужно прочитать больше текста, чем при показе одного числа или короткой категории.',
           },
         },
         {
@@ -406,24 +406,24 @@ export const projects: Project[] = [
           title: { en: 'Make urgent routes explicit', ru: 'Ясно обозначить помощь в срочной ситуации' },
           rationale: {
             en: 'Show crisis contacts with the region and age they apply to.',
-            ru: 'Рядом с кризисными контактами указаны регион и возрастные условия.',
+            ru: 'Рядом с контактами срочной помощи указано, в каком регионе она доступна и для какого возраста предназначена.',
           },
         },
       ],
       delivered: [
         { en: 'A published catalog with seven screening questionnaires.', ru: 'Опубликованный каталог с семью скрининговыми опросниками.' },
         { en: 'Questionnaires with scores and saved progress in the browser.', ru: 'Опросники с результатами и сохранением прогресса в браузере.' },
-        { en: 'A journal, delete and backup controls, and text, print and JSON export.', ru: 'Дневник, удаление и резервное копирование истории, экспорт в текст, печать и JSON.' },
-        { en: 'Method sources, score limitations and urgent-help guidance.', ru: 'Источники методик, ограничения результатов и рекомендации для срочных ситуаций.' },
+        { en: 'A journal, history deletion and backup, text and JSON export, and result printing.', ru: 'Дневник, удаление и резервное копирование истории, экспорт в текстовом формате и JSON, печать результатов.' },
+        { en: 'Method sources, score limitations and urgent-help guidance.', ru: 'Источники методик, пояснения о границах применения результатов и рекомендации для срочных ситуаций.' },
       ],
       status: {
-        en: 'The site and source code are public. The product has not been tested with users; there is no data on usage, diagnostic accuracy or clinical outcomes.',
-        ru: 'Сайт и исходный код опубликованы. На пользователях продукт не проверялся; данных об использовании, точности диагностики и клинических результатах нет.',
+        en: 'The site and source code are public. The product has not been tested with users; there is no usage or clinical outcome data. It is not intended for diagnosis.',
+        ru: 'Сайт и исходный код опубликованы. Продукт не проверялся с пользователями; данных об использовании и клинических результатах нет. Приложение не предназначено для диагностики.',
       },
       successCriteria: [
         {
           en: 'After seeing a result, a participant explains in their own words that the score is not a diagnosis and what it does show.',
-          ru: 'Увидев результат, участник своими словами объясняет, что балл — не диагноз, и что он показывает.',
+          ru: 'Увидев результат, участник своими словами объясняет, что показывает балл и почему его нельзя считать диагнозом.',
         },
         {
           en: 'A participant can say where the answers are stored and how to back them up or delete them.',
@@ -436,7 +436,7 @@ export const projects: Project[] = [
       ],
       nextValidation: {
         en: 'Check these criteria in short moderated sessions with the published site. Separately review questionnaire sources, translation rights and crisis contacts.',
-        ru: 'Проверить эти критерии на коротких модерируемых сессиях с опубликованным сайтом. Отдельно перепроверить источники опросников, права на перевод и кризисные контакты.',
+        ru: 'Проверить эти критерии на коротких сессиях с пользователями и ведущим на опубликованном сайте. Отдельно перепроверить источники опросников, права на перевод и контакты срочной помощи.',
       },
       materials: [
         { label: { en: 'Product and questionnaire notes', ru: 'Описание продукта и опросников' }, href: 'https://github.com/Simifar/mindtrack/blob/main/README.md' },
@@ -473,23 +473,23 @@ export const projects: Project[] = [
     presentation: 'additional',
     subtitle: {
       en: 'A Russian-language catalog for learning English',
-      ru: 'Русскоязычный каталог для изучения английского',
+      ru: 'Каталог материалов для изучения английского языка',
     },
     cardFocus: {
       en: 'Browse by CEFR level, search, filter and save favorites in the browser.',
-      ru: 'Каталог по уровням CEFR, поиск, фильтры и избранное в браузере.',
+      ru: 'Материалы по уровням владения языком (CEFR), поиск, фильтры и избранное в браузере.',
     },
     category: { en: 'Education', ru: 'Образование' },
     description: {
       en: 'A Russian-language English-learning catalog with CEFR levels, search, filters and browser-based favorites. The static site is published on GitHub Pages.',
-      ru: 'Русскоязычный каталог для изучения английского: уровни CEFR, поиск, фильтры и избранное в браузере. Статический сайт опубликован на GitHub Pages.',
+      ru: 'Русскоязычный каталог материалов для изучения английского языка. Материалы сгруппированы по общеевропейской шкале владения языком (CEFR). Есть поиск, фильтры и избранное в браузере. Статический сайт опубликован на GitHub Pages.',
     },
     features: [
       { en: 'Browse materials by CEFR level.', ru: 'Находить материалы по уровню CEFR.' },
       { en: 'Search and filter the catalog.', ru: 'Искать и фильтровать материалы каталога.' },
       { en: 'Save favorites in the browser without an account.', ru: 'Сохранять избранное в браузере без регистрации.' },
     ],
-    tags: ['Education', 'CEFR levels', 'Static site'],
+    tags: [{ en: 'Education', ru: 'Образование' }, { en: 'CEFR levels', ru: 'Уровни CEFR' }, { en: 'Static site', ru: 'Статический сайт' }],
     github: 'https://github.com/Simifar/CortexMap',
     live: 'https://simifar.github.io/CortexMap/',
     status: { en: 'Published', ru: 'Опубликован' },
@@ -497,7 +497,7 @@ export const projects: Project[] = [
       src: '/projects/cortexmap-cover.webp',
       socialSrc: '/projects/cortexmap-cover.png',
       kind: 'cover',
-      alt: { en: 'CortexMap editorial cover: an English-learning catalog with CEFR levels A1 to C2, composed from the product interface.', ru: 'Обложка CortexMap по мотивам интерфейса: каталог английского с уровнями CEFR от A1 до C2.' },
+      alt: { en: 'CortexMap editorial cover: an English-learning catalog with CEFR levels A1 to C2, composed from the product interface.', ru: 'Обложка CortexMap по мотивам интерфейса: каталог материалов для изучения английского языка с уровнями CEFR от A1 до C2.' },
       caption: { en: 'Editorial cover · based on the product interface', ru: 'Обложка проекта · по мотивам интерфейса' },
       width: 1600,
       height: 900,
