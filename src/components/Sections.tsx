@@ -49,7 +49,7 @@ function ProjectActions({ project }: { project: (typeof projects)[number] }) {
       </TransitionLink>
       {project.live && (
         <a href={project.live} target="_blank" rel="noopener noreferrer" className="project-action">
-          {t.work.openProduct}
+          {project.slug === 'cortexmap' ? t.work.openCatalog : t.work.openProduct}
           <ExternalLink size={14} aria-hidden="true" />
         </a>
       )}

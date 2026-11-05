@@ -15,8 +15,8 @@
 - 09.02.07 Information Systems and Programming, secondary vocational education.
 
 ## Projects
-- [TaskFocus case](https://simifar.github.io/porfolio.site/work/taskfocus/): published task planner with a daily list limited to five tasks and genuine signed-in screenshots. [Live app](https://taskfocus-eight.vercel.app/) · [Source](https://github.com/Simifar/taskfocus)
-- [MindTrack case](https://simifar.github.io/porfolio.site/work/mindtrack/): browser app for self-observation with questionnaires; answers stay in browser storage. [Live app](https://simifar.github.io/mindtrack/) · [Source](https://github.com/Simifar/mindtrack)
+- [TaskFocus case](https://simifar.github.io/porfolio.site/work/taskfocus/): published task planner with a daily list limited to five tasks and genuine signed-in screenshots. Requires sign-in; signed-in workflows were not rechecked for this portfolio update. No user validation or usage data. [Live app](https://taskfocus-eight.vercel.app/) · [Source](https://github.com/Simifar/taskfocus)
+- [MindTrack case](https://simifar.github.io/porfolio.site/work/mindtrack/): browser app for self-observation with questionnaires; results are calculated and answers stored in the browser. Not intended for diagnosis; no user validation or clinical outcome data. [Live app](https://simifar.github.io/mindtrack/) · [Source](https://github.com/Simifar/mindtrack)
 - [CortexMap](https://simifar.github.io/CortexMap/): Russian-language catalog for learning English, with CEFR levels, search and filters. [Source](https://github.com/Simifar/CortexMap)
 
 ## Contact

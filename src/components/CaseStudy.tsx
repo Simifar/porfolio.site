@@ -89,7 +89,7 @@ export default function CaseStudy() {
               <p className="case-description">{project.description[lang]}</p>
               {!project.caseStudy && (
                 <div className="case-tags" aria-label={t.caseStudy.projectDetails}>
-                  {project.tags.map(tag => <span key={tag} className="case-tag">{tag}</span>)}
+                  {project.tags.map(tag => <span key={tag.en} className="case-tag">{tag[lang]}</span>)}
                 </div>
               )}
               <div className="case-actions">
@@ -103,7 +103,7 @@ export default function CaseStudy() {
                 </a>
                 {project.live && (
                   <a href={project.live} target="_blank" rel="noopener noreferrer" className="case-action">
-                    {t.caseStudy.liveSite}
+                    {project.slug === 'cortexmap' ? t.caseStudy.liveCatalog : t.caseStudy.liveSite}
                     <ExternalLink size={14} aria-hidden="true" />
                   </a>
                 )}

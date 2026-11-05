@@ -276,7 +276,7 @@ test('product cases show the same problem-to-lessons sections in the SPA and sta
 });
 
 test('every case ends with an email-first CTA before the next project, in the SPA and static pages', async ({ page, request }) => {
-  const cta = { en: 'Looking for technical roles', ru: 'Ищу техническую работу' };
+  const cta = { en: 'Open to IT support roles', ru: 'Ищу работу в техподдержке' };
   const linkedin = 'https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US';
   for (const slug of slugs) {
     for (const lang of ['en', 'ru'] as const) {
@@ -316,7 +316,7 @@ test('static case pages expose indexable bilingual HTML and usable links', async
   }
   await page.goto('/ru/work/taskfocus/');
   await expect(page.getByRole('heading', { name: 'Решения проекта' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Открыть продукт' })).toHaveAttribute('href', 'https://taskfocus-eight.vercel.app/');
+  await expect(page.getByRole('link', { name: 'Открыть приложение' })).toHaveAttribute('href', 'https://taskfocus-eight.vercel.app/');
   await page.getByRole('button', { name: 'Сменить тему' }).click();
   await expect(page.locator('html')).toHaveClass(/dark/);
   await page.getByRole('link', { name: 'Открыть интерактивный кейс' }).click();
@@ -346,6 +346,34 @@ for (const scenario of [
     }))).toEqual([]);
   });
 }
+
+test('static project decisions fit tablet widths in both languages and themes', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.setViewportSize({ width: 768, height: 900 });
+  for (const lang of ['en', 'ru']) {
+    for (const theme of ['light', 'dark']) {
+      await page.goto('/');
+      await page.evaluate(value => localStorage.setItem('theme', value), theme);
+      for (const slug of ['taskfocus', 'mindtrack']) {
+        await page.goto(`/${lang === 'ru' ? 'ru/' : ''}work/${slug}/`);
+        await expect(page.locator('html')).toHaveClass(new RegExp(theme));
+        // A lazy gallery can change the page width once the full case is loaded.
+        await page.evaluate(async () => {
+          await document.fonts.ready;
+          await Promise.all([...document.images].map(async image => {
+            image.loading = 'eager';
+            await image.decode();
+          }));
+        });
+        await expectNoHorizontalScroll(page);
+        const overflowingText = await page.locator('.preview-decisions dt, .preview-decisions dd').evaluateAll(nodes => nodes
+          .filter(node => node.scrollWidth > node.clientWidth + 1)
+          .map(node => node.textContent));
+        expect(overflowingText).toEqual([]);
+      }
+    }
+  }
+});
 
 test('scroll reveal shows every section once it is reached and never hides what is already on screen', async ({ page }) => {
   await page.goto('/');

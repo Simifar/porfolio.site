@@ -32,7 +32,7 @@ const decisionItem = (decision, lang, l) => {
 const labels = {
   en: {
     home: 'Portfolio', alternate: 'Русский', open: 'Open interactive case', openOverview: 'Open project overview', theme: 'Switch theme',
-    source: 'Source code', live: 'Open product', task: 'The task', role: 'What I did',
+    source: 'Source code', live: 'Open product', catalog: 'Open catalog', task: 'The task', role: 'What I did',
     case: 'Project case', overview: 'Project overview', alternatives: 'Why not existing tools',
     problem: 'Problem', alternative: 'Alternative', choice: 'Chosen solution', reason: 'Why this option',
     constraints: 'Constraints', scope: 'MVP scope', included: 'Included', cut: 'Left out',
@@ -41,12 +41,10 @@ const labels = {
     criteria: 'Success criteria', validation: 'What to test next', lessons: 'What I would do differently',
     materials: 'Project links', features: 'Features', gallery: 'Inside the product',
     email: 'Email', telegram: 'Telegram', linkedin: 'View LinkedIn',
-    ctaTitle: 'Looking for technical roles',
-    ctaText: 'I am looking for opportunities in IT support and PC hardware. Email is the easiest way to reach me; my LinkedIn has more background.',
   },
   ru: {
     home: 'Портфолио', alternate: 'English', open: 'Открыть интерактивный кейс', openOverview: 'Открыть обзор проекта', theme: 'Сменить тему',
-    source: 'Исходный код', live: 'Открыть продукт', task: 'Задача', role: 'Что я сделал',
+    source: 'Исходный код', live: 'Открыть приложение', catalog: 'Открыть каталог', task: 'Задача', role: 'Что я сделал',
     case: 'Кейс проекта', overview: 'Обзор проекта', alternatives: 'Почему не готовые решения',
     problem: 'Проблема', alternative: 'Альтернатива', choice: 'Выбранное решение', reason: 'Почему этот вариант',
     constraints: 'Ограничения', scope: 'Рамки MVP', included: 'Вошло', cut: 'Не вошло',
@@ -55,8 +53,6 @@ const labels = {
     criteria: 'Критерии успеха', validation: 'Что проверить дальше', lessons: 'Что сделал бы иначе',
     materials: 'Ссылки на материалы', features: 'Функции', gallery: 'Экраны проекта',
     email: 'Почта', telegram: 'Telegram', linkedin: 'Открыть LinkedIn',
-    ctaTitle: 'Ищу техническую работу',
-    ctaText: 'Рассматриваю возможности в технической поддержке и работе с компьютерной техникой. Напишите на почту; больше информации обо мне есть в LinkedIn.',
   },
 };
 
@@ -108,7 +104,7 @@ function renderCase(project, lang) {
 <script>try{document.documentElement.className=localStorage.getItem('theme')==='dark'?'dark':'light'}catch{}</script>
 </head><body>
 <header class="preview-header"><div class="shell"><a href="${homeUrl}">${escape(l.home)} / Egor Matafonov</a><nav aria-label="${lang === 'ru' ? 'Навигация' : 'Navigation'}"><a href="mailto:Matafonovegor2@gmail.com">${escape(l.email)} · Matafonovegor2@gmail.com</a><a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer">${escape(l.telegram)} · @legionanstek</a><a href="${alternateUrl}">${escape(l.alternate)}</a><button type="button" id="theme-switch">${escape(l.theme)}</button></nav></div></header>
-<main class="shell"><div class="preview-hero"><p class="preview-kicker">${escape(pageType)} · ${escape(project.category[lang])}</p><h1>${escape(project.name)}</h1><p class="preview-intro">${escape(description)}</p><div class="preview-links"><a href="${appUrl}" id="interactive-case">${escape(openLabel)} ↗</a><a href="${escape(project.github)}">${escape(l.source)} ↗</a>${project.live ? `<a href="${escape(project.live)}">${escape(l.live)} ↗</a>` : ''}</div></div>
+<main class="shell"><div class="preview-hero"><p class="preview-kicker">${escape(pageType)} · ${escape(project.category[lang])}</p><h1>${escape(project.name)}</h1><p class="preview-intro">${escape(description)}</p><div class="preview-links"><a href="${appUrl}" id="interactive-case">${escape(openLabel)} ↗</a><a href="${escape(project.github)}">${escape(l.source)} ↗</a>${project.live ? `<a href="${escape(project.live)}">${escape(project.slug === 'cortexmap' ? l.catalog : l.live)} ↗</a>` : ''}</div></div>
 ${visual}${details}${cta}</main>
 <footer class="preview-footer"><div class="shell">© Egor Matafonov · <a href="${homeUrl}">${escape(l.home)}</a></div></footer>
 <script>document.getElementById('theme-switch').addEventListener('click',()=>{const dark=document.documentElement.classList.toggle('dark');document.documentElement.classList.toggle('light',!dark);try{localStorage.setItem('theme',dark?'dark':'light')}catch{}});document.getElementById('interactive-case').addEventListener('click',()=>{try{localStorage.setItem('lang','${lang}')}catch{}})</script>

@@ -66,6 +66,12 @@ figcaption { margin-top: .45rem; color: var(--muted); font-size: .8rem; }
 .preview-cta-primary { border-color: var(--accent); background: var(--accent); color: var(--page); font-weight: 600; }
 .preview-footer { margin-top: 2rem; padding-block: 2rem; border-top: 1px solid var(--border); color: var(--muted); }
 
+/* The case body is already a column; stack nested decisions before text gets too narrow. */
+@media (min-width: 701px) and (max-width: 1000px) {
+  .preview-decisions li { grid-template-columns: minmax(0, 1fr); }
+  .preview-decision--structured .preview-decision-analysis, .preview-decision-choice, .preview-decision--compact h3, .preview-decision--compact .preview-decision-details { grid-column: 1; }
+}
+
 @media (max-width: 700px) {
   .preview-hero { padding-block: 2.5rem; }
   .preview-section, .preview-cta { grid-template-columns: minmax(0, 1fr); gap: .6rem; }
