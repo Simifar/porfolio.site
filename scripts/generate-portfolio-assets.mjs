@@ -13,22 +13,10 @@ const [{ en, ru }, { experience }] = await Promise.all([readModule('src/content/
 const escape = value => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 const font = async name => `data:font/woff2;base64,${(await readFile(`src/assets/fonts/${name}.woff2`)).toString('base64')}`;
 const fontCSS = `@font-face{font-family:Plex;src:url('${await font('ibm-plex-sans-latin')}');font-weight:400 700;unicode-range:U+0000-00FF,U+2000-206F,U+2191,U+2193} @font-face{font-family:Plex;src:url('${await font('ibm-plex-sans-cyrillic')}');font-weight:400 700;unicode-range:U+0400-045F,U+2116}`;
-const browser = await chromium.launch({ channel: process.platform === 'win32' ? 'chrome' : undefined });
+const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined, channel: process.platform === 'win32' ? 'chrome' : undefined });
 await mkdir('public/resume', { recursive: true });
 try {
   const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
-  await page.setContent(`<!doctype html><html lang="ru"><meta charset="utf-8"><style>${fontCSS}
-    *{box-sizing:border-box}body{margin:0;background:#f2f3ef;color:#202624;font-family:Plex,Arial,sans-serif;padding:48px 64px}
-    header{display:flex;justify-content:space-between;border-bottom:1px solid #cdd2cb;padding-bottom:22px;font-size:23px}
-    .label{font-size:17px;letter-spacing:1px;color:#58605a}h1{font-size:65px;font-weight:600;letter-spacing:-2.3px;line-height:1.04;margin:34px 0 28px;max-width:1070px}
-    .accent{display:block;width:56px;height:4px;background:#b33729;margin-top:26px}.proofs{display:flex;gap:76px;padding-top:20px;border-top:1px solid #cdd2cb}.proofs strong{font-size:37px;font-weight:600}.proofs p{font-size:20px;line-height:1.3;margin:5px 0 0;color:#4b554e}footer{font-size:17px;color:#58605a;margin-top:23px}
-  </style><header><strong>Егор Матафонов</strong><span class="label">EGOR MATAFONOV · PORTFOLIO</span></header>
-  <span class="accent"></span><h1>Техническая поддержка<br>и компьютерное оборудование</h1>
-  <div class="proofs"><div><strong>50+ ПК</strong><p>собрал и пересобрал</p></div><div><strong>ЕЭТК · 2026</strong><p>информационные системы<br>и программирование</p></div></div>
-  <footer>IT SUPPORT & PC HARDWARE · simifar.github.io/porfolio.site</footer></html>`);
-  await page.evaluate(() => document.fonts.ready);
-  await page.screenshot({ path: 'public/og-image.png' });
-
   for (const lang of ['ru', 'en']) {
     const t = lang === 'ru' ? ru : en;
     const labels = lang === 'ru' ? { name: 'Егор Матафонов', profile: 'Профиль', skills: 'Навыки и практика', experience: 'Опыт', education: 'Образование', projects: 'Программный проект', project: 'TaskFocus - самостоятельный дипломный проект, собранный с помощью AI-агентов. Планировщик с разделом «Входящие», лимитом в пять задач на день, авторизацией и документацией по архитектуре и запуску.', updated: 'Обновлено 5 ноября 2026' } : { name: 'Egor Matafonov', profile: 'Profile', skills: 'Skills and practice', experience: 'Experience', education: 'Education', projects: 'Software project', project: 'TaskFocus - a solo diploma project built with AI agents. A task planner with an inbox, a five-task daily cap, authentication, and architecture and setup documentation.', updated: 'Updated November 5, 2026' };
@@ -47,3 +35,5 @@ try {
   await browser.close();
 }
 console.log('Generated og-image.png (1200×630) and RU/EN resume PDFs.');
+
+await import('./generate-social-image.mjs');

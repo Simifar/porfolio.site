@@ -17,7 +17,7 @@ test('home explains experience and projects, and case back returns to the projec
   page.on('console', message => { if (message.type() === 'error') errors.push(message.text()); });
 
   await page.goto('/');
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('IT Support & PC Hardware');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('BUILD.FIX.REPEAT.');
   await expect(page.getByRole('heading', { name: 'Professional experience' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'УЦ «Потенциал»' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'O!task' })).toBeVisible();
@@ -35,7 +35,7 @@ test('home explains experience and projects, and case back returns to the projec
   await expect(approach.getByRole('link', { name: 'Work at Potencial', exact: true })).toHaveAttribute('href', '#/?section=experience');
   await approach.getByRole('link', { name: 'Work at Potencial', exact: true }).click();
   await expect.poll(() => page.locator('#experience').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
-  await page.getByRole('link', { name: 'See technical experience' }).click();
+  await page.getByRole('link', { name: 'Explore world' }).click();
   await expect(page).toHaveURL(/section=experience/);
   await expect.poll(() => page.locator('#experience').evaluate(element => Math.round(element.getBoundingClientRect().top))).toBeLessThan(200);
   await expect(page.getByRole('article', { name: 'TaskFocus' }).getByRole('link', { name: 'Open product' })).toHaveAttribute('href', 'https://taskfocus-eight.vercel.app/');
@@ -76,14 +76,14 @@ test('hero shows role, proof points and primary CTA above the fold without dupli
     await page.setViewportSize(viewport);
     await page.goto('/');
     const hero = page.locator('#hero');
-    await expect(hero.getByText('Egor Matafonov · open to IT support and PC hardware roles')).toBeInViewport();
+    await expect(hero.getByText('Egor Matafonov', { exact: true })).toBeInViewport();
     await expect(hero.getByRole('heading', { level: 1 })).toBeInViewport();
     await expect(hero.getByRole('list', { name: 'Key facts' }).getByRole('listitem')).toHaveCount(3);
     for (const item of await hero.getByRole('list', { name: 'Key facts' }).getByRole('listitem').all()) {
       await expect(item).toBeInViewport({ ratio: 1 });
     }
-    await expect(hero.getByRole('link', { name: 'See technical experience' })).toBeInViewport({ ratio: 1 });
-    await expect(page.locator('img[src$="mindtrack-cover.webp"]')).toHaveCount(1);
+    await expect(hero.getByRole('link', { name: 'Explore world' })).toBeInViewport({ ratio: 1 });
+    await expect(page.locator('img[src$="mindtrack-result.png"]')).toHaveCount(1);
   }
 });
 
@@ -217,7 +217,8 @@ test('every case renders on desktop and phone in both languages and themes', asy
         await page.goto('/');
         await expect(page.locator('html')).toHaveAttribute('lang', lang);
         await expect(page.locator('html')).toHaveClass(new RegExp(theme));
-        await expect(page.getByRole('heading', { level: 1 })).toContainText(lang === 'en' ? 'IT Support & PC Hardware' : 'Техническая поддержка');
+        await expect(page.getByRole('heading', { level: 1 })).toHaveText('BUILD.FIX.REPEAT.');
+        await expect(page.locator('.hero-identity')).toContainText(lang === 'en' ? 'IT Support & PC Hardware' : 'компьютерное оборудование');
         await expectNoHorizontalScroll(page);
         for (const slug of slugs) {
           await page.goto(`/#/work/${slug}`);

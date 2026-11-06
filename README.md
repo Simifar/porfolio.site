@@ -1,10 +1,14 @@
-# Egor Matafonov | Portfolio
+# EGOR.EXE — A Tech World
 
 Personal portfolio for my move into **IT Support & PC Hardware**. It brings together my vocational education, hands-on computer equipment experience, and software projects in one bilingual (English and Russian) site.
 
 **[Open the portfolio](https://simifar.github.io/porfolio.site/)** · [English](https://simifar.github.io/porfolio.site/) · [Русская версия](https://simifar.github.io/porfolio.site/?lang=ru)
 
 The site documents my work assembling and reassembling more than 50 computers and taking inventory of classroom equipment at Potencial Training Center. I also share software projects built independently; they are presented as projects, not as IT support employment.
+
+## The world
+
+Original SVG voxel workshop, interactive technical inventory and a selectable tech lab, designed for keyboard, touch and reduced motion. Dark forest and light limestone themes; English and Russian throughout. No WebGL or external artwork.
 
 ## What is here
 
@@ -13,7 +17,7 @@ The site documents my work assembling and reassembling more than 50 computers an
 - **Software projects:** TaskFocus, MindTrack and CortexMap, with project pages in English and Russian.
 - **Contact:** email, LinkedIn, GitHub and Telegram, plus English and Russian PDF resumes. Seeking remote work or office / hybrid roles in Yekaterinburg.
 
-The social image and resumes can be rebuilt with `node scripts/generate-portfolio-assets.mjs` after installing dependencies. The script uses the site's local fonts and shared experience / skills content. Review the resulting PDFs visually after content changes.
+The original social card can be rebuilt with `node scripts/generate-social-image.mjs`. The social image and resumes can be rebuilt with `node scripts/generate-portfolio-assets.mjs` after installing dependencies. The script uses the site's local fonts and shared experience / skills content. Review the resulting PDFs visually after content changes.
 
 ## Project pages
 
@@ -60,8 +64,23 @@ End-to-end tests use Playwright and cover navigation, project pages, language an
 - `src/content/projects.ts` - project descriptions and case-study content.
 - `src/content/i18n.ts` - interface copy in English and Russian.
 - `src/components/` - site sections, navigation and project views.
+- `src/components/world/` - original SVG workshop, pixel sprites, inventory, tech lab and milestones.
+- `src/content/world.ts` - bilingual world UI and factual skill classifications.
+- `src/styles/world.css` - light/dark tokens, game components and responsive rules.
+- `docs/screenshots/` - desktop and mobile previews in both themes.
+- `DESIGN.md` - current design direction, data integrity and accessibility decisions.
 - `scripts/generate-case-pages.mjs` - static bilingual project-page generator.
 - `public/projects/` - project screenshots used by the site.
+
+## Verification
+
+Install the test browser once with `npx playwright install --with-deps chromium`. Run `npm run lighthouse` for the repository's configured budgets. If Chromium is already installed, `CHROME_PATH=/path/to/chrome` selects it for Playwright and asset generators; Lighthouse also honors this variable.
+
+The E2E suite includes axe checks, all case routes, static cases, real PDF responses, inventory keyboard/tap selection, workstation context, responsive EN/RU themes, reduced motion, clipboard and console errors.
+
+## Release policy
+
+Changes in `codex/minecraft-portfolio-redesign` are for review. **Do not merge or deploy to production without separate owner confirmation.**
 
 ## Publish
 

@@ -1,4 +1,12 @@
-import { ArrowUpRight, Copy, ExternalLink, Github, Linkedin, Mail, Send } from 'lucide-react';
+import {
+  ArrowUpRight,
+  Copy,
+  ExternalLink,
+  Github,
+  Linkedin,
+  Mail,
+  Send,
+} from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router';
 import { projects } from '../content/projects';
@@ -6,20 +14,34 @@ import { experience } from '../content/experience';
 import { useApp } from '../lib/context';
 import TransitionLink from './TransitionLink';
 import { copyEmail } from './Toast';
+import { worldCopy } from '../content/world';
+import PixelIcon from './world/PixelIcon';
 
 // A case link that shows the project's visual on hover, so the reader sees
 // what they are about to open. The card repeats the link, so it is hidden from
 // assistive technology.
-function CasePreviewLink({ to, children }: { to: string; children: React.ReactNode }) {
+function CasePreviewLink({
+  to,
+  children,
+}: {
+  to: string;
+  children: React.ReactNode;
+}) {
   const { lang } = useApp();
   // Mounted on first hover or focus, so the page does not load or carry the image up front.
   const [armed, setArmed] = useState(false);
-  const project = projects.find(item => `/work/${item.slug}` === to);
+  const project = projects.find((item) => `/work/${item.slug}` === to);
   const visual = project?.visual;
 
   return (
-    <span className="case-preview" onPointerEnter={() => setArmed(true)} onFocus={() => setArmed(true)}>
-      <TransitionLink to={to} className="practice-item__link">{children}</TransitionLink>
+    <span
+      className="case-preview"
+      onPointerEnter={() => setArmed(true)}
+      onFocus={() => setArmed(true)}
+    >
+      <TransitionLink to={to} className="practice-item__link">
+        {children}
+      </TransitionLink>
       {armed && project && visual && (
         <span className="case-preview__card" aria-hidden="true">
           <img
@@ -31,7 +53,9 @@ function CasePreviewLink({ to, children }: { to: string; children: React.ReactNo
             decoding="async"
           />
           <span className="case-preview__name">{project.name}</span>
-          <span className="case-preview__subtitle">{project.subtitle[lang]}</span>
+          <span className="case-preview__subtitle">
+            {project.subtitle[lang]}
+          </span>
         </span>
       )}
     </span>
@@ -43,17 +67,32 @@ function ProjectActions({ project }: { project: (typeof projects)[number] }) {
 
   return (
     <div className="project-actions">
-      <TransitionLink to={`/work/${project.slug}`} className="project-action project-action--primary">
+      <TransitionLink
+        to={`/work/${project.slug}`}
+        className="project-action project-action--primary"
+      >
         {project.caseStudy ? t.work.viewCase : t.work.viewOverview}
         <ArrowUpRight size={16} aria-hidden="true" />
       </TransitionLink>
       {project.live && (
-        <a href={project.live} target="_blank" rel="noopener noreferrer" className="project-action">
-          {project.slug === 'cortexmap' ? t.work.openCatalog : t.work.openProduct}
+        <a
+          href={project.live}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="project-action"
+        >
+          {project.slug === 'cortexmap'
+            ? t.work.openCatalog
+            : t.work.openProduct}
           <ExternalLink size={14} aria-hidden="true" />
         </a>
       )}
-      <a href={project.github} target="_blank" rel="noopener noreferrer" className="project-action project-action--quiet">
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="project-action project-action--quiet"
+      >
         {t.work.repository}
         <ExternalLink size={12} aria-hidden="true" />
       </a>
@@ -65,16 +104,30 @@ export function Experience() {
   const { t, lang } = useApp();
 
   return (
-    <section id="experience" className="experience-section" aria-labelledby="experience-title">
+    <section
+      id="experience"
+      className="experience-section"
+      aria-labelledby="experience-title"
+    >
       <div className="site-shell">
         <div className="section-heading" data-reveal="">
-          <h2 id="experience-title" className="section-title">{t.experience.title}</h2>
+          <p className="section-eyebrow">03 / {worldCopy[lang].quest}</p>
+          <h2 id="experience-title" className="section-title">
+            {t.experience.title}
+          </h2>
           <p className="section-subtitle">{t.experience.subtitle}</p>
         </div>
         <div className="experience-list">
-          {experience.map(entry => (
-            <article key={entry.company} className={`experience-entry${entry.compact ? ' experience-entry--compact' : ''}`} data-reveal="">
+          {experience.map((entry) => (
+            <article
+              key={entry.company}
+              className={`experience-entry${entry.compact ? ' experience-entry--compact' : ''}`}
+              data-reveal=""
+            >
               <div className="experience-entry__meta">
+                <span className="quest-state">
+                  ✓ {worldCopy[lang].completed}
+                </span>
                 <span>{entry.period[lang]}</span>
                 <span>{entry.context[lang]}</span>
               </div>
@@ -83,7 +136,9 @@ export function Experience() {
                 <p className="experience-entry__role">{entry.role[lang]}</p>
                 <p className="experience-entry__work">{entry.work[lang]}</p>
                 <ul className="experience-entry__outcomes">
-                  {entry.outcomes.map(outcome => <li key={outcome.en}>{outcome[lang]}</li>)}
+                  {entry.outcomes.map((outcome) => (
+                    <li key={outcome.en}>{outcome[lang]}</li>
+                  ))}
                 </ul>
                 {entry.practice && (
                   <div className="experience-practice">
@@ -94,12 +149,18 @@ export function Experience() {
               </div>
             </article>
           ))}
-          <article className="experience-entry experience-entry--compact" aria-labelledby="education-title" data-reveal="">
+          <article
+            className="experience-entry experience-entry--compact"
+            aria-labelledby="education-title"
+            data-reveal=""
+          >
             <div className="experience-entry__meta">
               <span>{t.experience.educationLabel}</span>
             </div>
             <div className="experience-entry__body">
-              <h3 id="education-title" className="experience-entry__company">{t.experience.education}</h3>
+              <h3 id="education-title" className="experience-entry__company">
+                {t.experience.education}
+              </h3>
             </div>
           </article>
         </div>
@@ -110,14 +171,21 @@ export function Experience() {
 
 export function SelectedWork() {
   const { t, lang } = useApp();
-  const featured = projects.filter(project => project.presentation === 'featured');
-  const additional = projects.filter(project => project.presentation === 'additional');
+  const featured = projects.filter(
+    (project) => project.presentation === 'featured',
+  );
+  const additional = projects.filter(
+    (project) => project.presentation === 'additional',
+  );
 
   return (
     <section id="work" className="work-section" aria-labelledby="work-title">
       <div className="site-shell">
         <div className="section-heading" data-reveal="">
-          <h2 id="work-title" className="section-title">{t.work.title}</h2>
+          <p className="section-eyebrow">04 / {worldCopy[lang].projects}</p>
+          <h2 id="work-title" className="section-title">
+            {t.work.title}
+          </h2>
           <p className="section-subtitle">{t.work.subtitle}</p>
         </div>
 
@@ -131,30 +199,63 @@ export function SelectedWork() {
               >
                 {project.visual && (
                   <figure className="feature-project__figure">
-                    <div className={`project-image-frame${project.visual.kind === 'cover' ? ' portfolio-cover' : ''}`} data-reveal="media">
+                    <div
+                      className={`project-image-frame${project.visual.kind === 'cover' ? ' portfolio-cover' : ''}`}
+                      data-reveal="media"
+                    >
                       <img
-                        src={import.meta.env.BASE_URL + project.visual.src.replace(/^\/+/, '')}
-                        alt={project.visual.alt[lang]}
-                        width={project.visual.width}
-                        height={project.visual.height}
+                        src={
+                          import.meta.env.BASE_URL + project.cardScreenshot.src
+                        }
+                        alt={project.cardScreenshot.alt[lang]}
+                        width={project.cardScreenshot.width}
+                        height={project.cardScreenshot.height}
                         loading="lazy"
                         decoding="async"
                         className="project-image"
                         data-morph="image"
                       />
                     </div>
-                    <figcaption className="project-image-caption">{project.visual.caption[lang]}</figcaption>
+                    <figcaption className="project-image-caption">
+                      {lang === 'en'
+                        ? 'APPLICATION SCREENSHOT / '
+                        : 'СКРИНШОТ ПРИЛОЖЕНИЯ / '}
+                      {project.name}
+                    </figcaption>
                   </figure>
                 )}
                 <div className="feature-project__copy" data-reveal="">
                   <div className="project-meta">
+                    <PixelIcon
+                      kind={
+                        project.slug === 'taskfocus'
+                          ? 'docs'
+                          : project.slug === 'mindtrack'
+                            ? 'gem'
+                            : 'network'
+                      }
+                    />
                     <span>{project.category[lang]}</span>
-                    {project.status && <span className="project-meta__status">{project.status[lang]}</span>}
+                    {project.status && (
+                      <span className="project-meta__status">
+                        {project.status[lang]}
+                      </span>
+                    )}
                   </div>
-                  <h3 id={`project-${project.slug}`} className="feature-project__title" data-morph="title">{project.name}</h3>
-                  <p className="feature-project__subtitle">{project.subtitle[lang]}</p>
+                  <h3
+                    id={`project-${project.slug}`}
+                    className="feature-project__title"
+                    data-morph="title"
+                  >
+                    {project.name}
+                  </h3>
+                  <p className="feature-project__subtitle">
+                    {project.subtitle[lang]}
+                  </p>
                   <p className="project-focus">{project.cardFocus[lang]}</p>
-                  {project.cardRole && <p className="project-role">{project.cardRole[lang]}</p>}
+                  {project.cardRole && (
+                    <p className="project-role">{project.cardRole[lang]}</p>
+                  )}
                   <ProjectActions project={project} />
                 </div>
               </article>
@@ -163,38 +264,85 @@ export function SelectedWork() {
         </div>
 
         <div className="additional-work">
-          <h3 className="additional-work__title" data-reveal="">{t.work.additionalTitle}</h3>
+          <h3 className="additional-work__title" data-reveal="">
+            {t.work.additionalTitle}
+          </h3>
           <div className="additional-grid">
-            {additional.map(project => (
-              <article key={project.slug} className="additional-project" aria-labelledby={`project-${project.slug}`} data-reveal="" data-morph-scope={`project-${project.slug}`}>
+            {additional.map((project) => (
+              <article
+                key={project.slug}
+                className="additional-project"
+                aria-labelledby={`project-${project.slug}`}
+                data-reveal=""
+                data-morph-scope={`project-${project.slug}`}
+              >
                 {project.visual ? (
-                  <figure className={`additional-project__visual${project.visual.kind === 'cover' ? ' portfolio-cover' : ''}`}>
+                  <figure
+                    className={`additional-project__visual${project.visual.kind === 'cover' ? ' portfolio-cover' : ''}`}
+                  >
                     {project.visual.kind === 'concept' && (
-                      <figcaption className="additional-project__disclosure">{project.visual.caption[lang]}</figcaption>
+                      <figcaption className="additional-project__disclosure">
+                        {lang === 'en'
+                          ? 'APPLICATION SCREENSHOT / '
+                          : 'СКРИНШОТ ПРИЛОЖЕНИЯ / '}
+                        {project.name}
+                      </figcaption>
                     )}
                     <img
-                      src={import.meta.env.BASE_URL + project.visual.src.replace(/^\/+/, '')}
-                      alt={project.visual.alt[lang]}
-                      width={project.visual.width}
-                      height={project.visual.height}
+                      src={
+                        import.meta.env.BASE_URL + project.cardScreenshot.src
+                      }
+                      alt={project.cardScreenshot.alt[lang]}
+                      width={project.cardScreenshot.width}
+                      height={project.cardScreenshot.height}
                       loading="lazy"
                       decoding="async"
                       data-morph="image"
                     />
                     {project.visual.kind !== 'concept' && (
-                      <figcaption className="additional-project__caption">{project.visual.caption[lang]}</figcaption>
+                      <figcaption className="additional-project__caption">
+                        {lang === 'en'
+                          ? 'APPLICATION SCREENSHOT / '
+                          : 'СКРИНШОТ ПРИЛОЖЕНИЯ / '}
+                        {project.name}
+                      </figcaption>
                     )}
                   </figure>
                 ) : (
-                  <div className="additional-project__text-visual">{(project.cardRole ?? project.category)[lang]}</div>
+                  <div className="additional-project__text-visual">
+                    {(project.cardRole ?? project.category)[lang]}
+                  </div>
                 )}
                 <div className="project-meta">
+                  <PixelIcon
+                    kind={
+                      project.slug === 'taskfocus'
+                        ? 'docs'
+                        : project.slug === 'mindtrack'
+                          ? 'gem'
+                          : 'network'
+                    }
+                  />
                   <span>{project.category[lang]}</span>
-                  {project.status && <span className="project-meta__status">{project.status[lang]}</span>}
+                  {project.status && (
+                    <span className="project-meta__status">
+                      {project.status[lang]}
+                    </span>
+                  )}
                 </div>
-                <h4 id={`project-${project.slug}`} className="additional-project__title" data-morph="title">{project.name}</h4>
-                <p className="additional-project__subtitle">{project.subtitle[lang]}</p>
-                <p className="additional-project__focus">{project.cardFocus[lang]}</p>
+                <h4
+                  id={`project-${project.slug}`}
+                  className="additional-project__title"
+                  data-morph="title"
+                >
+                  {project.name}
+                </h4>
+                <p className="additional-project__subtitle">
+                  {project.subtitle[lang]}
+                </p>
+                <p className="additional-project__focus">
+                  {project.cardFocus[lang]}
+                </p>
                 <ProjectActions project={project} />
               </article>
             ))}
@@ -206,13 +354,42 @@ export function SelectedWork() {
 }
 
 export function About() {
-  const { t } = useApp();
+  const { t, lang } = useApp();
+  const w = worldCopy[lang];
 
   return (
-    <section id="about" className="practice-section" aria-labelledby="about-title">
+    <section
+      id="about"
+      className="practice-section"
+      aria-labelledby="about-title"
+    >
       <div className="site-shell practice-layout">
         <div className="practice-intro" data-reveal="">
-          <h2 id="about-title" className="section-title">{t.about.title}</h2>
+          <p className="section-eyebrow">01 / {w.profile}</p>
+          <h2 id="about-title" className="section-title">
+            {t.about.title}
+          </h2>
+          <div className="player-card">
+            <div className="player-avatar" aria-hidden="true">
+              <PixelIcon kind="pc" />
+            </div>
+            <span className="player-id">PLAYER_01</span>
+            <h3>{w.name}</h3>
+            <p className="player-role">{w.role}</p>
+            <p>{w.profileBody}</p>
+            <ul>
+              {w.profileFacts.map((fact) => (
+                <li key={fact}>{fact}</li>
+              ))}
+            </ul>
+            <a
+              className="practice-item__link"
+              href={`${import.meta.env.BASE_URL}resume/egor-matafonov-${lang}.pdf`}
+              download
+            >
+              {w.resume} ↗
+            </a>
+          </div>
         </div>
 
         <div>
@@ -223,17 +400,23 @@ export function About() {
                 <h3 className="practice-item__title">{practice.title}</h3>
                 <p className="practice-item__detail">{practice.detail}</p>
                 <div className="practice-item__links">
-                  {practice.links.map(link => link.to.startsWith('/work/') ? (
-                    <CasePreviewLink key={link.to} to={link.to}>
-                      {link.label}
-                      <ArrowUpRight size={14} aria-hidden="true" />
-                    </CasePreviewLink>
-                  ) : (
-                    <Link key={link.to} to={link.to} className="practice-item__link">
-                      {link.label}
-                      <ArrowUpRight size={14} aria-hidden="true" />
-                    </Link>
-                  ))}
+                  {practice.links.map((link) =>
+                    link.to.startsWith('/work/') ? (
+                      <CasePreviewLink key={link.to} to={link.to}>
+                        {link.label}
+                        <ArrowUpRight size={14} aria-hidden="true" />
+                      </CasePreviewLink>
+                    ) : (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        className="practice-item__link"
+                      >
+                        {link.label}
+                        <ArrowUpRight size={14} aria-hidden="true" />
+                      </Link>
+                    ),
+                  )}
                 </div>
               </li>
             ))}
@@ -248,43 +431,104 @@ export function Contact() {
   const { t, lang } = useApp();
 
   return (
-    <section id="contact" className="contact-section" aria-labelledby="contact-title">
+    <section
+      id="contact"
+      className="contact-section"
+      aria-labelledby="contact-title"
+    >
       <div className="site-shell contact-layout">
         <div data-reveal="">
-          <h2 id="contact-title" className="contact-title">{t.contact.title}</h2>
+          <p className="section-eyebrow">07 / {worldCopy[lang].connect}</p>
+          <span className="connect-symbol" aria-hidden="true">
+            ↗
+          </span>
+          <h2 id="contact-title" className="contact-title">
+            {t.contact.title}
+          </h2>
         </div>
         <div data-reveal="">
           <p className="contact-copy">{t.contact.subtitle}</p>
           <p className="contact-format">{t.contact.workFormat}</p>
           <div className="contact-actions">
-            <a href={`${import.meta.env.BASE_URL}resume/egor-matafonov-${lang}.pdf`} download className="contact-link">
+            <a
+              href={`${import.meta.env.BASE_URL}resume/egor-matafonov-${lang}.pdf`}
+              download
+              className="contact-link"
+            >
               {t.contact.resumeBtn}
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>
             <span className="contact-email-group">
-              <a href="mailto:Matafonovegor2@gmail.com" className="contact-email" aria-label={t.contact.emailBtn}>
+              <a
+                href="mailto:Matafonovegor2@gmail.com"
+                className="contact-email"
+                aria-label={t.contact.emailBtn}
+              >
                 <Mail size={17} aria-hidden="true" />
-                <span>Matafonovegor2@<wbr />gmail.com</span>
-                <ArrowUpRight className="contact-action__arrow" size={15} aria-hidden="true" />
+                <span>
+                  Matafonovegor2@
+                  <wbr />
+                  gmail.com
+                </span>
+                <ArrowUpRight
+                  className="contact-action__arrow"
+                  size={15}
+                  aria-hidden="true"
+                />
               </a>
-              <button type="button" className="contact-copy-button" onClick={() => { void copyEmail(t); }} aria-label={t.contact.copyEmail} title={t.contact.copyEmail}>
+              <button
+                type="button"
+                className="contact-copy-button"
+                onClick={() => {
+                  void copyEmail(t);
+                }}
+                aria-label={t.contact.copyEmail}
+                title={t.contact.copyEmail}
+              >
                 <Copy size={16} aria-hidden="true" />
               </button>
             </span>
-            <a href="https://github.com/Simifar" target="_blank" rel="noopener noreferrer" className="contact-link">
+            <a
+              href="https://github.com/Simifar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-link"
+            >
               <Github size={17} aria-hidden="true" />
               <span>{t.footer.github}</span>
-              <ArrowUpRight className="contact-action__arrow" size={14} aria-hidden="true" />
+              <ArrowUpRight
+                className="contact-action__arrow"
+                size={14}
+                aria-hidden="true"
+              />
             </a>
-            <a href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer" className="contact-link">
+            <a
+              href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-link"
+            >
               <Linkedin size={17} aria-hidden="true" />
               <span>{t.contact.linkedinBtn}</span>
-              <ArrowUpRight className="contact-action__arrow" size={14} aria-hidden="true" />
+              <ArrowUpRight
+                className="contact-action__arrow"
+                size={14}
+                aria-hidden="true"
+              />
             </a>
-            <a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer" className="contact-link">
+            <a
+              href="https://t.me/legionanstek"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-link"
+            >
               <Send size={16} aria-hidden="true" />
               <span>{t.contact.telegramBtn}</span>
-              <ArrowUpRight className="contact-action__arrow" size={14} aria-hidden="true" />
+              <ArrowUpRight
+                className="contact-action__arrow"
+                size={14}
+                aria-hidden="true"
+              />
             </a>
           </div>
         </div>
@@ -294,21 +538,53 @@ export function Contact() {
 }
 
 export function Footer() {
-  const { t } = useApp();
+  const { t, lang } = useApp();
   const year = new Date().getFullYear();
 
   return (
     <footer className="site-footer">
       <div className="site-footer__inner">
         <div>
-          <p className="site-footer__copyright">{t.footer.copyright.replace('{year}', String(year))}</p>
-          <p className="site-footer__built">{t.footer.built}</p>
+          <p className="site-footer__copyright">
+            {t.footer.copyright.replace('{year}', String(year))}
+          </p>
+          <p className="site-footer__built">{worldCopy[lang].footer}</p>
         </div>
         <nav aria-label={t.nav.socialLinks} className="site-footer__links">
-          <a href="https://github.com/Simifar" target="_blank" rel="noopener noreferrer" className="site-footer__link"><Github size={15} aria-hidden="true" />{t.footer.github}</a>
-          <a href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US" target="_blank" rel="noopener noreferrer" className="site-footer__link"><Linkedin size={15} aria-hidden="true" />{t.footer.linkedin}</a>
-          <a href="https://t.me/legionanstek" target="_blank" rel="noopener noreferrer" className="site-footer__link"><Send size={14} aria-hidden="true" />{t.footer.telegram}</a>
-          <a href="mailto:Matafonovegor2@gmail.com" className="site-footer__link"><Mail size={15} aria-hidden="true" />{t.footer.email}</a>
+          <a
+            href="https://github.com/Simifar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-footer__link"
+          >
+            <Github size={15} aria-hidden="true" />
+            {t.footer.github}
+          </a>
+          <a
+            href="https://www.linkedin.com/in/egor-matafonov-764620300/?locale=en-US"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-footer__link"
+          >
+            <Linkedin size={15} aria-hidden="true" />
+            {t.footer.linkedin}
+          </a>
+          <a
+            href="https://t.me/legionanstek"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="site-footer__link"
+          >
+            <Send size={14} aria-hidden="true" />
+            {t.footer.telegram}
+          </a>
+          <a
+            href="mailto:Matafonovegor2@gmail.com"
+            className="site-footer__link"
+          >
+            <Mail size={15} aria-hidden="true" />
+            {t.footer.email}
+          </a>
         </nav>
       </div>
     </footer>
