@@ -120,7 +120,7 @@ export function Navbar() {
   return (
     <header ref={header} className="site-header">
       <div className="site-header__inner">
-        <Link to="/" aria-label={t.nav.siteHome} className="site-brand">{t.nav.brand}</Link>
+        <Link to="/" aria-label={t.nav.siteHome} className="site-brand"><span className="brand-block" aria-hidden="true">E</span><span>EGOR<span className="brand-extension">.EXE</span></span></Link>
         <button
           ref={menuButton}
           type="button"

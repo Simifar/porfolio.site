@@ -42,6 +42,7 @@ export interface Project {
   subtitle: LocalizedText;
   cardFocus: LocalizedText;
   cardRole?: LocalizedText;
+  cardScreenshot: { src: string; width: number; height: number; alt: LocalizedText };
   category: LocalizedText;
   description: LocalizedText;
   features: LocalizedText[];
@@ -74,6 +75,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: 'taskfocus',
+    cardScreenshot: { src: 'projects/taskfocus-today.png', width: 1919, height: 1079, alt: { en: 'TaskFocus Today dashboard with its daily task list', ru: 'TaskFocus: раздел «Сегодня» со списком задач' } },
     name: 'TaskFocus',
     presentation: 'featured',
     interactiveDemo: 'today-limit',
@@ -284,6 +286,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'mindtrack',
+    cardScreenshot: { src: 'projects/mindtrack-result.png', width: 1440, height: 1000, alt: { en: 'MindTrack questionnaire results, shown as an interface example', ru: 'MindTrack: результаты опросника как пример интерфейса' } },
     name: 'MindTrack',
     presentation: 'featured',
     subtitle: {
@@ -469,6 +472,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'cortexmap',
+    cardScreenshot: { src: 'projects/cortexmap-home.png', width: 1200, height: 630, alt: { en: 'CortexMap English-learning catalog', ru: 'CortexMap: каталог материалов для изучения английского' } },
     name: 'CortexMap',
     presentation: 'additional',
     subtitle: {

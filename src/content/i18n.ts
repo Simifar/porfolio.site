@@ -124,7 +124,7 @@ export interface Content {
 
 export const en: Content = {
   metadata: {
-    title: 'Egor Matafonov | IT Support & PC Hardware',
+    title: 'EGOR.EXE — Egor Matafonov | IT Support & PC Hardware',
     description: 'Egor Matafonov, IT Support & PC Hardware. Information systems and programming graduate with hands-on PC assembly and equipment inventory experience.',
     projectTitleSuffix: 'Project case by Egor Matafonov',
     projectOverviewSuffix: 'Project overview by Egor Matafonov',
@@ -283,7 +283,7 @@ export const en: Content = {
 
 export const ru: Content = {
   metadata: {
-    title: 'Егор Матафонов | техническая поддержка и оборудование',
+    title: 'EGOR.EXE — Егор Матафонов | техническая поддержка и оборудование',
     description: 'Егор Матафонов: ищу работу в техподдержке. Окончил колледж по специальности «Информационные системы и программирование». Собрал и пересобрал более 50 компьютеров.',
     projectTitleSuffix: 'Кейс проекта Егора Матафонова',
     projectOverviewSuffix: 'Обзор проекта Егора Матафонова',

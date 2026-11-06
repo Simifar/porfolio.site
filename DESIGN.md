@@ -1,115 +1,56 @@
-# Design direction
+# EGOR.EXE — A Tech World
 
-## Audience and goal
+A Minecraft-inspired professional portfolio for **IT Support / PC Hardware / Desktop Support**, by Egor Matafonov. Historical product/growth and presale roles remain biography, not current positioning.
 
-This is a portfolio for a Product Manager looking for work. A recruiter or hiring manager should be able to understand the role, inspect real product decisions, see what was built, and find a direct contact route without having to interpret decorative visuals.
+## Visual direction
 
-The portfolio separates verified company experience from personal product projects. The company roles and dates come from Egor's supplied career details. TaskFocus is published and has genuine signed-in dashboard screenshots. The material does not document user research or measured business impact.
+An original computer workshop on a grass-and-earth voxel island. The design takes the care in composition, type and interactions of the Samiran De reference, without reproducing its layout or assets. No official Minecraft textures, characters, logos or third-party artwork are used. No WebGL, audio, game gate or backend.
 
-## Design read
+`WorkshopScene.tsx` draws deterministic isometric facets in SVG: desk, diagnostic display, tower, rack, tools and laptop. `PixelIcon.tsx` contains original 16×16 sprites. Both illustrations and controls work without image downloads.
 
-An individual Product Manager portfolio for recruiters, using a product-editorial language inspired by working notes and decision records. The visual system is calm, direct, and slightly asymmetric. It uses real product screenshots, compact labels, generous margins, and a single brick accent. Motion supports navigation and feedback without distracting from the content.
+## Tokens
 
-- Design variance: 7/10. Uneven image and text proportions add character while keeping the reading path predictable.
-- Motion intensity: 6/10. Motion explains product decisions and changes of state: decision rows strike the rejected alternative, and the cover and project name travel between pages. All content remains complete and clear with reduced motion enabled.
-- Visual density: 4/10. Project facts stay concise, with full reasoning reserved for case pages.
-- Foundation: custom portfolio styling on the existing React, Vite, and Tailwind CSS stack. This is an editorial aesthetic, not an implementation of a third-party design system.
+The final theme tokens live in `src/styles/world.css`. Existing rich case layouts and motion utilities remain in `src/index.css`; the world stylesheet follows them deliberately.
 
-## Existing material to preserve
+| Role | Dark | Light |
+|---|---|---|
+| Canvas | #101713 | #eef0e4 |
+| Panel | #17211b | #e1e6d6 |
+| Raised surface | #1b2820 | #f8f8ee |
+| Main text | #e9e7d9 | #203026 |
+| Secondary text | #b0bfaa | #435744 |
+| Border | #344335 | #b7c3ab |
+| Lime | #a2d66b | #3c6b27 |
+| Technical cyan | #70cbb7 | #246c61 |
+| Brass | #d5af78 | #805423 |
 
-- React 18, Vite, TypeScript, Tailwind CSS 4, and React Router's `HashRouter`.
-- GitHub Pages project path `/porfolio.site/`, all hash routes, and the existing section anchors.
-- Static HTML case pages for search engines and social previews, generated from the same project content as the React views.
-- English and Russian copy, persisted language choice, persisted light and dark themes, and dynamic page metadata.
-- The existing name wordmark, navigation labels, verified screenshots, project order, repositories, live links, email, LinkedIn, and Telegram.
-- Skip navigation, keyboard focus, image alt text, and `prefers-reduced-motion` support.
+IBM Plex Sans handles reading; IBM Plex Mono handles small HUD labels; Pixelify Sans handles display type. All fonts are local, support Cyrillic, use `font-display: swap`, and retain SIL Open Font License files in `src/assets/fonts`. Pixelify is 49KB. No third-party font requests are made.
 
-## Visual system
+Panels use square corners, thin borders and restrained inset shadows. Controls have pressed, hover and focus states. Desktop spacing is 94px between chapters; mobile 64px. Content width is 1240px. Mobile gutters are 16–20px.
 
-### Color
+## Reading order
 
-Use the same neutral and brick-red color family across the whole page. The color changes slightly between themes to retain readable contrast.
+1. **Enter my world:** identity, real experience, three actions and original scene.
+2. **Player profile:** readable biography, education and four technical-practice summaries.
+3. **Inventory:** eight native toggle buttons, experience status, live detail panel and complete text alternative.
+4. **Quest log:** primary hardware work at Potencial, earlier O!task and Web Do roles, education.
+5. **Crafted projects:** actual application screenshots, real links and unchanged substantive cases.
+6. **Workstation:** five native object controls, optional scene hotspots, highlighted objects and factual detail.
+7. **Milestones:** 50+ PCs, 2026 qualification and three published software projects.
+8. **Connect:** direct email, copy button, GitHub, LinkedIn, Telegram and localized PDF.
 
-| Token | Light | Dark | Use |
-| --- | --- | --- | --- |
-| Page | `#F2F3EF` | `#141817` | Main canvas |
-| Surface | `#E9ECE7` | `#1C2220` | Quiet project and navigation surfaces |
-| Raised surface | `#F8F9F5` | `#222A27` | Screenshot surroundings and controls |
-| Main text | `#202523` | `#F2F4EF` | Headings and primary copy |
-| Secondary text | `#4C5652` | `#C0C9C3` | Paragraphs |
-| Muted text | `#66716D` | `#9AA69F` | Captions and labels |
-| Accent | `#A63B2D` | `#F27A65` | Links, focus, and primary actions |
+## Data integrity
 
-Avoid gradients, ambient glows, noise overlays, and decorative status dots. Product screenshots remain faithful to their original colors.
+`experience.ts` and `projects.ts` retain original claims and links. `world.ts` adds bilingual UI and evidence-based skill descriptions. Hardware, equipment inventory and documentation are hands-on; Windows Server / 1C are practical exposure; Windows, Debian and virtualization are learning. No skill levels, XP, certifications, user counts or commercial outcomes are invented. Equipment inventory is used instead of asserting an unverified networking skill.
 
-### Typography and spacing
+## Accessibility and motion
 
-- Self-host IBM Plex Sans for display and body text, with IBM Plex Mono for brief project labels and technical metadata. Include Latin and Cyrillic subsets.
-- Use a compact type scale with clear weight contrast, balanced headings, and body copy limited to a readable measure.
-- Use an eight-pixel spacing rhythm, a centered content width near 1,240 pixels, and progressively wider desktop gutters.
-- Keep controls and image frames square or lightly rounded. Let whitespace and rules, rather than nested cards, separate content.
+Native buttons expose selection with `aria-pressed` and `aria-controls`; live regions announce selected information. All selected information also appears in the profile, projects or inventory text view. The scene is an accessible image; HTML controls provide equivalent actions. Hover is optional. Visible keyboard focus, skip link, mobile menu Escape handling, preserved command menu and 44px primary touch targets remain.
 
-### Motion
+Reduced motion disables animation and transition motion; content remains visible. No endlessly moving objects or flashing HUD. Both themes and EN/RU are first-class layouts at 320, 390, 768 and 1440px. Static cases retain semantic HTML, metadata, canonical URLs, real screenshots and direct contact links.
 
-Every animation answers one of four questions: what matters here, what happened, where did it go, or what was decided. Decoration alone is not a reason to move.
+## Reproduction and release
 
-- Easing: `--motion-ease` (`cubic-bezier(0.22, 1, 0.36, 1)`) for arrivals; a symmetric in-out curve only for wipes and strikes. UI feedback uses `--motion-ui` (260 ms); reveals run 700 to 900 ms.
-- Properties: transform and opacity first. Clip-path wipes and the decision strike are the exceptions, and each covers a small area.
-- Hero intro, once per visit: the headline rises word by word behind a mask, the supporting copy wipes up and a brick tick draws on the proof rule. The TaskFocus cover stays undimmed, without overlays or enlargement that would clip its margins.
-- Scroll reveal: section headings, experience rows, project copy and case sections rise in once. Screenshots open with a top-down wipe. Anything already on screen when a page mounts is shown at once, and print shows everything.
-- Brick ticks: a short accent segment marks where a record starts on its rule (hero proofs, experience rows). It draws in with the row.
-- Decisions: the rejected alternative receives a thin accent strike and the chosen solution a vertical accent rule. Both stay visible as the static state.
-- Page changes use the View Transitions API: the clicked cover and project name morph into the case header, and back again to the project card. The theme spreads as a circle from its toggle; language changes cross-fade. Browsers without the API and reduced-motion readers get instant changes.
-- Reduced motion: no intro, no reveal, no view transitions, no scroll progress bar. Covers, ticks, strikes and rules are shown in their final state.
+`npm ci`, `npm run typecheck`, `npm run build`, `npm run test:e2e`, `npm run lighthouse`. `CHROME_PATH` can select an installed Chromium executable for tests and asset generation. `node scripts/generate-social-image.mjs` creates the 1200×630 social image from the same scene; the existing portfolio asset generator also invokes it after generating PDFs.
 
-### Interaction details
-
-Small tools that save a reader time. Each one has a plain fallback and none replaces the visible navigation.
-
-- Command menu: Ctrl/⌘+K or "/" opens a searchable list of sections, cases and contact actions (theme, language, copy or write email, LinkedIn, Telegram, GitHub). It is a native modal dialog with a combobox and listbox. The trigger shows from 768 px; on phones the header menu remains the route. The menu loads in its own chunk after the first screen.
-- Copy email: a square button beside every email link copies the address and confirms it in one polite toast. The mailto link stays the primary action.
-- Try the decision: the TaskFocus case includes an interactive model of the five-task rule. It uses sample tasks, is labelled as a model rather than the app, and repeats the real trade-off text when the limit stops the reader. Projects opt in with `interactiveDemo`.
-- Case contents: from 1440 px a contents rail sits in the left margin of product cases. It appears after the case header, marks the current section with the brick tick, and steps aside before the closing call to action.
-- Case previews: links to cases in "How I work" show the project cover and subtitle on hover or focus, on pointer devices only. The card mounts on first hover so the page does not load extra images.
-- DevTools note: the console prints a short greeting with the email address and the source repository.
-
-## Page composition
-
-### Home
-
-1. A left-aligned role statement and one useful project preview form the first screen. The headline names the role; its short supporting copy describes the confirmed project work.
-2. Company experience appears as open editorial rows. O!task and Web Do carry more detail; the technical and operational role at «Потенциал» is shorter. This section stays separate from personal projects.
-3. TaskFocus and MindTrack remain the detailed cases. The supplied editorial covers appear on the home page and in case headers, at their complete 16:9 aspect ratio. Covers have their own canvas and margins, so they receive no extra frame, crop, dimming or annotation. Captions identify them as compositions based on the product interface; the MindTrack score is an example. WebP is used on the page and PNG for social previews.
-4. CortexMap uses the matching editorial cover as an additional project. Real product screens remain inside detailed cases as evidence for specific decisions.
-5. “How I work” presents three evidence-backed themes: product framing, privacy and interpretation, and solo delivery with AI-assisted coding. Each points to its relevant case.
-6. Contact keeps email as the primary action and LinkedIn and Telegram as direct secondary routes. A CV link appears only after a current PDF is supplied.
-
-### Case pages
-
-- Keep the current project URLs and the order of task, role and constraints, decisions, delivery, status, and validation.
-- Use a quiet case header and one clear source or live-product action.
-- Case headers place the cover below the introduction at full content width, keeping the composition legible. Real screenshots keep their original aspect ratios in the product gallery: TaskFocus Today, Inbox, week and calendar, and the MindTrack result with demonstration answers.
-- Present decisions as open editorial rows with a clear title and rationale, not a grid of repeated bordered cards.
-- Keep additional projects concise and retain the real status of their public materials.
-
-### Navigation and contact
-
-- Keep the current desktop navigation labels and destinations.
-- On mobile, put the section links in a second header row. This avoids a fixed bottom dock covering the project caption and other content.
-- Keep theme and language controls available on both home and case pages.
-- Use visible hover and focus states with the shared accent. Give buttons, links, page entry, and section navigation a brief, eased response. Avoid magnetic controls and movement that does not clarify an action.
-
-## Responsive and accessibility rules
-
-- At 320, 390, tablet, and desktop widths, keep text within the viewport and avoid horizontal scrolling.
-- Stack project imagery and captions on narrow screens. Keep all project and contact links reachable with keyboard and touch.
-- Keep a visible focus ring, descriptive names for icon-only controls, semantic headings and landmarks, and meaningful alt text.
-- Honor `prefers-reduced-motion`; the complete experience must remain understandable with motion removed.
-- Maintain readable text and control contrast in both themes. The page does not switch to an unrelated theme midway through a section.
-
-## Search and publishing boundaries
-
-- The React views retain hash routes for navigation on GitHub Pages. Canonical English and Russian HTML pages at `/work/<slug>/` and `/ru/work/<slug>/` expose case content and unique social metadata without requiring JavaScript. The in-app case links to its shareable HTML page.
-- Preserve the homepage canonical URL, Open Graph and Twitter metadata, structured person data, repository links, and GitHub Pages path handling.
-- Local previews and builds do not publish the site. No commit, push, or deployment is part of this redesign.
-- Do not add metrics, employment claims, testimonials, client names, user research, or outcomes that are not present in verified project materials.
+The feature is reviewed in a PR. Production deployment remains the existing master-only Pages workflow; do not merge or invoke it without the owner's separate confirmation.

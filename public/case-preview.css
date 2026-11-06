@@ -82,3 +82,23 @@ figcaption { margin-top: .45rem; color: var(--muted); font-size: .8rem; }
   .preview-gallery { grid-template-columns: minmax(0, 1fr); }
   .preview-gallery figure:first-child { grid-column: auto; }
 }
+
+/* EGOR.EXE — the readable static edition of the same workshop. */
+:root {
+  --page: #eef0e4; --text: #203026; --secondary: #435744; --muted: #52664f;
+  --border: #b7c3ab; --accent: #315d22; --panel: #e1e6d6;
+}
+html.dark {
+  --page: #101713; --text: #e9e7d9; --secondary: #b0bfaa; --muted: #9ba992;
+  --border: #344335; --accent: #a2d66b; --panel: #1b2820;
+}
+body { background-image: radial-gradient(color-mix(in srgb,var(--muted) 12%,transparent) .7px,transparent .7px); background-size: 8px 8px; }
+.preview-header { background: var(--panel); }
+.preview-header a:first-child { font-family: ui-monospace,monospace; font-weight: 700; }
+.preview-header button { min-height: 44px; padding-inline: 14px; box-shadow: 2px 2px color-mix(in srgb,var(--text) 12%,transparent); }
+.preview-kicker, .preview-links, .preview-decision-label { font-family: ui-monospace,monospace; }
+.preview-links a { display: inline-flex; align-items: center; min-height: 44px; }
+.preview-section { padding-block: 2.5rem; }
+.preview-visual--cover img { border-radius: 0; border: 1px solid var(--border); }
+.preview-cta { background: var(--panel); padding: 28px; border: 1px solid var(--border); }
+.preview-cta a { display: inline-flex; align-items: center; min-height: 44px; }

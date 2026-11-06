@@ -8,6 +8,7 @@ export default defineConfig({
   use: {
     baseURL: 'http://127.0.0.1:4173',
     browserName: 'chromium',
+    launchOptions: process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {},
     channel: process.platform === 'win32' ? 'chrome' : undefined,
     colorScheme: 'dark',
     viewport: { width: 1440, height: 900 },

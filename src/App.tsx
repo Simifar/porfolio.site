@@ -5,6 +5,9 @@ import { useScrollReveal } from './lib/motion';
 import { projects } from './content/projects';
 import { Navbar, ScrollProgress } from './components/Navigation';
 import Hero from './components/Hero';
+import Inventory from './components/world/Inventory';
+import Workstation from './components/world/Workstation';
+import Highlights from './components/world/Highlights';
 import { Experience, SelectedWork, About, Contact, Footer } from './components/Sections';
 import CaseStudy from './components/CaseStudy';
 import NotFound from './components/NotFound';
@@ -38,7 +41,7 @@ function PageMetadata() {
     document.querySelector<HTMLMetaElement>('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
     document.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.setAttribute('content', socialVisual
       ? `https://simifar.github.io/porfolio.site/${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}`
-      : 'https://simifar.github.io/porfolio.site/og-image.png?v=20261105');
+      : 'https://simifar.github.io/porfolio.site/og-image.png?v=20261106');
     document.querySelector<HTMLMetaElement>('meta[property="og:image:width"]')?.setAttribute('content', String(socialVisual?.width ?? 1200));
     document.querySelector<HTMLMetaElement>('meta[property="og:image:height"]')?.setAttribute('content', String(socialVisual?.height ?? 630));
     document.querySelector<HTMLMetaElement>('meta[property="og:type"]')?.setAttribute('content', project ? 'article' : 'website');
@@ -47,7 +50,7 @@ function PageMetadata() {
     document.querySelector<HTMLMetaElement>('meta[name="twitter:image:alt"]')?.setAttribute('content', socialVisual?.alt[lang] ?? t.metadata.socialImageAlt);
     document.querySelector<HTMLMetaElement>('meta[name="twitter:image"]')?.setAttribute('content', socialVisual
       ? `https://simifar.github.io/porfolio.site/${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}`
-      : 'https://simifar.github.io/porfolio.site/og-image.png?v=20261105');
+      : 'https://simifar.github.io/porfolio.site/og-image.png?v=20261106');
   }, [lang, pathname, t]);
 
   return null;
@@ -59,7 +62,7 @@ function ScrollReset() {
   useEffect(() => {
     const section = pathname === '/' ? new URLSearchParams(search).get('section') : null;
     const frame = window.requestAnimationFrame(() => {
-      if (section && ['experience', 'work', 'about', 'contact'].includes(section)) {
+      if (section && ['experience', 'work', 'about', 'contact', 'inventory', 'workstation', 'highlights'].includes(section)) {
         const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
         document.getElementById(section)?.scrollIntoView({ behavior, block: 'start' });
       } else {
@@ -103,9 +106,12 @@ function HomePage() {
       <Navbar />
       <main id="main-content" tabIndex={-1}>
         <Hero />
-        <Experience />
         <About />
+        <Inventory />
+        <Experience />
         <SelectedWork />
+        <Workstation />
+        <Highlights />
         <Contact />
       </main>
       <Footer />
