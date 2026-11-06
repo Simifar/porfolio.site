@@ -116,9 +116,14 @@ test.describe('touchscreen inventory', () => {
     await expect(page.locator('.inventory-detail')).toContainText(
       'Currently learning',
     );
-    await expect(page.locator('.inventory-detail')).toBeInViewport({
-      ratio: 1,
-    });
+    // scrollIntoView rounds to device pixels; IntersectionObserver may report
+    // 0.999896 instead of 1 for a panel that is only 0.04px below the viewport.
+    // Check full-panel bounds with a 1px rounding allowance, plus visible text.
+    await expect(page.locator('.inventory-detail h3')).toBeInViewport({ ratio: 1 });
+    await expect.poll(() => page.locator('.inventory-detail').evaluate(node => {
+      const bounds = node.getBoundingClientRect();
+      return bounds.top >= -1 && bounds.bottom <= window.innerHeight + 1;
+    })).toBe(true);
   });
 });
 
