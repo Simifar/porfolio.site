@@ -92,6 +92,17 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, [lang]);
 
   useEffect(() => {
+    // A history entry can carry a different language from the current page.
+    // Restore that choice without rewriting either entry or its router state.
+    const syncHistoryLanguage = () => {
+      const fromUrl = new URLSearchParams(window.location.search).get('lang');
+      if (isLang(fromUrl)) setLangState(fromUrl);
+    };
+    window.addEventListener('popstate', syncHistoryLanguage);
+    return () => window.removeEventListener('popstate', syncHistoryLanguage);
+  }, []);
+
+  useEffect(() => {
     savePreference('theme', theme);
     document.documentElement.classList.toggle('light', theme === 'light');
     document.documentElement.classList.toggle('dark', theme === 'dark');

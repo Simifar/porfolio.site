@@ -16,15 +16,19 @@ export function canUseViewTransition() {
 
 // Wraps a React state update in a View Transition. Browsers without the API,
 // and readers who ask for reduced motion, get the plain update.
-export function runViewTransition(update: () => void, kind: TransitionKind) {
+export function runViewTransition(update: () => void, kind: TransitionKind, afterUpdate?: () => void) {
   if (!canUseViewTransition()) {
-    update();
+    if (afterUpdate) {
+      flushSync(update);
+      afterUpdate();
+    } else update();
     return null;
   }
   const root = document.documentElement;
   root.dataset.vt = kind;
   const transition = document.startViewTransition(() => {
     flushSync(update);
+    afterUpdate?.();
   });
   transition.ready.catch(() => {});
   transition.finished.finally(() => {
@@ -93,8 +97,8 @@ export function navigateWithTransition(navigate: () => void, link: HTMLElement |
     tagged.push(source);
   }
 
-  const transition = runViewTransition(() => {
-    navigate();
+  // DOM targets only exist once flushSync has committed the destination route.
+  const transition = runViewTransition(navigate, 'route', () => {
     // Names must be unique in the new state, so the sources give them up first.
     for (const element of tagged.splice(0)) setMorph(element, '');
     document.querySelector('[data-morph-scope="case"]')?.setAttribute('data-arrived', '');
@@ -108,7 +112,7 @@ export function navigateWithTransition(navigate: () => void, link: HTMLElement |
         tagged.push(target);
       }
     }
-  }, 'route');
+  });
 
   const cleanup = () => {
     for (const element of tagged.splice(0)) setMorph(element, '');

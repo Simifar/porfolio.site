@@ -38,6 +38,13 @@ function PageMetadata() {
     document.querySelector<HTMLMetaElement>('meta[property="og:description"]')?.setAttribute('content', description);
     document.querySelector<HTMLMetaElement>('meta[property="og:image:alt"]')?.setAttribute('content', socialVisual?.alt[lang] ?? t.metadata.socialImageAlt);
     document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', canonicalUrl);
+    for (const alternate of ['en', 'ru', 'x-default']) {
+      const alternateUrl = project
+        ? `https://simifar.github.io/porfolio.site/${alternate === 'ru' ? 'ru/' : ''}work/${project.slug}/`
+        : `https://simifar.github.io/porfolio.site/${isHome && alternate === 'ru' ? '?lang=ru' : ''}`;
+      document.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${alternate}"]`)?.setAttribute('href', alternateUrl);
+    }
+    document.querySelector<HTMLMetaElement>('meta[property="og:locale"]')?.setAttribute('content', lang === 'ru' ? 'ru_RU' : 'en_US');
     document.querySelector<HTMLMetaElement>('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
     document.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.setAttribute('content', socialVisual
       ? `https://simifar.github.io/porfolio.site/${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}`
@@ -135,7 +142,8 @@ function NotFoundPage() {
 export default function App() {
   return (
     <AppProvider>
-      <HashRouter>
+      {/* Route snapshots need the committed DOM, rather than a deferred React transition. */}
+      <HashRouter useTransitions={false}>
         <ScrollReset />
         <PageMetadata />
         <Routes>

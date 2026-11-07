@@ -184,6 +184,7 @@ button:disabled {
   background: var(--world-button);
 }
 .theme-toggle,
+.site-menu-button,
 .command-trigger {
   min-width: 40px;
   min-height: 42px;
@@ -1592,9 +1593,6 @@ html.dark .section-title {
   .language-toggle__button {
     min-width: 44px;
     min-height: 44px;
-  }
-  .site-menu-button {
-    border: 0;
   }
   .command-trigger {
     display: none;
