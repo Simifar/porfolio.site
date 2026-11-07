@@ -1,56 +1,52 @@
-# EGOR.EXE — A Tech World
+# EGOR.EXE — Tech Arena
 
-A Minecraft-inspired professional portfolio for **IT Support / PC Hardware / Desktop Support**, by Egor Matafonov. Historical product/growth and presale roles remain biography, not current positioning.
+A Brawl Stars-inspired alternative portfolio for **IT Support / PC Hardware / Desktop Support**. This branch prepares the design for comparison; the published Minecraft version remains on master until the owner chooses a release.
 
-## Visual direction
+## Direction
 
-An original computer workshop on a grass-and-earth voxel island. The design takes the care in composition, type and interactions of the Samiran De reference, without reproducing its layout or assets. No official Minecraft textures, characters, logos or third-party artwork are used. No WebGL, audio, game gate or backend.
+A confident arcade lobby, with oversized rounded headlines, hard ink outlines, saturated blue/purple surfaces, yellow primary actions, mint technical accents and collectible-looking equipment cards. The real career story remains the reading path; game vocabulary supplies personality rather than proficiency claims.
 
-`WorkshopScene.tsx` draws deterministic isometric facets in SVG: desk, diagnostic display, tower, rack, tools and laptop. `PixelIcon.tsx` contains original 16×16 sprites. Both illustrations and controls work without image downloads.
+The artwork is original. `TechMascot.tsx` depicts a fictional repair-crew character, not an owner portrait or a game character. `EquipmentIcon.tsx` supplies ten bespoke gadget illustrations. `ArenaScene.tsx` arranges the five technical topics on a selectable board. No official Brawl Stars characters, logos, insignia or textures are used. No WebGL, audio, game gate, random rewards, backend or new runtime dependencies.
 
-## Tokens
+## System
 
-The final theme tokens live in `src/styles/world.css`. Existing rich case layouts and motion utilities remain in `src/index.css`; the world stylesheet follows them deliberately.
+`src/styles/arena.css` provides a complete replacement for the previous Minecraft world layer. It follows the preserved case/motion foundations in `src/index.css`.
 
 | Role | Dark | Light |
 |---|---|---|
-| Canvas | #101713 | #eef0e4 |
-| Panel | #17211b | #e1e6d6 |
-| Raised surface | #1b2820 | #f8f8ee |
-| Main text | #e9e7d9 | #203026 |
-| Secondary text | #b0bfaa | #435744 |
-| Border | #344335 | #b7c3ab |
-| Lime | #a2d66b | #3c6b27 |
-| Technical cyan | #70cbb7 | #246c61 |
-| Brass | #d5af78 | #805423 |
+| Canvas | #101c43 | #edf3ff |
+| Secondary panel | #192e61 | #e1e8ff |
+| Raised panel | #213b78 | #fffdf8 |
+| Main text | #fffdf6 | #19213e |
+| Secondary text | #d3def9 | #3b4c74 |
+| Text accent | #ffcf48 | #5f32b1 |
+| Technical accent | #80e9d3 | #126c62 |
+| Primary button | #ffcf48 | #ffcf48 |
+| Structural ink | #11172f | #11172f |
 
-IBM Plex Sans handles reading; IBM Plex Mono handles small HUD labels; Pixelify Sans handles display type. All fonts are local, support Cyrillic, use `font-display: swap`, and retain SIL Open Font License files in `src/assets/fonts`. Pixelify is 49KB. No third-party font requests are made.
+Rubik One is the local display face, Cyrillic-verified and SIL OFL licensed. The 150KB source TTF is delivered as a 40KB WOFF2 conversion with all glyphs preserved. IBM Plex Sans/Mono remain the reading/utility faces. Fonts make no third-party requests. Static cases receive the same display font under a stable, base-relative `/fonts/` URL during `prepare-pages.mjs`.
 
-Panels use square corners, thin borders and restrained inset shadows. Controls have pressed, hover and focus states. Desktop spacing is 94px between chapters; mobile 64px. Content width is 1240px. Mobile gutters are 16–20px.
+Panels have 2–3px ink borders, 7–14px corners and hard extruded shadows. Headline outlines and small angled stickers provide the action-game character. Reading copy stays upright and conventionally spaced. Touch controls expose real pressed, focus and selected states; decorative movement is limited to brief hover/press feedback. Reduced motion disables it.
 
-## Reading order
+## Reading structure
 
-1. **Enter my world:** identity, real experience, three actions and original scene.
-2. **Player profile:** readable biography, education and four technical-practice summaries.
-3. **Inventory:** eight native toggle buttons, experience status, live detail panel and complete text alternative.
-4. **Quest log:** primary hardware work at Potencial, earlier O!task and Web Do roles, education.
-5. **Crafted projects:** actual application screenshots, real links and unchanged substantive cases.
-6. **Workstation:** five native object controls, optional scene hotspots, highlighted objects and factual detail.
-7. **Milestones:** 50+ PCs, 2026 qualification and three published software projects.
-8. **Connect:** direct email, copy button, GitHub, LinkedIn, Telegram and localized PDF.
+1. Hero: BUILD. FIX. REPEAT., actual name/role, factual introduction, three direct actions, original technician mascot and verified facts.
+2. Player dossier: readable biography, qualification, location and practice summaries.
+3. Gear loadout: eight factual equipment/knowledge topics, native radio filters, selected detail and all-skills text alternative.
+4. Mission records: full hardware work at Potencial, historical O!task/Web Do and education.
+5. Project lineup: genuine TaskFocus/MindTrack/CortexMap screenshots, case pages, live products and source links.
+6. Practice arena: five native controls and five equivalent map hotspots, selected technical context and supporting links.
+7. Milestones: 50+ computers, 2026 qualification and three published software projects.
+8. Contact lobby: direct email/clipboard, GitHub/LinkedIn/Telegram and both original PDF resumes.
 
-## Data integrity
+## Data and interaction
 
-`experience.ts` and `projects.ts` retain original claims and links. `world.ts` adds bilingual UI and evidence-based skill descriptions. Hardware, equipment inventory and documentation are hands-on; Windows Server / 1C are practical exposure; Windows, Debian and virtualization are learning. No skill levels, XP, certifications, user counts or commercial outcomes are invented. Equipment inventory is used instead of asserting an unverified networking skill.
+Career/project data remain unchanged. Hands-on PC assembly, maintenance, equipment inventory and documentation are distinct from practical Windows Server/1C exposure and current Windows/Debian/virtualization study. No ranks, XP, certifications, fabricated user counts or commercial outcomes.
 
-## Accessibility and motion
+Filtering skills automatically selects the first matching item; selection always belongs to the visible set. Native radios support keyboard and touch. Existing button selection/live regions and phone scroll-to-explanation remain. The complete text alternative always includes all eight skills regardless of filter. The SVG board has corresponding native HTML controls, so information never depends on interpreting the illustration or hovering.
 
-Native buttons expose selection with `aria-pressed` and `aria-controls`; live regions announce selected information. All selected information also appears in the profile, projects or inventory text view. The scene is an accessible image; HTML controls provide equivalent actions. Hover is optional. Visible keyboard focus, skip link, mobile menu Escape handling, preserved command menu and 44px primary touch targets remain.
+## Responsive and validation
 
-Reduced motion disables animation and transition motion; content remains visible. No endlessly moving objects or flashing HUD. Both themes and EN/RU are first-class layouts at 320, 390, 768 and 1440px. Static cases retain semantic HTML, metadata, canonical URLs, real screenshots and direct contact links.
+1240px content width; mobile gutters 16–20px. The hero places identity/actions/facts before the mascot on mobile. Two-column touch loadout, wrapping filters, long Russian qualification names and email controls are checked at narrow widths. The case galleries, static bilingual SEO, PDF, saved preferences, HashRouter and `/porfolio.site/` base remain functional.
 
-## Reproduction and release
-
-`npm ci`, `npm run typecheck`, `npm run build`, `npm run test:e2e`, `npm run lighthouse`. `CHROME_PATH` can select an installed Chromium executable for tests and asset generation. `node scripts/generate-social-image.mjs` creates the 1200×630 social image from the same scene; the existing portfolio asset generator also invokes it after generating PDFs.
-
-The feature is reviewed in a PR. Production deployment remains the existing master-only Pages workflow; do not merge or invoke it without the owner's separate confirmation.
+Run `npm ci`, `npm run typecheck`, `npm run build`, `CI=true npm run test:e2e` (Chromium Headless Shell, same as Actions), and configured Lighthouse CI. `node scripts/generate-social-image.mjs` renders the 1200×630 social card from the actual mascot source. Publication remains a separate owner decision.

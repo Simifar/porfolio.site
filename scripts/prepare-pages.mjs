@@ -1,4 +1,4 @@
-import { readFile, writeFile } from 'node:fs/promises';
+import { readFile, writeFile, mkdir, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const outputDirectory = resolve('dist');
@@ -11,3 +11,8 @@ await writeFile(resolve(outputDirectory, '404.html'), applicationShell.replace('
 await writeFile(resolve(outputDirectory, '.nojekyll'), '');
 
 await import('./generate-case-pages.mjs');
+
+// Stable local font URL for the readable static case pages.
+await mkdir(resolve(outputDirectory, 'fonts'), { recursive: true });
+await copyFile(resolve('src/assets/fonts/rubik-one.woff2'), resolve(outputDirectory, 'fonts/rubik-one.woff2'));
+await copyFile(resolve('src/assets/fonts/OFL-Rubik-One.txt'), resolve(outputDirectory, 'fonts/OFL-Rubik-One.txt'));

@@ -1,4 +1,4 @@
-# EGOR.EXE — A Tech World
+# EGOR.EXE — Tech Arena
 
 Personal portfolio for my move into **IT Support & PC Hardware**. It brings together my vocational education, hands-on computer equipment experience, and software projects in one bilingual (English and Russian) site.
 
@@ -6,9 +6,11 @@ Personal portfolio for my move into **IT Support & PC Hardware**. It brings toge
 
 The site documents my work assembling and reassembling more than 50 computers and taking inventory of classroom equipment at Potencial Training Center. I also share software projects built independently; they are presented as projects, not as IT support employment.
 
-## The world
+## This alternative
 
-Original SVG voxel workshop, interactive technical inventory and a selectable tech lab, designed for keyboard, touch and reduced motion. Dark forest and light limestone themes; English and Russian throughout. No WebGL or external artwork.
+This branch prepares a **Brawl Stars-inspired** design for comparison. The published Minecraft version remains available on master; this alternative is not automatically published.
+
+Original repair-crew mascot and gadget SVGs, a selectable tech arena, bold local Cyrillic typography, extruded controls and a filterable eight-item loadout. Blue/purple dark and paper/sky light themes; keyboard, touch and reduced motion remain supported. All career facts, project cases, PDF resumes and contact links are preserved.
 
 ## What is here
 
@@ -64,10 +66,11 @@ End-to-end tests use Playwright and cover navigation, project pages, language an
 - `src/content/projects.ts` - project descriptions and case-study content.
 - `src/content/i18n.ts` - interface copy in English and Russian.
 - `src/components/` - site sections, navigation and project views.
-- `src/components/world/` - original SVG workshop, pixel sprites, inventory, tech lab and milestones.
+- `src/components/arena/` - original technician mascot, equipment illustrations and selectable arena.
+- `src/components/world/` - factual loadout filtering, tech lab and milestones.
 - `src/content/world.ts` - bilingual world UI and factual skill classifications.
-- `src/styles/world.css` - light/dark tokens, game components and responsive rules.
-- `docs/screenshots/` - desktop and mobile previews in both themes.
+- `src/styles/arena.css` - light/dark tokens, arcade components and responsive rules.
+- `docs/screenshots/arena/` - desktop and mobile previews of this alternative.
 - `DESIGN.md` - current design direction, data integrity and accessibility decisions.
 - `scripts/generate-case-pages.mjs` - static bilingual project-page generator.
 - `public/projects/` - project screenshots used by the site.
@@ -80,7 +83,7 @@ The E2E suite includes axe checks, all case routes, static cases, real PDF respo
 
 ## Release policy
 
-Changes in `codex/minecraft-portfolio-redesign` are for review. **Do not merge or deploy to production without separate owner confirmation.**
+Changes in `codex/brawl-stars-portfolio` are for comparison and review. **Do not merge or deploy to production without separate owner confirmation.**
 
 ## Publish
 

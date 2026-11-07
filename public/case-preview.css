@@ -102,3 +102,17 @@ body { background-image: radial-gradient(color-mix(in srgb,var(--muted) 12%,tran
 .preview-visual--cover img { border-radius: 0; border: 1px solid var(--border); }
 .preview-cta { background: var(--panel); padding: 28px; border: 1px solid var(--border); }
 .preview-cta a { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Tech Arena: a local display face and the same ink-and-card system. */
+@font-face { font-family:'Rubik One'; font-weight:400; font-style:normal; font-display:swap; src:url('./fonts/rubik-one.woff2') format('woff2'); }
+:root { --page:#edf3ff; --text:#19213e; --secondary:#3b4c74; --muted:#506087; --border:#17213d; --accent:#5f32b1; --panel:#e1e8ff; }
+html.dark { --page:#101c43; --text:#fffdf6; --secondary:#d3def9; --muted:#b7c8ed; --border:#0a122c; --accent:#ffcf48; --panel:#213b78; }
+body { background:var(--page); }
+h1, h2 { font-family:'Rubik One',system-ui,sans-serif; font-weight:400; letter-spacing:-.035em; }
+h1 { font-size:clamp(2.6rem,7vw,5.2rem); }
+.preview-header { border-bottom:3px solid var(--border); }
+.preview-header button { border:2px solid var(--border); border-radius:7px; box-shadow:0 3px var(--border); }
+.preview-links a { border:2px solid var(--border); border-radius:7px; padding:8px 12px; font-size:.8rem; }
+.preview-visual--cover img { border:3px solid var(--border); border-radius:12px; }
+.preview-cta { border:3px solid var(--border); border-radius:12px; }
+.preview-section { border-top-width:2px; }
