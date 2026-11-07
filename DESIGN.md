@@ -1,6 +1,6 @@
 # EGOR.EXE — Tech Arena
 
-A Brawl Stars-inspired alternative portfolio for **IT Support / PC Hardware / Desktop Support**. This branch prepares the design for comparison; the published Minecraft version remains on master until the owner chooses a release.
+A Brawl Stars-inspired portfolio for **IT Support / PC Hardware / Desktop Support**. Tech Arena is the published design on `master`, following the owner's release approval.
 
 ## Direction
 
@@ -47,6 +47,6 @@ Filtering skills automatically selects the first matching item; selection always
 
 ## Responsive and validation
 
-1240px content width; mobile gutters 16–20px. The hero places identity/actions/facts before the mascot on mobile. Two-column touch loadout, wrapping filters, long Russian qualification names and email controls are checked at narrow widths. The case galleries, static bilingual SEO, PDF, saved preferences, HashRouter and `/porfolio.site/` base remain functional.
+1240px content width; mobile gutters 16–20px. The hero places identity/actions/facts before the mascot on mobile. Navigation collapses below 1024px so tablet controls remain reachable. Two-column touch loadout, wrapping filters, long Russian qualification names and email controls are checked at narrow widths. Static decision labels stack above their explanations below 481px. The case galleries, static bilingual SEO, PDF, saved preferences, HashRouter and `/porfolio.site/` base remain functional.
 
 Run `npm ci`, `npm run typecheck`, `npm run build`, `CI=true npm run test:e2e` (Chromium Headless Shell, same as Actions), and configured Lighthouse CI. `node scripts/generate-social-image.mjs` renders the 1200×630 social card from the actual mascot source. Publication remains a separate owner decision.

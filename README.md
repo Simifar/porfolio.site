@@ -6,9 +6,9 @@ Personal portfolio for my move into **IT Support & PC Hardware**. It brings toge
 
 The site documents my work assembling and reassembling more than 50 computers and taking inventory of classroom equipment at Potencial Training Center. I also share software projects built independently; they are presented as projects, not as IT support employment.
 
-## This alternative
+## Design
 
-This branch prepares a **Brawl Stars-inspired** design for comparison. The published Minecraft version remains available on master; this alternative is not automatically published.
+The published **Tech Arena** design is inspired by the expressive interfaces of Brawl Stars. It was released from `master` after the owner's approval; the preceding Minecraft-inspired design remains in Git history.
 
 Original repair-crew mascot and gadget SVGs, a selectable tech arena, bold local Cyrillic typography, extruded controls and a filterable eight-item loadout. Blue/purple dark and paper/sky light themes; keyboard, touch and reduced motion remain supported. All career facts, project cases, PDF resumes and contact links are preserved.
 
@@ -70,7 +70,7 @@ End-to-end tests use Playwright and cover navigation, project pages, language an
 - `src/components/world/` - factual loadout filtering, tech lab and milestones.
 - `src/content/world.ts` - bilingual world UI and factual skill classifications.
 - `src/styles/arena.css` - light/dark tokens, arcade components and responsive rules.
-- `docs/screenshots/arena/` - desktop and mobile previews of this alternative.
+- `docs/screenshots/arena/` - desktop and mobile previews of Tech Arena.
 - `DESIGN.md` - current design direction, data integrity and accessibility decisions.
 - `scripts/generate-case-pages.mjs` - static bilingual project-page generator.
 - `public/projects/` - project screenshots used by the site.
@@ -81,9 +81,11 @@ Install the test browser once with `npx playwright install --with-deps chromium`
 
 The E2E suite includes axe checks, all case routes, static cases, real PDF responses, inventory keyboard/tap selection, workstation context, responsive EN/RU themes, reduced motion, clipboard and console errors.
 
+The [7 November UI audit](docs/UI-AUDIT-2026-11-07.md) records reproducible findings, fixes, the 49-test result, Lighthouse scores and updated desktop/phone/tablet screenshots.
+
 ## Release policy
 
-Changes in `codex/brawl-stars-portfolio` are for comparison and review. **Do not merge or deploy to production without separate owner confirmation.**
+Prepare changes on feature branches for review. **Do not merge or deploy to production without owner authorization.**
 
 ## Publish
 

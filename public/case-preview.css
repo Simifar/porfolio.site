@@ -83,6 +83,10 @@ figcaption { margin-top: .45rem; color: var(--muted); font-size: .8rem; }
   .preview-gallery figure:first-child { grid-column: auto; }
 }
 
+@media (max-width: 480px) {
+  .preview-decision-details > div { grid-template-columns: minmax(0, 1fr); gap: .2rem; }
+}
+
 /* EGOR.EXE — the readable static edition of the same workshop. */
 :root {
   --page: #eef0e4; --text: #203026; --secondary: #435744; --muted: #52664f;
