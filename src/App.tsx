@@ -41,7 +41,7 @@ function PageMetadata() {
     document.querySelector<HTMLMetaElement>('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
     document.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.setAttribute('content', socialVisual
       ? `https://simifar.github.io/porfolio.site/${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}`
-      : 'https://simifar.github.io/porfolio.site/og-image.png?v=20261106');
+      : 'https://simifar.github.io/porfolio.site/og-image.png?v=20261107');
     document.querySelector<HTMLMetaElement>('meta[property="og:image:width"]')?.setAttribute('content', String(socialVisual?.width ?? 1200));
     document.querySelector<HTMLMetaElement>('meta[property="og:image:height"]')?.setAttribute('content', String(socialVisual?.height ?? 630));
     document.querySelector<HTMLMetaElement>('meta[property="og:type"]')?.setAttribute('content', project ? 'article' : 'website');
@@ -50,7 +50,7 @@ function PageMetadata() {
     document.querySelector<HTMLMetaElement>('meta[name="twitter:image:alt"]')?.setAttribute('content', socialVisual?.alt[lang] ?? t.metadata.socialImageAlt);
     document.querySelector<HTMLMetaElement>('meta[name="twitter:image"]')?.setAttribute('content', socialVisual
       ? `https://simifar.github.io/porfolio.site/${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}`
-      : 'https://simifar.github.io/porfolio.site/og-image.png?v=20261106');
+      : 'https://simifar.github.io/porfolio.site/og-image.png?v=20261107');
   }, [lang, pathname, t]);
 
   return null;

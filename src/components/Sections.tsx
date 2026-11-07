@@ -15,7 +15,7 @@ import { useApp } from '../lib/context';
 import TransitionLink from './TransitionLink';
 import { copyEmail } from './Toast';
 import { worldCopy } from '../content/world';
-import PixelIcon from './world/PixelIcon';
+import EquipmentIcon from './arena/EquipmentIcon';
 
 // A case link that shows the project's visual on hover, so the reader sees
 // what they are about to open. The card repeats the link, so it is hidden from
@@ -226,7 +226,7 @@ export function SelectedWork() {
                 )}
                 <div className="feature-project__copy" data-reveal="">
                   <div className="project-meta">
-                    <PixelIcon
+                    <EquipmentIcon
                       kind={
                         project.slug === 'taskfocus'
                           ? 'docs'
@@ -314,7 +314,7 @@ export function SelectedWork() {
                   </div>
                 )}
                 <div className="project-meta">
-                  <PixelIcon
+                  <EquipmentIcon
                     kind={
                       project.slug === 'taskfocus'
                         ? 'docs'
@@ -371,7 +371,7 @@ export function About() {
           </h2>
           <div className="player-card">
             <div className="player-avatar" aria-hidden="true">
-              <PixelIcon kind="pc" />
+              <EquipmentIcon kind="pc" />
             </div>
             <span className="player-id">PLAYER_01</span>
             <h3>{w.name}</h3>

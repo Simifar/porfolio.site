@@ -1,12 +1,21 @@
 import { useRef, useState } from 'react';
 import { useApp } from '../../lib/context';
-import { skills, statusLabels, worldCopy } from '../../content/world';
-import PixelIcon from './PixelIcon';
+import {
+  skills,
+  statusLabels,
+  worldCopy,
+  type SkillStatus,
+} from '../../content/world';
+import EquipmentIcon from '../arena/EquipmentIcon';
 
 export default function Inventory() {
   const { lang } = useApp();
   const w = worldCopy[lang];
   const [selected, setSelected] = useState(0);
+  const [filter, setFilter] = useState<SkillStatus | 'all'>('all');
+  const visibleSkills = skills
+    .map((skill, index) => ({ ...skill, index }))
+    .filter((skill) => filter === 'all' || skill.status === filter);
   const item = skills[selected];
   const detail = useRef<HTMLDivElement>(null);
   return (
@@ -28,56 +37,90 @@ export default function Inventory() {
             <span>
               {lang === 'en' ? 'EQUIPMENT & KNOWLEDGE' : 'ИНСТРУМЕНТЫ И ЗНАНИЯ'}
             </span>
-            <span>08 {lang === 'en' ? 'ITEMS' : 'ПРЕДМЕТОВ'}</span>
+            <span>
+              {visibleSkills.length.toString().padStart(2, '0')}{' '}
+              {lang === 'en' ? 'ITEMS' : 'ПРЕДМЕТОВ'}
+            </span>
           </div>
           <div className="inventory-layout">
             <div className="inventory-items">
               <p className="inventory-hint">{w.inventoryHint}</p>
+              <fieldset className="loadout-filters">
+                <legend className="sr-only">{w.filtersLabel}</legend>
+                {(['all', 'hands', 'exposure', 'learning'] as const).map(
+                  (value) => (
+                    <label key={value} className="loadout-filter">
+                      <input
+                        type="radio"
+                        name="loadout-status"
+                        value={value}
+                        checked={filter === value}
+                        onChange={() => {
+                          setFilter(value);
+                          const first = skills.findIndex(
+                            (skill) =>
+                              value === 'all' || skill.status === value,
+                          );
+                          setSelected(first);
+                        }}
+                      />
+                      <span>
+                        {value === 'all'
+                          ? w.allFilter
+                          : statusLabels[value][lang]}
+                      </span>
+                    </label>
+                  ),
+                )}
+              </fieldset>
               <div
                 className="inventory-grid"
                 role="group"
                 aria-label={w.inventoryTitle}
               >
-                {skills.map((skill, i) => (
-                  <button
-                    type="button"
-                    key={skill.id}
-                    className="inventory-slot"
-                    aria-label={skill.name[lang]}
-                    aria-pressed={selected === i}
-                    aria-controls="inventory-detail"
-                    onClick={(event) => {
-                      setSelected(i);
-                      // On a phone, the selected explanation can be below the eight slots.
-                      // Pointer/touch selection reveals it; keyboard focus stays on the item.
-                      if (
-                        event.detail > 0 &&
-                        window.matchMedia('(max-width: 767px)').matches
-                      ) {
-                        requestAnimationFrame(() =>
-                          detail.current?.scrollIntoView({
-                            block: 'nearest',
-                            behavior: window.matchMedia(
-                              '(prefers-reduced-motion: reduce)',
-                            ).matches
-                              ? 'auto'
-                              : 'smooth',
-                          }),
-                        );
-                      }
-                    }}
-                  >
-                    <span className="slot-number" aria-hidden="true">
-                      0{i + 1}
-                    </span>
-                    <PixelIcon kind={skill.id} />
-                    <span>{skill.name[lang]}</span>
-                    <span
-                      className={`slot-dot slot-dot--${skill.status}`}
-                      aria-hidden="true"
-                    />
-                  </button>
-                ))}
+                {visibleSkills.map((skill) => {
+                  const i = skill.index;
+                  return (
+                    <button
+                      type="button"
+                      key={skill.id}
+                      className="inventory-slot"
+                      aria-label={skill.name[lang]}
+                      aria-pressed={selected === i}
+                      aria-controls="inventory-detail"
+                      onClick={(event) => {
+                        setSelected(i);
+                        // On a phone, the selected explanation can be below the eight slots.
+                        // Pointer/touch selection reveals it; keyboard focus stays on the item.
+                        if (
+                          event.detail > 0 &&
+                          window.matchMedia('(max-width: 767px)').matches
+                        ) {
+                          requestAnimationFrame(() =>
+                            detail.current?.scrollIntoView({
+                              block: 'nearest',
+                              behavior: window.matchMedia(
+                                '(prefers-reduced-motion: reduce)',
+                              ).matches
+                                ? 'auto'
+                                : 'smooth',
+                            }),
+                          );
+                        }
+                      }}
+                    >
+                      <span className="slot-number" aria-hidden="true">
+                        0{i + 1}
+                      </span>
+                      <EquipmentIcon kind={skill.id} />
+                      <span>{skill.name[lang]}</span>
+                      <span
+                        className={`slot-dot slot-dot--${skill.status}`}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  );
+                })}
               </div>
               <div className="inventory-legend">
                 {(['hands', 'exposure', 'learning'] as const).map((status) => (
@@ -100,7 +143,7 @@ export default function Inventory() {
                 {w.selected} / 0{selected + 1}
               </span>
               <div className="item-pedestal">
-                <PixelIcon kind={item.id} />
+                <EquipmentIcon kind={item.id} />
               </div>
               <span className={`skill-status skill-status--${item.status}`}>
                 {statusLabels[item.status][lang]}

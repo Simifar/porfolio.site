@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import "./styles/world.css";
+import "./styles/arena.css";
 import App from "./App.tsx";
 
 // A note for whoever opens DevTools: often the same people who review code.

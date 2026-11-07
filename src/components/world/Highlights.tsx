@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import { useApp } from '../../lib/context';
 import { worldCopy } from '../../content/world';
-import PixelIcon from './PixelIcon';
+import EquipmentIcon from '../arena/EquipmentIcon';
 export default function Highlights() {
   const { lang } = useApp();
   const w = worldCopy[lang];
@@ -26,7 +26,7 @@ export default function Highlights() {
               className="milestone"
               data-reveal=""
             >
-              <PixelIcon kind={i === 0 ? 'pc' : i === 1 ? 'docs' : 'gem'} />
+              <EquipmentIcon kind={i === 0 ? 'pc' : i === 1 ? 'docs' : 'gem'} />
               <strong>{milestone.value}</strong>
               <h3>{milestone.title}</h3>
               <p>{milestone.note}</p>

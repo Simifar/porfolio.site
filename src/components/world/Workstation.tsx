@@ -8,8 +8,11 @@ import {
   worldCopy,
   type ItemKind,
 } from '../../content/world';
-import WorkshopScene, { type StationObject } from './WorkshopScene';
-import PixelIcon from './PixelIcon';
+import ArenaScene, {
+  arenaStations,
+  type StationObject,
+} from '../arena/ArenaScene';
+import EquipmentIcon from '../arena/EquipmentIcon';
 const objects: { id: StationObject; icon: ItemKind; skill: number }[] = [
   { id: 'pc', icon: 'pc', skill: 0 },
   { id: 'monitor', icon: 'windows', skill: 2 },
@@ -42,11 +45,11 @@ export default function Workstation() {
         <div className="lab-layout world-window">
           <div className="lab-stage">
             <div className="window-bar">
-              <span>WORKSHOP.EXE</span>
+              <span>TECH ARENA</span>
               <span>{lang === 'en' ? 'INTERACTIVE' : 'ИНТЕРАКТИВНО'}</span>
             </div>
             <div className="lab-scene-wrap">
-              <WorkshopScene
+              <ArenaScene
                 label={w.scene}
                 selected={selected}
                 onSelect={setSelected}
@@ -55,12 +58,16 @@ export default function Workstation() {
                 <button
                   key={entry.id}
                   className={`scene-hotspot scene-hotspot--${entry.id}`}
+                  style={{
+                    left: `${arenaStations[i].x / 7.2}%`,
+                    top: `${(arenaStations[i].y + 64) / 4.8}%`,
+                  }}
                   type="button"
                   aria-label={`${lang === 'en' ? 'Inspect' : 'Осмотреть'}: ${w.objects[i]}`}
                   aria-controls="lab-detail"
                   onClick={() => setSelected(entry.id)}
                 >
-                  <span aria-hidden="true">+</span>
+                  <span aria-hidden="true">{i + 1}</span>
                 </button>
               ))}
             </div>
@@ -76,7 +83,7 @@ export default function Workstation() {
             <span className="section-eyebrow">
               {w.selected} / 0{index + 1}
             </span>
-            <PixelIcon kind={object.icon} />
+            <EquipmentIcon kind={object.icon} />
             <h3>{w.objects[index]}</h3>
             <span className={`skill-status skill-status--${skill.status}`}>
               {statusLabels[skill.status][lang]}
@@ -115,7 +122,7 @@ export default function Workstation() {
                 aria-controls="lab-detail"
                 onClick={() => setSelected(entry.id)}
               >
-                <PixelIcon kind={entry.icon} />
+                <EquipmentIcon kind={entry.icon} />
                 <span>{w.objects[i]}</span>
               </button>
             ))}

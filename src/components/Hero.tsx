@@ -2,7 +2,7 @@ import { ArrowDown, ArrowUpRight, FileText } from 'lucide-react';
 import { Link } from 'react-router';
 import { useApp } from '../lib/context';
 import { worldCopy } from '../content/world';
-import WorkshopScene from './world/WorkshopScene';
+import TechMascot from './arena/TechMascot';
 
 export default function Hero() {
   const { t, lang } = useApp();
@@ -14,7 +14,7 @@ export default function Hero() {
           <i className="status-dot" />
           {w.available}
         </span>
-        <span>PORTFOLIO / 2026</span>
+        <span>EGOR.EXE / TECH ARENA</span>
       </div>
       <div className="hero__inner">
         <div className="hero__copy">
@@ -52,22 +52,20 @@ export default function Hero() {
             </Link>
           </div>
         </div>
-        <aside className="hero-practice world-window" aria-label={w.sceneLabel}>
-          <div className="window-bar">
-            <span>
-              <i className="tiny-square" />
-              {w.sceneLabel}
-            </span>
-            <span aria-hidden="true">− □ ×</span>
+        <aside
+          className="hero-practice arena-hero-visual"
+          aria-label={w.sceneLabel}
+        >
+          <div className="character-nameplate">
+            <span>{w.characterType}</span>
+            <span aria-hidden="true">#01</span>
           </div>
           <div className="hero-scene">
-            <span className="scene-coordinate" aria-hidden="true">
-              WORLD_01 / HOME BASE
-            </span>
-            <WorkshopScene label={w.scene} />
-            <span className="scene-badge">
-              <i className="status-dot" />
-              {lang === 'en' ? 'HANDS-ON MODE' : 'ПРАКТИКА'}
+            <TechMascot label={w.mascotLabel} />
+            <span className="character-sticker" aria-hidden="true">
+              IT
+              <br />
+              CREW
             </span>
           </div>
           <div className="scene-caption">
@@ -93,7 +91,9 @@ export default function Hero() {
         ))}
       </ul>
       <div className="world-divider" aria-hidden="true">
-        <span>↓ SCROLL TO EXPLORE</span>
+        <span>
+          {lang === 'en' ? '↓ YOUR NEXT TEAMMATE' : '↓ ВАШ БУДУЩИЙ КОЛЛЕГА'}
+        </span>
         <span>HARDWARE · SYSTEMS · SOFTWARE</span>
       </div>
     </section>
