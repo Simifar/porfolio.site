@@ -99,7 +99,6 @@ export const skills: {
 export const worldCopy = {
   en: {
     available: 'Open to work',
-    explore: 'Explore world',
     resume: 'View resume',
     scene:
       'An original illustrated technical arena with PC, operating system, server, toolkit and terminal stations.',
@@ -164,7 +163,6 @@ export const worldCopy = {
   },
   ru: {
     available: 'Открыт к предложениям',
-    explore: 'Исследовать мир',
     resume: 'Резюме',
     scene:
       'Авторская техническая арена: станции компьютера, операционных систем, сервера, инструментов и терминала.',

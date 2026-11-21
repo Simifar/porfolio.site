@@ -8,7 +8,7 @@ The site documents my work assembling and reassembling more than 50 computers an
 
 ## Design
 
-Tech Arena takes cues from the Brawl Stars lobby and character roster. Relay is an original workshop robot with an eight-angle turntable and a downloadable GLB. The interactive workshop uses an original top-down map and selectable equipment. The bilingual Brawl Stars guide displays four characters, their official animations and three game modes using [attributed media from Supercell](public/brawl-guide/ASSET-SOURCES.md).
+Tech Arena presents Egor’s portfolio as an arcade lobby. The name and field of work lead the page. Quick links open his experience, projects and interactive workshop. Relay is the original workshop mascot with eight rendered angles and a downloadable GLB. Short animations accompany its arrival, turns and equipment selections.
 
 ## What is here
 
@@ -64,7 +64,7 @@ End-to-end tests use Playwright and cover navigation, project pages, language an
 - `src/content/projects.ts` - project descriptions and case-study content.
 - `src/content/i18n.ts` - interface copy in English and Russian.
 - `src/components/` - site sections, navigation and project views.
-- `src/components/arena/` - Relay turntable, Brawl Stars guide and selectable workshop map.
+- `src/components/arena/` - Relay turntable and selectable workshop map.
 - `src/components/world/` - factual loadout filtering, tech lab and milestones.
 - `src/content/world.ts` - bilingual world UI and factual skill classifications.
 - `src/styles/arena.css` - light/dark tokens, arcade components and responsive rules.

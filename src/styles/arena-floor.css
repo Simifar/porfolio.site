@@ -427,3 +427,16 @@
   .scene-hotspot[aria-current='true'] .station-marker { outline: 2px solid Highlight; }
   .arena-node[data-active='true'] .arena-selection-ring { stroke: Highlight; }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  .gear-display .item-pedestal .equipment-icon {
+    transform-origin: 50% 78%;
+    animation: gear-select 320ms var(--motion-ease);
+  }
+
+  @keyframes gear-select {
+    0% { transform: translateY(5px) scale(.84); }
+    58% { transform: translateY(-3px) scale(1.055); }
+    100% { transform: none; }
+  }
+}

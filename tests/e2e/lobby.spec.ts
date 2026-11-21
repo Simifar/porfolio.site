@@ -33,13 +33,44 @@ test('the phone lobby shows the figurine, supports a full turn, and loads the mo
   expect(bytes.readUInt32LE(8)).toBe(bytes.byteLength);
 });
 
-test('the lobby leads to the real brawler guide without leaving the Russian portfolio', async ({ page }) => {
+test('the Russian lobby introduces Egor and leads directly to his projects and workshop', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/?lang=ru');
-  await page.getByRole('region', { name: 'Фигурка «Реле»' }).getByRole('button', { name: 'Повернуть вправо' }).click();
-  const guideLink = page.locator('#hero').getByRole('link', { name: /Бойцы Brawl Stars/ });
-  await guideLink.click();
-  await expect(page).toHaveURL(/\?lang=ru#\/\?section=brawlers$/);
-  await expect(page.locator('#brawlers h2')).toBeInViewport();
+  const hero = page.locator('#hero');
+  await expect(hero.getByRole('heading', { level: 1 })).toHaveText('Егор Матафонов');
+  await expect(hero.getByText(/компьютерное оборудование/)).toBeInViewport();
+  await expect(page.locator('main > section').nth(1)).toHaveAttribute('id', 'about');
+  const navigation = hero.getByRole('navigation', { name: 'Разделы портфолио' });
+  await navigation.getByRole('link', { name: /Проекты/ }).click();
+  await expect(page).toHaveURL(/\?lang=ru#\/\?section=work$/);
+  await expect(page.getByRole('heading', { name: 'Программные проекты' })).toBeInViewport();
+  await navigation.getByRole('link', { name: /Мастерская/ }).click();
+  await expect(page).toHaveURL(/\?lang=ru#\/\?section=workstation$/);
+  await expect(page.locator('#workstation h2')).toBeInViewport();
+});
+
+test('turning Relay and selecting equipment use brief motion when enabled', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/?lang=en');
+  const viewer = page.getByRole('region', { name: 'Relay figurine' });
+  const figure = viewer.getByRole('img');
+  const motion = (node: Element) => getComputedStyle(node).animationName;
+  expect(await figure.evaluate(motion)).not.toBe('none');
+  await viewer.getByRole('button', { name: 'Turn right' }).click();
+  await expect(figure).toHaveAttribute('src', /view-1\.webp$/);
+  expect(await figure.evaluate(motion)).not.toBe('none');
+
+  const workshop = page.locator('#workstation');
+  const animationStarted = workshop.locator('.lab-detail').evaluate(node => new Promise<string>(resolve => {
+    node.addEventListener('animationstart', event => resolve((event as AnimationEvent).animationName), { once: true });
+  }));
+  await workshop.getByRole('button', { name: 'Server', exact: true }).click();
+  await expect(workshop.locator('.lab-detail')).toContainText('Windows Server');
+  expect(await animationStarted).toBe('gear-select');
+
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await workshop.getByRole('button', { name: 'Terminal', exact: true }).click();
+  await expect(workshop.locator('.lab-detail')).toContainText('software projects');
+  expect(await workshop.locator('.lab-detail .equipment-icon').evaluate(motion)).toBe('none');
 });

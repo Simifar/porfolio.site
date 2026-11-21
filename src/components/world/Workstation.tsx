@@ -78,7 +78,7 @@ export default function Workstation() {
               <span className="gear-display-label">
                 <Crosshair size={14} aria-hidden="true" />{w.selected}
               </span>
-              <div className="item-pedestal">
+              <div key={station.id} className="item-pedestal">
                 <WorkshopGear kind={station.kind} library="lab" />
               </div>
             </div>
