@@ -1,55 +1,39 @@
-// Original social card, rendered from the same SVG scene used by the website.
+// Rebuild the share image from the portfolio's own figure, landscape and local typefaces.
 import { readFile } from 'node:fs/promises';
-import ts from 'typescript';
-import { renderToStaticMarkup } from 'react-dom/server';
-import { createElement } from 'react';
 import { chromium } from '@playwright/test';
-const source = await readFile('src/components/arena/TechMascot.tsx', 'utf8');
-let { outputText } = ts.transpileModule(source, {
-  compilerOptions: {
-    target: ts.ScriptTarget.ES2022,
-    module: ts.ModuleKind.ESNext,
-    jsx: ts.JsxEmit.ReactJSX,
-  },
-});
-for (const dependency of ['react/jsx-runtime', 'react'])
-  outputText = outputText
-    .replaceAll(
-      `from "${dependency}"`,
-      `from "${import.meta.resolve(dependency)}"`,
-    )
-    .replaceAll(
-      `from '${dependency}'`,
-      `from '${import.meta.resolve(dependency)}'`,
-    );
-const { default: TechMascot } = await import(
-  `data:text/javascript;base64,${Buffer.from(outputText).toString('base64')}`
-);
-const scene = renderToStaticMarkup(
-  createElement(TechMascot, { label: 'Original repair-crew mascot' }),
-);
-const displayFont = (
-  await readFile('src/assets/fonts/rubik-one.woff2')
-).toString('base64');
-const sansFont = (
-  await readFile('src/assets/fonts/ibm-plex-sans-latin.woff2')
-).toString('base64');
-const browser = await chromium.launch({
-  executablePath: process.env.CHROME_PATH || undefined,
-});
+
+async function dataUrl(file, mime) {
+  const bytes = await readFile(file);
+  return `data:${mime};base64,${bytes.toString('base64')}`;
+}
+const [figure, landscape, displayFont, textFont] = await Promise.all([
+  dataUrl('public/figures/relay/view-0.webp', 'image/webp'),
+  dataUrl('public/figures/relay/relay-yard.svg', 'image/svg+xml'),
+  dataUrl('src/assets/fonts/rubik-one.woff2', 'font/woff2'),
+  dataUrl('src/assets/fonts/ibm-plex-sans-latin.woff2', 'font/woff2'),
+]);
+const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH || undefined });
 try {
-  const page = await browser.newPage({
-    viewport: { width: 1200, height: 630 },
-    deviceScaleFactor: 1,
-  });
+  const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1 });
   await page.setContent(`<!doctype html><html lang="en"><meta charset="utf-8"><style>
-    @font-face{font-family:Display;src:url(data:font/woff2;base64,${displayFont})} @font-face{font-family:Plex;src:url(data:font/woff2;base64,${sansFont})}
-    *{box-sizing:border-box}body{margin:0;padding:38px 54px;background:#132654;color:#fffdf6;font-family:Plex,Arial,sans-serif;background-image:repeating-conic-gradient(from 5deg at 73% 44%,#ffffff05 0deg 10deg,transparent 10deg 28deg)}
-    header{display:flex;justify-content:space-between;border-bottom:1px solid #10172e;padding-bottom:18px;font:22px Display;letter-spacing:1px}header span{color:#ffcf48;font-size:16px}main{display:flex;align-items:center;height:458px}h1{font:84px/.97 Display;margin:15px 0 22px;letter-spacing:-4px}h1 span{color:#ffcf48}.copy{width:46%}.name{font-size:23px;margin:0 0 7px}.role{font-size:16px;color:#80e9d3;margin:0}svg{width:58%;margin-left:-2%}footer{display:flex;justify-content:space-between;border-top:1px solid #10172e;padding-top:16px;font-size:14px;color:#d3def9}footer strong{color:#ffcf48}
-    </style><header>EGOR.EXE <span>TECH ARENA / 2026</span></header><main><div class="copy"><h1>BUILD.<br>FIX.<br><span>REPEAT.</span></h1><p class="name">Egor Matafonov</p><p class="role">IT Support & PC Hardware</p></div>${scene}</main><footer><span><strong>50+ PCs</strong> assembled & rebuilt</span><span>Technical graduate · 2026</span><span>simifar.github.io/porfolio.site</span></footer></html>`);
-  await page.evaluate(() => document.fonts.ready);
+    @font-face { font-family: Display; src: url(${displayFont}); }
+    @font-face { font-family: Plex; src: url(${textFont}); font-weight: 400 700; }
+    * { box-sizing: border-box; }
+    body { margin: 0; height: 630px; background: linear-gradient(95deg,#17152ded 0%,#201b39ed 32%,#34274b11 68%), url(${landscape}) center / cover, #211c3b; color: #fffcf1; font-family: Plex, sans-serif; }
+    header, footer { position: absolute; left: 54px; right: 54px; display: flex; align-items: center; justify-content: space-between; }
+    header { top: 39px; font: 24px Display; } header small { border-radius: 8px; padding: 9px 15px; background: #26213d; color: #9cf2d9; font: 600 17px Plex; }
+    main { position: absolute; left: 54px; top: 138px; }
+    h1 { margin: 0; transform: skew(-5deg) rotate(-2deg); transform-origin: left bottom; font: 86px/.94 Display; letter-spacing: -4px; text-shadow: 2px 6px #21172e; }
+    h1 span { color: #ffd455; }
+    .name { margin: 31px 0 3px; font: 700 30px Plex; } .role { margin: 0; color: #a2f5df; font: 600 21px Plex; }
+    img { position: absolute; right: 44px; bottom: 88px; width: 480px; height: 480px; object-fit: contain; }
+    footer { bottom: 33px; border-top: 2px solid #d7ceef80; padding-top: 17px; font-size: 18px; color: #fffbf2; } footer strong { color: #ffdb65; }
+    </style><header>EGOR.EXE <small>Tech Arena</small></header><main><h1>BUILD. FIX.<br><span>REPEAT.</span></h1><p class="name">Egor Matafonov</p><p class="role">IT Support &amp; PC Hardware</p></main><img src="${figure}" alt="Relay, the workshop robot"><footer><span><strong>50+ PCs</strong> assembled and rebuilt</span><span>Information systems &amp; programming · 2026</span></footer></html>`);
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+    await Promise.all([...document.images].map(image => image.decode()));
+  });
   await page.screenshot({ path: 'public/og-image.png' });
 } finally {
   await browser.close();
 }
-console.log('Generated original EGOR.EXE social card (1200 × 630).');

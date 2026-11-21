@@ -107,7 +107,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.classList.toggle('light', theme === 'light');
     document.documentElement.classList.toggle('dark', theme === 'dark');
     document.documentElement.style.colorScheme = theme;
-    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#101c43' : '#edf3ff');
+    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#171526' : '#f2eff6');
   }, [theme]);
 
   const t = lang === 'en' ? en : ru;

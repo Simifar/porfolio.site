@@ -8,9 +8,7 @@ The site documents my work assembling and reassembling more than 50 computers an
 
 ## Design
 
-The published **Tech Arena** design is inspired by the expressive interfaces of Brawl Stars. It was released from `master` after the owner's approval; the preceding Minecraft-inspired design remains in Git history.
-
-Original repair-crew mascot and gadget SVGs, a selectable tech arena, bold local Cyrillic typography, extruded controls and a filterable eight-item loadout. Blue/purple dark and paper/sky light themes; keyboard, touch and reduced motion remain supported. All career facts, project cases, PDF resumes and contact links are preserved.
+Tech Arena takes cues from the Brawl Stars lobby and character roster. Relay is an original workshop robot with an eight-angle turntable and a downloadable GLB. The interactive workshop uses an original top-down map and selectable equipment. The bilingual Brawl Stars guide displays four characters, their official animations and three game modes using [attributed media from Supercell](public/brawl-guide/ASSET-SOURCES.md).
 
 ## What is here
 
@@ -66,11 +64,11 @@ End-to-end tests use Playwright and cover navigation, project pages, language an
 - `src/content/projects.ts` - project descriptions and case-study content.
 - `src/content/i18n.ts` - interface copy in English and Russian.
 - `src/components/` - site sections, navigation and project views.
-- `src/components/arena/` - original technician mascot, equipment illustrations and selectable arena.
+- `src/components/arena/` - Relay turntable, Brawl Stars guide and selectable workshop map.
 - `src/components/world/` - factual loadout filtering, tech lab and milestones.
 - `src/content/world.ts` - bilingual world UI and factual skill classifications.
 - `src/styles/arena.css` - light/dark tokens, arcade components and responsive rules.
-- `docs/screenshots/arena/` - desktop and mobile previews of Tech Arena.
+- `docs/screenshots/arena/` - screenshots of the first Tech Arena release.
 - `DESIGN.md` - current design direction, data integrity and accessibility decisions.
 - `scripts/generate-case-pages.mjs` - static bilingual project-page generator.
 - `public/projects/` - project screenshots used by the site.

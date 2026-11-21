@@ -98,19 +98,13 @@ export const skills: {
 ];
 export const worldCopy = {
   en: {
-    world: 'THE TECH ARENA',
     available: 'Open to work',
     explore: 'Explore world',
     resume: 'View resume',
     scene:
       'An original illustrated technical arena with PC, operating system, server, toolkit and terminal stations.',
-    mascotLabel: 'An original cartoon repair-crew mascot with a wrench and a diagnostic PC, drawn for this portfolio.',
-    characterType: 'THE TECHNICIAN',
     allFilter: 'All skills',
     filtersLabel: 'Filter skills by practice',
-    sceneLabel: 'TECH CLASS',
-    sceneHint: 'Tech support. With a hands-on attitude.',
-    labLink: 'Enter the tech lab',
     profile: 'PLAYER PROFILE',
     profileNote: 'The person behind the workstation.',
     name: 'Egor Matafonov',
@@ -169,19 +163,13 @@ export const worldCopy = {
     footer: 'Built with character. Ready for real work.',
   },
   ru: {
-    world: 'ТЕХНОАРЕНА',
     available: 'Открыт к предложениям',
     explore: 'Исследовать мир',
     resume: 'Резюме',
     scene:
       'Авторская техническая арена: станции компьютера, операционных систем, сервера, инструментов и терминала.',
-    mascotLabel: 'Авторский персонаж-техник с гаечным ключом и компьютером диагностики, нарисованный для портфолио.',
-    characterType: 'ТЕХНИК',
     allFilter: 'Все навыки',
     filtersLabel: 'Фильтр навыков по практике',
-    sceneLabel: 'ТЕХНИЧЕСКИЙ ПРОФИЛЬ',
-    sceneHint: 'Техническая поддержка. Настоящая практика.',
-    labLink: 'Открыть технический стенд',
     profile: 'ПРОФИЛЬ ИГРОКА',
     profileNote: 'Кто стоит за рабочим столом.',
     name: 'Егор Матафонов',

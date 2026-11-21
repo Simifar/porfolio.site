@@ -13,7 +13,7 @@ export default function Highlights() {
     >
       <div className="site-shell">
         <div className="section-heading" data-reveal="">
-          <p className="section-eyebrow">06 / {w.highlights}</p>
+          <p className="section-eyebrow">{w.highlights}</p>
           <h2 id="highlights-title" className="section-title">
             {w.highlightsTitle}
           </h2>

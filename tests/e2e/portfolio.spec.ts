@@ -392,7 +392,8 @@ test('reduced motion shows all content and technical hero without animation', as
   expect(await page.evaluate(() => document.querySelectorAll('[data-reveal]:not([data-revealed="instant"])').length)).toBe(0);
   expect(await page.locator('#hero').getAttribute('data-intro')).toBeNull();
   await expect(page.locator('.hero-practice')).toBeVisible();
-  await expect(page.locator('#hero img')).toHaveCount(0);
+  await expect(page.locator('.relay-figure')).toHaveAttribute('src', /view-0\.webp$/);
+  expect(await page.locator('.relay-figure').evaluate(node => node.getAnimations().length)).toBe(0);
   await page.locator('#work').scrollIntoViewIfNeeded();
   expect(await page.locator('#work .project-image-frame').first().evaluate(element => getComputedStyle(element).clipPath)).toBe('none');
 });

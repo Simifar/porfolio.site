@@ -146,11 +146,13 @@ export function useScrollReveal(key: string) {
     }, { rootMargin: '0px 0px -10% 0px' }) : null;
 
     const register = (elements: Iterable<HTMLElement>) => {
-      for (const element of elements) {
-        if (element.dataset.revealed !== undefined) continue;
-        if (!observer || element.getBoundingClientRect().top < window.innerHeight) element.dataset.revealed = 'instant';
-        else observer.observe(element);
-      }
+      // Measure first, so revealing one element cannot invalidate the next layout read.
+      const pending = Array.from(elements).filter(element => element.dataset.revealed === undefined);
+      const visible = pending.map(element => !observer || element.getBoundingClientRect().top < window.innerHeight);
+      pending.forEach((element, index) => {
+        if (visible[index]) element.dataset.revealed = 'instant';
+        else observer?.observe(element);
+      });
     };
 
     register(document.querySelectorAll<HTMLElement>('[data-reveal]'));

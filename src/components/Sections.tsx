@@ -111,7 +111,7 @@ export function Experience() {
     >
       <div className="site-shell">
         <div className="section-heading" data-reveal="">
-          <p className="section-eyebrow">03 / {worldCopy[lang].quest}</p>
+          <p className="section-eyebrow">{worldCopy[lang].quest}</p>
           <h2 id="experience-title" className="section-title">
             {t.experience.title}
           </h2>
@@ -182,7 +182,7 @@ export function SelectedWork() {
     <section id="work" className="work-section" aria-labelledby="work-title">
       <div className="site-shell">
         <div className="section-heading" data-reveal="">
-          <p className="section-eyebrow">04 / {worldCopy[lang].projects}</p>
+          <p className="section-eyebrow">{worldCopy[lang].projects}</p>
           <h2 id="work-title" className="section-title">
             {t.work.title}
           </h2>
@@ -365,7 +365,7 @@ export function About() {
     >
       <div className="site-shell practice-layout">
         <div className="practice-intro" data-reveal="">
-          <p className="section-eyebrow">01 / {w.profile}</p>
+          <p className="section-eyebrow">{w.profile}</p>
           <h2 id="about-title" className="section-title">
             {t.about.title}
           </h2>
@@ -373,7 +373,6 @@ export function About() {
             <div className="player-avatar" aria-hidden="true">
               <EquipmentIcon kind="pc" />
             </div>
-            <span className="player-id">PLAYER_01</span>
             <h3>{w.name}</h3>
             <p className="player-role">{w.role}</p>
             <p>{w.profileBody}</p>
@@ -438,7 +437,7 @@ export function Contact() {
     >
       <div className="site-shell contact-layout">
         <div data-reveal="">
-          <p className="section-eyebrow">07 / {worldCopy[lang].connect}</p>
+          <p className="section-eyebrow">{worldCopy[lang].connect}</p>
           <span className="connect-symbol" aria-hidden="true">
             ↗
           </span>

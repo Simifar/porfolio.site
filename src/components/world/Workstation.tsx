@@ -1,39 +1,37 @@
 import { useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Check, Crosshair, Plus } from 'lucide-react';
 import { Link } from 'react-router';
 import { useApp } from '../../lib/context';
-import {
-  skills,
-  statusLabels,
-  worldCopy,
-  type ItemKind,
-} from '../../content/world';
+import { skills, statusLabels, worldCopy } from '../../content/world';
 import ArenaScene, {
   arenaStations,
   type StationObject,
+  WorkshopGear,
+  WorkshopSymbols,
 } from '../arena/ArenaScene';
-import EquipmentIcon from '../arena/EquipmentIcon';
-const objects: { id: StationObject; icon: ItemKind; skill: number }[] = [
-  { id: 'pc', icon: 'pc', skill: 0 },
-  { id: 'monitor', icon: 'windows', skill: 2 },
-  { id: 'server', icon: 'server', skill: 4 },
-  { id: 'toolkit', icon: 'tool', skill: 1 },
-  { id: 'terminal', icon: 'terminal', skill: 7 },
-];
+import '../../styles/arena-floor.css';
+
+const stationKinds = arenaStations.map((station) => station.kind);
+
 export default function Workstation() {
   const { lang } = useApp();
   const w = worldCopy[lang];
   const [selected, setSelected] = useState<StationObject>('pc');
-  const index = objects.findIndex((object) => object.id === selected);
-  const object = objects[index];
-  const skill = skills[object.skill];
-  const terminal = selected === 'terminal';
+  const index = arenaStations.findIndex((station) => station.id === selected);
+  const station = arenaStations[index];
+  const skill = skills.find((entry) => entry.id === station.kind);
+  const projectStatus = lang === 'en' ? 'Published projects' : 'Опубликованные проекты';
+  const projectDetail = lang === 'en'
+    ? 'My software projects: TaskFocus, MindTrack and CortexMap. I used AI assistance to build these applications. Their source code is on GitHub.'
+    : 'Мои программные проекты: TaskFocus, MindTrack и CortexMap. При разработке этих приложений я использовал ИИ. Исходный код доступен на GitHub.';
+
   return (
     <section
       id="workstation"
       className="world-section lab-section"
       aria-labelledby="lab-title"
     >
+      <WorkshopSymbols library="lab" kinds={stationKinds} />
       <div className="site-shell">
         <div className="section-heading" data-reveal="">
           <p className="section-eyebrow">05 / {w.lab}</p>
@@ -45,29 +43,25 @@ export default function Workstation() {
         <div className="lab-layout world-window">
           <div className="lab-stage">
             <div className="window-bar">
-              <span>TECH ARENA</span>
+              <span><Crosshair size={16} aria-hidden="true" />TECH ARENA</span>
               <span>{lang === 'en' ? 'INTERACTIVE' : 'ИНТЕРАКТИВНО'}</span>
             </div>
             <div className="lab-scene-wrap">
-              <ArenaScene
-                label={w.scene}
-                selected={selected}
-                onSelect={setSelected}
-              />
-              {objects.map((entry, i) => (
+              <ArenaScene label={w.scene} selected={selected} />
+              {arenaStations.map((entry, i) => (
                 <button
                   key={entry.id}
                   className={`scene-hotspot scene-hotspot--${entry.id}`}
-                  style={{
-                    left: `${arenaStations[i].x / 7.2}%`,
-                    top: `${(arenaStations[i].y + 64) / 4.8}%`,
-                  }}
+                  style={{ left: `${(entry.x / 720) * 100}%`, top: `${(entry.y / 480) * 100}%` }}
                   type="button"
                   aria-label={`${lang === 'en' ? 'Inspect' : 'Осмотреть'}: ${w.objects[i]}`}
                   aria-controls="lab-detail"
+                  aria-current={selected === entry.id ? 'true' : undefined}
                   onClick={() => setSelected(entry.id)}
                 >
-                  <span aria-hidden="true">{i + 1}</span>
+                  <span className="station-marker" aria-hidden="true">
+                    {selected === entry.id ? <Check /> : <Plus />}
+                  </span>
                 </button>
               ))}
             </div>
@@ -80,41 +74,35 @@ export default function Workstation() {
             aria-live="polite"
             aria-atomic="true"
           >
-            <span className="section-eyebrow">
-              {w.selected} / 0{index + 1}
-            </span>
-            <EquipmentIcon kind={object.icon} />
-            <h3>{w.objects[index]}</h3>
-            <span className={`skill-status skill-status--${skill.status}`}>
-              {statusLabels[skill.status][lang]}
-            </span>
-            <p>
-              {terminal
-                ? lang === 'en'
-                  ? 'My software projects: TaskFocus, MindTrack and CortexMap. A separate space for building applications and working with source code, with AI assistance.'
-                  : 'Мои программные проекты: TaskFocus, MindTrack и CortexMap. Отдельное направление — приложения и работа с исходным кодом, с помощью AI.'
-                : skill.detail[lang]}
-            </p>
-            {terminal ? (
-              <a
-                href="https://github.com/Simifar"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {w.github}
-                <ArrowUpRight size={16} aria-hidden="true" />
-              </a>
-            ) : (
-              <Link
-                to={`/?section=${selected === 'monitor' ? 'about' : 'experience'}`}
-              >
-                {w.labAction}
-                <ArrowUpRight size={16} aria-hidden="true" />
-              </Link>
-            )}
+            <div className="gear-display">
+              <span className="gear-display-label">
+                <Crosshair size={14} aria-hidden="true" />{w.selected}
+              </span>
+              <div className="item-pedestal">
+                <WorkshopGear kind={station.kind} library="lab" />
+              </div>
+            </div>
+            <div className="gear-description">
+              <span className={`skill-status skill-status--${skill?.status ?? 'projects'}`}>
+                {skill ? statusLabels[skill.status][lang] : projectStatus}
+              </span>
+              <h3>{w.objects[index]}</h3>
+              <p>{skill ? skill.detail[lang] : projectDetail}</p>
+              {selected === 'terminal' ? (
+                <a href="https://github.com/Simifar" target="_blank" rel="noopener noreferrer">
+                  {w.github}
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+              ) : (
+                <Link to={`/?section=${selected === 'monitor' ? 'about' : 'experience'}`}>
+                  {w.labAction}
+                  <ArrowUpRight size={16} aria-hidden="true" />
+                </Link>
+              )}
+            </div>
           </div>
           <div className="lab-controls" role="group" aria-label={w.labTitle}>
-            {objects.map((entry, i) => (
+            {arenaStations.map((entry, i) => (
               <button
                 type="button"
                 key={entry.id}
@@ -122,7 +110,7 @@ export default function Workstation() {
                 aria-controls="lab-detail"
                 onClick={() => setSelected(entry.id)}
               >
-                <EquipmentIcon kind={entry.icon} />
+                <WorkshopGear kind={entry.kind} library="lab" />
                 <span>{w.objects[i]}</span>
               </button>
             ))}
