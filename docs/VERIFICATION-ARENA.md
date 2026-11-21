@@ -1,6 +1,6 @@
 # Tech Arena verification — 7 November 2026
 
-Comparison branch: `codex/brawl-stars-portfolio`, based on published master `dd43140`. This work does not merge or publish a replacement for the current Minecraft version.
+Original implementation branch: `codex/brawl-stars-portfolio`, based on `dd43140`. Subsequently released with the owner's approval in PR #16 (`05ba1aa` on `master`). The results below describe that implementation; the follow-up UI audit is recorded separately in [UI-AUDIT-2026-11-07.md](UI-AUDIT-2026-11-07.md).
 
 ## Results
 
@@ -44,7 +44,7 @@ An independent reviewer found no Critical/Important bugs. Additional review cove
 
 ## Limits
 
-Browser verification used Linux Chromium, including touch-enabled phone viewports. Physical iPhone/Safari and authenticated workflows of the linked software products were not tested. Original resumes and factual project/experience data were preserved. The current published site remains the Minecraft design until the owner explicitly chooses a release.
+Browser verification used Linux Chromium, including touch-enabled phone viewports. Physical iPhone/Safari and authenticated workflows of the linked software products were not tested. Original resumes and factual project/experience data were preserved. Tech Arena has since been published with the owner's approval.
 
 ## Final Lighthouse metrics
 

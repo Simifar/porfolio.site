@@ -1,52 +1,38 @@
 # EGOR.EXE — Tech Arena
 
-A Brawl Stars-inspired alternative portfolio for **IT Support / PC Hardware / Desktop Support**. This branch prepares the design for comparison; the published Minecraft version remains on master until the owner chooses a release.
+A bilingual IT support and PC hardware portfolio. The landing page combines a playable-looking lobby with direct access to Egor’s experience, projects, contact details and PDFs.
 
-## Direction
+## What comes from the reference
 
-A confident arcade lobby, with oversized rounded headlines, hard ink outlines, saturated blue/purple surfaces, yellow primary actions, mint technical accents and collectible-looking equipment cards. The real career story remains the reading path; game vocabulary supplies personality rather than proficiency claims.
+| Observed in Brawl Stars | Application in Tech Arena |
+| --- | --- |
+| The lobby puts a readable character silhouette and scene at the centre. Actions live around it, with a prominent yellow entry button beside the mode card. | Relay stands in an illustrated service yard. A compact turntable console sits below the figure. Yellow leads to the technical experience, and two panels lead to the workshop and brawler guide. |
+| The character browser uses a portrait roster, a full-body preview, class, rarity and information about abilities. | The guide shows Spike, Poco, Nita and El Primo with their actual portraits and named attacks. A direct choice updates the preview and explanation. |
+| The illustrated arenas distinguish traversable lanes, cover and a focal point through silhouette and colour. | The workshop map places five pieces of equipment amid raised walls and visible paths. Markers and an equivalent row of buttons open factual descriptions and links. |
+| Game modes are identified by short labels, icons and different objectives. | Three guide cards explain Gem Grab, Brawl Ball and Knockout and display their published icons. |
 
-The artwork is original. `TechMascot.tsx` depicts a fictional repair-crew character, not an owner portrait or a game character. `EquipmentIcon.tsx` supplies ten bespoke gadget illustrations. `ArenaScene.tsx` arranges the five technical topics on a selectable board. No official Brawl Stars characters, logos, insignia or textures are used. No WebGL, audio, game gate, random rewards, backend or new runtime dependencies.
+References include the [official Brawl Stars page](https://supercell.com/brawlstars/en/) and [its published gameplay capture](https://supercell.com/games/brawlstars/videos/social/social.mp4). The portfolio’s robot, environment, interface and equipment art are original. The game media is presented in the guide to identify and discuss the game, with the [source URLs, checksums and terms](public/brawl-guide/ASSET-SOURCES.md).
 
-## System
+## Figure and media
 
-`src/styles/arena.css` provides a complete replacement for the previous Minecraft world layer. It follows the preserved case/motion foundations in `src/index.css`.
+Relay is modelled in Blender and rendered from eight fixed positions. The first view loads with the lobby. Buttons and horizontal swipes select another angle, and the previous rendered view remains visible until the next is decoded. The downloadable GLB contains the editable geometry and materials. To regenerate the assets with Blender 4.3+ and ImageMagick installed, run:
 
-| Role | Dark | Light |
-|---|---|---|
-| Canvas | #101c43 | #edf3ff |
-| Secondary panel | #192e61 | #e1e8ff |
-| Raised panel | #213b78 | #fffdf8 |
-| Main text | #fffdf6 | #19213e |
-| Secondary text | #d3def9 | #3b4c74 |
-| Text accent | #ffcf48 | #5f32b1 |
-| Technical accent | #80e9d3 | #126c62 |
-| Primary button | #ffcf48 | #ffcf48 |
-| Structural ink | #11172f | #11172f |
+```sh
+blender -b -t 3 --python-exit-code 1 -P scripts/art/build-relay.py
+node scripts/generate-social-image.mjs
+```
 
-Rubik One is the local display face, Cyrillic-verified and SIL OFL licensed. The 150KB source TTF is delivered as a 40KB WOFF2 conversion with all glyphs preserved. IBM Plex Sans/Mono remain the reading/utility faces. Fonts make no third-party requests. Static cases receive the same display font under a stable, base-relative `/fonts/` URL during `prepare-pages.mjs`.
+The guide starts with a poster. Pressing Play loads the selected brawler’s official clip. The corresponding poster returns when it ends. Character names and explanations remain available when media fails or the codec is unavailable.
 
-Panels have 2–3px ink borders, 7–14px corners and hard extruded shadows. Headline outlines and small angled stickers provide the action-game character. Reading copy stays upright and conventionally spaced. Touch controls expose real pressed, focus and selected states; decorative movement is limited to brief hover/press feedback. Reduced motion disables it.
+## Layout and access
 
-## Reading structure
+Warm yellow actions, a lilac service yard, inky outlines and cream text provide the lobby’s contrast. The light and dark themes use muted violet surfaces so the lobby, guide and map carry the strongest colour. Both Rubik One and IBM Plex are served locally and cover Cyrillic. The layout places the identity, model and controls in reading order on phones. The header collapses below 1024px.
 
-1. Hero: BUILD. FIX. REPEAT., actual name/role, factual introduction, three direct actions, original technician mascot and verified facts.
-2. Player dossier: readable biography, qualification, location and practice summaries.
-3. Gear loadout: eight factual equipment/knowledge topics, native radio filters, selected detail and all-skills text alternative.
-4. Mission records: full hardware work at Potencial, historical O!task/Web Do and education.
-5. Project lineup: genuine TaskFocus/MindTrack/CortexMap screenshots, case pages, live products and source links.
-6. Practice arena: five native controls and five equivalent map hotspots, selected technical context and supporting links.
-7. Milestones: 50+ computers, 2026 qualification and three published software projects.
-8. Contact lobby: direct email/clipboard, GitHub/LinkedIn/Telegram and both original PDF resumes.
+Skills distinguish documented hands-on work, practical exposure and current study. The filtering UI and workshop offer keyboard and touch controls. Detailed experience, case pages, static bilingual HTML and contact links remain directly accessible. Reduced motion removes the interface animations. The turntable and game clips start only through user input.
 
-## Data and interaction
+## Screenshots
 
-Career/project data remain unchanged. Hands-on PC assembly, maintenance, equipment inventory and documentation are distinct from practical Windows Server/1C exposure and current Windows/Debian/virtualization study. No ranks, XP, certifications, fabricated user counts or commercial outcomes.
-
-Filtering skills automatically selects the first matching item; selection always belongs to the visible set. Native radios support keyboard and touch. Existing button selection/live regions and phone scroll-to-explanation remain. The complete text alternative always includes all eight skills regardless of filter. The SVG board has corresponding native HTML controls, so information never depends on interpreting the illustration or hovering.
-
-## Responsive and validation
-
-1240px content width; mobile gutters 16–20px. The hero places identity/actions/facts before the mascot on mobile. Two-column touch loadout, wrapping filters, long Russian qualification names and email controls are checked at narrow widths. The case galleries, static bilingual SEO, PDF, saved preferences, HashRouter and `/porfolio.site/` base remain functional.
-
-Run `npm ci`, `npm run typecheck`, `npm run build`, `CI=true npm run test:e2e` (Chromium Headless Shell, same as Actions), and configured Lighthouse CI. `node scripts/generate-social-image.mjs` renders the 1200×630 social card from the actual mascot source. Publication remains a separate owner decision.
+- [Desktop lobby](docs/screenshots/brawl-lobby/desktop.webp)
+- [Phone lobby](docs/screenshots/brawl-lobby/phone.webp)
+- [Phone brawler guide](docs/screenshots/brawl-lobby/brawlers.webp)
+- [Workshop map](docs/screenshots/brawl-lobby/workshop.webp)

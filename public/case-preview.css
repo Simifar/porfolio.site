@@ -83,6 +83,10 @@ figcaption { margin-top: .45rem; color: var(--muted); font-size: .8rem; }
   .preview-gallery figure:first-child { grid-column: auto; }
 }
 
+@media (max-width: 480px) {
+  .preview-decision-details > div { grid-template-columns: minmax(0, 1fr); gap: .2rem; }
+}
+
 /* EGOR.EXE — the readable static edition of the same workshop. */
 :root {
   --page: #eef0e4; --text: #203026; --secondary: #435744; --muted: #52664f;
@@ -105,8 +109,8 @@ body { background-image: radial-gradient(color-mix(in srgb,var(--muted) 12%,tran
 
 /* Tech Arena: a local display face and the same ink-and-card system. */
 @font-face { font-family:'Rubik One'; font-weight:400; font-style:normal; font-display:swap; src:url('./fonts/rubik-one.woff2') format('woff2'); }
-:root { --page:#edf3ff; --text:#19213e; --secondary:#3b4c74; --muted:#506087; --border:#17213d; --accent:#5f32b1; --panel:#e1e8ff; }
-html.dark { --page:#101c43; --text:#fffdf6; --secondary:#d3def9; --muted:#b7c8ed; --border:#0a122c; --accent:#ffcf48; --panel:#213b78; }
+:root { --page:#f2eff6; --text:#241e39; --secondary:#4b4667; --muted:#5e5577; --border:#252033; --accent:#5f32b1; --panel:#e5e2ef; }
+html.dark { --page:#171526; --text:#fffdf6; --secondary:#e2dced; --muted:#c6bdd9; --border:#131024; --accent:#ffcf48; --panel:#302a49; }
 body { background:var(--page); }
 h1, h2 { font-family:'Rubik One',system-ui,sans-serif; font-weight:400; letter-spacing:-.035em; }
 h1 { font-size:clamp(2.6rem,7vw,5.2rem); }

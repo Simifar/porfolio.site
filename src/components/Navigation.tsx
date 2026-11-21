@@ -5,7 +5,7 @@ import { rememberLang, rememberTheme, useApp } from '../lib/context';
 import { animateThemeChange, runViewTransition } from '../lib/motion';
 import { CommandMenuTrigger } from './CommandMenuTrigger';
 
-type SectionName = 'experience' | 'work' | 'about' | 'contact';
+type SectionName = 'experience' | 'work' | 'inventory' | 'contact';
 
 export function ScrollProgress() {
   const progress = useRef<HTMLDivElement>(null);
@@ -112,7 +112,7 @@ export function Navbar() {
 
   const navLinks: { label: string; target: SectionName }[] = [
     { label: t.nav.experience, target: 'experience' },
-    { label: t.nav.about, target: 'about' },
+    { label: t.nav.about, target: 'inventory' },
     { label: t.nav.work, target: 'work' },
     { label: t.nav.contact, target: 'contact' },
   ];

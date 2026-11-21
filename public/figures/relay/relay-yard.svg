@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 570" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x2=".84" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#201b56"/><stop offset=".45" stop-color="#534698"/><stop offset=".76" stop-color="#bb769d"/><stop offset="1" stop-color="#ffb781"/></linearGradient>
+    <linearGradient id="deck" x2=".3" y2="1"><stop stop-color="#5b548e"/><stop offset=".6" stop-color="#423b76"/><stop offset="1" stop-color="#302c5e"/></linearGradient>
+    <linearGradient id="sun" x2="0" y2="1"><stop stop-color="#fff1b3"/><stop offset="1" stop-color="#ffb783"/></linearGradient>
+    <radialGradient id="bloom"><stop stop-color="#ffcf9c" stop-opacity=".62"/><stop offset="1" stop-color="#ffc39c" stop-opacity="0"/></radialGradient>
+    <pattern id="dots" width="13" height="13" patternUnits="userSpaceOnUse" patternTransform="rotate(-15)"><circle cx="4" cy="4" r="1.3" fill="#eddcff" opacity=".25"/></pattern>
+    <g id="cr"><path d="m0 10 31-10 34 13-33 11Z" fill="#e7a56f"/><path d="m0 10 32 14v32L0 40Z" fill="#b8766e"/><path d="m32 24 33-11v30L32 56Z" fill="#8b626e"/><path d="m5 19 21 11v17L5 36Zm2 2 17 22m0-13L7 36m30-10 23-8v20l-23 8Zm3 1 18 10m0-16L40 43" stroke="#654762" stroke-width="2.6" fill="none"/></g>
+    <g id="antenna" stroke-linejoin="round"><path d="m0 130 22-107h9l23 107m-47-31h40m-36-24h30m-25-20h20m-28 49 39-23m-31-14 22-11" stroke="currentColor" stroke-width="5" fill="none"/><path d="M26 26V0m-10 15h20m-17 5h14" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="26" cy="0" r="3.5" fill="#ffcf88"/></g>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h1440v570H0z"/>
+  <g fill="#a18dc4" opacity=".34"><path d="M640 85h126l16-8h59l11 8h73l-20 7H616Z"/><path d="M1090 52h85l10-7h40l10 7h79l-13 5h-220Z"/><path d="m895 132 21-6h106l7-8h70l12 8h71l-32 6Z"/></g>
+  <path fill="url(#dots)" opacity=".34" d="M720 0h720v122l-301-25-235 17-184-25Z"/>
+  <ellipse cx="1120" cy="192" rx="275" ry="202" fill="url(#bloom)"/>
+  <circle cx="1120" cy="212" r="86" fill="url(#sun)"/>
+  <g fill="#ffdbbc"><path d="m746 43 3 9 8 3-8 3-3 9-3-9-8-3 8-3Zm549 44 3 8 9 3-9 3-3 9-3-9-8-3 8-3Zm-332-38 2 5 5 2-5 2-2 6-2-6-6-2 6-2Z"/><circle cx="849" cy="77" r="2"/><circle cx="1345" cy="43" r="2"/><circle cx="946" cy="105" r="2.5"/><circle cx="784" cy="116" r="1.8"/></g>
+  <!-- Distant mesas in the service yard. -->
+  <path fill="#a276a1" d="M0 295 92 275l80 9 33-27 53-3 40-26 104 6 57 31 71-13 77 9 52-39 40-6 21-36 61-4 18-24 39 1 33 47 57 13 14 22 54-6 48-28 34-2 29-15 26 3 63 40 42-4 21-16 43 2 31-34h56l19-31h51l38 20v201H0Z"/>
+  <path fill="#836992" d="m738 198 30-6 13-20 18-1 15-17 10-1-17 28-19 3-10 17-36 8Zm456 48 29-25 46-2 29-29h55l20-31 20 1-17 41-56 2-27 30-35 1-29 22Z"/>
+  <path fill="#665c8e" d="M0 290 93 269l58 9 28-19 53 3 51 31 62-3 22-44 19 3 10 19 47-2 36 26 50-3 45 23 58-13 20-9 32-2 29-20 63 6 23-15 35 14 45 36 71-6 38 12 37-14 53-5 38-15 76 7 19-17 52 4 22-37 92-2 38-28 52 1 47 15v134H0Z"/>
+  <g color="#5c537f"><use href="#antenna" transform="translate(817 197) scale(.63)"/><path d="M776 277v-13l25-11h73l24 9v23Z" fill="currentColor"/></g>
+  <!-- Cable tram posts and an original radio dish. -->
+  <g fill="#45416a"><path d="M1302 284v-39l12-8h46v-29l8-8h9v41h52l11 11v49Z"/><path d="m1344 248 9-50 7 2-9 48Zm-22-81q18 35 53 38 12 0 19-6-24 0-68-36Z"/><path d="m1349 190 7-25 3-1-3 31Z"/></g>
+  <g fill="#383865"><path d="m621 340 13-117 7-5h8l-4 122Z"/><path d="m610 225 62-9 2 10-62 10Z"/><path d="M1208 304v-91l5-10h8l8 101Z"/><path d="m1198 214 42-5-1 7-40 5Z"/></g>
+  <g fill="none" stroke="#42385c" stroke-width="2.6"><path d="M288 129q181 126 344 98m15 0q287 101 567-14m10 0q146 17 241-41"/><path d="M648 230q273 119 563-13m14-1q159 35 236-31"/></g>
+  <path fill="#45446f" d="M0 317 178 294l86 23 31-11 72 10 88-11 40 12 162 9 46-17 76-1 48 24 98-5 49 15 70-22 74 5 58-18 61 1 40-28 92 9 33-15 58 2v101H0Z"/>
+  <g fill="#77729a"><path d="m725 315 39-3 15 1-15 4-42 3Zm329 17 33-6 30 3-4 2-30-1Zm211-26 14-10 36 2 11 4-45-2-8 6Z"/></g>
+  <path fill="url(#deck)" d="M0 359q265-14 537-12t604-11q146-4 299-8v242H0Z"/>
+  <g fill="none" stroke="#9d8bb3" stroke-width="2" opacity=".28"><path d="m55 570 614-226m-236 226 365-228m-24 228 124-228m178 228-109-231m431 231L1067 337M371 365l1069-18M54 413l1386-38M0 494l1440-66"/></g>
+  <g transform="translate(1265 309) scale(.73)"><use href="#cr"/><use href="#cr" x="64" y="7"/><use href="#cr" x="32" y="-27"/></g>
+  <g fill="#a28db0" opacity=".7"><path d="m601 472 42-9 17 2-14 3-27 3-6 3Zm702-80 41-6 17 2-45 7Zm-101 115 71-16 22 2-16 3-26 4-27 7Z"/></g>
+  <path fill="#333260" d="m0 482 149 12 63 46 111 12 42 18H0Zm1440-66-43 11-28 7-22 15-65 11-36 16-41 9-33 25-67 11-48 21-55 8-36 20h474Z"/>
+  <g fill="#4a4876"><path d="m1438 426-63 12-16 10 35-3Zm-116 43-41 9-22 13 34-9Zm-98 40-45 11-26 13 51-16Z"/></g>
+</svg>

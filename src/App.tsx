@@ -1,10 +1,11 @@
 import { HashRouter, Routes, Route, useLocation } from 'react-router';
-import { lazy, Suspense, useEffect } from 'react';
+import { lazy, startTransition, Suspense, useEffect, useState } from 'react';
 import { AppProvider, useApp } from './lib/context';
 import { useScrollReveal } from './lib/motion';
 import { projects } from './content/projects';
 import { Navbar, ScrollProgress } from './components/Navigation';
 import Hero from './components/Hero';
+import BrawlerGuide from './components/arena/BrawlerGuide';
 import Inventory from './components/world/Inventory';
 import Workstation from './components/world/Workstation';
 import Highlights from './components/world/Highlights';
@@ -38,10 +39,17 @@ function PageMetadata() {
     document.querySelector<HTMLMetaElement>('meta[property="og:description"]')?.setAttribute('content', description);
     document.querySelector<HTMLMetaElement>('meta[property="og:image:alt"]')?.setAttribute('content', socialVisual?.alt[lang] ?? t.metadata.socialImageAlt);
     document.querySelector<HTMLLinkElement>('link[rel="canonical"]')?.setAttribute('href', canonicalUrl);
+    for (const alternate of ['en', 'ru', 'x-default']) {
+      const alternateUrl = project
+        ? `https://simifar.github.io/porfolio.site/${alternate === 'ru' ? 'ru/' : ''}work/${project.slug}/`
+        : `https://simifar.github.io/porfolio.site/${isHome && alternate === 'ru' ? '?lang=ru' : ''}`;
+      document.querySelector<HTMLLinkElement>(`link[rel="alternate"][hreflang="${alternate}"]`)?.setAttribute('href', alternateUrl);
+    }
+    document.querySelector<HTMLMetaElement>('meta[property="og:locale"]')?.setAttribute('content', lang === 'ru' ? 'ru_RU' : 'en_US');
     document.querySelector<HTMLMetaElement>('meta[property="og:url"]')?.setAttribute('content', canonicalUrl);
     document.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.setAttribute('content', socialVisual
       ? `https://simifar.github.io/porfolio.site/${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}`
-      : 'https://simifar.github.io/porfolio.site/og-image.png?v=20261107');
+      : 'https://simifar.github.io/porfolio.site/og-image.png?v=relay-1');
     document.querySelector<HTMLMetaElement>('meta[property="og:image:width"]')?.setAttribute('content', String(socialVisual?.width ?? 1200));
     document.querySelector<HTMLMetaElement>('meta[property="og:image:height"]')?.setAttribute('content', String(socialVisual?.height ?? 630));
     document.querySelector<HTMLMetaElement>('meta[property="og:type"]')?.setAttribute('content', project ? 'article' : 'website');
@@ -50,7 +58,7 @@ function PageMetadata() {
     document.querySelector<HTMLMetaElement>('meta[name="twitter:image:alt"]')?.setAttribute('content', socialVisual?.alt[lang] ?? t.metadata.socialImageAlt);
     document.querySelector<HTMLMetaElement>('meta[name="twitter:image"]')?.setAttribute('content', socialVisual
       ? `https://simifar.github.io/porfolio.site/${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}`
-      : 'https://simifar.github.io/porfolio.site/og-image.png?v=20261107');
+      : 'https://simifar.github.io/porfolio.site/og-image.png?v=relay-1');
   }, [lang, pathname, t]);
 
   return null;
@@ -62,7 +70,7 @@ function ScrollReset() {
   useEffect(() => {
     const section = pathname === '/' ? new URLSearchParams(search).get('section') : null;
     const frame = window.requestAnimationFrame(() => {
-      if (section && ['experience', 'work', 'about', 'contact', 'inventory', 'workstation', 'highlights'].includes(section)) {
+      if (section && ['experience', 'work', 'about', 'contact', 'inventory', 'workstation', 'highlights', 'brawlers'].includes(section)) {
         const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
         document.getElementById(section)?.scrollIntoView({ behavior, block: 'start' });
       } else {
@@ -87,6 +95,24 @@ function RevealController() {
 
 function HomePage() {
   const { t } = useApp();
+  const { search } = useLocation();
+  const hasSectionTarget = new URLSearchParams(search).has('section');
+  const [bodyReady, setBodyReady] = useState(hasSectionTarget);
+  const showBody = bodyReady || hasSectionTarget;
+
+  useEffect(() => {
+    if (bodyReady) return;
+    // Give the lobby a paint before mounting the detailed portfolio and map.
+    // Section links still mount their target synchronously for ScrollReset.
+    let nextPaint = 0;
+    const firstPaint = requestAnimationFrame(() => {
+      nextPaint = requestAnimationFrame(() => startTransition(() => setBodyReady(true)));
+    });
+    return () => {
+      cancelAnimationFrame(firstPaint);
+      cancelAnimationFrame(nextPaint);
+    };
+  }, [bodyReady]);
 
   return (
     <>
@@ -106,15 +132,18 @@ function HomePage() {
       <Navbar />
       <main id="main-content" tabIndex={-1}>
         <Hero />
-        <About />
-        <Inventory />
-        <Experience />
-        <SelectedWork />
-        <Workstation />
-        <Highlights />
-        <Contact />
+        {showBody && <>
+          <BrawlerGuide />
+          <About />
+          <Inventory />
+          <Experience />
+          <SelectedWork />
+          <Workstation />
+          <Highlights />
+          <Contact />
+        </>}
       </main>
-      <Footer />
+      {showBody && <Footer />}
     </>
   );
 }
@@ -135,7 +164,8 @@ function NotFoundPage() {
 export default function App() {
   return (
     <AppProvider>
-      <HashRouter>
+      {/* Route snapshots need the committed DOM, rather than a deferred React transition. */}
+      <HashRouter useTransitions={false}>
         <ScrollReset />
         <PageMetadata />
         <Routes>

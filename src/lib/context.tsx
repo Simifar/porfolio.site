@@ -92,11 +92,22 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, [lang]);
 
   useEffect(() => {
+    // A history entry can carry a different language from the current page.
+    // Restore that choice without rewriting either entry or its router state.
+    const syncHistoryLanguage = () => {
+      const fromUrl = new URLSearchParams(window.location.search).get('lang');
+      if (isLang(fromUrl)) setLangState(fromUrl);
+    };
+    window.addEventListener('popstate', syncHistoryLanguage);
+    return () => window.removeEventListener('popstate', syncHistoryLanguage);
+  }, []);
+
+  useEffect(() => {
     savePreference('theme', theme);
     document.documentElement.classList.toggle('light', theme === 'light');
     document.documentElement.classList.toggle('dark', theme === 'dark');
     document.documentElement.style.colorScheme = theme;
-    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#101c43' : '#edf3ff');
+    document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#171526' : '#f2eff6');
   }, [theme]);
 
   const t = lang === 'en' ? en : ru;

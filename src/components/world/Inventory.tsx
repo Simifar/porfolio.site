@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { Check, Crosshair, Layers } from 'lucide-react';
 import { useApp } from '../../lib/context';
 import {
   skills,
@@ -6,7 +7,15 @@ import {
   worldCopy,
   type SkillStatus,
 } from '../../content/world';
-import EquipmentIcon from '../arena/EquipmentIcon';
+import { WorkshopGear, WorkshopSymbols } from '../arena/ArenaScene';
+import '../../styles/arena-floor.css';
+
+const inventoryKinds = skills.map((skill) => skill.id);
+const russianPlurals = new Intl.PluralRules('ru');
+const itemForms: Partial<Record<Intl.LDMLPluralRule, string>> = {
+  one: 'ПРЕДМЕТ',
+  few: 'ПРЕДМЕТА',
+};
 
 export default function Inventory() {
   const { lang } = useApp();
@@ -18,12 +27,17 @@ export default function Inventory() {
     .filter((skill) => filter === 'all' || skill.status === filter);
   const item = skills[selected];
   const detail = useRef<HTMLDivElement>(null);
+  const count = visibleSkills.length;
+  const countLabel = lang === 'ru'
+    ? itemForms[russianPlurals.select(count)] ?? 'ПРЕДМЕТОВ'
+    : count === 1 ? 'ITEM' : 'ITEMS';
   return (
     <section
       id="inventory"
       className="world-section inventory-section"
       aria-labelledby="inventory-title"
     >
+      <WorkshopSymbols library="loadout" kinds={inventoryKinds} />
       <div className="site-shell">
         <div className="section-heading" data-reveal="">
           <p className="section-eyebrow">02 / {w.inventory}</p>
@@ -35,12 +49,10 @@ export default function Inventory() {
         <div className="inventory-panel world-window">
           <div className="window-bar">
             <span>
+              <Layers size={16} aria-hidden="true" />
               {lang === 'en' ? 'EQUIPMENT & KNOWLEDGE' : 'ИНСТРУМЕНТЫ И ЗНАНИЯ'}
             </span>
-            <span>
-              {visibleSkills.length.toString().padStart(2, '0')}{' '}
-              {lang === 'en' ? 'ITEMS' : 'ПРЕДМЕТОВ'}
-            </span>
+            <span>{count} {countLabel}</span>
           </div>
           <div className="inventory-layout">
             <div className="inventory-items">
@@ -85,6 +97,7 @@ export default function Inventory() {
                       type="button"
                       key={skill.id}
                       className="inventory-slot"
+                      data-status={skill.status}
                       aria-label={skill.name[lang]}
                       aria-pressed={selected === i}
                       aria-controls="inventory-detail"
@@ -109,15 +122,15 @@ export default function Inventory() {
                         }
                       }}
                     >
-                      <span className="slot-number" aria-hidden="true">
-                        0{i + 1}
+                      <span className="slot-art">
+                        <WorkshopGear kind={skill.id} library="loadout" />
                       </span>
-                      <EquipmentIcon kind={skill.id} />
-                      <span>{skill.name[lang]}</span>
+                      <span className="slot-title">{skill.name[lang]}</span>
                       <span
                         className={`slot-dot slot-dot--${skill.status}`}
                         aria-hidden="true"
                       />
+                      {selected === i && <Check className="slot-check" size={17} aria-hidden="true" />}
                     </button>
                   );
                 })}
@@ -139,17 +152,21 @@ export default function Inventory() {
               aria-live="polite"
               aria-atomic="true"
             >
-              <span className="section-eyebrow">
-                {w.selected} / 0{selected + 1}
-              </span>
-              <div className="item-pedestal">
-                <EquipmentIcon kind={item.id} />
+              <div className="gear-display">
+                <span className="gear-display-label">
+                  <Crosshair size={14} aria-hidden="true" />{w.selected}
+                </span>
+                <div className="item-pedestal">
+                  <WorkshopGear kind={item.id} library="loadout" />
+                </div>
               </div>
-              <span className={`skill-status skill-status--${item.status}`}>
-                {statusLabels[item.status][lang]}
-              </span>
-              <h3>{item.name[lang]}</h3>
-              <p>{item.detail[lang]}</p>
+              <div className="gear-description">
+                <span className={`skill-status skill-status--${item.status}`}>
+                  {statusLabels[item.status][lang]}
+                </span>
+                <h3>{item.name[lang]}</h3>
+                <p>{item.detail[lang]}</p>
+              </div>
             </div>
           </div>
         </div>

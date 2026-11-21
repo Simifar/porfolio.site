@@ -11,7 +11,8 @@ test('technical experience is the main entry point and precedes software project
     const sections = await page.locator('main > section').evaluateAll(nodes => nodes.map(node => node.id));
     expect(sections.indexOf('about')).toBeLessThan(sections.indexOf('work'));
     await expect(page.locator('#experience')).toContainText('Windows Server');
-    await expect(page.locator('#hero img')).toHaveCount(0);
+    await expect(page.locator('#hero img')).toHaveAttribute('src', /figures\/relay\/view-0\.webp$/);
+    await expect(page.locator('#hero img[src*="projects/"]')).toHaveCount(0);
   }
 });
 
