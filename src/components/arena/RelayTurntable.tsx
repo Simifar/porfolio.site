@@ -7,13 +7,13 @@ const frameCount = 8;
 const frameUrl = (index: number) => `${directory}view-${index}.webp`;
 const labels = {
   en: {
-    region: 'Relay figurine', name: 'Relay', type: 'Workshop robot',
+    region: 'Relay figurine', name: 'Relay', type: 'Workshop mascot',
     alt: 'A cream CRT repair robot with a mint display and a tool pack.',
     left: 'Turn left', right: 'Turn right', angle: 'Viewing angle',
     download: 'Download 3D model (GLB)', error: 'This view could not load.',
   },
   ru: {
-    region: 'Фигурка «Реле»', name: 'Реле', type: 'Робот мастерской',
+    region: 'Фигурка «Реле»', name: 'Реле', type: 'Маскот мастерской',
     alt: 'Робот-техник со светлым корпусом, мятным экраном и инструментами.',
     left: 'Повернуть влево', right: 'Повернуть вправо', angle: 'Угол обзора',
     download: 'Скачать 3D-модель (GLB)', error: 'Не удалось загрузить этот ракурс.',
@@ -23,7 +23,8 @@ const labels = {
 export default function RelayTurntable() {
   const { lang } = useApp();
   const copy = labels[lang];
-  const [frame, setFrame] = useState(0);
+  const [view, setView] = useState({ frame: 0, turn: 0 });
+  const { frame } = view;
   const [hasError, setHasError] = useState(false);
   const requested = useRef(0);
   const requestId = useRef(0);
@@ -39,7 +40,7 @@ export default function RelayTurntable() {
     image.src = frameUrl(target);
     image.decode().then(() => {
       if (id !== requestId.current) return;
-      setFrame(target);
+      setView({ frame: target, turn: step });
       setHasError(false);
     }).catch(() => {
       if (id !== requestId.current) return;
@@ -65,7 +66,7 @@ export default function RelayTurntable() {
         onPointerLeave={() => { touchStart.current = null; }}
       >
         <span className="relay-plinth" aria-hidden="true" />
-        <img className="relay-figure" src={frameUrl(frame)} alt={copy.alt}
+        <img key={frame} className="relay-figure" data-turn={view.turn} src={frameUrl(frame)} alt={copy.alt}
           width="640" height="640" fetchPriority={frame === 0 ? 'high' : 'auto'} draggable={false} onError={() => setHasError(true)} />
       </div>
       <div className="relay-console">

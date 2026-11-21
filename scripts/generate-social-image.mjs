@@ -23,12 +23,12 @@ try {
     header, footer { position: absolute; left: 54px; right: 54px; display: flex; align-items: center; justify-content: space-between; }
     header { top: 39px; font: 24px Display; } header small { border-radius: 8px; padding: 9px 15px; background: #26213d; color: #9cf2d9; font: 600 17px Plex; }
     main { position: absolute; left: 54px; top: 138px; }
-    h1 { margin: 0; transform: skew(-5deg) rotate(-2deg); transform-origin: left bottom; font: 86px/.94 Display; letter-spacing: -4px; text-shadow: 2px 6px #21172e; }
+    h1 { margin: 0; transform: skew(-5deg) rotate(-2deg); transform-origin: left bottom; font: 78px/.98 Display; letter-spacing: -4px; text-shadow: 2px 6px #21172e; }
     h1 span { color: #ffd455; }
-    .name { margin: 31px 0 3px; font: 700 30px Plex; } .role { margin: 0; color: #a2f5df; font: 600 21px Plex; }
+    .role { margin: 28px 0 0; color: #a2f5df; font: 600 21px Plex; }
     img { position: absolute; right: 44px; bottom: 88px; width: 480px; height: 480px; object-fit: contain; }
     footer { bottom: 33px; border-top: 2px solid #d7ceef80; padding-top: 17px; font-size: 18px; color: #fffbf2; } footer strong { color: #ffdb65; }
-    </style><header>EGOR.EXE <small>Tech Arena</small></header><main><h1>BUILD. FIX.<br><span>REPEAT.</span></h1><p class="name">Egor Matafonov</p><p class="role">IT Support &amp; PC Hardware</p></main><img src="${figure}" alt="Relay, the workshop robot"><footer><span><strong>50+ PCs</strong> assembled and rebuilt</span><span>Information systems &amp; programming · 2026</span></footer></html>`);
+    </style><header>EGOR.EXE <small>PORTFOLIO</small></header><main><h1>EGOR<br><span>MATAFONOV</span></h1><p class="role">IT Support &amp; PC Hardware</p></main><img src="${figure}" alt="Relay, the workshop robot"><footer><span><strong>50+ PCs</strong> assembled and rebuilt</span><span>Information systems &amp; programming · 2026</span></footer></html>`);
   await page.evaluate(async () => {
     await document.fonts.ready;
     await Promise.all([...document.images].map(image => image.decode()));

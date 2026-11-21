@@ -71,7 +71,7 @@ function renderCase(project, lang) {
   const description = project.description[lang];
   const image = project.visual;
   const socialVisual = image?.kind === 'concept' ? undefined : image;
-  const socialImage = socialVisual ? `${site}${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}` : `${site}og-image.png?v=relay-1`;
+  const socialImage = socialVisual ? `${site}${(socialVisual.socialSrc ?? socialVisual.src).replace(/^\/+/, '')}` : `${site}og-image.png?v=egor-lobby-1`;
   const visual = image ? `<figure class="preview-visual${image.kind === 'cover' ? ' preview-visual--cover' : ''}">${image.kind === 'concept' ? `<figcaption class="preview-disclosure">${escape(image.caption[lang])}</figcaption>` : ''}<img src="${escape(asset(image))}" alt="${escape(image.alt[lang])}" width="${image.width}" height="${image.height}" fetchpriority="high">${image.kind !== 'concept' ? `<figcaption>${escape(image.caption[lang])}</figcaption>` : ''}</figure>` : '';
   const gallery = project.gallery ? `<section class="preview-gallery" aria-label="${escape(l.gallery)}">${project.gallery.map(image => `<figure><img src="${escape(asset(image))}" alt="${escape(image.alt[lang])}" width="${image.width}" height="${image.height}" loading="lazy"><figcaption>${escape(image.caption[lang])}</figcaption></figure>`).join('')}</section>` : '';
   const study = project.caseStudy;

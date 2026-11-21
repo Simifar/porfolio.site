@@ -156,7 +156,7 @@ export default function Inventory() {
                 <span className="gear-display-label">
                   <Crosshair size={14} aria-hidden="true" />{w.selected}
                 </span>
-                <div className="item-pedestal">
+                <div key={item.id} className="item-pedestal">
                   <WorkshopGear kind={item.id} library="loadout" />
                 </div>
               </div>

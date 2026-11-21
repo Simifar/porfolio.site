@@ -1,4 +1,4 @@
-import { ArrowUpRight, Copy, CornerDownLeft, FileText, Gamepad2, Github, Home, Languages, Linkedin, Mail, Search, Send, SunMoon, type LucideIcon } from 'lucide-react';
+import { ArrowUpRight, Copy, CornerDownLeft, FileText, Github, Home, Languages, Linkedin, Mail, Search, Send, SunMoon, type LucideIcon } from 'lucide-react';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { projects } from '../content/projects';
@@ -41,7 +41,6 @@ export default function CommandMenu() {
       { id: 'work', group: 'navigate', label: t.nav.work, icon: ArrowUpRight, run: go('/?section=work') },
       { id: 'inventory', group: 'navigate', label: t.nav.about, icon: ArrowUpRight, run: go('/?section=inventory') },
       { id: 'contact', group: 'navigate', label: t.nav.contact, icon: ArrowUpRight, run: go('/?section=contact') },
-      { id: 'brawlers', group: 'navigate', label: lang === 'en' ? 'Brawl Stars brawlers' : 'Бойцы Brawl Stars', icon: Gamepad2, run: go('/?section=brawlers') },
       ...projects.map<Command>(project => ({
         id: `case-${project.slug}`,
         group: 'cases',
